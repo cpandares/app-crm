@@ -1,254 +1,607 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
 
-    @section('content')
-    
-    <div class="container-xxl" id="kt_content_container">
-        <!--begin::Navbar-->
-       
-        <!--end::Navbar-->
-        <!--begin::details View-->
-        <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+@section('content')
 
-
-            <div class="card mb-5 mb-xl-10">
-                <div class="card-body pt-9 pb-0">
-                    <!--begin::Details-->
-                    <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
-                        <!--begin: Pic-->
-                        <div class="me-7 mb-4">
-                            <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                                <img src="https://res.cloudinary.com/cpandares/image/upload/v1657235694/blog-laravel/bi73wvmf92urspi6vhaf.jpg" alt="image">
-                                <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
-                            </div>
-                        </div>
-                        <!--end::Pic-->
-                        <!--begin::Info-->
-                        <div class="flex-grow-1">
-                            <!--begin::Title-->
-                            <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
-                                <!--begin::User-->
-                                <div class="d-flex flex-column">
-                                    <!--begin::Name-->
-                                    <div class="d-flex align-items-center mb-2">
-                                        <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ $contact->name }}</a>
-                                        <a href="#">
-                                            <!--begin::Svg Icon | path: icons/duotune/general/gen026.svg-->
-                                            <span class="svg-icon svg-icon-1 svg-icon-primary">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
-                                                    <path d="M10.0813 3.7242C10.8849 2.16438 13.1151 2.16438 13.9187 3.7242V3.7242C14.4016 4.66147 15.4909 5.1127 16.4951 4.79139V4.79139C18.1663 4.25668 19.7433 5.83365 19.2086 7.50485V7.50485C18.8873 8.50905 19.3385 9.59842 20.2758 10.0813V10.0813C21.8356 10.8849 21.8356 13.1151 20.2758 13.9187V13.9187C19.3385 14.4016 18.8873 15.491 19.2086 16.4951V16.4951C19.7433 18.1663 18.1663 19.7433 16.4951 19.2086V19.2086C15.491 18.8873 14.4016 19.3385 13.9187 20.2758V20.2758C13.1151 21.8356 10.8849 21.8356 10.0813 20.2758V20.2758C9.59842 19.3385 8.50905 18.8873 7.50485 19.2086V19.2086C5.83365 19.7433 4.25668 18.1663 4.79139 16.4951V16.4951C5.1127 15.491 4.66147 14.4016 3.7242 13.9187V13.9187C2.16438 13.1151 2.16438 10.8849 3.7242 10.0813V10.0813C4.66147 9.59842 5.1127 8.50905 4.79139 7.50485V7.50485C4.25668 5.83365 5.83365 4.25668 7.50485 4.79139V4.79139C8.50905 5.1127 9.59842 4.66147 10.0813 3.7242V3.7242Z" fill="#00A3FF"></path>
-                                                    <path class="permanent" d="M14.8563 9.1903C15.0606 8.94984 15.3771 8.9385 15.6175 9.14289C15.858 9.34728 15.8229 9.66433 15.6185 9.9048L11.863 14.6558C11.6554 14.9001 11.2876 14.9258 11.048 14.7128L8.47656 12.4271C8.24068 12.2174 8.21944 11.8563 8.42911 11.6204C8.63877 11.3845 8.99996 11.3633 9.23583 11.5729L11.3706 13.4705L14.8563 9.1903Z" fill="white"></path>
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon-->
-                                        </a>
-                                        
-                                    </div>
-                                    <!--end::Name-->
-                                    <!--begin::Info-->
-                                    <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
-                                        
-                                        <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
-                                        <span class="svg-icon svg-icon-4 me-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.3" d="M18.0624 15.3453L13.1624 20.7453C12.5624 21.4453 11.5624 21.4453 10.9624 20.7453L6.06242 15.3453C4.56242 13.6453 3.76242 11.4453 4.06242 8.94534C4.56242 5.34534 7.46242 2.44534 11.0624 2.04534C15.8624 1.54534 19.9624 5.24534 19.9624 9.94534C20.0624 12.0453 19.2624 13.9453 18.0624 15.3453Z" fill="black"></path>
-                                                <path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="black"></path>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->{{ $contact->city }}</a>
-                                        <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
-                                        <!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
-                                        <span class="svg-icon svg-icon-4 me-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.3" d="M21 19H3C2.4 19 2 18.6 2 18V6C2 5.4 2.4 5 3 5H21C21.6 5 22 5.4 22 6V18C22 18.6 21.6 19 21 19Z" fill="black"></path>
-                                                <path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="black"></path>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->{{ $contact->email }}</a>
-                                    </div>
-                                    <!--end::Info-->
-                                </div>
-                                <!--end::User-->
-                                <!--begin::Actions-->
-                                <div class="d-flex my-4">
-                                    <a href="#" class="btn btn-sm btn-light me-2" id="kt_user_follow_button">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr012.svg-->
-                                       Crear Presupuesto
+<div class="row container-xxl " bis_skin_checked="1">
+    <div class="col-md-3" bis_skin_checked="1">
+        <!-- Profile Image -->
+        <div class="card" bis_skin_checked="1">
+            <div class="card-header p-2" bis_skin_checked="1">
+                
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body" bis_skin_checked="1">
+                <div class="tab-content" bis_skin_checked="1">
+                    <div class="active tab-pane" id="datos_contrato" bis_skin_checked="1">
+                        
+                        <div class="panel-body" bis_skin_checked="1">
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <b>Nombre: </b> <a class="pull-right">{{ $contact->name }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Contrato File Maker #</b> <a class="float-right"></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Cliente</b> <a class="float-right">CARMEN MARIA
+                                        VEGA MORALES</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Sede</b>
+                                    <a class="float-right">
+                                        VALLE DE PAZ DE COSTA RICA SA
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#kt_modal_offer_a_deal">Nueva Campaña</a>
-                                    <!--begin::Menu-->
-                                    <div class="me-0">
-                                        <a href="{{url('clientes')}}" class="btn btn-outline-primary">Ir Atras</a>
-                                        <!--begin::Menu 3-->
-                                        
-                                        <!--end::Menu 3-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </div>
-                                <!--end::Actions-->
-                            </div>
-                            <!--end::Title-->
-                            <!--begin::Stats-->
-                           
-                            <!--end::Stats-->
+
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Vendedor</b> <a class="float-right">GERARDO CRUZ _
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Fecha Inicia</b> <a class="float-right">01-02-2023</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Fecha Primer Cobro</b> <a class="float-right">22-03-2023</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Día de Pago</b> <a class="float-right">22</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Modalidad de Cobro</b> <a class="float-right">Quincenal</a>
+                                </li>
+                               
+                                
+                               
+                            </ul>
+
                         </div>
-                        <!--end::Info-->
                     </div>
-                    <!--end::Details-->
-                  
-                </div>
-            </div>
+                    <!-- /#data_contratos -->
+                    <div class="tab-pane" id="datos_cliente" bis_skin_checked="1">
+                        <h4 class="panel-title">
+                            <a aria-expanded="true"> Datos Contrato </a>
+                        </h4>
+                        <div class="panel-body" bis_skin_checked="1">
+                            <div class="text-center" bis_skin_checked="1">
+                                <img width="50%" height="50%" class="img-circle"
+                                    src="http://localhost/valle_paz/public/images/default_avatar.png"
+                                    alt="User profile picture">
+                            </div>
+                            <h4 class="profile-username text-center"><strong>CARMEN MARIA
+                                    VEGA MORALES</strong></h4>
+                            <p class="text-muted text-center">ID 700810175</p>
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <b>Celular</b> <a class="float-right">88309523</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Sexo</b> <a class="float-right">Masculino</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Fecha de Nacimiento</b> <a class="float-right">27-03-2065</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Nacionalidad</b> <a class="float-right">Costarricense</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Estado Civil</b> <a class="float-right">Casado (a)</a>
+                                </li>
+                            </ul>
 
-            
-            <!--begin::Card header-->
-            <div class="card-header cursor-pointer">
-                <!--begin::Card title-->
-                <div class="card-title m-0">
-                    <h3 class="fw-bolder m-0">Perfil de {{ $contact->name }}</h3>
+                            <strong><i class="fa fa-map-marker mr-1"></i>Dirección</strong>
 
+                            <p class="text-muted">
 
-                    
+                            </p>
+                            <hr>
+                            <strong><i class="fa fa-map mr-1"></i>Distrito</strong>
+                            <p class="text-muted"></p>
+                            <hr>
+
+                            <strong><i class="fa fa-phone mr-1"></i>Otros Teléfonos</strong>
+                            <p class="text-muted">
+                            </p>
+                            <hr>
+
+                            <strong><i class="fa fa-comment mr-1"></i>Observacion Fija</strong>
+                            <p class="text-muted"></p>
+                            <hr>
+
+                            <strong><i class="fa fa-envelope mr-1"></i> Autoriza el Envío de Email?</strong>
+                            <p class="text-muted">No</p>
+                            <hr>
+                            <strong><i class="fa fa-mobile mr-1"></i> Autoriza el Envío de SMS?</strong>
+                            <p class="text-muted">No</p>
+                        </div>
+                    </div>
+                    <!-- /#data_contratos -->
                 </div>
-                <div class="pull-rigth card-title m-0"> 
-                   
-                </div>
-                <!--end::Card title-->
-                <!--begin::Action-->
-               {{--  <a href="../../demo17/dist/account/settings.html" class="btn btn-primary align-self-center">Edit Profile</a> --}}
-                <!--end::Action-->
-                
+                <a href="http://localhost/valle_paz/public/contratos/124450/editar"
+                    class="btn btn-primary btn-block"><b>Actualizar</b></a>
+                <a href="http://localhost/valle_paz/public/contratos/124450/editar"
+                    class="btn btn-danger btn-block"><b>Eliminar</b></a>
+                <a href="http://localhost/valle_paz/public/contratos/lista" class="btn btn-warning btn-block"><b>Volver
+                        a Lista</b></a>
             </div>
-            <!--begin::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body p-9 text-center">
-                <!--begin::Row-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Nombre completo</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">{{ $contact->name }} {{ $contact->lastname }}</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Row-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Email</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <span class="fw-bold text-gray-800 fs-6">{{ $contact->email }}</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Télefono</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <span class="fw-bold text-gray-800 fs-6">{{ $contact->phone }}</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Campañas activas</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8">
-                        @php
-                            $number = rand(1,10)
-                        @endphp
-                        <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">{{ $number}}</a>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">País
-                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Country of origination" aria-label="Country of origination"></i></label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">{{ $contact->country }}</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Contactado Mediante</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8">
-                        @if ($contact->comunication_medium == 1)                            
-                            <span class="fw-bolder fs-6 text-gray-800">Whatsapp</span>
-                        @elseif($contact->comunication_medium == 2)
-                            <span class="fw-bolder fs-6 text-gray-800">Facebook</span>
-                        @elseif($contact->comunication_medium == 3)
-                            <span class="fw-bolder fs-6 text-gray-800">Skype</span>
-                        @elseif($contact->comunication_medium == 4)
-                            <span class="fw-bolder fs-6 text-gray-800">Telefonica</span>
-                        @else
-                        <span class="fw-bolder fs-6 text-gray-800">Email</span>
-                        @endif
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-10">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Estado del contacto</label>
-                    <!--begin::Label-->
-                    <!--begin::Label-->
-                    <div class="col-lg-8">
-                            @if ($contact->contact_status == 1)
-                            <span class="badge badge-primary">Nuevo</span>
-                            @elseif($contact->contact_status == 2)
-                            <span class="badge badge-danger">No interesado</span>
-                            @elseif($contact->contact_status == 3)
-                            <span class="badge badge-info">Presupuesto Enviado</span>
-                            @elseif($contact->contact_status == 4)
-                            <span class="badge badge-success">Cliente</span>
-                            @elseif($contact->contact_status == 5)
-                            <span class="badge badge-danger">En Negociación</span>
-                            @else
-                            <span class="badge badge-primary">Renegociando</span>
-                            @endif
-                        {{-- <span class="fw-bold fs-6 text-gray-800">Yes</span> --}}
-                    </div>
-                    <!--begin::Label-->
-                    
-                </div>
-                
-                <!--end::Input group-->
-                <!--begin::Notice-->
-              
-                <!--end::Notice-->
-            </div>
-            <!--end::Card body-->
-            
+            <!-- /.card-body -->
         </div>
-
-        
-        <!--end::details View-->
-        <!--begin::Row-->
-        
-        <!--end::Row-->
+        <!-- /.card -->
     </div>
+    <!-- /.column -->
+    <div class="col-md-9" bis_skin_checked="1">
+        <div class="card" bis_skin_checked="1">
+            <div class="card-header p-2" bis_skin_checked="1">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="#servicio_contrato"
+                            data-toggle="tab">Servicios del
+                            Contrato</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#beneficios_contrato" data-toggle="tab">Beneficiarios
+                            del
+                            Contrato</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#planes_pago" data-toggle="tab">Planes de Pago</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#cobros_generados" data-toggle="tab">Cobros
+                            Generados</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#pagos_realizados" data-toggle="tab">Pagos
+                            Realizados</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#documentos_adjuntos" data-toggle="tab">Documentos
+                            Adjuntos</a></li>
+                </ul>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body" bis_skin_checked="1">
+                <div class="tab-content" bis_skin_checked="1">
+                    <!--servicio_contrato--------------------------------->
+                    <div class="active tab-pane" id="servicio_contrato" bis_skin_checked="1">
+                        <div class="row" bis_skin_checked="1">
+                            <div class="col-md-12" bis_skin_checked="1">
+                                <div class="mb-3 float-right" bis_skin_checked="1">
+                                    <a class="btn bg-success text-white"
+                                        href="http://localhost/valle_paz/public/contrato/servicio/crear/124450"><i
+                                            class="fa fa-plus"></i>Agregar Servicio</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" bis_skin_checked="1">
+                            <div class="col-md-12" bis_skin_checked="1">
+                                <div class="table-responsive" bis_skin_checked="1">
+                                    <table class="table table-wrap">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nombre</th>
+                                                <th>Observaciones</th>
+                                                <th>Valor Servicio</th>
+                                                <th>Cuota Servicio</th>
+                                                <th>Saldo Actual</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <input type="hidden" id="h_row_contrato_servicio_50577345"
+                                                    value="251996">
+                                                <td>1</td>
+                                                <td>Corporativo</td>
+                                                <td></td>
 
-    @endsection
+                                                <td>
+                                                    ₡
+
+                                                    4,500.00
+
+                                                </td>
+
+                                                <td>
+
+                                                    ₡
+
+
+
+                                                    4,500.00
+
+
+
+
+
+
+                                                </td>
+
+                                                <td>₡
+
+                                                    0,00
+                                                </td>
+                                                <td>
+                                                    <p class="notification-label bg-primary text-white">Activo</p>
+                                                </td>
+                                                <td>
+                                                    <a href="http://localhost/valle_paz/public/contrato_servicio/511/251996"
+                                                        class="btn btn-tbl-update btn-xs text-white">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="http://localhost/valle_paz/public/servicio_contrato/edit/251996"
+                                                        class="btn btn-tbl-update btn-xs text-white">
+                                                        <i class="fa fa-pencil primary"></i>
+                                                    </a>
+
+                                                    <input type="hidden" name="" id="contrato_id" value="251996">
+
+
+
+                                                    <a class="btn btn-tbl-update btn-xs text-white"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Desactivar Servicio"
+                                                        onclick="sendUpdate('service_activate', '251996')">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <input type="hidden" id="h_row_contrato_servicio_65913312"
+                                                    value="251997">
+                                                <td>2</td>
+                                                <td>Corporativo</td>
+                                                <td></td>
+
+                                                <td>
+                                                    ₡
+
+                                                    4,500.00
+
+                                                </td>
+
+                                                <td>
+
+                                                    ₡
+
+
+
+                                                    4,500.00
+
+
+
+
+
+
+                                                </td>
+
+                                                <td>₡
+
+                                                    0,00
+                                                </td>
+                                                <td>
+                                                    <p class="notification-label bg-primary text-white">Activo</p>
+                                                </td>
+                                                <td>
+                                                    <a href="http://localhost/valle_paz/public/contrato_servicio/511/251997"
+                                                        class="btn btn-tbl-update btn-xs text-white">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="http://localhost/valle_paz/public/servicio_contrato/edit/251997"
+                                                        class="btn btn-tbl-update btn-xs text-white">
+                                                        <i class="fa fa-pencil primary"></i>
+                                                    </a>
+
+                                                    <input type="hidden" name="" id="contrato_id" value="251997">
+
+
+
+                                                    <a class="btn btn-tbl-update btn-xs text-white"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Desactivar Servicio"
+                                                        onclick="sendUpdate('service_activate', '251997')">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <input type="hidden" id="h_row_contrato_servicio_5223086"
+                                                    value="251998">
+                                                <td>3</td>
+                                                <td>Corporativo</td>
+                                                <td></td>
+
+                                                <td>
+                                                    ₡
+
+                                                    4,500.00
+
+                                                </td>
+
+                                                <td>
+
+                                                    ₡
+
+
+
+                                                    5,085.00
+
+
+
+
+
+
+                                                </td>
+
+                                                <td>₡
+
+                                                    0,00
+                                                </td>
+                                                <td>
+                                                    <p class="notification-label bg-primary text-white">Activo</p>
+                                                </td>
+                                                <td>
+                                                    <a href="http://localhost/valle_paz/public/contrato_servicio/511/251998"
+                                                        class="btn btn-tbl-update btn-xs text-white">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="http://localhost/valle_paz/public/servicio_contrato/edit/251998"
+                                                        class="btn btn-tbl-update btn-xs text-white">
+                                                        <i class="fa fa-pencil primary"></i>
+                                                    </a>
+
+                                                    <input type="hidden" name="" id="contrato_id" value="251998">
+
+
+
+                                                    <a class="btn btn-tbl-update btn-xs text-white"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Desactivar Servicio"
+                                                        onclick="sendUpdate('service_activate', '251998')">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---beneficios_contrato------------------------------------------------------->
+                    <div class="tab-pane" id="beneficios_contrato" bis_skin_checked="1">
+                        <div class="row" bis_skin_checked="1">
+                            <div class="col-md-12 mb-3" bis_skin_checked="1">
+                                <div class="text-right" bis_skin_checked="1">
+                                    <a href="http://localhost/valle_paz/public/contrato_beneficiario/crear/124450"
+                                        class="btn bg-primary text-white">
+                                        <i class="fa fa-plus"></i>Agregar Beneficiario
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" bis_skin_checked="1">
+                            <div class="col-md-12" bis_skin_checked="1">
+                                <div id="tablaContratos" bis_skin_checked="1">
+                                    <div class="table-responsive" bis_skin_checked="1">
+                                        <table class="table table-hover table-sm">
+                                            <thead class="thead">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Nombre Completo</th>
+                                                    <th>Edad de Afiliación</th>
+                                                    <th>Parentesco</th>
+                                                    <th>Nombre Servicio</th>
+                                                    <th>Vigencia desde</th>
+                                                    <th>¿Reporta a la INS?</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="7">
+                                                        <center>
+                                                            No se encontraron resultados.
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---planes_pago------------------------------------------------------->
+                    <div class="tab-pane" id="planes_pago" bis_skin_checked="1">
+
+                        <div class="row" bis_skin_checked="1">
+                            <div class="col-md-12" bis_skin_checked="1">
+
+                                <div class="table-responsive" bis_skin_checked="1">
+                                    <form method="GET"
+                                        action="http://localhost/valle_paz/public/contrato/generar-plan-pago/124450"
+                                        accept-charset="UTF-8" id="frmFiltros">
+
+                                        <select id="servicio" class="form-control" style="width:
+                        100%;" onchange="buscar('servicio')" name="servicio">
+                                            <option selected="selected" value="">Servicios</option>
+                                            <option value="251996">Corporativo</option>
+                                            <option value="251997">Corporativo</option>
+                                            <option value="251998">Corporativo</option>
+                                        </select>
+
+                                        <button class="btn bg-success text-white mt-1" type="submit">
+                                            Ver Plan de pago
+                                        </button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----cobros_generados----------------------->
+                    <div class="tab-pane" id="cobros_generados" bis_skin_checked="1">
+                        <div class="row" bis_skin_checked="1">
+                            <div class="col-md-12" bis_skin_checked="1">
+
+                                <div class="table-responsive" bis_skin_checked="1">
+                                    <form method="GET"
+                                        action="http://localhost/valle_paz/public/cobros/contratos-clientes/124450"
+                                        accept-charset="UTF-8" id="frmFiltros">
+
+                                        <select id="servicio" class="form-control" style="width:
+                        100%;" onchange="buscar('servicio')" name="contrato_servicio">
+                                            <option selected="selected" value="">Servicios</option>
+                                            <option value="251996">Corporativo</option>
+                                            <option value="251997">Corporativo</option>
+                                            <option value="251998">Corporativo</option>
+                                        </select>
+
+
+
+                                        <button class="btn bg-success text-white mt-1" type="submit">
+                                            Ver Cobros
+                                        </button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----pagos_realizados----------------------->
+                    <div class="tab-pane" id="pagos_realizados" bis_skin_checked="1">
+                        <div class="row" bis_skin_checked="1">
+                            <div class="col-md-12 mb-3" bis_skin_checked="1">
+                                <div class="text-right" bis_skin_checked="1">
+                                    <a href="http://localhost/valle_paz/public/contrato_beneficiario/crear/124450"
+                                        class="btn bg-primary text-white">
+                                        <i class="fa fa-plus"></i>Agregar Beneficiario
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" bis_skin_checked="1">
+                            <div class="col-md-12" bis_skin_checked="1">
+                                pagos_realizados
+                            </div>
+                        </div>
+                    </div>
+                    <!----documentos_adjuntos----------------------->
+                    <div class="tab-pane" id="documentos_adjuntos" bis_skin_checked="1">
+
+                        <div class="row" bis_skin_checked="1">
+                            <div class="col-md-12 mb-3" bis_skin_checked="1">
+                                <div id="tablaDocumentos" bis_skin_checked="1">
+                                    <div class="tab-pane active" id="documentos_adjuntos" bis_skin_checked="1">
+                                        <div class="row" bis_skin_checked="1">
+                                            <div class="col-md-12 text-right mb-3" bis_skin_checked="1">
+                                                <a data-toggle="modal" data-target="#agregar_adjunto"
+                                                    class="btn btn-primary">
+                                                    <i class="fa fa-plus"></i> Agregar Adjunto
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row" bis_skin_checked="1">
+                                            <div class="col-md-12" bis_skin_checked="1">
+                                                <div class="table-responsive" bis_skin_checked="1">
+                                                    <table class="table table-striped table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th><a data-sort="cliente_adjunto_nombre">Nombre
+                                                                        Adjunto</a></th>
+                                                                <th><a
+                                                                        data-sort="cliente_adjunto_observacion">Observación</a>
+                                                                </th>
+                                                                <th class="action-column">&nbsp;</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="4">No Hay resultados que mostrar</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="agregar_adjunto" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true" bis_skin_checked="1">
+                    <div class="modal-dialog modal-lg" role="document" bis_skin_checked="1">
+                        <div class="modal-content" bis_skin_checked="1">
+                            <div class="modal-header" bis_skin_checked="1">
+                                <h4 class="modal-title" id="exampleModalLabel">Agregar Adjunto</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <form method="POST"
+                                action="http://localhost/valle_paz/public/contrato/create/documento/86/124450"
+                                accept-charset="UTF-8" role="form" id="frmAdjuntarArchivos"
+                                enctype="multipart/form-data"><input name="_token" type="hidden"
+                                    value="WlVOZbDqzdeKp1hjsff0Ltom9KiZWuLkIrm7XruK">
+                                <div class="modal-body" bis_skin_checked="1">
+                                    <div class="row col-md-12" bis_skin_checked="1">
+                                        <div class="col-12" bis_skin_checked="1">
+                                            <div class="form-group" bis_skin_checked="1"><label
+                                                    class="form-control-label text-color-dark" for="nombre">Nombre del
+                                                    archivo<span class="text-danger">*</span></label><input
+                                                    class="form-control" placeholder="Nombre del archivo" id="nombre"
+                                                    autocomplete="off" required=""
+                                                    onkeyup="javascript:this.value=this.value.toUpperCase()"
+                                                    name="nombre" type="text"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-md-12" bis_skin_checked="1">
+                                        <div class="row col-md-12" bis_skin_checked="1">
+                                            <label for="foto" class="form-label">Archivo</label>
+                                            <input type="file" class="form-control" name="archivo" id="archivo">
+                                        </div>
+                                    </div>
+                                    <div class="row col-md-12" bis_skin_checked="1">
+                                        <div class="col-sm-12" bis_skin_checked="1">
+                                            <div class="form-group" bis_skin_checked="1"><label
+                                                    class="form-label text-color-dark"
+                                                    for="observaciones">Observación</label><textarea
+                                                    name="observaciones" class="form-control" placeholder="Observación"
+                                                    id="observaciones"></textarea></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer text-center" bis_skin_checked="1">
+                                    <input type="hidden" name="id_registro" id="id_registro" value="">
+                                    <button type="submit" class="btn btn-primary"><!--<i class="fa fa-times"></i>-->
+                                        Guardar</button>
+                                    <button type="button" class="btn btn-warning"
+                                        data-dismiss="modal"><!--<i class="fa fa-times"></i>--> Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.tab-content -->
+        </div>
+        <!-- /.card-body -->
+       
+       
+       
+
+    </div>
+    <!-- /.nav-tabs-custom -->
+</div>
+
+@endsection
