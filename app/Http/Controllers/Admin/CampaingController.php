@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Campaing;
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CampaingController extends Controller
@@ -19,7 +21,7 @@ class CampaingController extends Controller
         $id = auth()->user()->id;
         $data = Campaing::where('user_id',$id)->get();
 
-        return view('');
+        return view('campaings.index', compact('data'));
     }
 
     /**
@@ -30,9 +32,8 @@ class CampaingController extends Controller
     public function create(Request $request)
     {
         //
-
-        
-
+      
+        return view('campaings.create');
 
 
     }
@@ -46,6 +47,26 @@ class CampaingController extends Controller
     public function store(Request $request)
     {
         //
+        $user_id = auth()->user()->id;
+        $request->validate([
+            'name'=>'required'          
+        ]);
+       
+        try {
+            $campaing = new Campaing();
+            $campaing->name = $request->name;
+            $campaing->status = 1;
+            $campaing->created_user = $user_id;
+            $campaing->save();
+   
+            $result = Campaing::where('created_user', $user_id)->orderByDesc('id')->first();
+   
+           return redirect()->route('admin.campaing.show', $result)->with(['message' => 'Contacto guardado']);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back();
+        }
+
     }
 
     /**
@@ -54,9 +75,16 @@ class CampaingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Campaing $campaing)
     {
         //
+        
+        if(!$campaing){
+            return redirect()->route('admin.contacs.index');
+        }
+
+        return view('campaings.show', $campaing);
+
     }
 
     /**
@@ -65,9 +93,14 @@ class CampaingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Campaing $campaing)
     {
         //
+        if(!$campaing){
+            return redirect()->route('admin.contacs.index');
+        }
+
+        return redirect()->route('admin.campaings.edit', $campaing);
     }
 
     /**
@@ -77,10 +110,21 @@ class CampaingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Campaing $campaing)
     {
-        //
+
+        try {
+            //code...
+            $campaing->update($request->all());
+            return redirect()->route('admin.campaings.show', $campaing);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -88,8 +132,67 @@ class CampaingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Campaing $campaing)
     {
         //
+        try {
+            //code...
+            $campaing->delete();
+            return redirect()->route('admin.campaings.index');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
     }
+
+
+    
+
+    public function addContact(Request $request, Campaing $campaing){
+
+        $input = $request->all();
+        $contacts = $input['contact_id'];
+        if(is_array($contacts)){
+            foreach ($contacts as $key => $value) {
+
+                if ( !Campaing::where('contact_id', $value)->exists() ){ 
+                  
+                    $campaing->contact_id = $value;
+                    $campaing->updated_at = Carbon::now(); 
+                    try {
+
+                        $result = $campaing->update();
+                            if($result){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        } catch (\Throwable $th) {
+                            throw $th;
+                        }
+                        
+                }
+
+            }
+
+        }else{
+            try {                
+                $campaing->contact_id = $request->contact;
+                $campaing->updated_at = Carbon::now();               
+
+               $result = $campaing->update();
+                 if($result){
+                     return true;
+                 }else{
+                     return false;
+                 }
+            } catch (\Throwable $th) {
+                throw $th;
+            }
+        }
+
+
+    }
+
+
 }

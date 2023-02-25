@@ -20,6 +20,7 @@ Route::get('/', [AdminController::class, 'login']);
 Auth::routes();
 
 
+
 Route::get('/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
 Route::get('/clientes', [ContactsController::class, 'index']);
 

@@ -5,15 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Campaing extends Model
+class Budget extends Model
 {
     use HasFactory;
-    //table laravel?
+
     protected $fillable = [
-        'name',
-        'status',
-        'contact_id',
-        'created_user'
+        'title',
+        'observacion',
+        'price',
+        'valid_until',
+        'user_created',
+        'user_created_for',
     ];
+
 
 }

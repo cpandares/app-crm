@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 class ContactsController extends Controller
 {
@@ -27,9 +28,30 @@ class ContactsController extends Controller
             'phone' =>'required'
         ]);
        
-         $contact = Contact::create($request->all());
+        $contact = new Contact();
 
-        return redirect()->route('admin.contacts.index')->with(['message' => 'Contacto guardado']);
+       try {
+        //code...
+        $contact->name = $request->name;
+        $contact->lastname = $request->lastname;
+        $contact->email = $request->email;
+        $contact->phone = $request->phone;
+        $contact->country = $request->country;
+        $contact->city = $request->city;
+        $contact->state = $request->state;
+        $contact->postcode = $request->postcode;
+        $contact->contact_status = $request->contact_status;
+        $contact->user_id = $request->user_id;
+        $contact->comunication_medium = $request->comunication_medium;
+        $contact->created_at = Carbon::now();
+        $contact->updated_at = Carbon::now();
+        $contact->save();
+
+        return redirect()->route('admin.contacts.show', $contact)->with(['message' => 'Contacto guardado']);
+       } catch (\Throwable $th) {
+        //throw $th;
+        return redirect()->route('admin.contacts.index')->with(['message' => 'Contacto no guardado']);
+       }
     }
 
 
@@ -42,6 +64,19 @@ class ContactsController extends Controller
     public function edit(Contact $contact){
 
         return view('contacts.edit', compact('contact'));
+
+    }
+
+    public function update(Contact $contact, Request $request){
+
+        try {
+            //code...
+            $contact->update($request->all());
+            return redirect()->route('admin.contact.show', $contact);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->route('admin.contacts.index')->with(['message' => 'Contacto no actualizado']);
+        }
 
     }
 

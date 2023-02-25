@@ -18,10 +18,12 @@ class CreateProductsTable extends Migration
             $table->string('product_name');
             $table->string('product_description');
             $table->string('image')->nullable();
+            $table->unsignedBigInteger('product_created_by');
             $table->string('price_esp')->nullable();
             $table->string('price_ger')->nullable();
             $table->string('price_italy')->nullable();
             $table->string('price_usa')->nullable();
+            $table->foreign('product_created_by')->references('id')->on('users')->onDelete('cascade');  
             $table->timestamps();
         });
     }

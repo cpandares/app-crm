@@ -12,6 +12,7 @@ class Product extends Model
         'product_name',
         'product_description',
         'image',
+        'product_created_by',
         'price_esp',
         'price_ger',
         'price_italy',
