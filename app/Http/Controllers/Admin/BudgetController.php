@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Budget;
+use App\Models\Note;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -150,6 +151,14 @@ class BudgetController extends Controller
         }
 
 
+    }
+
+
+    public function ajax($id){
+
+        $notes = Budget::where('user_created_for', $id)->orderByDesc('id')->paginate(20);
+
+        return view('budget.lista', compact('notes'));
     }
 
 

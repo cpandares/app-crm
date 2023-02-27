@@ -291,14 +291,15 @@
                         <!--end::Menu 1-->
                         <!--end::Filter-->
                         <!--begin::Export-->
-                        <button
+                        <a
                             type="button"
                             class="btn btn-light-primary me-3"
                             data-bs-toggle="modal"
                             data-bs-target="#kt_customers_export_modal"
+                            
                         >
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr078.svg-->
-                            <span class="svg-icon svg-icon-2">
+                           {{--  <span class="svg-icon svg-icon-2">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="24"
@@ -325,9 +326,9 @@
                                         fill="#C4C4C4"
                                     ></path>
                                 </svg>
-                            </span>
-                            <!--end::Svg Icon-->Exportar
-                        </button>
+                            </span> --}}
+                            <!--end::Svg Icon-->Crear Campaña
+                        </a>
                         <!--end::Export-->
                         <!--begin::Add customer-->
                         <button
@@ -336,7 +337,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#kt_modal_add_customer"
                         >
-                            Añadir Contacto
+                         +   Añadir Contacto
                         </button>
                         <!--end::Add customer-->
                     </div>
@@ -985,3 +986,7 @@
 </div>
 
 @endsection
+
+
+
+

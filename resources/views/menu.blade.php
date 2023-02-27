@@ -2,7 +2,7 @@
     <!--begin::Logo-->
     <div class="aside-logo flex-column-auto py-13" id="kt_aside_logo">
         <a href="{{ url('/home') }}">
-            <img alt="Logo" src="assets/media/logos/logo-demo17.webp" class="h-40px" />
+            <img alt="Logo" src="https://res.cloudinary.com/cpandares/image/upload/v1677505079/logo-demo17_o0xsf6.webp" class="h-40px" />
         </a>
     </div>
     <!--end::Logo-->
