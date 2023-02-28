@@ -7,7 +7,9 @@
 <!-- ------------------------------------------------- HEADER ---------------------------------------------------------- -->
 <!-- ------------------------------------------------------------------------------------------------------------------- -->
 @include('head')
-
+@yield('script')
+<script src="{{ asset('inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 <!-- ------------------------------------------------------------------------------------------------------------------- -->
 
 <!-- ------------------------------------------------------------------------------------------------------------------- -->
@@ -15,6 +17,7 @@
 <!-- ------------------------------------------------------------------------------------------------------------------- -->
 
 <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-disabled">
+    @include('sweetalert::alert');
     <!--begin::Main-->
     <!--begin::Root-->
     <div class="d-flex flex-column flex-root">
@@ -30,8 +33,9 @@
                     <div class="container d-flex flex-stack">
                         <!--begin::Mobile logo-->
                         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-                            <a href="../../demo17/dist/index.html">
-                                <img alt="Logo" src="assets/media/logos/logo-demo17.svg" class="h-35px" />
+                            <a>
+                               
+                                <img alt="Logo" src="https://res.cloudinary.com/cpandares/image/upload/v1677505079/logo-demo17_o0xsf6.webp" class="h-35px" />
                             </a>
                         </div>
                         <!--end::Mobile logo-->

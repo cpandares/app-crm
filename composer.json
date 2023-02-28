@@ -15,6 +15,8 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/sanctum": "^2.11",
+        "laravelcollective/html": "^6.3",
+        "realrashid/sweet-alert": "^4.1",
         "laravel/ui": "^3.4"
     },
     "require-dev": {

@@ -18,7 +18,8 @@
     <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-   
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <!--end::Fonts-->
     <!--begin::Page Vendor Stylesheets(used by this page)-->
     <link  href="{{ asset('css/plugins/datatables.bundle.css') }}"  rel="stylesheet" type="text/css" />

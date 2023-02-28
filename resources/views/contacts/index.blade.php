@@ -1,4 +1,5 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app') 
+@section('content')
 
 <div
     class="content d-flex flex-column flex-column-fluid"
@@ -331,14 +332,13 @@
                         </a>
                         <!--end::Export-->
                         <!--begin::Add customer-->
-                        <button
-                            type="button"
+                        <a
+                            
                             class="btn btn-outline-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#kt_modal_add_customer"
+                            href="{{ route('admin.contact.create') }}"
                         >
                          +   Añadir Contacto
-                        </button>
+                        </a>
                         <!--end::Add customer-->
                     </div>
                     <!--end::Toolbar-->
@@ -582,7 +582,7 @@
                                                     bis_skin_checked="1"
                                                 >
                                                     <a
-                                                        href="{{ route('admin.contact.edit', $item) }}"
+                                                        href="{{ route('admin.contact.show', $item) }}"
                                                         class="menu-link px-3"
                                                         >Ver</a
                                                     >
@@ -630,12 +630,7 @@
                             <!--begin::Modal content-->
                             <div class="modal-content">
                                 <!--begin::Form-->
-                                <form
-                                    class="form"
-                                    action="#"
-                                    id="kt_modal_add_customer_form"
-                                    
-                                >
+                              
                                     <!--begin::Modal header-->
                                     <div
                                         class="modal-header"
@@ -688,7 +683,7 @@
                                     <!--end::Modal header-->
                                     <!--begin::Modal body-->
                                     <div class="modal-body py-10 px-lg-17">
-                                        <!--begin::Scroll-->
+                                        {!! Form::open(['route'=>'admin.contact.store', 'autocomplete'=>'off', 'files'=>true]) !!}
                                         <div
                                             class="scroll-y me-n7 pe-7"
                                             id="kt_modal_add_customer_scroll"
@@ -824,15 +819,15 @@
                                                     <!--begin::Label-->
                                                     <label
                                                         class="required fs-6 fw-bold mb-2"
-                                                        >Dirección de contacto</label
+                                                        >País contacto</label
                                                     >
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input
                                                         class="form-control form-control-solid"
                                                         placeholder=""
-                                                        name="address1"
-                                                        value="101, Collins Street"
+                                                        name="country"
+                                                        value=""
                                                     />
                                                     <!--end::Input-->
                                                 </div>
@@ -939,40 +934,15 @@
                                             <!--end::Billing form-->
                                         </div>
                                         <!--end::Scroll-->
+                                        
+                                            {!! Form::submit('Guardar', ['class'=>'btn btn-primary mt-2']) !!}
+                                            {!! Form::close() !!}
+                                      
                                     </div>
                                     <!--end::Modal body-->
                                     <!--begin::Modal footer-->
-                                    <div class="modal-footer flex-center">
-                                        <!--begin::Button-->
-                                        <button
-                                            type="reset"
-                                            id="kt_modal_add_customer_cancel"
-                                            class="btn btn-light me-3"
-                                        >
-                                            Discard
-                                        </button>
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button
-                                            type="submit"
-                                            id="kt_modal_add_customer_submit"
-                                            class="btn btn-primary"
-                                        >
-                                            <span class="indicator-label"
-                                                >Submit</span
-                                            >
-                                            <span class="indicator-progress"
-                                                >Please wait...
-                                                <span
-                                                    class="spinner-border spinner-border-sm align-middle ms-2"
-                                                ></span
-                                            ></span>
-                                        </button>
-                                        <!--end::Button-->
-                                    </div>
                                     <!--end::Modal footer-->
-                                </form>
-                                <!--end::Form-->
+                               
                             </div>
                         </div>
                     </div>

@@ -9,11 +9,13 @@ class Campaing extends Model
 {
     use HasFactory;
     //table laravel?
+    protected $table = 'campaing';
     protected $fillable = [
         'name',
         'status',
         'contact_id',
-        'created_user'
+        'created_user',
+       
     ];
 
 }

@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Budget;
-use App\Models\Note;
+
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+Use Alert;
 
 class BudgetController extends Controller
 {
@@ -26,14 +28,27 @@ class BudgetController extends Controller
 
     }
 
+    public function show (Budget $presupuesto){
+
+        if(!$presupuesto){
+            return redirect()->back();
+        }
+
+       /*  dd($presupuesto); */
+
+        return view('budget.show', compact('presupuesto'));
+    }
+
 
     public function store(Request $request, Budget $budget){
 
 
         $user_id = auth()->user()->id;
+       
         $request->validate([
-            'name'=>'required'          
+            'title'=>'required'          
         ]);
+
 
         $budget = new Budget();
 
@@ -44,15 +59,18 @@ class BudgetController extends Controller
             $budget->price = $request->price;
             $budget->valid_until = $request->valid_until;
             $budget->user_created = $user_id;
-            $budget->user_created_for = $request->user_created_for;
+            $budget->user_created_for = $request->contact;
             $budget->created_at = Carbon::now();
             $budget->updated_at = Carbon::now();
 
             $budget->save();
 
-            return redirect()->route('admin.budget.show', compact('budget'));
+            $presupuesto = Budget::orderByDesc('id')->first();
+
+            Alert::success('Presupuesto almacenado');
+            return redirect()->back();
        } catch (\Throwable $th) {
-        //throw $th;
+        throw $th;
        }
 
     }

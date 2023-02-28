@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Note;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Alert;
 
 class NoteController extends Controller
 {
@@ -50,7 +51,7 @@ class NoteController extends Controller
         //
         $user_id = auth()->user()->id;
         $request->validate([
-            'name'=>'required'          
+            'title'=>'required'          
         ]);
 
         $note = new Note();
@@ -61,15 +62,17 @@ class NoteController extends Controller
             $note->observacion = $request->observacion;
            
             $note->user_created = $user_id;
-            $note->user_created_for = $request->user_created_for;
+            $note->user_created_for = $request->contact;
             $note->created_at = Carbon::now();
             $note->updated_at = Carbon::now();
 
             $note->save();
-
-            return redirect()->route('admin.notes.show', compact('note'));
+            Alert::success('Registro guardado con éxito');
+            return redirect()->back();
        } catch (\Throwable $th) {
         //throw $th;
+        Alert::error('Registro no se guardó');
+        return redirect()->back();
        }
 
     }

@@ -25,7 +25,7 @@ class Contacts extends Migration
             $table->string('postcode')->nullable();          
             $table->unsignedBigInteger('contact_status');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('comunication_medium');
+            $table->unsignedBigInteger('comunication_medium')->nullable();
             $table->foreign('contact_status')->references('id')->on('contact_status')->onDelete('cascade');  
             $table->foreign('comunication_medium')->references('id')->on('comunication_media')->onDelete('cascade');  
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
