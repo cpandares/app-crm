@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Campaing;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\ContactCampaing;
 use Carbon\Carbon;
+use Database\Factories\ContactFactory;
 use Illuminate\Http\Request;
 
 class CampaingController extends Controller
@@ -48,23 +50,26 @@ class CampaingController extends Controller
     {
         //
         $user_id = auth()->user()->id;
+        
         $request->validate([
             'name'=>'required'          
         ]);
        
         try {
-            $campaing = new Campaing();
-            $campaing->name = $request->name;
-            $campaing->status = 1;
-            $campaing->created_user = $user_id;
-            $campaing->save();
+            $ca = new Campaing();
+            $ca->name = $request->name;
+            $ca->status = $request->status;
+            $ca->created_user = $user_id;
+            $ca->save();
    
-            $result = Campaing::where('created_user', $user_id)->orderByDesc('id')->first();
-   
-           return redirect()->route('admin.campaing.show', $result)->with(['message' => 'Contacto guardado']);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return redirect()->back();
+            $campaing = Campaing::where('created_user', $user_id)->orderByDesc('id')->first();
+           /*  dd($campaing); */
+            
+
+           return redirect()->route('admin.campaings.show', compact('campaing'))->with(['message' => 'Contacto guardado']);
+        } catch (\PDOException $th) {
+            return $th->getMessage();
+            /* return redirect()->back(); */
         }
 
     }
@@ -78,12 +83,14 @@ class CampaingController extends Controller
     public function show(Campaing $campaing)
     {
         //
-        
+        $user_id = auth()->user()->id;
+
         if(!$campaing){
             return redirect()->route('admin.contacs.index');
         }
+        $contacts = Contact::where('user_id', $user_id)->orderByDesc('id')->paginate(20);
 
-        return view('campaings.show', $campaing);
+        return view('campaings.show', compact('campaing', 'contacts'));
 
     }
 
@@ -148,46 +155,58 @@ class CampaingController extends Controller
 
     
 
-    public function addContact(Request $request, Campaing $campaing){
+    public function addContact(Request $request, $id){
 
+        $user_id = auth()->user()->id;
         $input = $request->all();
+       /*  dd($input); */
         $contacts = $input['contact_id'];
+       
         if(is_array($contacts)){
-            foreach ($contacts as $key => $value) {
-
-                if ( !Campaing::where('contact_id', $value)->exists() ){ 
-                  
-                    $campaing->contact_id = $value;
-                    $campaing->updated_at = Carbon::now(); 
-                    try {
-
-                        $result = $campaing->update();
-                            if($result){
-                                return true;
-                            }else{
-                                return false;
+            foreach ($contacts as $key) {
+             /*   dd($key); */
+                if ( !ContactCampaing::where('contact_id', $key)->exists() ){
+                    foreach ($contacts as $key => $value) {
+                        $campaing = new ContactCampaing();
+    
+                        try {
+                            
+                            $campaing->camaping_id = $id;
+                            $campaing->contact_id = $value;
+                            $campaing->user_id = $user_id; 
+    
+                            $result = $campaing->save();
+                                if($result){
+                                    return true;
+                                }else{
+                                    return false;
+                                }
+                            } catch (\PDOException $th) {
+                                return $th->getMessage();
                             }
-                        } catch (\Throwable $th) {
-                            throw $th;
-                        }
+                        # code...
+                    } 
                         
                 }
 
             }
 
         }else{
-            try {                
-                $campaing->contact_id = $request->contact;
-                $campaing->updated_at = Carbon::now();               
-
+            try {      
+                $campaing = new ContactCampaing();
+                $campaing->camaping_id = $id;         
+                $campaing->contact_id = $request->contact_id;
+                $campaing->user_id = $user_id;
+                $campaing->created_at = Carbon::now();               
+                $campaing->updated_at = Carbon::now();   
                $result = $campaing->update();
                  if($result){
                      return true;
                  }else{
                      return false;
                  }
-            } catch (\Throwable $th) {
-                throw $th;
+            } catch (\PDOException $th) {
+                return $th->getMessage();
             }
         }
 

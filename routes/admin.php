@@ -26,3 +26,4 @@ Route::resource('campaings', CampaingController::class)->names('admin.campaings'
 
 Route::get('contacto-presupuesto-ajax/{id}', [BudgetController::class, 'ajax'])->name('contacto-presupuesto-ajax');
 
+Route::post('add-contacts-campaings/{id}', [CampaingController::class, 'addContact'])->name('add-contacts-campaings');

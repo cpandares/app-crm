@@ -60,3 +60,27 @@
 .wizard .nav-tabs .nav-item .nav-link svg {
 	font-size: 25px;
 }
+
+.container {
+    font-family: "Trebuchet MS", sans-serif;
+    display: flex;
+    gap: 30px;
+}
+.column {
+    flex-basis: 20%;
+    background: #ddd;
+    min-height: 90vh;
+    padding: 5px;
+    border-radius: 10px;
+}
+.column h1 {
+    text-align: center;
+    font-size: 22px;
+}
+.list-group-item {
+    background: #fff;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}

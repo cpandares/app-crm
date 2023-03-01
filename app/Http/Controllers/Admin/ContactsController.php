@@ -20,9 +20,11 @@ class ContactsController extends Controller
 
         $user_id = auth()->user()->id;
 
-        $data = Contact::where('user_id',$user_id)->paginate(20);
-
-        return view('contacts.index', compact('data'));
+        $new_clients = Contact::where('user_id',$user_id)->where('contact_status',5)->paginate(20);
+        $clientes_negoci = Contact::where('user_id',$user_id)->where('contact_status',4)->paginate(20);
+        $presupuestados = Contact::where('user_id',$user_id)->where('contact_status',4)->paginate(20);
+        $clientes = Contact::where('user_id',$user_id)->where('contact_status',3)->paginate(20);
+        return view('contacts.index', compact('new_clients', 'clientes_negoci','presupuestados', 'clientes'));
     }
 
     public function create(){
