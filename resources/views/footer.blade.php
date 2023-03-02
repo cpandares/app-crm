@@ -29,17 +29,170 @@
     
     /* const items = document.querySelectorAll('.card__item')
     const columns = document.querySelectorAll('.column') */
-
-    const columns = document.querySelectorAll(".column");
+    
+    const columns = document.querySelectorAll("#column_nuevos");
+    const columns_nego = document.querySelectorAll("#column_nego");
+    const column_presu = document.querySelectorAll("#column_presu");
+    const column_cli = document.querySelectorAll("#column_cli");
+   /*  let idContacto  = document.getElementById('id_contacto').value
+    let contact_status_id  = document.getElementById('contact_status_id').value */
 
     columns.forEach((column) => {
         new Sortable(column, {
             group: "shared",
+           
             animation: 150,
-            ghostClass: "blue-background-class"
+            ghostClass: "blue-background-class",
+            onMove: function (/**Event*/evt, /**Event*/originalEvent) {
+              // Example: https://jsbin.com/nawahef/edit?js,output
+              evt.dragged; // dragged HTMLElement
+              evt.draggedRect; // DOMRect {left, top, right, bottom}
+              evt.related; // HTMLElement on which have guided
+              evt.relatedRect; // DOMRect
+              evt.willInsertAfter; // Boolean that is true if Sortable will insert drag element after target by default
+              originalEvent.clientY; // mouse position
+              // return false; — for cancel
+              // return -1; — insert before target
+              // return 1; — insert after target
+              // return true; — keep default insertion point based on the direction
+              // return void; — keep default insertion point based on the direction
+            },
+           
+            onEnd: function (/**Event*/evt) {
+                let itemEl = evt.item;  // dragged HTMLElement
+                let to = evt.to;    // target list
+                let from = evt.from;  // previous list
+                let oldIndex = evt.oldIndex;  // element's old index within old parent
+                let newIndex = evt.newIndex;  // element's new index within new parent
+                let oldDraggableIndex = evt.oldDraggableIndex; // element's old index within old parent, only counting draggable elements
+                let newDraggableIndex = evt.newDraggableIndex; // element's new index within new parent, only counting draggable elements
+                let clone = evt.clone // the clone element
+                let pullMode =  evt.pullMode;  // when item is in another sortable: `"clone"` if cloning, `true` if moving
+
+                console.log( to )
+            }
         });
        
     });  
+
+    columns_nego.forEach((column) => {
+        new Sortable(column, {
+            group: "shared",
+           
+            animation: 150,
+            ghostClass: "blue-background-class",
+            onMove: function (/**Event*/evt, /**Event*/originalEvent) {
+              // Example: https://jsbin.com/nawahef/edit?js,output
+              evt.dragged; // dragged HTMLElement
+              evt.draggedRect; // DOMRect {left, top, right, bottom}
+              evt.related; // HTMLElement on which have guided
+              evt.relatedRect; // DOMRect
+              evt.willInsertAfter; // Boolean that is true if Sortable will insert drag element after target by default
+              originalEvent.clientY; // mouse position
+              // return false; — for cancel
+              // return -1; — insert before target
+              // return 1; — insert after target
+              // return true; — keep default insertion point based on the direction
+              // return void; — keep default insertion point based on the direction
+            },
+           
+            onEnd: function (/**Event*/evt) {
+                let itemEl = evt.item;  // dragged HTMLElement
+                let to = evt.to;    // target list
+                let from = evt.from;  // previous list
+                let oldIndex = evt.oldIndex;  // element's old index within old parent
+                let newIndex = evt.newIndex;  // element's new index within new parent
+                let oldDraggableIndex = evt.oldDraggableIndex; // element's old index within old parent, only counting draggable elements
+                let newDraggableIndex = evt.newDraggableIndex; // element's new index within new parent, only counting draggable elements
+                let clone = evt.clone // the clone element
+                let pullMode =  evt.pullMode;  // when item is in another sortable: `"clone"` if cloning, `true` if moving
+
+                console.log( to )
+            }
+        });
+       
+    });  
+
+    column_presu.forEach((column) => {
+        new Sortable(column, {
+            group: "shared",
+           
+            animation: 150,
+            ghostClass: "blue-background-class",
+            onMove: function (/**Event*/evt, /**Event*/originalEvent) {
+              // Example: https://jsbin.com/nawahef/edit?js,output
+              evt.dragged; // dragged HTMLElement
+              evt.draggedRect; // DOMRect {left, top, right, bottom}
+              evt.related; // HTMLElement on which have guided
+              evt.relatedRect; // DOMRect
+              evt.willInsertAfter; // Boolean that is true if Sortable will insert drag element after target by default
+              originalEvent.clientY; // mouse position
+              // return false; — for cancel
+              // return -1; — insert before target
+              // return 1; — insert after target
+              // return true; — keep default insertion point based on the direction
+              // return void; — keep default insertion point based on the direction
+            },
+           
+            onEnd: function (/**Event*/evt) {
+                let itemEl = evt.item;  // dragged HTMLElement
+                let to = evt.to;    // target list
+                let from = evt.from;  // previous list
+                let oldIndex = evt.oldIndex;  // element's old index within old parent
+                let newIndex = evt.newIndex;  // element's new index within new parent
+                let oldDraggableIndex = evt.oldDraggableIndex; // element's old index within old parent, only counting draggable elements
+                let newDraggableIndex = evt.newDraggableIndex; // element's new index within new parent, only counting draggable elements
+                let clone = evt.clone // the clone element
+                let pullMode =  evt.pullMode;  // when item is in another sortable: `"clone"` if cloning, `true` if moving
+
+                console.log( to )
+            }
+        });
+
+        
+       
+    });
+
+    column_cli.forEach((column) => {
+        new Sortable(column, {
+            group: "shared",
+           
+            animation: 150,
+            ghostClass: "blue-background-class",
+            onMove: function (/**Event*/evt, /**Event*/originalEvent) {
+              // Example: https://jsbin.com/nawahef/edit?js,output
+              evt.dragged; // dragged HTMLElement
+              evt.draggedRect; // DOMRect {left, top, right, bottom}
+              evt.related; // HTMLElement on which have guided
+              evt.relatedRect; // DOMRect
+              evt.willInsertAfter; // Boolean that is true if Sortable will insert drag element after target by default
+              originalEvent.clientY; // mouse position
+              // return false; — for cancel
+              // return -1; — insert before target
+              // return 1; — insert after target
+              // return true; — keep default insertion point based on the direction
+              // return void; — keep default insertion point based on the direction
+            },
+           
+            onEnd: function (/**Event*/evt) {
+                let itemEl = evt.item;  // dragged HTMLElement
+                let to = evt.to;    // target list
+                let from = evt.from;  // previous list
+                let oldIndex = evt.oldIndex;  // element's old index within old parent
+                let newIndex = evt.newIndex;  // element's new index within new parent
+                let oldDraggableIndex = evt.oldDraggableIndex; // element's old index within old parent, only counting draggable elements
+                let newDraggableIndex = evt.newDraggableIndex; // element's new index within new parent, only counting draggable elements
+                let clone = evt.clone // the clone element
+                let pullMode =  evt.pullMode;  // when item is in another sortable: `"clone"` if cloning, `true` if moving
+
+                console.log( to )
+            }
+        });
+
+        
+       
+    });
+
 
   </script>
 

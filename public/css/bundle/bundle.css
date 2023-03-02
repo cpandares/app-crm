@@ -61,10 +61,14 @@
 	font-size: 25px;
 }
 
+
+
 .container {
     font-family: "Trebuchet MS", sans-serif;
     display: flex;
+	flex-wrap: wrap;
     gap: 30px;
+	
 }
 .column {
     flex-basis: 20%;
@@ -72,6 +76,8 @@
     min-height: 90vh;
     padding: 5px;
     border-radius: 10px;
+	max-height: 450px;
+	overflow: scroll;
 }
 .column h1 {
     text-align: center;
@@ -84,3 +90,4 @@
     border-radius: 5px;
     cursor: pointer;
 }
+

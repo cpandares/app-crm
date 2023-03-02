@@ -388,43 +388,93 @@
                 
                 <!--end::Table-->
             </div>
+            <section class="wrapper_li">
+                <div class="container">
+                    <div class="column" id="column_nuevos">
+                        <h1>Nuevos Clientes</h1>
+                        @foreach ($new_clients as $item)                    
+                            <div class="list-group-item card__item" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
+                               {{--  <input type="hidden" name="" id="status_contact" value="{{ $item->contact_status }}">
+                                <input type="hidden" id="contact_id" value="{{ $item->id }}"> --}}
+                                <span class="itemDra" ><strong>{{ $item->name }} {{ $item->lastname }}</strong></span> 
+                                <hr>
+                                
+                                <span><strong>País: </strong> {{ $item->country }}</span>
+                              
+                            </div>
+                        @endforeach
+                      
+                    </div>
+                    <div class="column" id="column_nego">
+                        <h1>En Negociación</h1>
+                        @foreach ($clientes_negoci as $item)                    
+                            <div class="list-group-item card__item" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
+                                {{-- <input type="hidden" name="" id="status_contact" value="{{ $item->contact_status }}">
+                                <input type="hidden" id="contact_id" value="{{ $item->id }}"> --}}
+                                <span  class="itemDra" 
+                                ><strong>{{ $item->name }} {{ $item->lastname }}</strong></span> 
+                               
+                                <hr>
+                                <span><strong>País: </strong> {{ $item->country }}</span>
+                              
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="column" id="column_presu">
+                        <h1>Presupuesto Enviado</h1>
+        
+                        @foreach ($presupuestados as $item)                    
+                            <div class="list-group-item card__item" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
+                                <span><strong>{{ $item->name }} {{ $item->lastname }}</strong></span> 
+                                {{-- <input type="hidden"  id="contact_status_id" value="2"> --}}
+                                <hr>
+                                <span><strong>País: </strong> {{ $item->country }}</span>
+                                
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="column " id="column_cli">
+                        <h1>Cliente</h1>
+        
+                        @foreach ($clientes as $item)                    
+                        <div class="list-group-item card__item" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
+                            <span><strong>{{ $item->name }} {{ $item->lastname }}</strong></span> 
+                            {{-- <input type="hidden"  id="contact_status_id" value="3"> --}}
+                            <hr>
+                            <span><strong>País: </strong> {{ $item->country }}</span>
+                            {{-- <li class="">
+                                <span class="card__tag card__tag--browser">Browser</span>
+                                <h6 class="card__title">Lightbox loading issue on Safari</h6>
+                                <ol class="card__actions">
+                                  <li class="card__actions--wrapper">
+                                    <i class="fas fa-align-left"></i></li>
+                                </ol>
+                              </li> --}}
+                        </div>
+                    @endforeach
+                    </div>
+                    {{-- <div class="column">
+                        <h1>No interesado</h1>
+        
+                        @foreach ($noInteresteds as $item)                    
+                        <div class="list-group-item card__item" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
+                            <span ><strong>{{ $item->name }} {{ $item->lastname }}</strong></span> 
+                           
+                            <hr>
+                            <span><strong>País: </strong> {{ $item->country }}</span>
+                            
+                        </div>
+                    @endforeach
+                    </div> --}}
+                </div>
+            
+               
+            
+            </section>
             <!--end::Card body-->
         </div>
     </div>
     <!--end::Container-->
-    <section class="wrapper_li">
-        <div class="container">
-            <div class="column">
-                <h1>Nuevos Clientes</h1>
-                @foreach ($new_clients as $item)                    
-                    <div class="list-group-item" draggable="true">
-                        <span><strong>{{ $item->name }} {{ $item->lastname }}</strong></span> 
-
-                    </div>
-                @endforeach
-               {{--  <div class="list-group-item" draggable="true">Take a stroll outside</div>
-                <div class="list-group-item" draggable="true">Design Thumbnail</div>
-                <div class="list-group-item" draggable="true">Attend Meeting</div>
-                <div class="list-group-item" draggable="true">Fix workshop</div>
-                <div class="list-group-item" draggable="true">Visit the zoo</div> --}}
-            </div>
-            <div class="column">
-                <h1>In progress</h1>
-            </div>
-            <div class="column">
-                <h1>Paused</h1>
-            </div>
-            <div class="column">
-                <h1>Under Review</h1>
-            </div>
-            <div class="column">
-                <h1>Completed</h1>
-            </div>
-        </div>
-    
-       
-    
-    </section>
 </div>
 
 @endsection
@@ -432,10 +482,10 @@
 
 @section('script')
 
-<script>
- 
+    <script>
+    
 
-</script>
+    </script>
 
 @endsection
 
