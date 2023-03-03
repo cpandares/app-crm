@@ -395,7 +395,8 @@
                     <div class="list-title">
                        <h2 class="text-center">Clientes Nuevos</h2>
                     </div>
-
+                    @if (count($new_clients) > 0)
+                        
                     @foreach ($new_clients as $item)                    
                         <div class="list-group-item card" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
                                {{--  <input type="hidden" name="" id="status_contact" value="{{ $item->contact_status }}">
@@ -412,6 +413,10 @@
                               
                         </div>
                     @endforeach
+                    @else
+                    <hr>
+                    <p>No hay datos para mostrar</p>
+                    @endif
 
                 </div>
                 <div class="board-list" data-reference="2">
