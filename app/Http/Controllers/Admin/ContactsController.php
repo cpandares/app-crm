@@ -20,11 +20,12 @@ class ContactsController extends Controller
 
         $user_id = auth()->user()->id;
 
-        $new_clients = Contact::where('user_id',$user_id)->where('contact_status',5)->paginate(20);
-        $clientes_negoci = Contact::where('user_id',$user_id)->where('contact_status',4)->paginate(20);
-        $presupuestados = Contact::where('user_id',$user_id)->where('contact_status',2)->paginate(20);
-        $clientes = Contact::where('user_id',$user_id)->where('contact_status',3)->paginate(20);
+        $new_clients = Contact::where('user_id',$user_id)->where('contact_status',1)->paginate(20);
+        $clientes_negoci = Contact::where('user_id',$user_id)->where('contact_status',2)->paginate(20);
+        $presupuestados = Contact::where('user_id',$user_id)->where('contact_status',3)->paginate(20);
+        $clientes = Contact::where('user_id',$user_id)->where('contact_status',4)->paginate(20);
         $noInteresteds = Contact::where('user_id',$user_id)->where('contact_status',6)->paginate(20);
+
         return view('contacts.index', compact('new_clients', 'clientes_negoci','presupuestados', 'clientes', 'noInteresteds'));
     }
 
@@ -116,6 +117,28 @@ class ContactsController extends Controller
 
 
         return view('admin.contact.index')->with(['message' => 'Contacto eliminado']);
+    }
+
+
+    public function updateStatus(Request $request){
+
+        $contact = Contact::findOrFail($request->id);
+        if(!$contact){
+            return false;
+        }
+
+        try {
+            $contact->contact_status = $request->reference;
+            $contact->updated_at = Carbon::now();
+            $contact->save();
+            //code...
+            return true;
+        } catch (\Throwable $th) {
+            //throw $th;
+
+            return false;
+        }
+
     }
 
 

@@ -390,7 +390,7 @@
             </div>
             <section class="wrapper_li">
                 <div class="container">
-                    <div class="column" id="column_nuevos">
+                    <div class="column" id="column_nuevos" data-reference="1">
                         <h1>Nuevos Clientes</h1>
                         @foreach ($new_clients as $item)                    
                             <div class="list-group-item card__item" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
@@ -405,7 +405,7 @@
                         @endforeach
                       
                     </div>
-                    <div class="column" id="column_nego">
+                    <div class="column" id="column_nego" data-reference="2">
                         <h1>En Negociación</h1>
                         @foreach ($clientes_negoci as $item)                    
                             <div class="list-group-item card__item" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
@@ -420,7 +420,8 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="column" id="column_presu">
+
+                    <div class="column" id="column_presu" data-reference="3">
                         <h1>Presupuesto Enviado</h1>
         
                         @foreach ($presupuestados as $item)                    
@@ -433,11 +434,15 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="column " id="column_cli">
+                    <div class="column " id="column_cli" data-reference="4">
                         <h1>Cliente</h1>
         
                         @foreach ($clientes as $item)                    
-                        <div class="list-group-item card__item" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
+                        <div class="list-group-item card__item" 
+                            draggable="true" 
+                            data-id="{{ $item->id }}" 
+                            data-contact="{{ $item->contact_status }}">
+                            
                             <span><strong>{{ $item->name }} {{ $item->lastname }}</strong></span> 
                             {{-- <input type="hidden"  id="contact_status_id" value="3"> --}}
                             <hr>
