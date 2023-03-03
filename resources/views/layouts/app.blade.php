@@ -934,7 +934,7 @@
                                         <!--end::Menu separator-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5">
-                                            <a  class="menu-link px-5" title="Proximamente" disabled>Mi perfil</a>
+                                            <a  class="menu-link px-5" title="Proximamente" disabled>Mi perfil (Próximamente)</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
