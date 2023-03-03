@@ -11,6 +11,7 @@ use App\Models\Contact;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Alert;
+use App\Models\ContactStatus;
 use App\Models\Note;
 
 class ContactsController extends Controller
@@ -20,11 +21,11 @@ class ContactsController extends Controller
 
         $user_id = auth()->user()->id;
 
-        $new_clients = Contact::where('user_id',$user_id)->where('contact_status',1)->paginate(20);
-        $clientes_negoci = Contact::where('user_id',$user_id)->where('contact_status',2)->paginate(20);
-        $presupuestados = Contact::where('user_id',$user_id)->where('contact_status',3)->paginate(20);
-        $clientes = Contact::where('user_id',$user_id)->where('contact_status',4)->paginate(20);
-        $noInteresteds = Contact::where('user_id',$user_id)->where('contact_status',5)->paginate(20);
+        $new_clients = Contact::where('user_id',$user_id)->where('contact_status',1)->orderByDesc('id')->get();
+        $clientes_negoci = Contact::where('user_id',$user_id)->where('contact_status',2)->orderByDesc('id')->get();
+        $presupuestados = Contact::where('user_id',$user_id)->where('contact_status',3)->orderByDesc('id')->get();
+        $clientes = Contact::where('user_id',$user_id)->where('contact_status',4)->orderByDesc('id')->get();
+        $noInteresteds = Contact::where('user_id',$user_id)->where('contact_status',5)->orderByDesc('id')->get();
 
         return view('contacts.index', compact('new_clients', 'clientes_negoci','presupuestados', 'clientes', 'noInteresteds'));
     }
@@ -33,7 +34,8 @@ class ContactsController extends Controller
         $user_id = auth()->user()->id;
         $comunicacion_medias = ComunicationMedium::pluck('comunication_medio', 'id');
         $campaings = Campaing::where('created_user', $user_id)->get();
-        return view('contacts.create', compact('comunicacion_medias', 'campaings'));
+        $status = ContactStatus::pluck('status_name', 'id');
+        return view('contacts.create', compact('comunicacion_medias', 'campaings','status'));
     }
 
 
@@ -65,7 +67,7 @@ class ContactsController extends Controller
         $contact->city = $request->city;
         $contact->state = $request->state;
         $contact->postcode = $request->postcode;
-        $contact->contact_status = 5;
+        $contact->contact_status = $request->statu;
         $contact->user_id = $user_id;
         $contact->comunication_medium = $request->comunication_medium;
         $contact->created_at = Carbon::now();

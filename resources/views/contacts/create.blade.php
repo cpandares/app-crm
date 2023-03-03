@@ -75,47 +75,21 @@
                         {!! Form::select('medio_comunicacion',$comunicacion_medias, '',['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar']) !!}
                     </div>
                     <div class="col-md-6">
-                      
+                        
+                            {!! Form::label('medio_comunicacion', 'Estado del Cliene') !!}
+                            {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                            {!! Form::select('statu',$status, null,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar']) !!}
+                        
                     </div>
                 </div>
 
 
-                <div class="row  mt-2 card">
-
-                    <div class="col-md-12">
-                        @if (count($campaings) > 0)
-                            
-                            <span>Campaña Francia</span>
-                            <input type="checkbox" name="campaing" id="">
-
-                            <span>Campaña Francia</span>
-                            <input type="checkbox" name="campaing" id="">
-                            <span>Campaña Francia</span>
-                            <input type="checkbox" name="campaing" id="">
-                            <span>Campaña Francia</span>
-                            <input type="checkbox" name="campaing" id="">
-                            <span>Campaña Francia</span>
-                            <input type="checkbox" name="campaing" id="">
-                            <span>Campaña Francia</span>
-                            <input type="checkbox" name="campaing" id="">
-                            <span>Campaña Francia</span>
-                            <input type="checkbox" name="campaing" id="">
-
-                            <span>Campaña Francia</span>
-                            <input type="checkbox" name="campaing" id="">
-
-                            <span>Campaña Francia</span>
-                            <input type="checkbox" name="campaing" id="">
-                       
-                        @endif
-                    </div>
-                    
-                </div>
+              
 
                 <div class="mt-5">
 
                     <a href="{{ route('admin.contact.index') }}" class="btn btn-success">Cancelar</a>
-                    {!! Form::submit('Guardar', ['class'=>'btn btn-primary ']) !!}
+                    {!! Form::submit('Guardar', ['class'=>'btn btn-outline-primary ']) !!}
                 </div>
                 {!! Form::close() !!}
             </div>
