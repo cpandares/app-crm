@@ -30,7 +30,7 @@
     /* const items = document.querySelectorAll('.card__item')
     const columns = document.querySelectorAll('.column') */
     
-    const columns = document.querySelectorAll(".column");
+    const columns = document.querySelectorAll(".board-list");
     
    /*  let idContacto  = document.getElementById('id_contacto').value
     let contact_status_id  = document.getElementById('contact_status_id').value */
