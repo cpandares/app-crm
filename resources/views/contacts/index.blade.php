@@ -18,40 +18,7 @@
                         class="d-flex align-items-center position-relative my-1"
                         bis_skin_checked="1"
                     >
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                        <span
-                            class="svg-icon svg-icon-1 position-absolute ms-6"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                            >
-                                <rect
-                                    opacity="0.5"
-                                    x="17.0365"
-                                    y="15.1223"
-                                    width="8.15546"
-                                    height="2"
-                                    rx="1"
-                                    transform="rotate(45 17.0365 15.1223)"
-                                    fill="black"
-                                ></rect>
-                                <path
-                                    d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                    fill="black"
-                                ></path>
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                        <input
-                            type="text"
-                            data-kt-customer-table-filter="search"
-                            class="form-control form-control-solid w-250px ps-15"
-                            placeholder="Buscar cliente"
-                        />
+                       
                     </div>
                     <!--end::Search-->
                 </div>
@@ -63,253 +30,39 @@
                         class="d-flex justify-content-end"
                         data-kt-customer-table-toolbar="base"
                         bis_skin_checked="1"
-                    >
-                        <!--begin::Filter-->
-                        <button
-                            type="button"
-                            class="btn btn-light-primary me-3"
-                            data-kt-menu-trigger="click"
-                            data-kt-menu-placement="bottom-end"
                         >
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                            <span class="svg-icon svg-icon-2">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                >
-                                    <path
-                                        d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z"
-                                        fill="black"
-                                    ></path>
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->Filtrar
-                        </button>
-                        <!--begin::Menu 1-->
-                        <div
-                            class="menu menu-sub menu-sub-dropdown w-300px w-md-325px"
-                            data-kt-menu="true"
-                            id="kt-toolbar-filter"
-                            bis_skin_checked="1"
+                       
+                        {{-- <a
+                            href="{{ url('admin/contactos-lista') }}"
+                            class="btn btn-primary"
                         >
-                            <!--begin::Header-->
-                            <div class="px-7 py-5" bis_skin_checked="1">
-                                <div
-                                    class="fs-4 text-dark fw-bolder"
-                                    bis_skin_checked="1"
-                                >
-                                    Filtrar por:
-                                </div>
-                            </div>
-                            <!--end::Header-->
-                            <!--begin::Separator-->
-                            <div
-                                class="separator border-gray-200"
-                                bis_skin_checked="1"
-                            ></div>
-                            <!--end::Separator-->
-                            <!--begin::Content-->
-                            <div class="px-7 py-5" bis_skin_checked="1">
-                                <!--begin::Input group-->
-                                <div class="mb-10" bis_skin_checked="1">
-                                    <!--begin::Label-->
-                                    <label class="form-label fs-5 fw-bold mb-3"
-                                        >Plataforma:</label
-                                    >
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <select
-                                        class="form-select form-select-solid fw-bolder select2-hidden-accessible"
-                                        data-kt-select2="true"
-                                        data-placeholder="Selecciona opción"
-                                        data-allow-clear="true"
-                                        data-kt-customer-table-filter="month"
-                                        data-dropdown-parent="#kt-toolbar-filter"
-                                        data-select2-id="select2-data-7-imcw"
-                                        tabindex="-1"
-                                        aria-hidden="true"
-                                    >
-                                        <option
-                                            data-select2-id="select2-data-9-wkqu"
-                                        ></option>
-                                        <option value="aug">Wp España</option>
-                                        <option value="sep">Wp Italia</option>
-                                        <option value="oct">Ankstore</option>
-                                        <option value="nov">Fairi</option>
-                                        <option value="dec">
-                                            Otro portal
-                                        </option></select
-                                    ><span
-                                        class="select2 select2-container select2-container--bootstrap5"
-                                        dir="ltr"
-                                        data-select2-id="select2-data-8-7j16"
-                                        style="width: 100%"
-                                        ><span class="selection"
-                                            ><span
-                                                class="select2-selection select2-selection--single form-select form-select-solid fw-bolder"
-                                                role="combobox"
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
-                                                tabindex="0"
-                                                aria-disabled="false"
-                                                aria-labelledby="select2-a297-container"
-                                                aria-controls="select2-a297-container"
-                                                ><span
-                                                    class="select2-selection__rendered"
-                                                    id="select2-a297-container"
-                                                    role="textbox"
-                                                    aria-readonly="true"
-                                                    title="Selecciona opción"
-                                                    ><span
-                                                        class="select2-selection__placeholder"
-                                                        >Selecciona opción</span
-                                                    ></span
-                                                ><span
-                                                    class="select2-selection__arrow"
-                                                    role="presentation"
-                                                    ><b
-                                                        role="presentation"
-                                                    ></b></span></span></span
-                                        ><span
-                                            class="dropdown-wrapper"
-                                            aria-hidden="true"
-                                        ></span
-                                    ></span>
-                                    <!--end::Input-->
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="mb-10" bis_skin_checked="1">
-                                    <!--begin::Label-->
-                                    <label class="form-label fs-5 fw-bold mb-3"
-                                        >Otro tipo:</label
-                                    >
-                                    <!--end::Label-->
-                                    <!--begin::Options-->
-                                    <div
-                                        class="d-flex flex-column flex-wrap fw-bold"
-                                        data-kt-customer-table-filter="payment_type"
-                                        bis_skin_checked="1"
-                                    >
-                                        <!--begin::Option-->
-                                        <label
-                                            class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5"
-                                        >
-                                            <input
-                                                class="form-check-input"
-                                                type="radio"
-                                                name="payment_type"
-                                                value="all"
-                                                checked="checked"
-                                            />
-                                            <span
-                                                class="form-check-label text-gray-600"
-                                                >Todos</span
-                                            >
-                                        </label>
-                                        <!--end::Option-->
-                                        <!--begin::Option-->
-                                        <label
-                                            class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5"
-                                        >
-                                            <input
-                                                class="form-check-input"
-                                                type="radio"
-                                                name="payment_type"
-                                                value="visa"
-                                            />
-                                            <span
-                                                class="form-check-label text-gray-600"
-                                                >Opción1</span
-                                            >
-                                        </label>
-                                        <!--end::Option-->
-                                        <!--begin::Option-->
-                                        <label
-                                            class="form-check form-check-sm form-check-custom form-check-solid mb-3"
-                                        >
-                                            <input
-                                                class="form-check-input"
-                                                type="radio"
-                                                name="payment_type"
-                                                value="mastercard"
-                                            />
-                                            <span
-                                                class="form-check-label text-gray-600"
-                                                >Opción2</span
-                                            >
-                                        </label>
-                                        <!--end::Option-->
-                                        <!--begin::Option-->
-                                        <label
-                                            class="form-check form-check-sm form-check-custom form-check-solid"
-                                        >
-                                            <input
-                                                class="form-check-input"
-                                                type="radio"
-                                                name="payment_type"
-                                                value="american_express"
-                                            />
-                                            <span
-                                                class="form-check-label text-gray-600"
-                                                >Opción3</span
-                                            >
-                                        </label>
-                                        <!--end::Option-->
-                                    </div>
-                                    <!--end::Options-->
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Actions-->
-                                <div
-                                    class="d-flex justify-content-end"
-                                    bis_skin_checked="1"
-                                >
-                                    <button
-                                        type="reset"
-                                        class="btn btn-light btn-active-light-primary me-2"
-                                        data-kt-menu-dismiss="true"
-                                        data-kt-customer-table-filter="reset"
-                                    >
-                                        Reset
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="btn btn-primary"
-                                        data-kt-menu-dismiss="true"
-                                        data-kt-customer-table-filter="filter"
-                                    >
-                                        OK
-                                    </button>
-                                </div>
-                                <!--end::Actions-->
-                            </div>
-                            <!--end::Content-->
-                        </div>
-                        <!--end::Menu 1-->
-                        <!--end::Filter-->
-                        <!--begin::Export-->
-                        <a
-                            type="button"
-                            class="btn btn-light-primary me-3"
-                            data-toggle="modal" data-target="#exampleModal"
-                            
-                        >
-                            + Crear Campaña
+                            Ver Tabla
                         </a>
-                        <!--end::Export-->
-                        <!--begin::Add customer-->
+                      
                         <a
                             
                             class="btn btn-outline-primary"
                             href="{{ route('admin.contact.create') }}"
                         >
                          +   Añadir Contacto
-                        </a>
+                        </a> --}}
                         <!--end::Add customer-->
+                        <div class="row" bis_skin_checked="1">
+                            <div class="col-12" bis_skin_checked="1">
+                               
+                                <button class="btn btn-primary float-right mb-3 btn-sm" data-toggle="modal" data-target="#exampleModal" type="button">
+                                    Agregar Contactos
+                                </button>
+                               
+                                <a href="{{ url('admin/contactos-lista') }}" class="btn btn-primary float-right btn-sm mr-1">
+                                    Vista tabla
+                                </a>
+        
+                                <a href="{{ route('admin.campaings.index') }}" class="btn btn-primary float-right btn-sm mr-1">
+                                   Campañas
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <!--end::Toolbar-->
                     <!--begin::Group actions-->
@@ -347,11 +100,6 @@
                     bis_skin_checked="1"
                 >
 
-
-                   
-
-
-
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -388,91 +136,114 @@
                 
                 <!--end::Table-->
             </div>
-            <div class="board-lists">
-
-                
+            <div class="board-lists container-fluid">
+        
+                        
                 <div class="board-list" data-reference="1">
                     <div class="list-title">
-                       <h2 class="text-center">Clientes Nuevos</h2>
+                       <h2 class="text-center text-gray-600 text-hover-primary">Nuevos</h2>
                     </div>
                     @if (count($new_clients) > 0)
                         
                     @foreach ($new_clients as $item)                    
-                        <div class="list-group-item card" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
-                               {{--  <input type="hidden" name="" id="status_contact" value="{{ $item->contact_status }}">
-                                <input type="hidden" id="contact_id" value="{{ $item->id }}"> --}}
+                        <div class="list-group-item card " id="tarjeta" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
+                              
                                 <span>
-                                    <strong>
-                                        <a href="{{ route('admin.contact.show', $item) }}">{{ $item->name }} {{ $item->lastname }}
+                                    
+                                        <a href="{{ route('admin.contact.show', $item->id) }}">{{ $item->name }} {{ $item->lastname }}
                                         </a>
-                                    </strong>
+                                    
                             </span> 
                             <hr>
                             
-                            <span><strong>País: </strong> {{ $item->country }}</span>
+                            @php
+                                $campaigs = $controlador->getCampaingsContacts($item->id)
+                            @endphp
+
+                            @if ($campaigs)
+                                <span>Campañas:  {{ $campaigs->campaing_name }}</span>
+                                
+                            @endif
                               
                         </div>
                     @endforeach
-                    @else
-                    <hr>
-                    <p>No hay datos para mostrar</p>
+                   
                     @endif
 
                 </div>
                 <div class="board-list" data-reference="2">
                     <div class="list-title">
-                        <h2 class="text-center">Clientes en Negociación</h2>
+                        <h2 class="text-center text-gray-600 text-hover-primary">En Negociación</h2>
                      </div>
-                     @if (count($clientes_negoci)>0)                         
-                        @foreach ($clientes_negoci  as $item)                    
-                        <div class="list-group-item card" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
-                            {{--  <input type="hidden" name="" id="status_contact" value="{{ $item->contact_status }}">
-                            <input type="hidden" id="contact_id" value="{{ $item->id }}"> --}}
+                     @if (count($clientes_negoci)>0)       
+                     @foreach ($clientes_negoci  as $item)                    
+                                        
+                        <div class="list-group-item card" 
+                            draggable="true" 
+                            data-id="{{ $item->id }}" 
+                            id="tarjeta"
+                            data-contact="{{ $item->contact_status }}">
+                           
                             <span>
-                                <strong>
-                                    <a href="{{ route('admin.contact.show', $item) }}">{{ $item->name }} {{ $item->lastname }}
+                                
+                                    <a href="{{ route('admin.contact.show', $item->id) }}">{{ $item->name }} {{ $item->lastname }}
                                     </a>
-                                </strong>
+                                
                             </span> 
                             <hr>
-                            
-                            <span><strong>País: </strong> {{ $item->country }}</span>
+                            @php
+                                $campaigs = $controlador->getCampaingsContacts($item->id)
+                            @endphp
+
+                            @if ($campaigs)
+                            <span>Campañas:  {{ $campaigs->campaing_name }}</span>
+                                
+                            @endif
                         
                         </div>
                         @endforeach
-                     @else
-                         <hr>
-                         <p>No hay datos para mostrar</p>
+                    
                      @endif
  
                 </div>
                 <div class="board-list" data-reference="3">
                     <div class="list-title">
-                        <h2 class="text-center">Presupuesto Enviado</h2>
+                        <h2 class="text-center text-gray-600 text-hover-primary">Presupuesto Enviado</h2>
                      </div>
                      @if (count($presupuestados) > 0)                         
                         @foreach ($presupuestados as $item)                    
-                                <div class="list-group-item card" draggable="true" data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}">
+                                <div 
+                                    class="list-group-item card" 
+                                    draggable="true" 
+                                    data-id="{{ $item->id }}" 
+                                    data-contact="{{ $item->contact_status }}"
+                                    id="tarjeta"
+                                    >
                                     <span>
-                                        <strong>
-                                            <a href="{{ route('admin.contact.show', $item) }}">{{ $item->name }} {{ $item->lastname }}
+                                        
+                                            <a href="{{ route('admin.contact.show', $item->id) }}">{{ $item->name }} {{ $item->lastname }}
                                             </a>
-                                        </strong>
+                                        
                                     </span>  
                                     {{-- <input type="hidden"  id="contact_status_id" value="2"> --}}
                                     <hr>
-                                    <span><strong>País: </strong> {{ $item->country }}</span>
+                                    @php
+                                    $campaigs = $controlador->getCampaingsContacts($item->id)
+                                @endphp
+    
+                                @if ($campaigs)
+                                <span>Campañas:  {{ $campaigs->campaing_name }}</span>
+                                    
+                                @endif
                                     
                                 </div>
                         @endforeach
-                     @else
-                        <hr>
-                     <p>No hay datos para mostrar</p>
+                    
                      @endif
                 </div>
                 <div class="board-list" data-reference="4">
                     <div class="list-title">
-                        <h2 class="text-center">Clientes</h2>
+                        <h2 class="text-center text-gray-600 text-hover-primary">Clientes</h2>
                      </div>
                      @if (count($clientes) > 0)
                          
@@ -480,56 +251,33 @@
                         <div class="list-group-item card" 
                             draggable="true" 
                             data-id="{{ $item->id }}" 
-                            data-contact="{{ $item->contact_status }}">
+                            data-contact="{{ $item->contact_status }}"
+                            id="tarjeta"
+                            >
                             
                             <span>
-                                <strong>
-                                    <a href="{{ route('admin.contact.show', $item) }}">{{ $item->name }} {{ $item->lastname }}
+                                
+                                    <a href="{{ route('admin.contact.show', $item->id) }}">{{ $item->name }} {{ $item->lastname }}
                                     </a>
-                                </strong>
+                                
                             </span> 
                             {{-- <input type="hidden"  id="contact_status_id" value="3"> --}}
                             <hr>
-                            <span><strong>País: </strong> {{ $item->country }}</span>
+                            @php
+                            $campaigs = $controlador->getCampaingsContacts($item->id)
+                        @endphp
+
+                        @if ($campaigs)
+                        <span>Campañas:  {{ $campaigs->campaing_name }}</span>
+                            
+                        @endif
                         
                         </div>
                         @endforeach
-                     @else
-                     <hr>
-                     <p>No hay datos para mostrar</p>
+                    
                      @endif
                 </div>
-                <div class="board-list" data-reference="5">
-                    <div class="list-title">
-                        <h2 class="text-center">No Interesado</h2>
-                     </div>
-
-                     @if (count($noInteresteds) > 0)
-                         
-                        @foreach ($noInteresteds as $item)                    
-                        <div class="list-group-item card" 
-                                draggable="true" 
-                                data-id="{{ $item->id }}" 
-                                data-contact="{{ $item->contact_status }}">
-                                
-                                <span>
-                                        <strong>
-                                            <a href="{{ route('admin.contact.show', $item) }}">{{ $item->name }} {{ $item->lastname }}
-                                            </a>
-                                        </strong>
-                                </span> 
-                                {{-- <input type="hidden"  id="contact_status_id" value="3"> --}}
-                                <hr>
-                                <span><strong>País: </strong> {{ $item->country }}</span>
-                            
-                            </div>
-                        @endforeach
-                     @else
-                     <hr>
-                     <p>No hay datos para mostrar</p>
-                     @endif
-
-                </div>
+                
               
 
 

@@ -14,7 +14,7 @@ class CreateContactCampaingsTable extends Migration
     public function up()
     {
         Schema::create('contact_campaings', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('contact_campaing_id');
             $table->unsignedBigInteger('camaping_id');
             $table->unsignedBigInteger('contact_id');
             $table->unsignedBigInteger('user_id');

@@ -12,6 +12,9 @@ class Campaing extends Model
     protected $table = 'campaing';
     protected $fillable = [
         'name',
+        'country',
+        'city',
+        'init_date',
         'status',
         'contact_id',
         'created_user',

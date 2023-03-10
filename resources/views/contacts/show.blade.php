@@ -6,7 +6,7 @@
                 <div class="card-body box-profile" >
                     <div class="text-center" >
                         <img width="50%" height="50%" class="rounded-circle"
-                            src="http://localhost/valle_paz/public/images/default_avatar.png" alt="User profile picture" />
+                            src="https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png" alt="User profile picture" />
                     </div>
 
                     <h4 class="profile-username text-center">
@@ -87,7 +87,7 @@
                     <hr />
 
                     <strong><i class="fa fa-envelope mr-1"></i>  Se contactó mediante: </strong>
-
+                            {{-- @dump($contact->comunication_medium) --}}
                         @if ($contact->comunication_medium == 1)
                                 <span class="badge badge-primary pull-rigth">Télefonica</span>
                             @elseif($contact->comunication_medium == 2)
@@ -106,7 +106,7 @@
                 </div>
                 <!-- /.card-body -->
                 <a  class="btn btn-primary btn-block"><b>Actualizar</b></a>
-                <a href="{{ route('admin.contact.index') }}" class="btn btn-warning btn-block"><b>Volver a
+                <a href="{{ route('admin.contact.index') }}" class="btn btn-light-primary btn-block"><b>Volver a
                         Lista</b></a>
             </div>
             <!-- /.card -->
@@ -115,7 +115,7 @@
         <div class="col-md-9" >
             <div class="card" >
                 {{--  --}}
-                <div class="container">
+              
                     <div class="wizard my-5">
                         <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
                             <li class="nav-item flex-fill" role="presentation" data-bs-toggle="tooltip" data-bs-placement="top" title="Nuevo">
@@ -173,7 +173,7 @@
                             </div>
                         </div> --}}
                     </div>
-                </div>
+               
                 {{--  --}}
                 <div class="card-header p-2" >
                     <ul class="nav nav-pills">
@@ -357,7 +357,13 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="campaings" >
-                           
+                            <div class="row">
+                                <div class="col-md-12 text-right mb-3">
+                                    <a data-toggle="modal" data-target="#agregarCa" class="btn btn-primary" >
+                                      <i class="fa fa-plus"></i>  Asignar Campaña
+                                    </a>
+                                </div>
+                            </div>
                             <table class="table table-striped mt-2">
                         
                                 <thead>
@@ -365,28 +371,34 @@
                                     <tr>
                                         <th>Titulo</th>
                                         <th>Observación</th>
-                                        <th>Fecha de creación</th>
+                                        <th>Fecha de inicio</th>
                                         <th>Fecha de actualización</th>
                                         <th colspan="2"></th>
                                     </tr>
                                 </thead>
                             
                                 <tbody>
-                                    <tr>
-                                        <td>Capaña de prueba</td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta quam ipsam eligendi odit officiis tempore repellat ipsa non provident sequi sed totam cumque iure necessitatibus porro </td>
-                                        <td>20-02-2023</td>
-                                        <td>-</td>
-                                        <td>
-                                            <a href="">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                        
-                                            <a href="">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @if (count($contactsCapaings) > 0)                                        
+                                        @foreach ($contactsCapaings as $item)                                        
+                                            <tr>
+                                                <td>{{ $item->campaing_name }}</td>
+                                                <td>-</td>
+                                                <td>{{ $item->init_date }}</td>
+                                                <td>-</td>
+                                                <td>
+                                                    <a href="">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                
+                                                    <a href="">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <td>No hay campañas asiganadas a este usuario</td>
+                                    @endif
                             
                                 </tbody>
                             
@@ -482,7 +494,7 @@
                         </div>
 
 
-                        <div class="modal fade" id="agregarPresupuesto" tabindex="-1" aria-labelledby="agregarPresupuestoLabel" aria-hidden="true">
+                        <div class="modal fade" id="agregarPresupuesto" tabindex="-1" aria-labelledby="agregarPresupuestoLabel"        aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -528,6 +540,32 @@
                               </div>
                             </div>
                           </div>
+
+                          <div class="modal fade" id="agregarCa" tabindex="-1" aria-labelledby="agregarPresupuestoLabel"        aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="agregarPresupuestoLabel">Asigna una Campaña</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    {!! Form::open(['url'=>'admin/add-contacts-campaings', 'autocomplete'=>'off', 'files'=>true]) !!}
+
+                                    {!! Form::label('campaing', 'Selecciona Campaña') !!}
+                                    {!! Form::select('campaing', $campaings, null, ['class' =>'form-control', 'placeholder'=>'--Seleccionar--']) !!}
+                                    <input type="hidden" name="contact" value="{{ $contact->id }}">
+                                    {!! Form::submit('Guardar', ['class'=>'btn btn-primary mt-2']) !!}
+                                    {!! Form::close() !!}
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                 
+                                </div>
+                              </div>
+                            </div>
+                          </div> 
 
                           <div class="modal fade" id="agregarComunicacion" tabindex="-1" aria-labelledby="agregarComunicacionLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
@@ -583,6 +621,7 @@
 
     </div>
 @endsection
+
 
 
 @section('script')

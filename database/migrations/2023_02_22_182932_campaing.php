@@ -15,7 +15,10 @@ class Campaing extends Migration
     {
          Schema::create('campaing', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('campaing_name');
+            $table->string('country');
+            $table->string('city');
+            $table->dateTime('init_date')->nullable();
             $table->string('status')->nullable();
             $table->unsignedBigInteger('contact_id')->nullable();          
             $table->unsignedBigInteger('created_user');            

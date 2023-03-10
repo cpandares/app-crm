@@ -17,7 +17,7 @@
 <!-- ------------------------------------------------------------------------------------------------------------------- -->
 
 <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-disabled">
-    @include('sweetalert::alert');
+    @include('sweetalert::alert')
     <!--begin::Main-->
     <!--begin::Root-->
     <div class="d-flex flex-column flex-root">
@@ -101,7 +101,7 @@
                                         <!--end::Svg Icon-->
                                         <!--end::Icon-->
                                         <!--begin::Input-->
-                                        <input type="text" class="form-control bg-transparent ps-13 fs-7 h-40px" name="search" value="" placeholder="Buscar" data-kt-search-element="input" />
+                                        <input type="text"  class="form-control bg-transparent ps-13 fs-7 h-40px" name="search" value="" placeholder="Buscar" data-kt-search-element="input" />
                                         <!--end::Input-->
                                         <!--begin::Spinner-->
                                         <span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5" data-kt-search-element="spinner">
@@ -915,16 +915,16 @@
                                         <div class="menu-item px-3">
                                             <div class="menu-content d-flex align-items-center px-3">
                                                 <!--begin::Avatar-->
-                                                {{-- <div class="symbol symbol-50px me-5">
-                                                    <img alt="Logo" src="https://tarimaflotantealicante.es/assets/media/logos/logo-demo17.webp" />
-                                                </div> --}}
+                                                <div class="symbol symbol-50px me-5">
+                                                    <img alt="Logo" src="https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png" />
+                                                </div>
                                                 <!--end::Avatar-->
                                                 <!--begin::Username-->
                                                 <div class="d-flex flex-column">
                                                     <div class="fw-bolder d-flex align-items-center fs-5">{{ auth()->user()->name }}
                                                         {{-- <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Directivo</span></div> --}}
+                                                    </div>
                                                     <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
-                                                </div>
                                                 <!--end::Username-->
                                             </div>
                                         </div>
@@ -935,6 +935,7 @@
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5">
                                             <a  class="menu-link px-5" title="Proximamente" disabled>Mi perfil (Próximamente)</a>
+                                            
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->

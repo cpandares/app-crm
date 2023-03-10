@@ -18,20 +18,28 @@
 
 
                 </div>
-
+                <a href="{{ route('admin.contact.index') }}" class="btn btn-outline-success">Cancelar</a>
             </div>
-
+           
             <div class="card-body">
                 {!! Form::open(['route'=>'admin.contact.store', 'autocomplete'=>'off', 'files'=>true]) !!}
 
                 <div class="row">
                     <div class="col-md-6">
+                      
                         {!! Form::label('name', 'Nombre') !!}
                         {!! Form::text('name', null, ['class'=>'form-control','placeholder'=>'Pedro', ]) !!}
+                        @error('name')
+                            <small class="text-danger">Este campo es requerido</small>
+                        @enderror
                     </div>
                     <div class="col-md-6">
+                       
                         {!! Form::label('lastname', 'Apellido') !!}
                         {!! Form::text('lastname', null, ['class'=>'form-control','placeholder'=>'Perez', ]) !!}
+                        @error('lastname')
+                            <small class="text-danger">Este campo es requerido</small>
+                        @enderror
                     </div>
                 </div>
 
@@ -41,8 +49,12 @@
                         {!! Form::text('phone', null, ['class'=>'form-control','placeholder'=>'+34 455487895', ]) !!}
                     </div>
                     <div class="col-md-6">
+                       
                         {!! Form::label('email', 'Email') !!}
                         {!! Form::email('email', null, ['class'=>'form-control','placeholder'=>'test@prueba.com', ]) !!}
+                        @error('email')
+                            <small class="text-danger">Este campo es requerido</small>
+                        @enderror
                     </div>
                 </div>
 
@@ -52,8 +64,12 @@
                         {!! Form::text('postcode', null, ['class'=>'form-control','placeholder'=>'+34 455487895', ]) !!}
                     </div>
                     <div class="col-md-6">
+                      
                         {!! Form::label('country', 'País') !!}
-                        {!! Form::text('country', null, ['class'=>'form-control','placeholder'=>'España', ]) !!}
+                        {!! Form::select('country', $paises, null, ['class'=>'form-control js-example-basic-single','placeholder'=>'España', ]) !!}
+                        @error('country')
+                            <small class="text-danger">Este campo es requerido</small>
+                        @enderror
                     </div>
                 </div>
 
@@ -63,22 +79,31 @@
                         {!! Form::text('city', null, ['class'=>'form-control','placeholder'=>'Barcelona', ]) !!}
                     </div>
                     <div class="col-md-6">
-                        {!! Form::label('state', 'Estado (opcional)') !!}
+                        {!! Form::label('state', 'Provincia (opcional)') !!}
                         {!! Form::text('state', null, ['class'=>'form-control','placeholder'=>'', ]) !!}
                     </div>
                 </div>
 
                 <div class="row  mt-2">
                     <div class="col-md-6">
+                     
                         {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
                         {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                        {!! Form::select('medio_comunicacion',$comunicacion_medias, '',['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar']) !!}
+                        {!! Form::select('medio_comunicacion',$comunicacion_medias, null,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+
+                        @error('medio_comunicacion')
+                            <small class="text-danger">Este campo es requerido</small>
+                        @enderror
                     </div>
                     <div class="col-md-6">
-                        
-                            {!! Form::label('medio_comunicacion', 'Estado del Cliene') !!}
-                            {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                            {!! Form::select('statu',$status, null,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar']) !!}
+                       
+                        {!! Form::label('medio_comunicacion', 'Estado del Cliente') !!}
+                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                        {!! Form::select('statu',$status, null,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+
+                        @error('statu')
+                            <small class="text-danger">Este campo es requerido</small>
+                        @enderror
                         
                     </div>
                 </div>
@@ -88,8 +113,8 @@
 
                 <div class="mt-5">
 
-                    <a href="{{ route('admin.contact.index') }}" class="btn btn-success">Cancelar</a>
                     {!! Form::submit('Guardar', ['class'=>'btn btn-outline-primary ']) !!}
+                    
                 </div>
                 {!! Form::close() !!}
             </div>
