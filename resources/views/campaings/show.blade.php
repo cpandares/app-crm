@@ -182,12 +182,7 @@
                                     <th>Pais</th>
                                     <th>Ciudad</th>
                                     <th>Estado</th>
-                                   {{--  <th>
-                                       
-                                       
-                                        <input type="checkbox" name="" id="marcarTodo" onclick="marcar(this);">
-                                    </th> --}}
-                                   {{--  <th>Acciones</th> --}}
+                                   
                                 </tr>
 
                                 <tr class="text-gray-400">
@@ -228,12 +223,8 @@
                                             class="form-control" 
                                             >
                                     </th>
-                                    <th>
-                                     
-                                        {!! Form::select('country',$paises, null,['id'=>'country','class'=>'form-control text-gray-400 js-example-basic-single','placeholder'=>'----','onchange'=>"buscar('country')" ]) !!}   
-                                     
-                                                                   
-                                       
+                                    <th>                                     
+                                        {!! Form::select('country',$paises, null,['id'=>'country','class'=>'form-control text-gray-400 js-example-basic-single','placeholder'=>'----','onchange'=>"buscar('country')" ]) !!}  
                                     </th>
                                     <th>
                                       

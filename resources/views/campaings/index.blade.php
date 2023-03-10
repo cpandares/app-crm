@@ -98,7 +98,60 @@
                                         <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1"
                                             aria-label="Acciones" style="width: 146.738px;">Acciones</th>
                                     </tr>
-                                    <!--end::Table row-->
+
+                                    <tr class="text-gray-400">
+                                        {{-- @dump($campaing) --}}
+                                        {!! Form::open([ 'route' => 'admin.campaings.index' ,'method'=>'get','id'=>'frmFiltros']) !!}
+                                        <input type="hidden" id="accion" name="accion" value="2">
+                                        
+                                        <th>
+                                            {{-- <input 
+                                                type="text" 
+                                                placeholder="Nombre contacto" 
+                                                name="name" 
+                                                id="name" 
+                                                onfocusout="buscar('documento')" 
+                                                onchange="buscar('documento')" 
+                                                class="form-control" 
+                                                > --}}
+                                        </th>
+                                        <th>
+                                            <input 
+                                                type="text" 
+                                                placeholder="Apellido contacto" 
+                                                name="lastname" 
+                                                id="lastname" 
+                                               {{--  onfocusout="buscar('documento')"  --}}
+                                                onchange="buscar('lastname')" 
+                                                class="form-control" 
+                                                >
+                                        </th>
+                                        <th>
+                                            <input 
+                                                type="text" 
+                                                placeholder="Email" 
+                                                name="email" 
+                                                id="email" 
+                                               {{--  onfocusout="buscar('documento')"  --}}
+                                                onchange="buscar('email')" 
+                                                class="form-control" 
+                                                >
+                                        </th>
+                                        <th>                                     
+                                            {!! Form::select('country',[], null,['id'=>'country','class'=>'form-control text-gray-400 js-example-basic-single','placeholder'=>'----','onchange'=>"buscar('country')" ]) !!}  
+                                        </th>
+                                        <th>
+                                          
+                                        </th>
+                                        <th>
+                                            {!! Form::select('statu',['1'=> 'Nuevo', '2'=> 'En Negociacion', '3' =>'Presupuesto Enviado', '4' =>'Cliente', '5' =>''], null,['id'=>'state','class'=>'form-control js-example-basic-single text-gray-400','placeholder'=>'----','onchange'=>"buscar('cliente')" ]) !!}  
+                                        </th>
+                                        
+                                      
+                                        <th></th>
+                                        {!! Form::close() !!}
+                                    </tr>
+                                   
                                 </thead>
                                 <!--end::Table head-->
                                 <!--begin::Table body-->
