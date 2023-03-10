@@ -62,7 +62,7 @@ class CampaingController extends Controller
 
         try {
             $ca = new Campaing();
-            $ca->name = $request->campaing_name;
+            $ca->campaing_name = $request->name;
             $ca->status = $request->status;
             $ca->country = $request->country;
             $ca->city = $request->ciudad;

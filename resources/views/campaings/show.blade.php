@@ -253,7 +253,9 @@
                                 @if (count($contacts) > 0)
                                     @foreach ($contacts as $item)
                                         <tr>
-                                            <td class="text-center text-gray-600 text-hover-primary mb-1">{{ $item->name }}</td>
+                                            <td class="text-center text-gray-600 text-hover-primary mb-1">
+                                                <a href="{{ route('admin.contact.show', $item->id) }}">{{ $item->name }}</a>
+                                            </td>
                                             <td class="text-center text-gray-600 text-hover-primary mb-1">{{ $item->lastname }}</td>
                                             <td class="text-center text-gray-600 text-hover-primary mb-1">{{ $item->email }}</td>
                                             <td class="text-center text-gray-600 text-hover-primary mb-1">{{ $item->country }}</td>
