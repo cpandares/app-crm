@@ -118,33 +118,33 @@
                                         <th>
                                             <input 
                                                 type="text" 
-                                                placeholder="Apellido contacto" 
-                                                name="lastname" 
-                                                id="lastname" 
+                                                placeholder="Nombre campaña" 
+                                                name="name" 
+                                                id="name" 
                                                {{--  onfocusout="buscar('documento')"  --}}
-                                                onchange="buscar('lastname')" 
+                                                onchange="buscar('name')" 
                                                 class="form-control" 
                                                 >
                                         </th>
                                         <th>
                                             <input 
                                                 type="text" 
-                                                placeholder="Email" 
-                                                name="email" 
-                                                id="email" 
+                                                placeholder="Ciudad" 
+                                                name="city" 
+                                                id="city" 
                                                {{--  onfocusout="buscar('documento')"  --}}
-                                                onchange="buscar('email')" 
+                                                onchange="buscar('city')" 
                                                 class="form-control" 
                                                 >
                                         </th>
                                         <th>                                     
-                                            {!! Form::select('country',[], null,['id'=>'country','class'=>'form-control text-gray-400 js-example-basic-single','placeholder'=>'----','onchange'=>"buscar('country')" ]) !!}  
+                                            {!! Form::select('country',[], null,['id'=>'country','class'=>'form-control text-gray-400 js-example-basic-single','placeholder'=>'Seleccionar','onchange'=>"buscar('country')" ]) !!}  
                                         </th>
                                         <th>
                                           
                                         </th>
                                         <th>
-                                            {!! Form::select('statu',['1'=> 'Nuevo', '2'=> 'En Negociacion', '3' =>'Presupuesto Enviado', '4' =>'Cliente', '5' =>''], null,['id'=>'state','class'=>'form-control js-example-basic-single text-gray-400','placeholder'=>'----','onchange'=>"buscar('cliente')" ]) !!}  
+                                            {{-- {!! Form::select('statu',['1'=> 'Nuevo', '2'=> 'En Negociacion', '3' =>'Presupuesto Enviado', '4' =>'Cliente', '5' =>''], null,['id'=>'state','class'=>'form-control js-example-basic-single text-gray-400','placeholder'=>'----','onchange'=>"buscar('cliente')" ]) !!}   --}}
                                         </th>
                                         
                                       
