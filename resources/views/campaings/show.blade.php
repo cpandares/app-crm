@@ -5,7 +5,7 @@
         <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
             <div class="card p-5" bis_skin_checked="1">
                 <!--begin::Card header-->
-                <h3 class="text-gray-410 text-hover-primary">Contactos en la campaña: {{ $campaing->name }}</h3> 
+                <h3 class="text-gray-600 text-hover-primary">Contactos en la campaña: {{ $campaing->campaing_name }}</h3> 
                 <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
                     
                     <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
@@ -54,10 +54,10 @@
                 </div>
 
                 <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class=" modal-dialog modal-dialog-centered mw-650px">
+                    <div class="modal-dialog modal-dialog-centered mw-650px">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Nueva Contacto</h5>
+                          <h5 class="modal-title" id="exampleModalLabel">Nuevo Contacto</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>

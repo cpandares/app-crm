@@ -29,6 +29,8 @@ class ContactsController extends Controller
         $presupuestados = Contact::where('user_id', $user_id)->where('contact_status', 3)->orderByDesc('id')->get();
         $clientes = Contact::where('user_id', $user_id)->where('contact_status', 4)->orderByDesc('id')->get();
         $noInteresteds = Contact::where('user_id', $user_id)->where('contact_status', 5)->orderByDesc('id')->get();
+        $comunicacion_medias = ComunicationMedium::pluck('comunication_medio', 'id');
+        $status = ContactStatus::pluck('status_name', 'id');
 
        /*  $contactsCapaings = DB::table('campaing')
                      ->select('campaing.campaing_name', 'campaing.id','campaing.init_date','campaing.country')
@@ -44,7 +46,10 @@ class ContactsController extends Controller
                     'clientes_negoci' =>$clientes_negoci, 
                     'presupuestados'=>$presupuestados, 
                     'clientes'=>$clientes, 
-                    'controlador' =>$controlador
+                    'controlador' =>$controlador,
+                    'paises' => $this->getPaises(),
+                    'comunicacion_medias' => $comunicacion_medias,
+                    'status' => $status,
                 ]);
 
     }
@@ -334,7 +339,7 @@ class ContactsController extends Controller
         }
 
         $contact = new Contact();
-        $contact_campaing = new ContactCampaing();
+       /*  $contact_campaing = new ContactCampaing(); */
         /*  dd("12"); */
         try {
             //code...
@@ -354,11 +359,11 @@ class ContactsController extends Controller
             $result = $contact->save();
 
 
-            $contact = Contact::where('user_id', $user_id)->orderByDesc('id')->first();
+           /*  $contact = Contact::where('user_id', $user_id)->orderByDesc('id')->first();
             $contact_campaing->contact_id = $contact->contact_id;
             $contact_campaing->user_id = $user_id;
             $contact_campaing->created_at = Carbon::now();
-            $contact_campaing->updated_at = Carbon::now();
+            $contact_campaing->updated_at = Carbon::now(); */
 
             /*  return redirect()->route('admin.contact.show', compact('contact'))->with(['message' => 'Contacto guardado']); */
             Alert::success('Contacto Guardado');

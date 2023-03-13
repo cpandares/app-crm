@@ -67,6 +67,7 @@ class CampaingController extends Controller
             $ca->country = $request->country;
             $ca->city = $request->ciudad;
             $ca->init_date = Carbon::parse($request->init_date);
+            $ca->end_date = Carbon::parse($request->end_date);
             $ca->created_user = $user_id;
             $ca->save();
 

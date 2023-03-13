@@ -68,13 +68,13 @@
                         @if ($contact->contact_status == 1)
                                 <span class="badge badge-primary pull-rigth">Nuevo</span>
                             @elseif($contact->contact_status == 2)
-                            <span class="badge badge-danger pull-rigth">No interesado</span>
+                            <span class="badge badge-light-primary pull-rigth">No interesado</span>
                             @elseif($contact->contact_status == 3)
-                            <span class="badge badge-info pull-rigth">Presupuesto Enviado</span>
+                            <span class="badge badge-light-primary pull-rigth">Presupuesto Enviado</span>
                             @elseif($contact->contact_status == 4)
-                            <span class="badge badge-success pull-rigth">Cliente</span>
+                            <span class="badge badge-primary pull-rigth">Cliente</span>
                             @elseif($contact->contact_status == 5)
-                            <span class="badge badge-danger pull-rigth">En Negociación</span>
+                            <span class="badge badge-light-primary pull-rigth">En Negociación</span>
                             @else
                             <span class="badge badge-primary pull-rigth">Renegociando</span>
                         @endif
@@ -91,13 +91,13 @@
                         @if ($contact->comunication_medium == 1)
                                 <span class="badge badge-primary pull-rigth">Télefonica</span>
                             @elseif($contact->comunication_medium == 2)
-                            <span class="badge badge-danger pull-rigth">Email</span>
+                            <span class="badge badge-light-primary pull-rigth">Email</span>
                             @elseif($contact->comunication_medium == 3)
-                            <span class="badge badge-info pull-rigth">Skype</span>
+                            <span class="badge badge-primary pull-rigth">Skype</span>
                             @elseif($contact->comunication_medium == 4)
-                            <span class="badge badge-success pull-rigth">Whatsapp</span>
+                            <span class="badge badge-light-primary pull-rigth">Whatsapp</span>
                             @elseif($contact->comunication_medium == 5)
-                            <span class="badge badge-danger pull-rigth">Facebook</span>
+                            <span class="badge badge-light-primary pull-rigth">Facebook</span>
                             
                         @endif
                     <hr />
@@ -372,7 +372,7 @@
                                         <th>Titulo</th>
                                         <th>Observación</th>
                                         <th>Fecha de inicio</th>
-                                        <th>Fecha de actualización</th>
+                                        <th>Fecha de Fin</th>
                                         <th colspan="2"></th>
                                     </tr>
                                 </thead>
@@ -384,7 +384,7 @@
                                                 <td>{{ $item->campaing_name }}</td>
                                                 <td>-</td>
                                                 <td>{{ $item->init_date }}</td>
-                                                <td>-</td>
+                                                <td>{{ $item->end_date }}</td>
                                                 <td>
                                                     <a href="">
                                                         <i class="fas fa-edit"></i>

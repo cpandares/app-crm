@@ -18,7 +18,8 @@ class Campaing extends Migration
             $table->string('campaing_name');
             $table->string('country');
             $table->string('city');
-            $table->dateTime('init_date')->nullable();
+            $table->date('init_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->string('status')->nullable();
             $table->unsignedBigInteger('contact_id')->nullable();          
             $table->unsignedBigInteger('created_user');            

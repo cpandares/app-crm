@@ -245,21 +245,47 @@
                 <div class="modal-body">
                     {!! Form::open(['route'=>'admin.campaings.store', 'autocomplete'=>'off', 'files'=>true]) !!}
 
-                    {!! Form::label('name', 'Nombre') !!}
-                    {!! Form::text('name', null, ['class'=>'form-control','placeholder'=>'Feria España', ]) !!}
-                        <br>
-                    {!! Form::label('country', 'Pais') !!}           
-                    {!! Form::select('country',$paises, null,['class'=>'form-control ','placeholder'=>'Seleccionar']) !!}
-                    <br>
-                    {!! Form::label('ciudad', 'Ciudad') !!}           
-                    {!! Form::text('ciudad', null, ['class'=>'form-control','placeholder'=>'Barcelona', ]) !!}
-                    <br>
-                    {!! Form::label('date', 'Fecha y hora de inicio') !!}           
-                    {!! Form::datetimelocal('date', null, ['class'=>'form-control' ]) !!}
-                    <br>
-                    {!! Form::label('status', 'Estado de la campaña') !!}
-                    {!! Form::select('status',['1'=>'Activa', '2'=>'Inactiva', '3'=>'Cancelada','4' => 'Empieza proximamente', '5'=>'Por confimar'], null,['class'=>'form-control','placeholder'=>'Seleccionar']) !!}
-                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            {!! Form::label('name', 'Nombre') !!}
+                            {!! Form::text('name', null, ['class'=>'form-control','placeholder'=>'Feria España', ]) !!}
+                                <br>
+                        </div>
+                        <div class="col-6">
+
+                            {!! Form::label('country', 'Pais') !!}           
+                            {!! Form::select('country',$paises, null,['class'=>'form-control ','placeholder'=>'Seleccionar']) !!}
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            {!! Form::label('ciudad', 'Ciudad') !!}           
+                            {!! Form::text('ciudad', null, ['class'=>'form-control','placeholder'=>'Barcelona', ]) !!}
+                            <br>
+
+                        </div>
+                        <div class="col-6">
+
+                            {!! Form::label('date', 'Fecha y hora de inicio') !!}           
+                            {!! Form::date('date', null, ['class'=>'form-control' ]) !!}
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+
+                            {!! Form::label('date', 'Fecha finalización') !!}           
+                            {!! Form::date('date_end', null, ['class'=>'form-control' ]) !!}
+                            <br>
+                        </div>
+                        <div class="col-6">
+
+                            {!! Form::label('status', 'Estado de la campaña') !!}
+                            {!! Form::select('status',['1'=>'Activa', '2'=>'Inactiva', '3'=>'Cancelada','4' => 'Empieza proximamente', '5'=>'Por confimar'], null,['class'=>'form-control','placeholder'=>'Seleccionar']) !!}
+                            <br>
+                        </div>
+                    </div>
                     {!! Form::submit('Guardar', ['class'=>'btn btn-primary mt-5']) !!}
                     {!! Form::close() !!}
                 </div>

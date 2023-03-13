@@ -101,25 +101,109 @@
                 >
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-dialog-centered mw-650px">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Nueva Campaña</h5>
+                              <h5 class="modal-title" id="exampleModalLabel">Nuevo Contacto</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
                             <div class="modal-body">
-                                {!! Form::open(['route'=>'admin.campaings.store', 'autocomplete'=>'off', 'files'=>true]) !!}
-
-                                {!! Form::label('name', 'Nombre') !!}
-                                {!! Form::text('name', null, ['class'=>'form-control','placeholder'=>'Feria España', ]) !!}
-
-                                {!! Form::label('status', 'Estado de la campaña') !!}
-                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                {!! Form::select('status',['1'=>'Activa', '2'=>'Inactiva', '3'=>'Cancelada','4' => 'Empieza proximamente', '5'=>'Por confimar'], '',['class'=>'form-control','placeholder'=>'Seleccionar']) !!}
-
-                                {!! Form::submit('Guardar', ['class'=>'btn btn-primary mt-5']) !!}
+                                {!! Form::open(['route'=>'admin.contact.store', 'autocomplete'=>'off', 'files'=>true]) !!}
+    
+                                <div class="row">
+                                    <div class="col-md-6">
+                                      
+                                        {!! Form::label('name', 'Nombre') !!}
+                                        {!! Form::text('name', null, ['class'=>'form-control','placeholder'=>'Pedro', ]) !!}
+                                        @error('name')
+                                            <small class="text-danger">Este campo es requerido</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                        {!! Form::label('lastname', 'Apellido') !!}
+                                        {!! Form::text('lastname', null, ['class'=>'form-control','placeholder'=>'Perez', ]) !!}
+                                        @error('lastname')
+                                            <small class="text-danger">Este campo es requerido</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                
+                                <div class="row  mt-2">
+                                    <div class="col-md-6">
+                                        {!! Form::label('phone', 'Telefono') !!}
+                                        {!! Form::text('phone', null, ['class'=>'form-control','placeholder'=>'+34 455487895', ]) !!}
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                        {!! Form::label('email', 'Email') !!}
+                                        {!! Form::email('email', null, ['class'=>'form-control','placeholder'=>'test@prueba.com', ]) !!}
+                                        @error('email')
+                                            <small class="text-danger">Este campo es requerido</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                
+                                <div class="row  mt-2">
+                                    <div class="col-md-6">
+                                        {!! Form::label('postcode', 'Código Postal') !!}
+                                        {!! Form::text('postcode', null, ['class'=>'form-control','placeholder'=>'285056', ]) !!}
+                                    </div>
+                                    <div class="col-md-6">
+                                      
+                                        {!! Form::label('country', 'País') !!}
+                                        {!! Form::select('country', $paises, null, ['class'=>'form-control','placeholder'=>'España', ]) !!}
+                                        @error('country')
+                                            <small class="text-danger">Este campo es requerido</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                
+                                <div class="row  mt-2">
+                                    <div class="col-md-6">
+                                        {!! Form::label('city', 'Ciudad') !!}
+                                        {!! Form::text('city', null, ['class'=>'form-control','placeholder'=>'Barcelona', ]) !!}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{-- {!! Form::label('state', 'Provincia (opcional)') !!}
+                                        {!! Form::text('state', null, ['class'=>'form-control','placeholder'=>'', ]) !!} --}}
+                                    </div>
+                                </div>
+                
+                                <div class="row  mt-2">
+                                    <div class="col-md-6">
+                                     
+                                        {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
+                                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                        {!! Form::select('medio_comunicacion',$comunicacion_medias, null,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+                
+                                        @error('medio_comunicacion')
+                                            <small class="text-danger">Este campo es requerido</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                        {!! Form::label('medio_comunicacion', 'Estado del Cliente') !!}
+                                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                        {!! Form::select('statu',$status, null,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+                
+                                        @error('statu')
+                                            <small class="text-danger">Este campo es requerido</small>
+                                        @enderror
+                                        
+                                    </div>
+                                </div>
+                
+                
+                              
+                
+                                <div class="mt-5">
+                
+                                    {!! Form::submit('Guardar', ['class'=>'btn btn-outline-primary ']) !!}
+                                    
+                                </div>
                                 {!! Form::close() !!}
                             </div>
                             <div class="modal-footer">
