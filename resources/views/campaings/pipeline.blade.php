@@ -8,7 +8,7 @@
                 <h3 class="text-gray-600 text-hover-primary">Contactos en la campaña: {{ $campaing->campaing_name }}</h3> 
                 <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
                     
-                    <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                    <a class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
                     <span class="svg-icon svg-icon-4 me-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -216,10 +216,10 @@
                         
                         <!--end::Table-->
                     </div>
-                    <div class="board-lists container-fluid">
+                    <div class="board-lists container-fluid  p-5">
         
                         
-                        <div class="board-list" data-reference="1">
+                        <div class="board-list rounded-top border-top border-info" data-reference="1">
                             <div class="list-title">
                                <h2 class="text-center text-gray-600 text-hover-primary">Nuevos</h2>
                             </div>
@@ -236,7 +236,7 @@
                                     </span> 
                                     <hr>
                                     
-                                    <span>Campañas:  {{ $item->country }}</span>
+                                    <span>Campañas:  {{ $campaing->campaing_name }}</span>
                                       
                                 </div>
                             @endforeach
@@ -244,7 +244,7 @@
                             @endif
         
                         </div>
-                        <div class="board-list" data-reference="2">
+                        <div class="board-list border-top border-success" data-reference="2">
                             <div class="list-title">
                                 <h2 class="text-center text-gray-600 text-hover-primary">En Negociación</h2>
                              </div>
@@ -265,7 +265,7 @@
                                     </span> 
                                     <hr>
                                     
-                                    <span>Campañas:  {{ $item->country }}</span>
+                                    <span>Campañas:  {{ $campaing->campaing_name }}</span>
                                 
                                 </div>
                                 @endforeach
@@ -273,7 +273,7 @@
                              @endif
          
                         </div>
-                        <div class="board-list" data-reference="3">
+                        <div class="board-list border-top border-primary " data-reference="3">
                             <div class="list-title">
                                 <h2 class="text-center text-gray-600 text-hover-primary">Presupuesto Enviado</h2>
                              </div>
@@ -294,14 +294,14 @@
                                             </span>  
                                             {{-- <input type="hidden"  id="contact_status_id" value="2"> --}}
                                             <hr>
-                                            <span>Campañas:  {{ $item->country }}</span>
+                                            <span>Campañas:  {{ $campaing->campaing_name }}</span>
                                             
                                         </div>
                                 @endforeach
                             
                              @endif
                         </div>
-                        <div class="board-list" data-reference="4">
+                        <div class="board-list border-top border-primary" data-reference="4">
                             <div class="list-title">
                                 <h2 class="text-center text-gray-600 text-hover-primary">Clientes</h2>
                              </div>
@@ -323,7 +323,7 @@
                                     </span> 
                                     {{-- <input type="hidden"  id="contact_status_id" value="3"> --}}
                                     <hr>
-                                    <span>Campañas:  {{ $item->country }}</span>
+                                    <span>Campañas:  {{ $campaing->campaing_name }}</span>
                                 
                                 </div>
                                 @endforeach

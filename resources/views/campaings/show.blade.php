@@ -8,7 +8,7 @@
                 <h3 class="text-gray-600 text-hover-primary">Contactos en la campaña: {{ $campaing->campaing_name }}</h3> 
                 <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
                     
-                    <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                    <a  class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
                     <span class="svg-icon svg-icon-4 me-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

@@ -21,9 +21,10 @@ class CampaingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $input = $request->all();
         $id = auth()->user()->id;
         $data = Campaing::where('created_user', $id)->get();
 
