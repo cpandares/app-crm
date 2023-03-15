@@ -30,7 +30,7 @@
     @include('sweetalert::alert')
     <!--begin::Main-->
     <!--begin::Root-->
-    <div class="d-flex flex-column flex-root">
+    <div class="d-flex flex-column flex-root ">
         <!--begin::Page-->
         <div class=" flex-row flex-column-fluid">
 
@@ -40,6 +40,7 @@
                 <!--begin::Header tablet and mobile-->
                 <div class="header-mobile py-3">
                     <!--begin::Container-->
+                    
                     <div class="container d-flex flex-stack">
                         <!--begin::Mobile logo-->
                         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
@@ -70,8 +71,12 @@
                     <!--begin::Container-->
                     <div class="header-container container-xxl">
                         <!--begin::Page title-->
-                        <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-20 py-3 py-lg-0 me-3">
-                         
+                        <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-20 py-3 py-lg-0 me-3" bis_skin_checked="1">
+                            <!--begin::Heading-->
+                           {{--  <h1 class="d-flex flex-column text-dark fw-bolder my-1">
+                                <span class="fs-1">Resumen de Ventas</span>
+                            </h1> --}}
+                            <!--end::Heading-->
                         </div>
                         <!--end::Page title=-->
                         <!--begin::Topbar-->

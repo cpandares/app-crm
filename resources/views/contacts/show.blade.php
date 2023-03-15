@@ -68,13 +68,13 @@
                         @if ($contact->contact_status == 1)
                                 <span class="badge badge-primary pull-rigth">Nuevo</span>
                             @elseif($contact->contact_status == 2)
-                            <span class="badge badge-light-primary pull-rigth">En Negociacion</span>
+                            <span class="badge badge-primary pull-rigth">En Negociacion</span>
                             @elseif($contact->contact_status == 3)
-                            <span class="badge badge-light-primary pull-rigth">Presupuesto Enviado</span>
+                            <span class="badge badge-primary pull-rigth">Presupuesto Enviado</span>
                             @elseif($contact->contact_status == 4)
                             <span class="badge badge-primary pull-rigth">Cliente</span>
                             @elseif($contact->contact_status == 5)
-                            <span class="badge badge-light-primary pull-rigth">Renegociando</span>
+                            <span class="badge badge-primary pull-rigth">Renegociando</span>
                             @else
                             <span class="badge badge-primary pull-rigth">No Interesado</span>
                         @endif
@@ -91,13 +91,13 @@
                         @if ($contact->comunication_medium == 1)
                                 <span class="badge badge-primary pull-rigth">Télefonica</span>
                             @elseif($contact->comunication_medium == 2)
-                            <span class="badge badge-light-primary pull-rigth">Email</span>
+                            <span class="badge badge-primary pull-rigth">Email</span>
                             @elseif($contact->comunication_medium == 3)
                             <span class="badge badge-primary pull-rigth">Skype</span>
                             @elseif($contact->comunication_medium == 4)
-                            <span class="badge badge-light-primary pull-rigth">Whatsapp</span>
+                            <span class="badge badge-primary pull-rigth">Whatsapp</span>
                             @elseif($contact->comunication_medium == 5)
-                            <span class="badge badge-light-primary pull-rigth">Facebook</span>
+                            <span class="badge badge-primary pull-rigth">Facebook</span>
                             
                         @endif
                     <hr />
@@ -106,7 +106,7 @@
                 </div>
                 <!-- /.card-body -->
                 <a  class="btn btn-primary btn-block"><b>Actualizar</b></a>
-                <a href="{{ route('admin.contact.index') }}" class="btn btn-light-primary btn-block"><b>Volver a
+                <a href="{{ route('admin.contact.index') }}" class="btn btn-primary btn-block"><b>Volver a
                         Lista</b></a>
             </div>
             <!-- /.card -->
