@@ -8,8 +8,8 @@
 >
     <!--begin::Container-->
     <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
+        <!--begin::Card header-->  <h2>Mis Contactos</h2> 
         <div class="card" bis_skin_checked="1">
-            <!--begin::Card header-->
             <div class="card-header border-0 pt-6" bis_skin_checked="1">
                 <!--begin::Card title-->
                 <div class="card-title" bis_skin_checked="1">
@@ -18,7 +18,8 @@
                         class="d-flex align-items-center position-relative my-1"
                         bis_skin_checked="1"
                     >
-                       
+                    
+                      <p>Contactos registrados: {{ count($data) }}</p>
                     </div>
                     <!--end::Search-->
                 </div>
@@ -223,7 +224,7 @@
             <div class="board-lists container-fluid">
         
                         
-                <div class="board-list" data-reference="1">
+                <div class="board-list rounded-top border-top border-info" data-reference="1">
                     <div class="list-title">
                        <h2 class="text-center text-gray-600 text-hover-primary">Nuevos</h2>
                     </div>
@@ -255,7 +256,7 @@
                     @endif
 
                 </div>
-                <div class="board-list" data-reference="2">
+                <div class="board-list border-top border-success" data-reference="2">
                     <div class="list-title">
                         <h2 class="text-center text-gray-600 text-hover-primary">En Negociación</h2>
                      </div>
@@ -290,7 +291,7 @@
                      @endif
  
                 </div>
-                <div class="board-list" data-reference="3">
+                <div class="board-list border-top border-primary" data-reference="3">
                     <div class="list-title">
                         <h2 class="text-center text-gray-600 text-hover-primary">Presupuesto Enviado</h2>
                      </div>
@@ -325,7 +326,7 @@
                     
                      @endif
                 </div>
-                <div class="board-list" data-reference="4">
+                <div class="board-list border-top border-primary" data-reference="4">
                     <div class="list-title">
                         <h2 class="text-center text-gray-600 text-hover-primary">Clientes</h2>
                      </div>

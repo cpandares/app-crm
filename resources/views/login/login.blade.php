@@ -64,6 +64,7 @@ License: For each use you must have a valid license purchased only from above li
             <!--begin::Body-->
             <div class="d-flex flex-column flex-lg-row-fluid py-10">
                 <!--begin::Content-->
+                <h2>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis architecto sed ea quo laboriosam aliquid fuga sequi? Odio laudantium rerum quae, blanditiis non sequi magnam placeat, reprehenderit quod illum distinctio.</h2>
                 <div class="d-flex flex-center flex-column flex-column-fluid">
                     <!--begin::Wrapper-->
                     <div class="w-lg-500px p-10 p-lg-15 mx-auto">
@@ -76,10 +77,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Title-->
                                 <h1 class="text-dark mb-3">Bienvenido</h1>
                                 <h4 class="text-dark mb-3">Inicia Sesión</h4>
-                                <!--end::Title-->
-                                <!--begin::Link-->
-
-                                <!--end::Link-->
+                               
                             </div>
                             <!--begin::Heading-->
                             <!--begin::Input group-->
@@ -100,12 +98,12 @@ License: For each use you must have a valid license purchased only from above li
                                     <label class="form-label fw-bolder text-dark fs-6 mb-0">Contraseña</label>
                                     <!--end::Label-->
                                     <!--begin::Link-->
-                                    <a href="../../demo17/dist/authentication/layouts/aside/password-reset.html" class="link-primary fs-6 fw-bolder">Olvidaste tu Contraseña ?</a>
+                                    <a >Olvidaste tu Contraseña ?</a>
                                     <!--end::Link-->
                                 </div>
                                 <!--end::Wrapper-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
+                                <input class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" type="password" name="password" autocomplete="off" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -116,7 +114,7 @@ License: For each use you must have a valid license purchased only from above li
 										<span class="indicator-label">Iniciar Sesión</span>
 										<span class="indicator-progress">Porfavor espere...
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-									</button>
+								</button>
                                 <!--end::Submit button-->
                                 <!--begin::Separator-->
 

@@ -24,13 +24,37 @@ class CampaingController extends Controller
     public function index(Request $request)
     {
         //
+        $condicion = [];
         $input = $request->all();
         $id = auth()->user()->id;
-        $data = Campaing::where('created_user', $id)->get();
+        $campaings = Campaing::where('created_user', $id)->pluck('campaing_name','campaing_name');
+        $data = Campaing::where('created_user', $id);
+
+        
+        
+        if (isset($input['city'])) {
+            $condicion[] = ['campaing.email', 'like', '%' . $input['city'] . '%'];
+        }
+
+        if (isset($input['name'])) {
+           
+            $condicion['campaing.campaing_name'] = $input['name'];
+        }
+
+        if (isset($input['country'])) {
+
+            $condicion['campaing.country'] = $input['country'];
+        }
+
+        $data = $data->where($condicion)->paginate(20);
 
         return view('campaings.index', [
             'data'=>$data,
-            'paises' => $this->getPaises()
+            'paises' => $this->getPaises(),
+            'campaings' => $campaings,
+            'name' => isset($input['name']) ? $input['name'] : null,
+            'city' =>isset($input['city']) ? $input['city'] : null,
+            'country' =>isset($input['country']) ? $input['country'] : null,
         ]);
     }
 
@@ -223,9 +247,13 @@ class CampaingController extends Controller
 
 
         $paises = [
+            "Alemania"=>"Alemania",
+            "España"=>"España",
+            "Francia"=>"Francia",
+            "Italia"=>"Italia",
+            "Portugal"=>"Portugal",
             "Afganistán"=>"Afganistán",
             "Albania"=>"Albania",
-            "Alemania"=>"Alemania",
             "Andorra"=>"Andorra",
             "Angola"=>"Angola",
             "Antigua y Barbuda"=>"Antigua y Barbuda",
@@ -281,14 +309,14 @@ class CampaingController extends Controller
             "Eritrea"=>"Eritrea",
             "Eslovaquia"=>"Eslovaquia",
             "Eslovenia"=>"Eslovenia",
-            "España"=>"España",
+           
             "Estados Unidos"=>"Estados Unidos",
             "Estonia"=>"Estonia",
             "Etiopía"=>"Etiopía",
             "Filipinas"=>"Filipinas",
             "Finlandia"=>"Finlandia",
             "Fiyi"=>"Fiyi",
-            "Francia"=>"Francia",
+           
             "Gabón"=>"Gabón",
             "Gambia"=>"Gambia",
             "Georgia"=>"Georgia",
@@ -312,7 +340,7 @@ class CampaingController extends Controller
             "Islas Marshall"=>"Islas Marshall",
             "Islas Salomón"=>"Islas Salomón",
             "Israel"=>"Israel",
-            "Italia"=>"Italia",
+            
             "Jamaica"=>"Jamaica",
             "Japón"=>"Japón",
             "Jordania"=>"Jordania",
@@ -364,7 +392,7 @@ class CampaingController extends Controller
             "Paraguay"=>"Paraguay",
             "Perú"=>"Perú",
             "Polonia"=>"Polonia",
-            "Portugal"=>"Portugal",
+            
             "Reino Unido"=>"Reino Unido",
             "República Centroafricana"=>"República Centroafricana",
             "República Checa"=>"República Checa",

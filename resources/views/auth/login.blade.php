@@ -41,6 +41,14 @@ License: For each use you must have a valid license purchased only from above li
 <!--end::Head-->
 <!--begin::Body-->
 
+<style>
+    #forgot_password  {
+        cursor: pointer;
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+</style>
+
 <body id="kt_body" class="bg-body">
     <!--begin::Main-->
     <!--begin::Root-->
@@ -67,15 +75,22 @@ License: For each use you must have a valid license purchased only from above li
                 <div class="d-flex flex-center flex-column flex-column-fluid">
                     <!--begin::Wrapper-->
                     <div class="w-lg-500px p-10 p-lg-15 mx-auto">
+                      
                         <!--begin::Form-->
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <!--begin::Heading-->
                             <div style="text-align: center;margin: 0 0 40px;" class="logo"><img src="assets/media/logonine.webp" /></div>
+                           
+                       
                             <div class="text-center mb-10">
                                 <!--begin::Title-->
                                 <h1 class="text-dark mb-3">Bienvenido</h1>
+                                @if (count($errors) > 0)
+                                <p class="text-danger">Usuario o password no validos</p>
+                                @else
                                 <h4 class="text-dark mb-3">Inicia Sesión</h4>
+                                @endif
                                 <!--end::Title-->
                                 <!--begin::Link-->
 
@@ -100,7 +115,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <label class="form-label fw-bolder text-dark fs-6 mb-0">Contraseña</label>
                                     <!--end::Label-->
                                     <!--begin::Link-->
-                                    <a href="../../demo17/dist/authentication/layouts/aside/password-reset.html" class="link-primary fs-6 fw-bolder">Olvidaste tu Contraseña ?</a>
+                                    <a  class="link-primary fs-6 fw-bolder" id="forgot_password">Olvidaste tu Contraseña ?</a>
                                     <!--end::Link-->
                                 </div>
                                 <!--end::Wrapper-->

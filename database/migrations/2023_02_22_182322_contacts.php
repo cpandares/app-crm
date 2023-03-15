@@ -18,6 +18,7 @@ class Contacts extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->string('email');
+           
             $table->string('phone');
             $table->string('country');
             $table->string('city');  
