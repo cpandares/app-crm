@@ -8,7 +8,7 @@
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content" bis_skin_checked="1">
         <!--begin::Container-->
         <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
-            <h2 class="text-center">Listado de Campañas</h2>
+            <h2 >Listado de Campañas</h2>
             <!--begin::Card-->
             <div class="card" bis_skin_checked="1">
                 <!--begin::Card header-->
