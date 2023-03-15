@@ -68,15 +68,15 @@
                         @if ($contact->contact_status == 1)
                                 <span class="badge badge-primary pull-rigth">Nuevo</span>
                             @elseif($contact->contact_status == 2)
-                            <span class="badge badge-light-primary pull-rigth">No interesado</span>
+                            <span class="badge badge-light-primary pull-rigth">En Negociacion</span>
                             @elseif($contact->contact_status == 3)
                             <span class="badge badge-light-primary pull-rigth">Presupuesto Enviado</span>
                             @elseif($contact->contact_status == 4)
                             <span class="badge badge-primary pull-rigth">Cliente</span>
                             @elseif($contact->contact_status == 5)
-                            <span class="badge badge-light-primary pull-rigth">En Negociación</span>
+                            <span class="badge badge-light-primary pull-rigth">Renegociando</span>
                             @else
-                            <span class="badge badge-primary pull-rigth">Renegociando</span>
+                            <span class="badge badge-primary pull-rigth">No Interesado</span>
                         @endif
                    
                     <hr />
