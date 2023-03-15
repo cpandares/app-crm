@@ -33,7 +33,7 @@ class CampaingController extends Controller
         
         
         if (isset($input['city'])) {
-            $condicion[] = ['campaing.email', 'like', '%' . $input['city'] . '%'];
+            $condicion[] = ['campaing.city', 'like', '%' . $input['city'] . '%'];
         }
 
         if (isset($input['name'])) {
