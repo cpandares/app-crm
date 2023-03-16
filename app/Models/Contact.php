@@ -21,7 +21,8 @@ class Contact extends Model
         'postcode',
         'contact_status',
         'user_id',
-        'comunication_medium'
+        'comunication_medium',
+        'image'
     ];
 
 

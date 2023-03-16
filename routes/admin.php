@@ -35,3 +35,5 @@ Route::post('add-contacts-campaings', [CampaingController::class, 'addContact'])
 Route::put('update-status-contact', [ContactsController::class, 'updateStatus'])->name('update-status-contact');
 
 Route::get('contactos-lista', [ContactsController::class, 'lista'])->name('admin.contactos.lista');
+
+Route::post('update-photo-contact/{id}', [ContactsController::class, 'updatePhoto'])->name('update-photo-contact');

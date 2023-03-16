@@ -10,34 +10,30 @@
                             {{--  <div class="image-input-wrapper w-150px h-150px" style="background-image: url('https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png')">
                             </div> --}}
                             <div class="text-center">
-                                <img width="50%" height="50%" class="rounded-circle"
+                                @if (!$contact->image)                                    
+                                    <img width="50%" height="50%" class="rounded-circle"
                                     src="https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png"
                                     alt="User profile picture" />
+                                @else
+                                    <img width="50%" height="50%" class="rounded-circle" style="object-fit: cover"
+                                    src="{{ $contact->image }}"
+                                    alt="User profile picture" />
+                                @endif
                             </div>
                             <!--end::Preview existing avatar-->
                             <!--begin::Label-->
+                            
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                 data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                title="Cambiar foto de contacto">
+                                title="Cambiar foto de contacto" onchange="changePhoto()">
                                 <i class="fas fa-pencil"></i>
                                 <!--begin::Inputs-->
-                                <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                <input type="file" name="avatar" id="avatarInput" accept=".png, .jpg, .jpeg" />
                                 <input type="hidden" name="avatar_remove" />
                                 <!--end::Inputs-->
                             </label>
-                            <!--end::Label-->
-                            <!--begin::Cancel-->
-                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                                <i class="bi bi-x fs-2"></i>
-                            </span>
-                            <!--end::Cancel-->
-                            <!--begin::Remove-->
-                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                                <i class="bi bi-x fs-2"></i>
-                            </span>
-                            <!--end::Remove-->
+
+                           
                         </div>
                     </div>
 
@@ -678,7 +674,11 @@
 
     </div>
 
-
+    <form action="{{ url('admin/update-photo-contact/' . $contact->id) }}" method="post" style="display: none" id="avatarForm">
+      
+        {{ csrf_field() }}
+       
+    </form>
     </div>
 
     </div>
@@ -689,7 +689,48 @@
 
 
 @section('script')
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+
     <script>
+
+        function changePhoto(){
+           
+            let avatarForm = $('#avatarForm');
+
+            let avatarImage =  $('#avatarInput')[0].files[0];
+            let id = document.getElementById('id_user').value;
+
+            console.log(avatarImage)
+            var formData = new FormData();
+            formData.append('imagen', avatarImage, 'id', id);
+
+           
+            
+            $.ajax({
+                    type: "POST",
+                    url: avatarForm.attr('action') + '?' + avatarForm.serialize(),
+                    
+                    data: formData,
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false ,  // tell jQuery not to set contentType
+                    success: function(res) {
+                        if (res) {
+                            Swal.fire({
+                                title: 'Se actualizo el contacto',
+                                text: "",
+                                icon: 'success',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6'
+                            });
+                        }
+                    },
+                    dataType: "json"
+                });
+
+
+        }
+
 
         function updateStatusNew() {
            
@@ -845,7 +886,7 @@
             $.ajax({
                 url: url + '?page=' + page,
             }).done((data) => {
-                console.log(data);
+               
                 $('#tablaPresupuestos').html(data)
             }).fail((jqXHR, ajaxOptions, thrownError) => {
                 console.log(thrownError)

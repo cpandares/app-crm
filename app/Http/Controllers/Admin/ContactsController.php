@@ -15,6 +15,7 @@ use App\Models\ContactCampaing;
 use App\Models\ContactStatus;
 use App\Models\Note;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ContactsController extends Controller
 {
@@ -493,4 +494,67 @@ class ContactsController extends Controller
             return false;
         }
     }
+
+
+    public function updatePhoto(Request $request, $id)
+    {
+       /*  dd($request->id, $request->imagen); */
+
+        $contact = Contact::findOrFail($id);
+        /*   dd($request->reference); */
+        if (!$contact) {
+            return false;
+        }
+
+        $request->validate([
+            'imagen' => 'required|image'
+        ]);
+
+        $imagen = $request->file('imagen');
+
+       /*  if($imagen != null){
+            $mime = $imagen->getMimeType();
+            
+            if($mime == 'image/jpeg' || $mime == 'image/jpg' || $mime == 'image/png'){
+                $extension = strtolower($imagen->getClientOriginalExtension());
+                
+                $name = 'contacto'.uniqid().'.'.$extension;
+                $path = base_path() . '/public/images/contactos/';
+                $photo=$name;
+                $imagen->move($path, $name);
+            }
+
+            
+
+
+        } */
+        if ($imagen){
+            $ruta = "blog-laravel";
+    
+            $response = cloudinary()->upload($request->file('imagen')->getRealPath(), array("folder" => $ruta))->getSecurepath();
+           /*  $post->image()->create([
+                'url' => $response,
+            ]); */
+        }  
+      
+        /*  dd($status); */
+        try {
+            $contact->image = $response;
+            $contact->updated_at = Carbon::now();
+            $result = $contact->save();
+            //code...
+            if ($result) {
+
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\PDOException $th) {
+            //throw $th;
+
+            return false;
+        }
+    }
+
+
 }
