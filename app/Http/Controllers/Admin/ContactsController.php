@@ -31,7 +31,7 @@ class ContactsController extends Controller
         $noInteresteds = Contact::where('user_id', $user_id)->where('contact_status', 5)->orderByDesc('id')->get();
         $comunicacion_medias = ComunicationMedium::pluck('comunication_medio', 'id');
         $status = ContactStatus::pluck('status_name', 'id');
-
+        $title = 'Listado de contactos';
        /*  $contactsCapaings = DB::table('campaing')
                      ->select('campaing.campaing_name', 'campaing.id','campaing.init_date','campaing.country')
                     ->leftJoin('contact_campaings', 'contact_campaings.camaping_id','=','campaing.id')
@@ -50,7 +50,8 @@ class ContactsController extends Controller
                     'paises' => $this->getPaises(),
                     'comunicacion_medias' => $comunicacion_medias,
                     'status' => $status,
-                    'data'=> $contacts
+                    'data'=> $contacts,
+                    'title' => $title
                 ]);
 
     }
@@ -72,7 +73,7 @@ class ContactsController extends Controller
     {
         $input = $request->all();
         $condicion = [];
-
+        $title = 'Listado de contactos';
         $user_id = auth()->user()->id;
         $controlador = new ContactsController();
         $contacts = DB::table('contacts')->where('user_id', $user_id)
@@ -111,7 +112,8 @@ class ContactsController extends Controller
             'status' => $status,
             'paises' => $this->getPaises(),
             'controlador' =>$controlador,
-            'list_campaings' => $list_campaings
+            'list_campaings' => $list_campaings,
+            'title' => $title
         ]);
     }
 
@@ -142,6 +144,7 @@ class ContactsController extends Controller
             "España"=>"España",
             "Francia"=>"Francia",
             "Italia"=>"Italia",
+            "__________"=>"_____________",
             "Portugal"=>"Portugal",
             "Afganistán"=>"Afganistán",
             "Albania"=>"Albania",
@@ -408,7 +411,7 @@ class ContactsController extends Controller
     {
 
         $user_id = auth()->user()->id;
-
+        
         $comunicacion_medias = ComunicationMedium::pluck('comunication_medio', 'id');
         $budgets = Budget::where('user_created_for', $contact->id)->orderByDesc('id')->paginate(20);
         $comunicaciones = Comunicacion::where('user_created_for', $contact->id)->orderByDesc('id')->paginate(20);
@@ -420,7 +423,7 @@ class ContactsController extends Controller
                            ->leftJoin('contact_campaings', 'contact_campaings.camaping_id','=','campaing.id' )
                            ->where('contact_campaings.contact_id', $contact->id)
                            ->get();
-
+        $title = 'Detalle de Contacto';
         /* dd($contactsCapaings); */
         return view('contacts.show', [
             'contact'=>$contact,
@@ -429,7 +432,8 @@ class ContactsController extends Controller
             'comunicaciones'=>$comunicaciones,
             'notes' => $notes,
             'campaings'=>$campaings,
-            'contactsCapaings' =>$contactsCapaings
+            'contactsCapaings' =>$contactsCapaings,
+            'title' => $title
         ]);
     }
 

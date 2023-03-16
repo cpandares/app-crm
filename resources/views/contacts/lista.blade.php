@@ -8,7 +8,7 @@
             <!--begin::Container-->
             <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
                 <!--begin::Card-->
-                <h2>Listado de contactos </h2>
+              {{--   <h2>Listado de contactos </h2> --}}
                 <div class="card" bis_skin_checked="1">
                     <!--begin::Card header-->
                     <div class="card-header border-0 pt-6" bis_skin_checked="1">

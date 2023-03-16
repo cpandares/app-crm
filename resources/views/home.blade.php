@@ -2,14 +2,14 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
     
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content" bis_skin_checked="1">
         <!--begin::Container-->
         <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
             <!--begin::Row-->
             <div class="row g-5 g-xl-10 mb-xl-10" bis_skin_checked="1">
-                <h2>Resumen de Ventas</h2>
+               
                 <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-md-5 mb-xl-20" bis_skin_checked="1">
                     <!--begin::Card widget 4-->
                     <div class="card card-flush overflow-hidden mb-5 h-md-50" bis_skin_checked="1">
@@ -1849,4 +1849,5 @@
         <!--end::Col-->
     </div>
 </div>
+
 @endsection

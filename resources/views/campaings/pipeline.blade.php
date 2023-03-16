@@ -5,7 +5,7 @@
         <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
             <div class="card p-5" bis_skin_checked="1">
                 <!--begin::Card header-->
-                <h3 class="text-gray-600 text-hover-primary">Contactos en la campaña: {{ $campaing->campaing_name }}</h3> 
+                
                 <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
                     
                     <a class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
@@ -17,7 +17,7 @@
                         </svg>
                     </span>
                     <!--end::Svg Icon--> 
-                    {{ $campaing->country }}
+                  Pais:   {{ $campaing->country }}
                 </a>
                     {{-- <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
                     

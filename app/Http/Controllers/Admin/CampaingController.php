@@ -29,7 +29,7 @@ class CampaingController extends Controller
         $id = auth()->user()->id;
         $campaings = Campaing::where('created_user', $id)->pluck('campaing_name','campaing_name');
         $data = Campaing::where('created_user', $id);
-
+        $title = 'Listado de Campañas';
         
         
         if (isset($input['city'])) {
@@ -55,6 +55,7 @@ class CampaingController extends Controller
             'name' => isset($input['name']) ? $input['name'] : null,
             'city' =>isset($input['city']) ? $input['city'] : null,
             'country' =>isset($input['country']) ? $input['country'] : null,
+            'title' => $title
         ]);
     }
 
@@ -120,7 +121,7 @@ class CampaingController extends Controller
         $input = $request->all();
 
         $user_id = auth()->user()->id;
-
+       
         /* if(!$campaing){
             return redirect()->route('admin.contacs.index');
         } */
@@ -159,13 +160,14 @@ class CampaingController extends Controller
 
         $contacts = $contacts->where($condicion)->paginate(20);
 
-
+        $title = 'Detalle de Campaña: ' . $campaing->campaing_name;
         return view('campaings.show', [
             'campaing' => $campaing,
             'contacts' => $contacts,
             'paises' => $this->getPaises(),
             'comunicacion_medias' => $comunicacion_medias,
-            'status' => $status
+            'status' => $status,
+            'title' => $title
         ]);
     }
 
@@ -227,7 +229,7 @@ class CampaingController extends Controller
         $campaing = Campaing::where('id', $id)->first();
       
         /* dd($new_clients, $clientes, $presupuestados, $clientes_negoci); */
-
+        $title = 'Contactos en la campaña: ' . $campaing->campaing_name;
         return view('campaings.pipeline', [
             'campaing' => $campaing,
            
@@ -237,8 +239,8 @@ class CampaingController extends Controller
             'clientes'=>$clientes,
             'presupuestados' => $presupuestados,
             'clientes_negoci' => $clientes_negoci,
-            'new_clients' => $new_clients
-
+            'new_clients' => $new_clients,
+            'title' => $title
         ]);
     }
 
@@ -252,6 +254,7 @@ class CampaingController extends Controller
             "Francia"=>"Francia",
             "Italia"=>"Italia",
             "Portugal"=>"Portugal",
+            "__________"=>"_____________",
             "Afganistán"=>"Afganistán",
             "Albania"=>"Albania",
             "Andorra"=>"Andorra",

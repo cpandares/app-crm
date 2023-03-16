@@ -8,7 +8,7 @@
 >
     <!--begin::Container-->
     <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
-        <!--begin::Card header-->  <h2>Mis Contactos</h2> 
+        <!--begin::Card header-->  
         <div class="card" bis_skin_checked="1">
             <div class="card-header border-0 pt-6" bis_skin_checked="1">
                 <!--begin::Card title-->
