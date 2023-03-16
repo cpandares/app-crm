@@ -714,21 +714,23 @@
                     data: formData,
                     processData: false,  // tell jQuery not to process the data
                     contentType: false ,  // tell jQuery not to set contentType
+
                     success: function(res) {
+                        Swal.showloading();
                         if (res) {
-                            Swal.fire({
+                           /*  Swal.fire({
                                 title: 'Se actualizo el contacto',
                                 text: "",
                                 icon: 'success',
                                 showCancelButton: false,
                                 confirmButtonColor: '#3085d6'
-                            });
+                            }); */
                         }
                     },
                     dataType: "json"
                 });
 
-
+                window.location.reload()
         }
 
 
@@ -756,6 +758,7 @@
                     }
                 },
                 dataType: "json"
+               
             });
         }
         function updateStatusNego() {

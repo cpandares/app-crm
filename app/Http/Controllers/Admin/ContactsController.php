@@ -512,29 +512,12 @@ class ContactsController extends Controller
 
         $imagen = $request->file('imagen');
 
-       /*  if($imagen != null){
-            $mime = $imagen->getMimeType();
-            
-            if($mime == 'image/jpeg' || $mime == 'image/jpg' || $mime == 'image/png'){
-                $extension = strtolower($imagen->getClientOriginalExtension());
-                
-                $name = 'contacto'.uniqid().'.'.$extension;
-                $path = base_path() . '/public/images/contactos/';
-                $photo=$name;
-                $imagen->move($path, $name);
-            }
-
-            
-
-
-        } */
+      
         if ($imagen){
             $ruta = "blog-laravel";
-    
+         /*    Alert::showloading('Espere...'); */
             $response = cloudinary()->upload($request->file('imagen')->getRealPath(), array("folder" => $ruta))->getSecurepath();
-           /*  $post->image()->create([
-                'url' => $response,
-            ]); */
+          
         }  
       
         /*  dd($status); */
