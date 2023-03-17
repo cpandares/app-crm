@@ -9,45 +9,7 @@
             <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
                 {{--  <h2 >Listado de Campañas</h2> --}}
                 <!--begin::Card-->
-                <div class="card" bis_skin_checked="1">
-                    <!--begin::Card header-->
-                    <div class="card-header border-0 pt-6" bis_skin_checked="1">
-                        <!--begin::Card title-->
-                        <div class="card-title" bis_skin_checked="1">
-                            <p> Tienes un total de clientes</p>
-                        </div>
-                        <!--begin::Card title-->
-                        <!--begin::Card toolbar-->
-                        <div class="card-toolbar" bis_skin_checked="1">
-                            <!--begin::Toolbar-->
-                            <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base"
-                                bis_skin_checked="1">
-
-                                <a href="{{ route('admin.campaings.index') }}" class="btn btn-primary mr-2">
-                                    Limpiar Filtros
-                                </a>
-
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal">Nueva Campaña</button>
-                                <!--end::Add customer-->
-                            </div>
-                            <!--end::Toolbar-->
-                            <!--begin::Group actions-->
-                            <div class="d-flex justify-content-end align-items-center d-none"
-                                data-kt-customer-table-toolbar="selected" bis_skin_checked="1">
-                                <div class="fw-bolder me-5" bis_skin_checked="1">
-                                    <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected
-                                </div>
-                                <button type="button" class="btn btn-danger"
-                                    data-kt-customer-table-select="delete_selected">Delete Selected</button>
-                            </div>
-                            <!--end::Group actions-->
-                        </div>
-                        <!--end::Card toolbar-->
-                    </div>
-
-
-                </div>
+                
 
 
 
@@ -66,7 +28,7 @@
                                     </svg>
                                 </span>
                                 <!--end::Svg Icon-->
-                                <input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Customers">
+                                <input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Buscar Cliente">
                             </div>
                             <!--end::Search-->
                         </div>
@@ -89,7 +51,7 @@
                                         <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                             <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
                                         </div>
-                                    </th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Customer Name: activate to sort column ascending" style="width: 173.712px;">Customer Name</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 232.688px;">Email</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Company: activate to sort column ascending" style="width: 183.475px;">Company</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Payment Method: activate to sort column ascending" style="width: 173.712px;">Payment Method</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Created Date: activate to sort column ascending" style="width: 214.525px;">Created Date</th><th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 129.137px;">Actions</th></tr>
+                                    </th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Customer Name: activate to sort column ascending" style="width: 173.712px;">Nombre Cliente</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 232.688px;">Email</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Company: activate to sort column ascending" style="width: 183.475px;">Pais</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Payment Method: activate to sort column ascending" style="width: 173.712px;">Télefono</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Created Date: activate to sort column ascending" style="width: 214.525px;">Fecha de registro</th><th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 129.137px;">Acciones</th></tr>
                                 <!--end::Table row-->
                             </thead>
                             <!--end::Table head-->
@@ -105,27 +67,27 @@
                                     <!--end::Checkbox-->
                                     <!--begin::Name=-->
                                     <td>
-                                        <a href="../../demo17/dist/apps/customers/view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
+                                        <a  class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
                                     </td>
                                     <!--end::Name=-->
                                     <!--begin::Email=-->
                                     <td>
-                                        <a href="#" class="text-gray-600 text-hover-primary mb-1">e.smith@kpmg.com.au</a>
+                                        <a >e.smith@kpmg.com.au</a>
                                     </td>
                                     <!--end::Email=-->
                                     <!--begin::Company=-->
                                     <td>-</td>
                                     <!--end::Company=-->
                                     <!--begin::Payment method=-->
-                                    <td data-filter="mastercard">
-                                    <img src="assets/media/svg/card-logos/mastercard.svg" class="w-35px me-3" alt="">**** 4044</td>
+                                    <td >
+                                    555585584044</td>
                                     <!--end::Payment method=-->
                                     <!--begin::Date=-->
                                     <td data-order="2020-12-14T20:43:00-04:00">14 Dec 2020, 8:43 pm</td>
                                     <!--end::Date=-->
                                     <!--begin::Action=-->
                                     <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                                        <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Acciones
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                         <span class="svg-icon svg-icon-5 m-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -137,14 +99,9 @@
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="../../demo17/dist/apps/customers/view.html" class="menu-link px-3">View</a>
+                                                <a  class="menu-link px-3">Ver</a>
                                             </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
+                                           
                                         </div>
                                         <!--end::Menu-->
                                     </td>

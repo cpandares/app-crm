@@ -1,6 +1,6 @@
 <head>
     <base href="../">
-      <title>@yield('page_title', 'Resumen de Ventas')</title>
+      <title>Nines d' Onil</title>
     <meta charset="utf-8" />
    
     <meta name="viewport" content="width=device-width, initial-scale=1" />

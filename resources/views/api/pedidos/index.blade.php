@@ -9,45 +9,7 @@
             <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
                 {{--  <h2 >Listado de Campañas</h2> --}}
                 <!--begin::Card-->
-                <div class="card" bis_skin_checked="1">
-                    <!--begin::Card header-->
-                    <div class="card-header border-0 pt-6" bis_skin_checked="1">
-                        <!--begin::Card title-->
-                        <div class="card-title" bis_skin_checked="1">
-                            <p> Tienes un total de Pedidos</p>
-                        </div>
-                        <!--begin::Card title-->
-                        <!--begin::Card toolbar-->
-                        <div class="card-toolbar" bis_skin_checked="1">
-                            <!--begin::Toolbar-->
-                            <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base"
-                                bis_skin_checked="1">
-
-                                <a href="{{ route('admin.campaings.index') }}" class="btn btn-primary mr-2">
-                                    Limpiar Filtros
-                                </a>
-
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal">Nueva Campaña</button>
-                                <!--end::Add customer-->
-                            </div>
-                            <!--end::Toolbar-->
-                            <!--begin::Group actions-->
-                            <div class="d-flex justify-content-end align-items-center d-none"
-                                data-kt-customer-table-toolbar="selected" bis_skin_checked="1">
-                                <div class="fw-bolder me-5" bis_skin_checked="1">
-                                    <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected
-                                </div>
-                                <button type="button" class="btn btn-danger"
-                                    data-kt-customer-table-select="delete_selected">Delete Selected</button>
-                            </div>
-                            <!--end::Group actions-->
-                        </div>
-                        <!--end::Card toolbar-->
-                    </div>
-
-
-                </div>
+                
 
 
 
@@ -106,15 +68,15 @@
                                             <th class="min-w-100px sorting" tabindex="0"
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Order ID: activate to sort column ascending"
-                                                style="width: 138.538px;">Order ID</th>
+                                                style="width: 138.538px;"># orden</th>
                                             <th class="min-w-175px sorting" tabindex="0"
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Customer: activate to sort column ascending"
-                                                style="width: 290.725px;">Customer</th>
+                                                style="width: 290.725px;">Cliente</th>
                                             <th class="text-end min-w-70px sorting" tabindex="0"
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Status: activate to sort column ascending"
-                                                style="width: 114.037px;">Status</th>
+                                                style="width: 114.037px;">Estado</th>
                                             <th class="text-end min-w-100px sorting" tabindex="0"
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Total: activate to sort column ascending"
@@ -122,13 +84,13 @@
                                             <th class="text-end min-w-100px sorting" tabindex="0"
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Date Added: activate to sort column ascending"
-                                                style="width: 138.538px;">Date Added</th>
+                                                style="width: 138.538px;">Fecha de registro</th>
                                             <th class="text-end min-w-100px sorting" tabindex="0"
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Date Modified: activate to sort column ascending"
-                                                style="width: 138.538px;">Date Modified</th>
+                                                style="width: 138.538px;">Fecha modificado</th>
                                             <th class="text-end min-w-100px sorting_disabled" rowspan="1"
-                                                colspan="1" aria-label="Actions" style="width: 138.587px;">Actions
+                                                colspan="1" aria-label="Actions" style="width: 138.587px;">Acciones
                                             </th>
                                         </tr>
                                         <!--end::Table row-->
@@ -147,7 +109,7 @@
                                             <!--end::Checkbox-->
                                             <!--begin::Order ID=-->
                                             <td data-kt-ecommerce-order-filter="order_id">
-                                                <a href="../../demo17/dist/apps/ecommerce/sales/details.html"
+                                                <a 
                                                     class="text-gray-800 text-hover-primary fw-bolder">14559</a>
                                             </td>
                                             <!--end::Order ID=-->
@@ -156,9 +118,9 @@
                                                 <div class="d-flex align-items-center">
                                                     <!--begin:: Avatar -->
                                                     <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                                        <a href="../../demo17/dist/apps/user-management/users/view.html">
+                                                        <a >
                                                             <div class="symbol-label">
-                                                                <img src="assets/media/avatars/300-25.jpg" alt="Brian Cox"
+                                                                <img src="https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png" alt="Brian Cox"
                                                                     class="w-100">
                                                             </div>
                                                         </a>
@@ -166,7 +128,7 @@
                                                     <!--end::Avatar-->
                                                     <div class="ms-5">
                                                         <!--begin::Title-->
-                                                        <a href="../../demo17/dist/apps/user-management/users/view.html"
+                                                        <a
                                                             class="text-gray-800 text-hover-primary fs-5 fw-bolder">Brian
                                                             Cox</a>
                                                         <!--end::Title-->
@@ -177,7 +139,7 @@
                                             <!--begin::Status=-->
                                             <td class="text-end pe-0" data-order="Completed">
                                                 <!--begin::Badges-->
-                                                <div class="badge badge-light-success">Completed</div>
+                                                <div class="badge badge-light-success">Despachado</div>
                                                 <!--end::Badges-->
                                             </td>
                                             <!--end::Status=-->
@@ -200,7 +162,7 @@
                                             <td class="text-end">
                                                 <a href="#" class="btn btn-sm btn-light btn-active-light-primary"
                                                     data-kt-menu-trigger="click"
-                                                    data-kt-menu-placement="bottom-end">Actions
+                                                    data-kt-menu-placement="bottom-end">Acciones
                                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                                     <span class="svg-icon svg-icon-5 m-0">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -217,20 +179,20 @@
                                                     data-kt-menu="true">
                                                     <!--begin::Menu item-->
                                                     <div class="menu-item px-3">
-                                                        <a href="../../demo17/dist/apps/ecommerce/sales/details.html"
-                                                            class="menu-link px-3">View</a>
+                                                        <a 
+                                                            class="menu-link px-3">Ver</a>
                                                     </div>
                                                     <!--end::Menu item-->
                                                     <!--begin::Menu item-->
                                                     <div class="menu-item px-3">
-                                                        <a href="../../demo17/dist/apps/ecommerce/sales/edit-order.html"
-                                                            class="menu-link px-3">Edit</a>
+                                                        <a
+                                                            class="menu-link px-3">Detalle</a>
                                                     </div>
                                                     <!--end::Menu item-->
                                                     <!--begin::Menu item-->
                                                     <div class="menu-item px-3">
                                                         <a href="#" class="menu-link px-3"
-                                                            data-kt-ecommerce-order-filter="delete_row">Delete</a>
+                                                            data-kt-ecommerce-order-filter="delete_row">Eliminar</a>
                                                     </div>
                                                     <!--end::Menu item-->
                                                 </div>
