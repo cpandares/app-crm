@@ -540,4 +540,14 @@ class ContactsController extends Controller
     }
 
 
+    public function listarClientesApi(){
+
+        $title = "Clientes Api";
+
+        return view('api.clientes.index',[
+            'title' => $title
+        ]);
+    }
+
+
 }

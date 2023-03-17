@@ -17,8 +17,11 @@ class ProductoController extends Controller
     {
         //
         $productos = Product::all();
-
-        return view('products.index', compact('productos'));
+        $title = 'Productos registrados';
+        return view('products.index', [
+            'productos' =>$productos,
+            'title' => $title
+        ]);
 
     }
 
@@ -30,8 +33,10 @@ class ProductoController extends Controller
     public function create()
     {
         //
-
-        return view('products.create');
+        $title = 'Crea un producto';
+        return view('products.create', [
+            'title' => $title
+        ]);
 
     }
 
@@ -153,4 +158,18 @@ class ProductoController extends Controller
 
 
     }
+
+
+    public function listarClientesApi(){
+
+        $title = "Productos Api";
+
+        return view('api.pedidos.index',[
+            'title' => $title
+        ]);
+    }
+
+
+
+
 }

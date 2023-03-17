@@ -37,3 +37,11 @@ Route::put('update-status-contact', [ContactsController::class, 'updateStatus'])
 Route::get('contactos-lista', [ContactsController::class, 'lista'])->name('admin.contactos.lista');
 
 Route::post('update-photo-contact/{id}', [ContactsController::class, 'updatePhoto'])->name('update-photo-contact');
+
+Route::get('clientes-api', [ContactsController::class, 'listarClientesApi'])->name('admin.clientes.api');
+
+Route::get('productos-api', [ProductoController::class, 'listarClientesApi'])->name('admin.clientes.api');
+
+Route::get('calendario', [CampaingController::class, 'calendario'])->name('admin.calendario.index');
+
+Route::get('campaing-ajax', [CampaingController::class, 'ajaxCampaing'])->name('ajax-campaing');

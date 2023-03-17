@@ -26,7 +26,7 @@
     <link  href="{{ asset('css/bundle/bundle.css') }}"  rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
 
-
+    <link  href="{{ asset('css/plugins/fullcalendar.bundle.css') }}"  rel="stylesheet" type="text/css" />
 
 
 

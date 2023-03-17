@@ -33,7 +33,7 @@
 
 
                 <div data-kt-menu-placement="right-start" class="menu-item py-3">
-                    <a class="menu-link"{{--  href="#" --}}>
+                    <a  href="{{ url('admin/productos-api') }}" class="menu-link" title="Productos Api" class="menu-link"{{--  href="#" --}}>
 
                         <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
@@ -59,7 +59,7 @@
 
                 </div>
                 <div data-kt-menu-placement="right-start" class="menu-item here show py-3">
-                    <a class="menu-link">
+                    <a href="{{ url('admin/clientes-api') }}" class="menu-link" title="Clientes Api">
 
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/abstract/abs037.svg-->
@@ -145,7 +145,20 @@
                     </div>
                 </div>
 
+                <div data-kt-menu-placement="right-start" class="menu-item here show py-3">
+                    <a href="{{ url('admin/calendario') }}" class="menu-link" title="Calendario">
 
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs037.svg-->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" class="bi bi-calendar" viewBox="0 0 16 16">
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                              </svg>
+                            </span>
+                        <!--end::Svg Icon-->
+                        </span>
+
+                    </a>
+                </div>
 
             </div>
         </div>

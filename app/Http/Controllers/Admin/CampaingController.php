@@ -509,7 +509,26 @@ class CampaingController extends Controller
         }
     }
 
+    public function calendario(Campaing $campaing)
+    {
+        //
+        
+        $title = 'Calendario';
+       
 
+       return view('campaings.calendario',[
+        'title' =>$title,
+       
+       ]);
+    }
+
+    public function ajaxCampaing(){
+
+        $id = auth()->user()->id;
+        $data = Campaing::where('created_user', $id)->get();
+
+        return response()->json($data);
+    }
 
 
     public function addContact(Request $request)

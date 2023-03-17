@@ -74,7 +74,7 @@
                             <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-20 py-3 py-lg-0 me-3" bis_skin_checked="1">
                                 <!--begin::Heading-->
                                 <h1 class="d-flex flex-column text-dark fw-bolder my-1">
-                                    <span class="fs-1">{{ $title }}</span>
+                                    <span class="fs-1">{{ $title = 'Calendario' }}</span>
                                 </h1>
                                 <!--end::Heading-->
                             </div>

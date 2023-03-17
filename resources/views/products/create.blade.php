@@ -11,7 +11,16 @@
             <!--begin::Card-->
             <div class="card card-flush">
 
-                <h2>Agrega el nuevo producto</h2>
+                <div class="row">
+                    <div class="col-">
+                        <h2>Agrega el nuevo producto</h2>
+
+                    </div>
+                    <div class="col-6 pull-rigth">
+                        <a href="" class="btn btn-primary">Volver</a>
+                    </div>
+                </div>
+                
                 <hr>
 
                 {!! Form::open(['route'=>'admin.products.store', 'autocomplete'=>'off', 'files'=>true]) !!}
