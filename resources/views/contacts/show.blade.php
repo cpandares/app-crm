@@ -10,19 +10,18 @@
                             {{--  <div class="image-input-wrapper w-150px h-150px" style="background-image: url('https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png')">
                             </div> --}}
                             <div class="text-center">
-                                @if (!$contact->image)                                    
+                                @if (!$contact->image)
                                     <img width="50%" height="50%" class="rounded-circle"
-                                    src="https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png"
-                                    alt="User profile picture" />
+                                        src="https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png"
+                                        alt="User profile picture" />
                                 @else
                                     <img width="50%" height="50%" class="rounded-circle" style="object-fit: cover"
-                                    src="{{ $contact->image }}"
-                                    alt="User profile picture" />
+                                        src="{{ $contact->image }}" alt="User profile picture" />
                                 @endif
                             </div>
                             <!--end::Preview existing avatar-->
                             <!--begin::Label-->
-                            
+
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                 data-kt-image-input-action="change" data-bs-toggle="tooltip"
                                 title="Cambiar foto de contacto" onchange="changePhoto()">
@@ -33,7 +32,7 @@
                                 <!--end::Inputs-->
                             </label>
 
-                           
+
                         </div>
                     </div>
 
@@ -148,63 +147,52 @@
 
                         <li class="nav-item flex-fill " role="presentation" data-bs-toggle="tooltip" data-bs-placement="top"
                             title="Nuevo">
-                            
-                                <button 
-                                    type="submit"
-                                    onclick="updateStatusNew()"
-                                    class="nav-link  rounded-circle mx-auto d-flex align-items-center justify-content-center {{ ($contact->contact_status == 1) ? 'active' : ''  }}"
-                                    data-bs-toggle="tab" role="tab" aria-controls="step1" aria-selected="true">
-                                    <i class="fas fa-folder-open"></i>
-                                </button>
-                            
+
+                            <button type="submit" onclick="updateStatusNew()"
+                                class="nav-link  rounded-circle mx-auto d-flex align-items-center justify-content-center {{ $contact->contact_status == 1 ? 'active' : '' }}"
+                                data-bs-toggle="tab" role="tab" aria-controls="step1" aria-selected="true">
+                                <i class="fas fa-folder-open"></i>
+                            </button>
+
                             {{-- <a  href="#step1" id="step1-tab" >
                                    
                                 </a> --}}
                         </li>
                         <li class="nav-item flex-fill" role="presentation" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Negociación">  
+                            title="Negociación">
 
-                                <button 
-                                    type="submit"
-                                    onclick="updateStatusNego()"
-                                    class="nav-link  rounded-circle mx-auto d-flex align-items-center justify-content-center {{ ($contact->contact_status == 2) ? 'active' : ''  }}"
-                                    data-bs-toggle="tab" role="tab" aria-controls="step1" aria-selected="true">
-                                    <i class="fas fa-briefcase"></i>
-                                </button>
-                            
+                            <button type="submit" onclick="updateStatusNego()"
+                                class="nav-link  rounded-circle mx-auto d-flex align-items-center justify-content-center {{ $contact->contact_status == 2 ? 'active' : '' }}"
+                                data-bs-toggle="tab" role="tab" aria-controls="step1" aria-selected="true">
+                                <i class="fas fa-briefcase"></i>
+                            </button>
+
                         </li>
-                        <li class="nav-item flex-fill" role="presentation" data-bs-toggle="tooltip"
-                            data-bs-placement="top" title="Presupuesto enviado">
-                            
-                               
-                                
-                               
-                                <button 
-                                    type="submit"
-                                    onclick="updateStatusPresu()"
-                                    class="nav-link  rounded-circle mx-auto d-flex align-items-center justify-content-center {{ ($contact->contact_status == 3) ? 'active' : ''  }} "
-                                    data-bs-toggle="tab" 
-                                    role="tab" 
-                                    aria-controls="step1" 
-                                    aria-selected="true">
-                                    <i class="fas fa-star"></i>
-                                </button>
-                           
+                        <li class="nav-item flex-fill" role="presentation" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Presupuesto enviado">
+
+
+
+
+                            <button type="submit" onclick="updateStatusPresu()"
+                                class="nav-link  rounded-circle mx-auto d-flex align-items-center justify-content-center {{ $contact->contact_status == 3 ? 'active' : '' }} "
+                                data-bs-toggle="tab" role="tab" aria-controls="step1" aria-selected="true">
+                                <i class="fas fa-star"></i>
+                            </button>
+
                         </li>
                         <li class="nav-item flex-fill" role="presentation" data-bs-toggle="tooltip"
                             data-bs-placement="top" title="Cliente">
-                           
-                                
-                               
-                                <input type="hidden" name="id" value="{{ $contact->id }}" id="id_user">
-                                <button 
-                                    type="submit"
-                                    onclick="return updateStatusCli()"
-                                    class="nav-link  rounded-circle mx-auto d-flex align-items-center justify-content-center {{ ($contact->contact_status == 4) ? 'active' : ''  }}"
-                                    data-bs-toggle="tab" role="tab" aria-controls="step1" aria-selected="true">
-                                    <i class="fas fa-flag-checkered"></i>
-                                </button>
-                           
+
+
+
+                            <input type="hidden" name="id" value="{{ $contact->id }}" id="id_user">
+                            <button type="submit" onclick="return updateStatusCli()"
+                                class="nav-link  rounded-circle mx-auto d-flex align-items-center justify-content-center {{ $contact->contact_status == 4 ? 'active' : '' }}"
+                                data-bs-toggle="tab" role="tab" aria-controls="step1" aria-selected="true">
+                                <i class="fas fa-flag-checkered"></i>
+                            </button>
+
                         </li>
                     </ul>
                     {{-- <div class="tab-content" id="myTabContent">
@@ -674,10 +662,11 @@
 
     </div>
 
-    <form action="{{ url('admin/update-photo-contact/' . $contact->id) }}" method="post" style="display: none" id="avatarForm">
-      
+    <form action="{{ url('admin/update-photo-contact/' . $contact->id) }}" method="post" style="display: none"
+        id="avatarForm">
+
         {{ csrf_field() }}
-       
+
     </form>
     </div>
 
@@ -689,53 +678,57 @@
 
 
 @section('script')
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
 
     <script>
+        function changePhoto() {
 
-        function changePhoto(){
-           
             let avatarForm = $('#avatarForm');
 
-            let avatarImage =  $('#avatarInput')[0].files[0];
+            let avatarImage = $('#avatarInput')[0].files[0];
             let id = document.getElementById('id_user').value;
 
             console.log(avatarImage)
             var formData = new FormData();
             formData.append('imagen', avatarImage, 'id', id);
 
-           
-            
+
+
             $.ajax({
-                    type: "POST",
-                    url: avatarForm.attr('action') + '?' + avatarForm.serialize(),
-                    
-                    data: formData,
-                    processData: false,  // tell jQuery not to process the data
-                    contentType: false ,  // tell jQuery not to set contentType
+                type: "POST",
+                url: avatarForm.attr('action') + '?' + avatarForm.serialize(),
 
-                    success: function(res) {
-                        Swal.showloading();
-                        if (res) {
-                           /*  Swal.fire({
-                                title: 'Se actualizo el contacto',
-                                text: "",
-                                icon: 'success',
-                                showCancelButton: false,
-                                confirmButtonColor: '#3085d6'
-                            }); */
-                        }
-                    },
-                    dataType: "json"
-                });
+                data: formData,
+                processData: false, // tell jQuery not to process the data
+                contentType: false, // tell jQuery not to set contentType
 
-                window.location.reload()
+
+                success: function(res) {
+                    if (res) {
+                        Swal.fire({
+                            title: 'Se Actualizo foto',
+                            /* text: "You won't be able to revert this!", */
+                            icon: 'success',
+                            showCancelButton: false,
+                            
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.reload()
+                            }
+                        })
+                    }
+                },
+                dataType: "json"
+            });
+
+           
         }
 
 
         function updateStatusNew() {
-           
+
             let reference = 1;
             let id = document.getElementById('id_user').value;
             $.ajax({
@@ -758,88 +751,90 @@
                     }
                 },
                 dataType: "json"
-               
+
             });
         }
-        function updateStatusNego() {
-           
-           let reference = 2;
-           let id = document.getElementById('id_user').value;
-           $.ajax({
-               type: "PUT",
-               url: "{{ asset('') . 'admin/update-status-contact' }}",
-               data: {
-                   "_token": "{{ csrf_token() }}",
-                   reference,
-                   id
-               },
-               success: function(res) {
-                   if (res) {
-                       Swal.fire({
-                           title: 'Se actualizo el contacto',
-                           text: "",
-                           icon: 'success',
-                           showCancelButton: false,
-                           confirmButtonColor: '#3085d6'
-                       });
-                   }
-               },
-               dataType: "json"
-           });
-       }
-       function updateStatusPresu() {
-           
-           let reference = 3;
-           let id = document.getElementById('id_user').value;
-           $.ajax({
-               type: "PUT",
-               url: "{{ asset('') . 'admin/update-status-contact' }}",
-               data: {
-                   "_token": "{{ csrf_token() }}",
-                   reference,
-                   id
-               },
-               success: function(res) {
-                   if (res) {
-                       Swal.fire({
-                           title: 'Se actualizo el contacto',
-                           text: "",
-                           icon: 'success',
-                           showCancelButton: false,
-                           confirmButtonColor: '#3085d6'
-                       });
-                   }
-               },
-               dataType: "json"
-           });
-       }
 
-       function updateStatusCli() {
-           
-           let reference = 4;
-           let id = document.getElementById('id_user').value;
-           $.ajax({
-               type: "PUT",
-               url: "{{ asset('') . 'admin/update-status-contact' }}",
-               data: {
-                   "_token": "{{ csrf_token() }}",
-                   reference,
-                   id
-               },
-               success: function(res) {
-                   if (res) {
-                       Swal.fire({
-                           title: 'Se actualizo el contacto',
-                           text: "",
-                           icon: 'success',
-                           showCancelButton: false,
-                           confirmButtonColor: '#3085d6'
-                       });
-                   }
-               },
-               dataType: "json"
-           });
-       }
+        function updateStatusNego() {
+
+            let reference = 2;
+            let id = document.getElementById('id_user').value;
+            $.ajax({
+                type: "PUT",
+                url: "{{ asset('') . 'admin/update-status-contact' }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    reference,
+                    id
+                },
+                success: function(res) {
+                    if (res) {
+                        Swal.fire({
+                            title: 'Se actualizo el contacto',
+                            text: "",
+                            icon: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6'
+                        });
+                    }
+                },
+                dataType: "json"
+            });
+        }
+
+        function updateStatusPresu() {
+
+            let reference = 3;
+            let id = document.getElementById('id_user').value;
+            $.ajax({
+                type: "PUT",
+                url: "{{ asset('') . 'admin/update-status-contact' }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    reference,
+                    id
+                },
+                success: function(res) {
+                    if (res) {
+                        Swal.fire({
+                            title: 'Se actualizo el contacto',
+                            text: "",
+                            icon: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6'
+                        });
+                    }
+                },
+                dataType: "json"
+            });
+        }
+
+        function updateStatusCli() {
+
+            let reference = 4;
+            let id = document.getElementById('id_user').value;
+            $.ajax({
+                type: "PUT",
+                url: "{{ asset('') . 'admin/update-status-contact' }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    reference,
+                    id
+                },
+                success: function(res) {
+                    if (res) {
+                        Swal.fire({
+                            title: 'Se actualizo el contacto',
+                            text: "",
+                            icon: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6'
+                        });
+                    }
+                },
+                dataType: "json"
+            });
+        }
 
 
         listar(1)
@@ -889,7 +884,7 @@
             $.ajax({
                 url: url + '?page=' + page,
             }).done((data) => {
-               
+
                 $('#tablaPresupuestos').html(data)
             }).fail((jqXHR, ajaxOptions, thrownError) => {
                 console.log(thrownError)
