@@ -32,6 +32,8 @@
                 <div class="row">
                     <div class="col-12">
                        
+                        
+
                         <button 
                             class="btn btn-primary float-right mb-3 btn-sm"  
                             data-toggle="modal" 
@@ -50,6 +52,9 @@
                         <a href="{{ route('admin.campaings.index') }}" class="btn btn-primary float-right btn-sm mr-1">
                            < Ir a Campañas
                         </a>
+                        <a href="{{ route('admin.campaings.show', $campaing->id) }}" class="btn btn-primary float-right btn-sm mr-1">
+                            Limpiar Filtro
+                         </a>
                     </div>
                 </div>
 
