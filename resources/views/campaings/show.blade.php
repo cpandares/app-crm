@@ -213,7 +213,7 @@
                                             name="lastname" 
                                             id="lastname" 
                                            {{--  onfocusout="buscar('documento')"  --}}
-                                            onchange="buscar('lastname')" 
+                                            onchange="buscar('lastnamea')" 
                                             class="form-control" 
                                             >
                                     </th>
@@ -224,7 +224,7 @@
                                             name="email" 
                                             id="email" 
                                            {{--  onfocusout="buscar('documento')"  --}}
-                                            onchange="buscar('email')" 
+                                            onchange="buscar('emaila')" 
                                             class="form-control" 
                                             >
                                     </th>
