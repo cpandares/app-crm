@@ -162,7 +162,7 @@ class ProductoController extends Controller
 
     public function listarClientesApi(){
 
-        $title = "Productos Api";
+        $title = "Pedidos Api";
 
         return view('api.pedidos.index',[
             'title' => $title
