@@ -19,7 +19,8 @@
 <script src="{{ asset('js/custom/modals/upgrade-plan.js') }}"></script>
 <script src="{{ asset('js/custom/modals/users-search.js') }}"></script>
 
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      
 <script src="{{ asset('inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -37,6 +38,44 @@
 <script>
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
+
+        
+        $('.formDelete').submit(function(e) {
+                e.preventDefault();
+                let form = event.target;
+                Swal.fire({
+                    title: 'Seguro desea eliminar esta campaña?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Continuar'
+                }).then((result) => {
+                    if (result.value) {
+                        this.submit();
+                    }
+                });
+            })
+
+            $('.formDeleteContact').submit(function(e) {
+                e.preventDefault();
+                let form = event.target;
+                Swal.fire({
+                    title: 'Seguro desea eliminar este contacto?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Continuar'
+                }).then((result) => {
+                    if (result.value) {
+                        this.submit();
+                    }
+                });
+            })
+        
     });
     /* const items = document.querySelectorAll('.card__item')
     const columns = document.querySelectorAll('.column') */

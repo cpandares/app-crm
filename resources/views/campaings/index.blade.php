@@ -100,7 +100,7 @@
                                                 {!! Form::select('name', $campaings, $name, [
                                                     'id' => 'name',
                                                     'class' => 'form-control text-gray-400
-                                                                                            js-example-basic-single',
+                                                                                                                                            js-example-basic-single',
                                                     'placeholder' => 'Seleccionar',
                                                     'onchange' => "buscar('name')",
                                                 ]) !!}
@@ -114,7 +114,7 @@
                                                 {!! Form::select('country', $paises, $country, [
                                                     'id' => 'country',
                                                     'class' => 'form-control text-gray-400
-                                                                                            js-example-basic-single',
+                                                                                                                                            js-example-basic-single',
                                                     'placeholder' => 'Seleccionar',
                                                     'onchange' => "buscar('country')",
                                                 ]) !!}
@@ -169,40 +169,111 @@
                                         --}}
 
                                                 <td class="text-end">
-                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary"
-                                                        data-kt-menu-trigger="click"
-                                                        data-kt-menu-placement="bottom-end">Acciones
-                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                                        <span class="svg-icon svg-icon-5 m-0">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path
-                                                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                                    fill="black"></path>
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
-                                                    </a>
+
                                                     <!--begin::Menu-->
-                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-primary fw-bold fs-7 w-125px py-4"
-                                                        data-kt-menu="true" bis_skin_checked="1">
-                                                        <!--begin::Menu item-->
-                                                        <div class="menu-item px-3" bis_skin_checked="1">
-                                                            <a href="{{ route('admin.campaings.show', $item) }}"
-                                                                class="menu-link px-3">Ver</a>
-                                                        </div>
-                                                        <!--end::Menu item-->
-                                                        <!--begin::Menu item-->
-                                                        <div class="menu-item px-3" bis_skin_checked="1">
-                                                            <a class="menu-link px-3"
-                                                                data-kt-customer-table-filter="delete_row">Borrar</a>
-                                                        </div>
-                                                        <!--end::Menu item-->
-                                                    </div>
+
                                                     <!--end::Menu-->
+                                                    <a href="{{ route('admin.campaings.show', $item) }}"
+                                                        class="text-white"><i class="fas fa-eye"></i></a>
+
+                                                    <a style="cursor: pointer" data-toggle="modal"
+                                                        data-target="#exampleModal<?= $item->id ?>">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <form method="post"
+                                                        action="{{ route('admin.campaings.destroy', $item) }}"
+                                                        class="formDelete">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button  type="submit" id="logout_button">
+                                                            <i class="fas fa-trash"></i>
+                                                            
+                                                        </button>
+                                                    </form>
                                                 </td>
 
                                             </tr>
+                                            <div class="modal fade" id="exampleModal<?= $item->id ?>" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar campaña: 
+                                                                {{ $item->campaing_name }}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            {!! Form::model($item, [
+                                                                'route' => ['admin.campaings.update', $item],
+                                                                'autocomplete' => 'off',
+                                                                'files' => true,
+                                                                'method' => 'put',
+                                                            ]) !!}
+
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    {!! Form::label('campaing_name', 'Nombre') !!}
+                                                                    {!! Form::text('campaing_name', $item->campaing_name, [
+                                                                        'class' => 'form-control',
+                                                                        'placeholder' => 'Feria España',
+                                                                    ]) !!}
+                                                                    <br>
+                                                                </div>
+                                                                <div class="col-6">
+
+                                                                    {!! Form::label('country', 'Pais') !!}
+                                                                    {!! Form::select('country', $paises, $item->country, [
+                                                                        'class' => 'form-control
+                                                                                                                                                                    ',
+                                                                        'placeholder' => 'Seleccionar',
+                                                                    ]) !!}
+                                                                    <br>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    {!! Form::label('city', 'Ciudad') !!}
+                                                                    {!! Form::text('city', $item->city, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
+                                                                    <br>
+
+                                                                </div>
+                                                                <div class="col-6">
+
+                                                                    {!! Form::label('init_date', 'Fecha de inicio') !!}
+                                                                    {!! Form::date('init_date', $item->init_date, ['class' => 'form-control']) !!}
+                                                                    <br>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-6">
+
+                                                                    {!! Form::label('end_date', 'Fecha finalización') !!}
+                                                                    {!! Form::date('end_date', $item->end_date, ['class' => 'form-control']) !!}
+                                                                    <br>
+                                                                </div>
+                                                                <div class="col-6">
+
+                                                                    {!! Form::label('status', 'Estado de la campaña') !!}
+                                                                    {!! Form::select(
+                                                                        'status',
+                                                                        ['1' => 'Activa', '2' => 'Inactiva', '3' => 'Cancelada', '4' => 'Empieza proximamente', '5' => 'Por confimar'],
+                                                                        $item->status,
+                                                                        ['class' => 'form-control', 'placeholder' => 'Seleccionar'],
+                                                                    ) !!}
+                                                                    <br>
+                                                                </div>
+                                                            </div>
+                                                            {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-5']) !!}
+                                                            {!! Form::close() !!}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
 
                                     </tbody>
@@ -272,7 +343,7 @@
                                     {!! Form::label('country', 'Pais') !!}
                                     {!! Form::select('country', $paises, null, [
                                         'class' => 'form-control
-                                                                    ',
+                                                                                                        ',
                                         'placeholder' => 'Seleccionar',
                                     ]) !!}
                                     <br>
@@ -323,39 +394,41 @@
             </div>
         </div>
     </div>
-    
-        @endsection
+@endsection
 
 
-        @section('script')
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $('.js-example-basic-single').select2();
-                });
-
-                function buscar(tipo) {
-
-                    $('#accion').val(1);
-                    var textoSelect = $('#' + tipo).val();
-                    const ENTER_KEY_CODE = 13;
-
-                    switch (tipo) {
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
 
 
-                        case 'city':
-                            document.querySelector('#city').addEventListener('keyup', function(e) {
-                                if (e.keyCode === ENTER_KEY_CODE) {
-                                    document.getElementById("frmFiltros").submit();
-                                }
-                            });
-                            break;
+          
+        });
+
+        function buscar(tipo) {
+
+            $('#accion').val(1);
+            var textoSelect = $('#' + tipo).val();
+            const ENTER_KEY_CODE = 13;
+
+            switch (tipo) {
 
 
-                        default:
+                case 'city':
+                    document.querySelector('#city').addEventListener('keyup', function(e) {
+                        if (e.keyCode === ENTER_KEY_CODE) {
                             document.getElementById("frmFiltros").submit();
-                            break;
-                    }
+                        }
+                    });
+                    break;
 
-                }
-            </script>
-        @endsection
+
+                default:
+                    document.getElementById("frmFiltros").submit();
+                    break;
+            }
+
+        }
+    </script>
+@endsection

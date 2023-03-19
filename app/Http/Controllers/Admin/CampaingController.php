@@ -479,13 +479,22 @@ class CampaingController extends Controller
      */
     public function update(Request $request, Campaing $campaing)
     {
-
+        /* dd($request->all()); */
         try {
             //code...
-            $campaing->update($request->all());
-            return redirect()->route('admin.campaings.show', $campaing);
-        } catch (\Throwable $th) {
-            //throw $th;
+            /* $campaing->update($request->all()); */
+            $campaing->campaing_name = $request->campaing_name;
+            $campaing->city = $request->city;
+            $campaing->country = $request->country;
+            $campaing->init_date = Carbon::parse($request->init_date);
+            $campaing->end_date = Carbon::parse($request->end_date);
+            $campaing->status = $request->status;
+            $campaing->update();
+            Alert::success('Campaña actualizada');
+            return redirect()->back();
+        } catch (\PDOException $th) {
+            Alert::success('Error al actualizar campaña');
+            return redirect()->back();
         }
     }
 

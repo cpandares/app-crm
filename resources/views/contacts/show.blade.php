@@ -9,15 +9,16 @@
                             <!--begin::Preview existing avatar-->
                             {{--  <div class="image-input-wrapper w-150px h-150px" style="background-image: url('https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png')">
                             </div> --}}
-                            <div class="text-center">
+                            <div class="text-center image-input image-input-empty image-input-outline mb-3">
                                 @if (!$contact->image)
                                     <img width="50%" height="50%" class="rounded-circle"
                                         src="https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png"
                                         alt="User profile picture" />
                                 @else
-                                    <img width="50%" height="50%" class="rounded-circle" style="object-fit: cover"
+                                    <img width="50%" height="50%" class="image-input-wrapper w-150px h-150px" style="object-fit: cover"
                                         src="{{ $contact->image }}" alt="User profile picture" />
                                 @endif
+                             
                             </div>
                             <!--end::Preview existing avatar-->
                             <!--begin::Label-->
@@ -116,24 +117,132 @@
                     <strong><i class="fa fa-envelope mr-1"></i> Se contactó mediante: </strong>
                     {{-- @dump($contact->comunication_medium) --}}
                     @if ($contact->comunication_medium == 1)
-                        <span class="badge badge-primary pull-rigth">Télefonica</span>
-                    @elseif($contact->comunication_medium == 2)
                         <span class="badge badge-primary pull-rigth">Email</span>
-                    @elseif($contact->comunication_medium == 3)
+                    @elseif($contact->comunication_medium == 2)
                         <span class="badge badge-primary pull-rigth">Skype</span>
+                    @elseif($contact->comunication_medium == 3)
+                        <span class="badge badge-primary pull-rigth">Telefonica</span>
                     @elseif($contact->comunication_medium == 4)
-                        <span class="badge badge-primary pull-rigth">Whatsapp</span>
-                    @elseif($contact->comunication_medium == 5)
                         <span class="badge badge-primary pull-rigth">Facebook</span>
+                    @elseif($contact->comunication_medium == 5)
+                        <span class="badge badge-primary pull-rigth">Whatsapp</span>
                     @endif
                     <hr />
 
 
                 </div>
                 <!-- /.card-body -->
-                <a class="btn btn-primary btn-block"><b>Actualizar</b></a>
+                <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal<?= $contact->id ?>"><b>Actualizar</b></button>
+
                 <a href="{{ route('admin.contact.index') }}" class="btn btn-primary btn-block"><b>Volver a
                         Lista</b></a>
+            </div>
+            <div class="modal fade" id="exampleModal<?= $contact->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Actualizar {{ $contact->name }}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::model($contact,['route'=>['admin.contact.update', $contact], 'autocomplete'=>'off', 'files'=>true, 'method'=>'put']) !!}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                              
+                                {!! Form::label('name', 'Nombre') !!}
+                                {!! Form::text('name', $contact->name, ['class'=>'form-control','placeholder'=>'Pedro', ]) !!}
+                                @error('name')
+                                    <small class="text-danger">Este campo es requerido</small>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                               
+                                {!! Form::label('lastname', 'Apellido') !!}
+                                {!! Form::text('lastname', $contact->lastname, ['class'=>'form-control','placeholder'=>'Perez', ]) !!}
+                                @error('lastname')
+                                    <small class="text-danger">Este campo es requerido</small>
+                                @enderror
+                            </div>
+                        </div>
+        
+                        <div class="row  mt-2">
+                            <div class="col-md-6">
+                                {!! Form::label('phone', 'Telefono') !!}
+                                {!! Form::text('phone', $contact->phone, ['class'=>'form-control','placeholder'=>'+34 455487895', ]) !!}
+                            </div>
+                            <div class="col-md-6">
+                               
+                                {!! Form::label('email', 'Email') !!}
+                                {!! Form::email('email', $contact->email, ['class'=>'form-control','placeholder'=>'test@prueba.com', ]) !!}
+                                @error('email')
+                                    <small class="text-danger">Este campo es requerido</small>
+                                @enderror
+                            </div>
+                        </div>
+        
+                        <div class="row  mt-2">
+                            <div class="col-md-6">
+                                {!! Form::label('postcode', 'Código Postal') !!}
+                                {!! Form::text('postcode', $contact->postcode, ['class'=>'form-control','placeholder'=>'65656', ]) !!}
+                            </div>
+                            <div class="col-md-6">
+                              
+                                {!! Form::label('country', 'País') !!}
+                                {!! Form::select('country', $paises, $contact->country, ['class'=>'form-control','placeholder'=>'---', ]) !!}
+                                @error('country')
+                                    <small class="text-danger">Este campo es requerido</small>
+                                @enderror
+                            </div>
+                        </div>
+        
+                        <div class="row  mt-2">
+                            <div class="col-md-6">
+                                {!! Form::label('city', 'Ciudad') !!}
+                                {!! Form::text('city', $contact->city, ['class'=>'form-control','placeholder'=>'Barcelona', ]) !!}
+                            </div>
+                          {{--   <div class="col-md-6">
+                                {!! Form::label('state', 'Provincia (opcional)') !!}
+                                {!! Form::text('state', null, ['class'=>'form-control','placeholder'=>'', ]) !!}
+                            </div> --}}
+                        </div>
+        
+                        <div class="row  mt-2">
+                            <div class="col-md-6">
+                             
+                                {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
+                                {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                {!! Form::select('medio_comunicacion',$comunicacion_medias, $contact->comunication_medium,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+        
+                                @error('medio_comunicacion')
+                                    <small class="text-danger">Este campo es requerido</small>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                               
+                                {!! Form::label('medio_comunicacion', 'Estado del Cliente') !!}
+                                {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                {!! Form::select('statu',$status, $contact->contact_status,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+        
+                                @error('statu')
+                                    <small class="text-danger">Este campo es requerido</small>
+                                @enderror
+                                
+                            </div>
+                        </div>
+        
+                        <div class="mt-5">
+        
+                            {!! Form::submit('Guardar', ['class'=>'btn btn-primary ']) !!}
+                            
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
+                   
+                  </div>
+                </div>
             </div>
             <!-- /.card -->
         </div>
@@ -708,7 +817,7 @@
                     if (res) {
                         Swal.fire({
                             title: 'Se Actualizo foto',
-                            /* text: "You won't be able to revert this!", */
+                           
                             icon: 'success',
                             showCancelButton: false,
                             
@@ -742,12 +851,17 @@
                 success: function(res) {
                     if (res) {
                         Swal.fire({
-                            title: 'Se actualizo el contacto',
-                            text: "",
+                            title: 'Se Actualizo contacto',
+                           
                             icon: 'success',
                             showCancelButton: false,
-                            confirmButtonColor: '#3085d6'
-                        });
+                            
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.reload()
+                            }
+                        })
                     }
                 },
                 dataType: "json"
@@ -770,12 +884,17 @@
                 success: function(res) {
                     if (res) {
                         Swal.fire({
-                            title: 'Se actualizo el contacto',
-                            text: "",
+                            title: 'Se Actualizo contacto',
+                           
                             icon: 'success',
                             showCancelButton: false,
-                            confirmButtonColor: '#3085d6'
-                        });
+                            
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.reload()
+                            }
+                        })
                     }
                 },
                 dataType: "json"
@@ -797,12 +916,17 @@
                 success: function(res) {
                     if (res) {
                         Swal.fire({
-                            title: 'Se actualizo el contacto',
-                            text: "",
+                            title: 'Se Actualizo contacto',
+                           
                             icon: 'success',
                             showCancelButton: false,
-                            confirmButtonColor: '#3085d6'
-                        });
+                            
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.reload()
+                            }
+                        })
                     }
                 },
                 dataType: "json"

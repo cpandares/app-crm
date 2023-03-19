@@ -78,7 +78,7 @@ class ContactsController extends Controller
         $user_id = auth()->user()->id;
         $controlador = new ContactsController();
         $contacts = DB::table('contacts')->where('user_id', $user_id)
-            ->select('contacts.id', 'contacts.name','contacts.contact_status', 'contacts.lastname', 'contacts.email', 'contacts.created_at', 'campaing.campaing_name')
+            ->select('contacts.id', 'contacts.name','contacts.contact_status', 'contacts.lastname', 'contacts.email', 'contacts.created_at', 'campaing.campaing_name', 'contacts.phone', 'contacts.postcode', 'contacts.country', 'contacts.city','contacts.comunication_medium')
             ->leftJoin('campaing', 'campaing.contact_id', '=', 'contacts.id')
             ->orderByDesc('contacts.id');
             /* ->select('contacts.*','campaing.*') */
@@ -145,8 +145,8 @@ class ContactsController extends Controller
             "España"=>"España",
             "Francia"=>"Francia",
             "Italia"=>"Italia",
-            "__________"=>"_____________",
             "Portugal"=>"Portugal",
+            "__________"=>"_____________",
             "Afganistán"=>"Afganistán",
             "Albania"=>"Albania",
             "Andorra"=>"Andorra",
@@ -347,6 +347,30 @@ class ContactsController extends Controller
     }
 
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Contact $contact)
+    {
+        //
+        if(!$contact){
+            Alert::error('Contacto no econtrado');
+            return redirect()->back();
+        }
+        try {
+            //code...
+            $contact->delete();
+            Alert::success('Contacto eliminado con exito');
+            return redirect()->back();
+        } catch (\PDOException $th) {
+            //throw $th;
+            Alert::success('Contacto no eliminado, contacto con soporte');
+            return redirect()->back();
+        }
+    }
 
     public function store(Request $request)
     {
@@ -418,7 +442,7 @@ class ContactsController extends Controller
         $comunicaciones = Comunicacion::where('user_created_for', $contact->id)->orderByDesc('id')->paginate(20);
         $notes = Note::where('user_created_for', $contact->id)->orderByDesc('id')->paginate(20);
         $campaings = Campaing::where('created_user', $user_id)->pluck('campaing_name','id');
-
+        $status = ContactStatus::pluck('status_name', 'id');
         $contactsCapaings = DB::table('campaing')
                            /*  ->select('campaing.campaing_name', 'campaing.id','campaing.init_date','campaing.country') */
                            ->leftJoin('contact_campaings', 'contact_campaings.camaping_id','=','campaing.id' )
@@ -434,7 +458,9 @@ class ContactsController extends Controller
             'notes' => $notes,
             'campaings'=>$campaings,
             'contactsCapaings' =>$contactsCapaings,
-            'title' => $title
+            'title' => $title,
+            'paises' => $this->getPaises(),
+            'status' =>$status
         ]);
     }
 
@@ -449,11 +475,23 @@ class ContactsController extends Controller
 
         try {
             //code...
-            $contact->update($request->all());
-            return redirect()->route('admin.contact.show', $contact);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return redirect()->route('admin.contacts.index')->with(['message' => 'Contacto no actualizado']);
+           /*  dd($request->all()); */
+            /* $contact->update($request->all()); */
+            $contact->name = $request->name;
+            $contact->lastname = $request->lastname;
+            $contact->country = $request->country;
+            $contact->city = $request->city;
+            $contact->phone = $request->phone;
+            $contact->postcode = $request->postcode;
+            $status = ContactStatus::where('id', (int) $request->contact_status)->first();
+            
+            $contact->contact_status = $status->id;
+            $contact->update();
+            Alert::success('Contacto actualizado');
+            return redirect()->back();
+        } catch (\PDOException $th) {
+            return $th->getMessage();
+            return redirect()->back();
         }
     }
 

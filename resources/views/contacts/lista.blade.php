@@ -311,56 +311,147 @@
                                                     @if ($item->contact_status == 1)
                                                         <span class="badge badge-primary pull-rigth">Nuevo</span>
                                                     @elseif($item->contact_status == 2)
-                                                        <span class="badge badge-light-primary pull-rigth">No
-                                                            interesado</span>
+                                                        <span class="badge badge-light-primary pull-rigth">En Negociacion</span>
                                                     @elseif($item->contact_status == 3)
                                                         <span class="badge badge-light-primary pull-rigth">Presupuesto
                                                             Enviado</span>
                                                     @elseif($item->contact_status == 4)
                                                         <span class="badge badge-primary pull-rigth">Cliente</span>
                                                     @elseif($item->contact_status == 5)
-                                                        <span class="badge badge-light-primary pull-rigth">En
-                                                            Negociación</span>
+                                                        <span class="badge badge-light-primary pull-rigth">Renegociando</span>
                                                     @else
-                                                        <span class="badge badge-primary pull-rigth">Renegociando</span>
+                                                        <span class="badge badge-primary pull-rigth">No interesado</span>
                                                     @endif
                                                 </td>
 
                                                 <td class="text-end">
-                                                    <a href="#"
-                                                        class="btn btn-sm btn-light btn-active-light-primary"
-                                                        data-kt-menu-trigger="click"
-                                                        data-kt-menu-placement="bottom-end">Acciones
-                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                                        <span class="svg-icon svg-icon-5 m-0">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path
-                                                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                                    fill="black"></path>
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
+                                                    <a href="{{ route('admin.contact.show', $item->id) }}"
+                                                        class="text-white"><i class="fas fa-eye"></i></a>
+
+                                                    <a style="cursor: pointer" data-toggle="modal"
+                                                        data-target="#exampleModal<?= $item->id ?>">
+                                                        <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <!--begin::Menu-->
-                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                                        data-kt-menu="true" bis_skin_checked="1">
-                                                        <!--begin::Menu item-->
-                                                        <div class="menu-item px-3" bis_skin_checked="1">
-                                                            <a href="" class="menu-link px-3">Ver</a>
-                                                        </div>
-                                                        <!--end::Menu item-->
-                                                        <!--begin::Menu item-->
-                                                        <div class="menu-item px-3" bis_skin_checked="1">
-                                                            <a class="menu-link px-3"
-                                                                data-kt-customer-table-filter="delete_row">Borrar</a>
-                                                        </div>
-                                                        <!--end::Menu item-->
-                                                    </div>
-                                                    <!--end::Menu-->
+                                                    <form method="post"
+                                                        action="{{ route('admin.contact.destroy', $item->id) }}"
+                                                        class="formDeleteContact">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button  type="submit" id="logout_button">
+                                                            <i class="fas fa-trash"></i>
+                                                            
+                                                        </button>
+                                                    </form>
                                                 </td>
 
                                             </tr>
+                                            <div class="modal fade" id="exampleModal<?= $item->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Actualizar Contacto</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {!! Form::model($item,['route'=>['admin.contact.update', $item->id], 'autocomplete'=>'off', 'files'=>true, 'method'=>'put']) !!}
+                                
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                              
+                                                                {!! Form::label('name', 'Nombre') !!}
+                                                                {!! Form::text('name', $item->name, ['class'=>'form-control','placeholder'=>'Pedro', ]) !!}
+                                                                @error('name')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                               
+                                                                {!! Form::label('lastname', 'Apellido') !!}
+                                                                {!! Form::text('lastname', $item->lastname, ['class'=>'form-control','placeholder'=>'Perez', ]) !!}
+                                                                @error('lastname')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                        
+                                                        <div class="row  mt-2">
+                                                            <div class="col-md-6">
+                                                                {!! Form::label('phone', 'Telefono') !!}
+                                                                {!! Form::text('phone', isset($item->phone) ? $item->phone : null, ['class'=>'form-control','placeholder'=>'+34 455487895', ]) !!}
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                               
+                                                                {!! Form::label('email', 'Email') !!}
+                                                                {!! Form::email('email', isset($item->email) ? $item->email :null, ['class'=>'form-control','placeholder'=>'test@prueba.com', ]) !!}
+                                                                @error('email')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                        
+                                                        <div class="row  mt-2">
+                                                            <div class="col-md-6">
+                                                                {!! Form::label('postcode', 'Código Postal') !!}
+                                                                {!! Form::text('postcode', isset($item->postcode) ? $item->postcode : null, ['class'=>'form-control','placeholder'=>'65656', ]) !!}
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                              
+                                                                {!! Form::label('country', 'País') !!}
+                                                                {!! Form::select('country', $paises, isset($item->country) ? $item->country : null, ['class'=>'form-control','placeholder'=>'---', ]) !!}
+                                                                @error('country')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                        
+                                                        <div class="row  mt-2">
+                                                            <div class="col-md-6">
+                                                                {!! Form::label('city', 'Ciudad') !!}
+                                                                {!! Form::text('city', isset($item->city) ? $item->city : null, ['class'=>'form-control','placeholder'=>'Barcelona', ]) !!}
+                                                            </div>
+                                                          {{--   <div class="col-md-6">
+                                                                {!! Form::label('state', 'Provincia (opcional)') !!}
+                                                                {!! Form::text('state', null, ['class'=>'form-control','placeholder'=>'', ]) !!}
+                                                            </div> --}}
+                                                        </div>
+                                        
+                                                        <div class="row  mt-2">
+                                                            <div class="col-md-6">
+                                                             
+                                                                {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
+                                                                {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                                {!! Form::select('medio_comunicacion',$comunicacion_medias, isset($item->comunication_medium) ? $item->comunication_medium : null,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+                                        
+                                                                @error('medio_comunicacion')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                               
+                                                                {!! Form::label('contact_status', 'Estado del Cliente') !!}
+                                                                {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                                {!! Form::select('contact_status',$status, $item->contact_status,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+                                        
+                                                                @error('statu')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                                
+                                                            </div>
+                                                        </div>
+                                        
+                                                        <div class="mt-5">
+                                        
+                                                            {!! Form::submit('Guardar', ['class'=>'btn btn-primary ']) !!}
+                                                            
+                                                        </div>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                   
+                                                  </div>
+                                                </div>
+                                            </div>
                                         @endforeach
 
                                     </tbody>
@@ -404,43 +495,7 @@
 
             </div>
 
-            {{--  <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class=" modal-dialog modal-dialog-centered mw-650px">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Nueva Campaña</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    {!! Form::open(['route'=>'admin.campaings.store', 'autocomplete'=>'off', 'files'=>true]) !!}
-
-                    {!! Form::label('name', 'Nombre') !!}
-                    {!! Form::text('name', null, ['class'=>'form-control','placeholder'=>'Feria España', ]) !!}
-                        <br>
-                    {!! Form::label('country', 'Pais') !!}           
-                    {!! Form::select('country',$paises, null,['class'=>'form-control ','placeholder'=>'Seleccionar']) !!}
-                    <br>
-                    {!! Form::label('ciudad', 'Ciudad') !!}           
-                    {!! Form::text('ciudad', null, ['class'=>'form-control','placeholder'=>'Barcelona', ]) !!}
-                    <br>
-                    {!! Form::label('date', 'Fecha y hora de inicio') !!}           
-                    {!! Form::datetimelocal('date', null, ['class'=>'form-control' ]) !!}
-                    <br>
-                    {!! Form::label('status', 'Estado de la campaña') !!}
-                    {!! Form::select('status',['1'=>'Activa', '2'=>'Inactiva', '3'=>'Cancelada','4' => 'Empieza proximamente', '5'=>'Por confimar'], null,['class'=>'form-control','placeholder'=>'Seleccionar']) !!}
-                    <br>
-                    {!! Form::submit('Guardar', ['class'=>'btn btn-primary mt-5']) !!}
-                    {!! Form::close() !!}
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                  
-                </div>
-              </div>
-            </div>
-        </div> --}}
+        
         @endsection
 
         @section('script')

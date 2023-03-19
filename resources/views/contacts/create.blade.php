@@ -108,9 +108,6 @@
                     </div>
                 </div>
 
-
-              
-
                 <div class="mt-5">
 
                     {!! Form::submit('Guardar', ['class'=>'btn btn-outline-primary ']) !!}

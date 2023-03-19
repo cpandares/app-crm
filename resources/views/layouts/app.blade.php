@@ -20,7 +20,7 @@
         border: none
     }
     #logout_button :hover{
-        background: #3f4254;
+        background: none;
         width: 100%;
         border: none
     }
