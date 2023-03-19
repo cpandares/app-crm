@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\NoteController;
 use App\Http\Controllers\Admin\ProductoController;
 use App\Http\Controllers\Admin\BudgetController;
 use App\Http\Controllers\Admin\ComunicacionController;
+use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
 
 
@@ -45,3 +46,5 @@ Route::get('productos-api', [ProductoController::class, 'listarClientesApi'])->n
 Route::get('calendario', [CampaingController::class, 'calendario'])->name('admin.calendario.index');
 
 Route::get('campaing-ajax', [CampaingController::class, 'ajaxCampaing'])->name('ajax-campaing');
+
+Route::resource('usuarios', User::class)->names('admin.usuarios');

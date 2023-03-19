@@ -553,7 +553,7 @@ class ContactsController extends Controller
       
         if ($imagen){
             $ruta = "blog-laravel";
-         /*    Alert::showloading('Espere...'); */
+        
             $response = cloudinary()->upload($request->file('imagen')->getRealPath(), array("folder" => $ruta))->getSecurepath();
           
         }  
