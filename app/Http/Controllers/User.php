@@ -113,10 +113,10 @@ class User extends Controller
                 }  
                
             }
-
+           /*  dd($request->password); */
             $user->name = $request->name;
             $user->email= $request->email;
-            $user->password =  isset($request->password) ?  Hash::make($request->password) : $user->password;
+            $user->password =  isset($request->password) ? Hash::make($request->password) : $user->password;
             $user->image = isset($imagen) ? $response : $user->image;
             $user->update();
             Alert::success('Perfil actualizado con éxito');

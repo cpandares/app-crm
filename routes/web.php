@@ -24,7 +24,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
 Route::get('/clientes', [ContactsController::class, 'index']);
 
-Route::middleware([
+
+Route::get("loginForm", [\App\Http\Controllers\Auth\AuthController::class, 'loginForm'])->name('loginForm');
+Route::post("login", [\App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login');
+Route::get("logout", [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
+
+/* Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
@@ -32,6 +37,6 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-});
+}); */
 
 

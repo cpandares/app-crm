@@ -86,7 +86,8 @@ License: For each use you must have a valid license purchased only from above li
                             <div class="text-center mb-10">
                                 <!--begin::Title-->
                                 <h1 class="text-dark mb-3">Bienvenido</h1>
-                                @if (count($errors) > 0)
+                               {{--  @dump(session('message')) --}}
+                                @if(session('message'))
                                 <p class="text-danger">Usuario o Contraseña no validos</p>
                                 @else
                                 <h4 class="text-dark mb-3">Inicia Sesión</h4>

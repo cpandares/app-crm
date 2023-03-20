@@ -189,7 +189,7 @@
                          
                             {!! Form::label('password', 'Contraseña') !!}
                            
-                            <input type="password" name="passowrd" class="form-control" placeholder="*******">
+                            <input type="password" name="password" class="form-control" placeholder="*******">
                         </div>
                     </div>
     
