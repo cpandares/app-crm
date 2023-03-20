@@ -46,13 +46,13 @@ var KTAppCalendar = (function () {
                 placement: "auto",
                 dismiss: !0,
                 html: !0,
-                title: "Event Summary",
+                title: "Resumen del evento",
                 content:
                     '<div class="fw-bolder mb-2">' +
                     x.eventName +
-                    '</div><div class="fs-7"><span class="fw-bold">Start:</span> ' +
+                    '</div><div class="fs-7"><span class="fw-bold">Empieza:</span> ' +
                     n +
-                    '</div><div class="fs-7 mb-4"><span class="fw-bold">End:</span> ' +
+                    '</div><div class="fs-7 mb-4"><span class="fw-bold">Termina:</span> ' +
                     a +
                     '</div><div id="kt_calendar_event_view_button" type="button" class="btn btn-sm btn-light-primary">View More</div>',
             };
@@ -62,7 +62,7 @@ var KTAppCalendar = (function () {
             B && (t.dispose(), (B = !1));
         },
         N = () => {
-            (f.innerText = "Add a New Event"), v.show();
+            (f.innerText = "Crea un evento nuevo"), v.show();
             const t = p.querySelectorAll('[data-kt-calendar="datepicker"]'),
                 r = p.querySelector("#kt_calendar_datepicker_allday");
             r.addEventListener("click", (e) => {

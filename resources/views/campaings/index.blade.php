@@ -358,16 +358,16 @@
                                 </div>
                                 <div class="col-6">
 
-                                    {!! Form::label('date', 'Fecha y hora de inicio') !!}
-                                    {!! Form::date('date', null, ['class' => 'form-control']) !!}
+                                    {!! Form::label('start_date', 'Fecha y hora de inicio') !!}
+                                    {!! Form::date('start_date', null, ['class' => 'form-control']) !!}
                                     <br>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6">
 
-                                    {!! Form::label('date', 'Fecha finalización') !!}
-                                    {!! Form::date('date_end', null, ['class' => 'form-control']) !!}
+                                    {!! Form::label('end_date', 'Fecha finalización') !!}
+                                    {!! Form::date('end_date', null, ['class' => 'form-control']) !!}
                                     <br>
                                 </div>
                                 <div class="col-6">

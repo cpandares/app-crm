@@ -46,7 +46,7 @@ class CampaingController extends Controller
             $condicion['campaing.country'] = $input['country'];
         }
 
-        $data = $data->where($condicion)->paginate(20);
+        $data = $data->where($condicion)->orderByDesc('id')->paginate(20);
 
         return view('campaings.index', [
             'data'=>$data,
@@ -85,7 +85,9 @@ class CampaingController extends Controller
         $request->validate([
             'name' => 'required'
         ]);
-
+        $start_date = Carbon::parse($request->start_date);
+        $end_date = Carbon::parse($request->end_date);
+       
         try {
             $ca = new Campaing();
             $ca->campaing_name = $request->name;
