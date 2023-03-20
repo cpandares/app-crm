@@ -28,7 +28,8 @@
 									<!--begin::Modal content-->
 									<div class="modal-content">
 										<!--begin::Form-->
-										<form class="form" action="#" id="kt_modal_add_event_form">
+										<form class="form" action="admin.campaings.store" id="kt_modal_add_event_form">
+											@csrf
 											<!--begin::Modal header-->
 											<div class="modal-header">
 												<!--begin::Modal title-->
@@ -50,25 +51,25 @@
 											<!--end::Modal header-->
 											<!--begin::Modal body-->
 											<div class="modal-body py-10 px-lg-17">
+												
 												<!--begin::Input group-->
 												<div class="fv-row mb-9">
 													<!--begin::Label-->
 													<label class="fs-6 fw-bold required mb-2">Nombre de campaña / evento</label>
 													<!--end::Label-->
 													<!--begin::Input-->
-													<input type="text" class="form-control form-control-solid" placeholder="" name="calendar_event_name" />
+													<input type="text" class="form-control form-control-solid" placeholder="" name="name" />
 													<!--end::Input-->
 												</div>
 												<!--end::Input group-->
 												<!--begin::Input group-->
-												<div class="fv-row mb-9">
-													<!--begin::Label-->
+												{{-- <div class="fv-row mb-9">
+													
 													<label class="fs-6 fw-bold mb-2">Descripcion</label>
-													<!--end::Label-->
-													<!--begin::Input-->
+												
 													<input type="text" class="form-control form-control-solid" placeholder="" name="calendar_event_description" />
-													<!--end::Input-->
-												</div>
+													
+												</div> --}}
 												<!--end::Input group-->
 												<!--begin::Input group-->
 												<div class="fv-row mb-9">
@@ -76,21 +77,10 @@
 													<label class="fs-6 fw-bold mb-2">País</label>
 													<!--end::Label-->
 													<!--begin::Input-->
-													<input type="text" class="form-control form-control-solid" placeholder="" name="calendar_event_location" />
+													<input type="text" class="form-control form-control-solid" placeholder="España" name="country" />
 													<!--end::Input-->
 												</div>
-												<!--end::Input group-->
-												<!--begin::Input group-->
-												<div class="fv-row mb-9">
-													<!--begin::Checkbox-->
-													<label class="form-check form-check-custom form-check-solid">
-														<input class="form-check-input" type="checkbox" value="" id="kt_calendar_datepicker_allday" />
-														<span class="form-check-label fw-bold" for="kt_calendar_datepicker_allday">All Day</span>
-													</label>
-													<!--end::Checkbox-->
-												</div>
-												<!--end::Input group-->
-												<!--begin::Input group-->
+											
 												<div class="row row-cols-lg-2 g-10">
 													<div class="col">
 														<div class="fv-row mb-9">
@@ -98,7 +88,7 @@
 															<label class="fs-6 fw-bold mb-2 required">Fecha Inicio</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input class="form-control form-control-solid" name="calendar_event_start_date" placeholder="Pick a start date" id="kt_calendar_datepicker_start_date" />
+															<input class="form-control form-control-solid" name="start_date" placeholder="Pick a start date" id="kt_calendar_datepicker_start_date" />
 															<!--end::Input-->
 														</div>
 													</div>
@@ -113,7 +103,7 @@
 															<label class="fs-6 fw-bold mb-2 required">Fecha fin</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input class="form-control form-control-solid" name="calendar_event_end_date" placeholder="Pick a end date" id="kt_calendar_datepicker_end_date" />
+															<input class="form-control form-control-solid" name="end_date" placeholder="Pick a end date" id="kt_calendar_datepicker_end_date" />
 															<!--end::Input-->
 														</div>
 													</div>
@@ -128,11 +118,7 @@
 												<button type="reset" id="kt_modal_add_event_cancel" class="btn btn-light me-3">Cancel</button>
 												<!--end::Button-->
 												<!--begin::Button-->
-												<button type="button" id="kt_modal_add_event_submit" class="btn btn-primary">
-													<span class="indicator-label">Submit</span>
-													<span class="indicator-progress">Please wait...
-													<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-												</button>
+												<button class="btn btn-primary" type="submit">Guardar</button>
 												<!--end::Button-->
 											</div>
 											<!--end::Modal footer-->

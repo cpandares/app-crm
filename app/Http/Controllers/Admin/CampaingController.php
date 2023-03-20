@@ -529,7 +529,7 @@ class CampaingController extends Controller
 
        return view('campaings.calendario',[
         'title' =>$title,
-       
+        'paises' => $this->getPaises()
        ]);
     }
 
