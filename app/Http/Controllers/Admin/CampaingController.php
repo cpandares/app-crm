@@ -521,9 +521,11 @@ class CampaingController extends Controller
     public function calendario(Campaing $campaing)
     {
         //
-        
+        $id = auth()->user()->id;
+
         $title = 'Calendario';
-       
+        $data = Campaing::where('created_user', $id)->get();
+
 
        return view('campaings.calendario',[
         'title' =>$title,
@@ -536,7 +538,16 @@ class CampaingController extends Controller
         $id = auth()->user()->id;
         $data = Campaing::where('created_user', $id)->get();
 
-        return response()->json($data);
+        $events= [];
+        foreach ($data as $event) {
+            $events[] = [
+                'title' => $event->campaing_name,
+                'start' => $event->init_date,
+                'end' => $event->end_date
+            ];
+        }
+
+        return response()->json($events);
     }
 
 
