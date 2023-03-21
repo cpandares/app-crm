@@ -173,9 +173,20 @@
                                                     <!--begin::Avatar-->
                                                     <div class="symbol symbol-50px me-5">
                                                         @if (auth()->user()->rol == 1)
-                                                        <img alt="Logo" src="https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png" />
+                                                            @if (!auth()->user()->image)
+                                                                <img alt="Logo" src="https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png" />
+                                                            @else
+                                                                <img alt="Logo" src="{{ auth()->user()->image }}" />
+                                                            @endif
+                                                       
                                                         @else
+
+                                                        @if (!auth()->user()->image)
                                                         <img alt="Logo" src="https://res.cloudinary.com/cpandares/image/upload/v1677505079/logo-demo17_o0xsf6.webp" />
+                                                            @else
+                                                                <img alt="Logo" src="{{ auth()->user()->image }}" />
+                                                        @endif
+                                                       
                                                         
                                                         @endif
                                                     </div>
@@ -195,7 +206,7 @@
                                                             </span>
                                                             @else
                                                             <span 
-                                                            class="badge badge-light-primary fw-bolder fs-8 px-2 py-1 ms-2">
+                                                            class="badge badge-primary fw-bolder fs-8 px-2 py-1 ms-2">
                                                             Empleado
                                                             </span>
                                                             @endif

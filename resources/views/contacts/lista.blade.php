@@ -208,8 +208,8 @@
                                         <!--begin::Table row-->
                                         <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
 
-                                            <th class="min-w-125px">Nombre </th>
-                                            <th class="min-w-125px ">Apellido</th>
+                                            <th class="min-w-125px">Nombre Completo </th>
+                                          {{--   <th class="min-w-125px ">Apellido</th> --}}
                                             <th class="min-w-125px ">Email</th>
                                             <th class="min-w-125px ">Campañas</th>
                                             <th class="min-w-125px ">Estado</th>
@@ -232,15 +232,6 @@
 
                                             </th>
                                             <th>
-                                                <input 
-                                                    type="email" 
-                                                    placeholder="Email" 
-                                                    name="email" 
-                                                    id="email"
-                                                   onchange="buscar('email')" 
-                                                   class="form-control">
-                                            </th>
-                                            <th>
                                                 {!! Form::select('campaing', $list_campaings, null, [
                                                     'id' => 'campaing',
                                                     'class' => 'form-control text-gray-400                                                                                            js-example-basic-single',
@@ -248,7 +239,6 @@
                                                     'onchange' => "buscar('campaing')",
                                                 ]) !!}
                                             </th>
-
                                             <th>
                                                 {!! Form::select(
                                                     'statu',
@@ -262,10 +252,14 @@
                                                         'onchange' => "buscar('statu')",
                                                     ],
                                                 ) !!}
+                                            </th>
+
+                                            <th>
+                                                
 
                                             </th>
 
-
+                                            <th></th>
 
                                             {!! Form::close() !!}
                                         </tr>
@@ -279,12 +273,8 @@
                                             <tr class="odd">
                                                 <td>
                                                     <a href="{{ route('admin.contact.show', $item->id) }}"
-                                                        class="text-gray-600 text-hover-primary mb-1">{{ $item->name }}</a>
-                                                </td>
-
-                                                <td>
-                                                    <a
-                                                        class="text-gray-600 text-hover-primary mb-1">{{ $item->lastname }}</a>
+                                              
+                                                        class="text-gray-800 text-hover-primary mb-1">{{ $item->name }} {{ $item->lastname }}</a>
                                                 </td>
 
                                                 <td>
@@ -311,37 +301,54 @@
                                                     @if ($item->contact_status == 1)
                                                         <span class="badge badge-primary pull-rigth">Nuevo</span>
                                                     @elseif($item->contact_status == 2)
-                                                        <span class="badge badge-light-primary pull-rigth">En Negociacion</span>
+                                                        <span class="badge badge-light-info pull-rigth">En Negociacion</span>
                                                     @elseif($item->contact_status == 3)
-                                                        <span class="badge badge-light-primary pull-rigth">Presupuesto
+                                                        <span class="badge badge-light-success pull-rigth">Presupuesto
                                                             Enviado</span>
                                                     @elseif($item->contact_status == 4)
-                                                        <span class="badge badge-primary pull-rigth">Cliente</span>
+                                                        <span class="badge badge-light-success pull-rigth">Cliente</span>
                                                     @elseif($item->contact_status == 5)
-                                                        <span class="badge badge-light-primary pull-rigth">Renegociando</span>
+                                                        <span class="badge badge-light-warning pull-rigth">Renegociando</span>
                                                     @else
-                                                        <span class="badge badge-primary pull-rigth">No interesado</span>
+                                                        <span class="badge badge-light-danger pull-rigth">No interesado</span>
                                                     @endif
                                                 </td>
 
+                                               
                                                 <td class="text-end">
-                                                    <a href="{{ route('admin.contact.show', $item->id) }}"
-                                                        class="text-white"><i class="fas fa-eye"></i></a>
-
-                                                    <a style="cursor: pointer" data-toggle="modal"
-                                                        data-target="#exampleModal<?= $item->id ?>">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <form method="post"
-                                                        action="{{ route('admin.contact.destroy', $item->id) }}"
+                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Acciones
+                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                                        <span class="svg-icon svg-icon-5 m-0">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon--></a>
+                                                    <!--begin::Menu-->
+                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                        <!--begin::Menu item-->
+                                                        <div class="menu-item px-3">
+                                                            <a 
+                                                            data-toggle="modal"
+                                                            data-target="#exampleModal<?= $item->id ?>" class="menu-link px-3">Editar</a>
+                                                        </div>
+                                                        <!--end::Menu item-->
+                                                        <!--begin::Menu item-->
+                                                        <div class="menu-item px-3">
+                                                            <form method="post"
+                                                            action="{{ route('admin.contact.destroy', $item->id) }}"
                                                         class="formDeleteContact">
                                                         @csrf
                                                         @method('delete')
-                                                        <button  type="submit" id="logout_button">
-                                                            <i class="fas fa-trash"></i>
+                                                        <button  type="submit" id="logout_button" class="menu-link px-3"> 
+                                                           Eliminar
                                                             
                                                         </button>
                                                     </form>
+                                                        </div>
+                                                        <!--end::Menu item-->
+                                                    </div>
+                                                    <!--end::Menu-->
                                                 </td>
 
                                             </tr>
