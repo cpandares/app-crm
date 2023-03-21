@@ -483,14 +483,15 @@ class ContactsController extends Controller
             $contact->city = $request->city;
             $contact->phone = $request->phone;
             $contact->postcode = $request->postcode;
-            $status = ContactStatus::where('id', (int) $request->contact_status)->first();
-            
+            $status = ContactStatus::where('id', (int) $request->statu)->first();
+           /*  dd($status); */
             $contact->contact_status = $status->id;
             $contact->update();
             Alert::success('Contacto actualizado');
             return redirect()->back();
         } catch (\PDOException $th) {
-            return $th->getMessage();
+           /*  return $th->getMessage(); */
+           Alert::error('Contacto no actualizado, contacta a soporte');
             return redirect()->back();
         }
     }

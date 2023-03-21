@@ -182,7 +182,7 @@ class CampaingController extends Controller
         $input = $request->all();
 
         $user_id = auth()->user()->id;
-
+        $controlador = new ContactsController();
         /* if(!$campaing){
             return redirect()->route('admin.contacs.index');
         } */
@@ -236,7 +236,7 @@ class CampaingController extends Controller
         $title = 'Contactos en la campaña: ' . $campaing->campaing_name;
         return view('campaings.pipeline', [
             'campaing' => $campaing,
-           
+            'controlador' =>$controlador,
             'paises' => $this->getPaises(),
             'comunicacion_medias' => $comunicacion_medias,
             'status' => $status,

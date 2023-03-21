@@ -6,7 +6,7 @@
             <div class="card p-5" bis_skin_checked="1">
                 <!--begin::Card header-->
                 {{-- <h3 class="text-gray-600 text-hover-primary">Contactos en la campaña: {{ $campaing->campaing_name }}</h3>  --}}
-                <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
+                <div class=" fw-bold fs-6 mb-4 pe-2">
 
                     <a class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
@@ -23,7 +23,18 @@
                         </span>
                         <!--end::Svg Icon-->
                         Pais: {{ $campaing->country }}
+
                     </a>
+                    <div>
+
+                        <a class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
+                          
+                           Total Contactos: {{count($contacts) }}
+    
+                        </a>
+                    </div>
+
                     {{-- <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
                     
                     <span class="svg-icon svg-icon-4 me-1">
@@ -53,9 +64,10 @@
 
                         <a href="{{ route('admin.campaings.index') }}" class="btn btn-primary float-right btn-sm mr-1">
                             < Ir a Campañas </a>
+
                                 <a href="{{ route('admin.campaings.show', $campaing->id) }}"
-                                    class="btn btn-primary float-right btn-sm mr-1">
-                                    Limpiar Filtro
+                                    class="btn btn-primary float-right btn-sm mr-1" title="Limpiar filtro">
+                                    <i class="fa fa-repeat"></i>
                                 </a>
                     </div>
                 </div>

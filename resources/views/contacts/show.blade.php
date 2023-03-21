@@ -396,10 +396,10 @@
                                                 <td>{{ $item->valid_until }}</td>
                                                 <td>{{ $item->updated_at }}</td>
                                                 <td>
-                                                    <a href="" class="btn">
+                                                    <a  class="btn">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="" class="btn">
+                                                    <a  class="btn">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -451,31 +451,32 @@
                                                     <div class="timeline-badge">
 
                                                         @if ($comunicacion->comunicacion_media_id == 1)
-                                                            <a href="" title="Telefonica">
+                                                            <a  title="Telefonica">
                                                                 <i class="fa fa-genderless text-primary fs-1">
 
                                                                 </i>
                                                             </a>
                                                         @elseif($comunicacion->comunicacion_media_id == 2)
-                                                            <a href="" title="Email">
+                                                            <a title="Email">
                                                                 <i class="fa fa-genderless text-warning fs-1">
 
                                                                 </i>
                                                             </a>
                                                         @elseif($comunicacion->comunicacion_media_id == 3)
-                                                            <a href="" title="skype">
+                                                            <a  title="skype">
                                                                 <i class="fa fa-genderless text-success fs-1">
 
                                                                 </i>
                                                             </a>
                                                         @elseif($comunicacion->comunicacion_media_id == 4)
-                                                            <a href="" title="Whatsapp">
+                                                            <a  title="Whatsapp">
                                                                 <i class="fa fa-genderless text-gray fs-1">
 
                                                                 </i>
                                                             </a>
                                                         @else
-                                                            <a href="" title="Whatsapp">
+                                                            <a 
+                                                             title="Whatsapp">
                                                                 <i class="fa fa-genderless text-success fs-1">
 
                                                                 </i>
@@ -551,11 +552,11 @@
                                                 <td>{{ $item->init_date }}</td>
                                                 <td>{{ $item->end_date }}</td>
                                                 <td>
-                                                    <a href="">
+                                                    <a >
                                                         <i class="fas fa-edit"></i>
                                                     </a>
 
-                                                    <a href="">
+                                                    <a >
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -602,11 +603,11 @@
                                                 <td>{{ $item->created_at }}</td>
                                                 <td>{{ $item->updated_at }}</td>
                                                 <td>
-                                                    <a href="">
+                                                    <a >
                                                         <i class="fas fa-edit"></i>
                                                     </a>
 
-                                                    <a href="">
+                                                    <a >
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>

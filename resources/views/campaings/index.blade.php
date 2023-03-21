@@ -51,8 +51,8 @@
                         <!--begin::Table-->
                         <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"
                             bis_skin_checked="1">
-                            <div class="table-responsive" bis_skin_checked="1">
-                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer table-hover"
+                            <div  bis_skin_checked="1">
+                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer table-hover table_responsive"
                                     id="kt_customers_table">
                                     <!--begin::Table head-->
                                     <thead class="">
@@ -303,7 +303,7 @@
                                                                     {!! Form::label('status', 'Estado de la campaña') !!}
                                                                     {!! Form::select(
                                                                         'status',
-                                                                        ['1' => 'Activa', '2' => 'Inactiva', '3' => 'Cancelada', '4' => 'Empieza proximamente', '5' => 'Por confimar'],
+                                                                        ['1' => 'Activa', '2' => 'Inactiva', '3' => 'Cancelada'],
                                                                         $item->status,
                                                                         ['class' => 'form-control', 'placeholder' => 'Seleccionar'],
                                                                     ) !!}
@@ -361,7 +361,6 @@
                 </div>
 
             </div>
-
             <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class=" modal-dialog  mw-650px">
@@ -435,6 +434,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 @endsection

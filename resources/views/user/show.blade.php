@@ -20,7 +20,7 @@
                         <!--end::Avatar-->
                         <!--begin::Name-->
                        {{--  @dump($user->name) --}}
-                        <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-1">{{ $user->name }} {{ $user->lastname }}</a>
+                        <a  class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-1">{{ $user->name }} {{ $user->lastname }}</a>
                         <!--end::Name-->
                         <!--begin::Position-->
                         <div class="fs-5 fw-bold text-muted mb-6">

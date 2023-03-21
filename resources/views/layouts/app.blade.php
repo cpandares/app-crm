@@ -228,7 +228,7 @@
                                             <!--end::Menu separator-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-5" >
-                                                <a href="{{  route('admin.usuarios.show', auth()->user())}}" class="menu-link px-5" title="Proximamente" disabled>Mi perfil (Próximamente)</a>
+                                                <a href="{{  route('admin.usuarios.show', auth()->user())}}" class="menu-link px-5" title="Proximamente" >Mi perfil </a>
                                                 
                                             </div>
                                             <!--end::Menu item-->
