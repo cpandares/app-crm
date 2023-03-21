@@ -28,7 +28,8 @@
 									<!--begin::Modal content-->
 									<div class="modal-content">
 										<!--begin::Form-->
-										<form class="form" action="admin.campaings.store" id="kt_modal_add_event_form">
+										{!! Form::open(['route' => 'admin.campaings.store', 'id' =>"kt_modal_add_event_form", 'autocomplete' => 'off', 'files' => true ]) !!}
+										
 											@csrf
 											<!--begin::Modal header-->
 											<div class="modal-header">
@@ -58,7 +59,7 @@
 													<label class="fs-6 fw-bold required mb-2">Nombre de campaña / evento</label>
 													<!--end::Label-->
 													<!--begin::Input-->
-													<input type="text" class="form-control form-control-solid" placeholder="" name="name" />
+													<input type="text" class="form-control form-control-solid"  name="name" />
 													<!--end::Input-->
 												</div>
 												<!--end::Input group-->
@@ -72,44 +73,42 @@
 												</div> --}}
 												<!--end::Input group-->
 												<!--begin::Input group-->
-												<div class="fv-row mb-9">
-													<!--begin::Label-->
-													<label class="fs-6 fw-bold mb-2">País</label>
-													<!--end::Label-->
-													<!--begin::Input-->
-													<input type="text" class="form-control form-control-solid" placeholder="España" name="country" />
-													<!--end::Input-->
+												<div class="row">
+													<div class="col-6">
+														{!! Form::label('country', 'Pais') !!}
+														{!! Form::select('country', $paises, null, [
+															'class' => 'form-control
+																															',
+															'placeholder' => 'Seleccionar',
+														]) !!}
+														<br>
+													</div>
+													<div class="col-6">
+														{!! Form::label('ciudad', 'Ciudad') !!}
+														{!! Form::text('ciudad', null, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
+														<br>
+														
+														<br>
+													</div>
 												</div>
 											
-												<div class="row row-cols-lg-2 g-10">
-													<div class="col">
+												<div class="row ">
+													<div class="col-6">
 														<div class="fv-row mb-9">
 															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2 required">Fecha Inicio</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input class="form-control form-control-solid" name="start_date" placeholder="Pick a start date" id="kt_calendar_datepicker_start_date" />
-															<!--end::Input-->
+															{!! Form::label('start_date', 'Fecha y hora de inicio') !!}
+															{!! Form::date('start_date', null, ['class' => 'form-control']) !!}
 														</div>
 													</div>
-													
-												</div>
-												<!--end::Input group-->
-												<!--begin::Input group-->
-												<div class="row row-cols-lg-2 g-10">
-													<div class="col">
+													<div class="col-6">
 														<div class="fv-row mb-9">
 															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2 required">Fecha fin</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input class="form-control form-control-solid" name="end_date" placeholder="Pick a end date" id="kt_calendar_datepicker_end_date" />
-															<!--end::Input-->
+															{!! Form::label('end_date', 'Fecha finalización') !!}
+                                    						{!! Form::date('end_date', null, ['class' => 'form-control']) !!}
 														</div>
 													</div>
-													
 												</div>
-												<!--end::Input group-->
+
 											</div>
 											<!--end::Modal body-->
 											<!--begin::Modal footer-->
@@ -122,7 +121,7 @@
 												<!--end::Button-->
 											</div>
 											<!--end::Modal footer-->
-										</form>
+											{!! Form::close() !!}
 										<!--end::Form-->
 									</div>
 								</div>

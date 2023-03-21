@@ -80,6 +80,8 @@ class CampaingController extends Controller
     public function store(Request $request)
     {
         //
+
+       /*  dd($request->all()); */
         $user_id = auth()->user()->id;
 
         $request->validate([
@@ -91,10 +93,10 @@ class CampaingController extends Controller
         try {
             $ca = new Campaing();
             $ca->campaing_name = $request->name;
-            $ca->status = $request->status;
+            $ca->status = isset($request->status) ? $request->status : '1';
             $ca->country = $request->country;
-            $ca->city = $request->ciudad;
-            $ca->init_date = Carbon::parse($request->init_date);
+            $ca->city = isset($request->ciudad) ? $request->ciudad : null;
+            $ca->init_date = Carbon::parse($request->start_date);
             $ca->end_date = Carbon::parse($request->end_date);
             $ca->created_user = $user_id;
             $ca->save();
