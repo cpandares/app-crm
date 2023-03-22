@@ -131,7 +131,7 @@
                                     <div class="col-md-6">
 
                                         {!! Form::label('country', 'País') !!}
-                                        {!! Form::select('country', $paises, null, ['class' => 'form-control', 'placeholder' => 'España']) !!}
+                                        {!! Form::select('country', $paises, null, ['class' => 'form-control', 'placeholder' => '--Seleccionar--']) !!}
                                         @error('country')
                                             <small class="text-danger">Este campo es requerido</small>
                                         @enderror
