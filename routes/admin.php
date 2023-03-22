@@ -48,3 +48,5 @@ Route::get('calendario', [CampaingController::class, 'calendario'])->name('admin
 Route::get('campaing-ajax', [CampaingController::class, 'ajaxCampaing'])->name('ajax-campaing');
 
 Route::resource('usuarios', User::class)->names('admin.usuarios');
+
+Route::get('config', [User::class, 'configSystem'])->name('admin.config');

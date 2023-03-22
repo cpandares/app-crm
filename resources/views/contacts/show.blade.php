@@ -39,8 +39,9 @@
 
                     <h4 class="profile-username text-center">
                         <strong>{{ $contact->name }} {{ $contact->lastname }}</strong>
+                        
                     </h4>
-
+                   
                     {{--  <p class="text-muted text-center">ID 115400723</p> --}}
 
                     {{-- <ul class="list-group list-group-unbordered mb-3">
@@ -72,24 +73,6 @@
             <div class="card card-primary">
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <strong><i class="fa fa-map-marker mr-1"></i>Dirección</strong>
-
-                    <p class="text-muted">{{ $contact->country }}</p>
-
-                    <hr />
-
-                    <strong><i class="fa fa-map mr-1"></i>Estado o ciudad</strong>
-
-                    <p class="text-muted">{{ $contact->state }}</p>
-
-                    <hr />
-
-                    <strong><i class="fa fa-phone mr-1"></i>Teléfonos</strong>
-
-                    <p class="text-muted">{{ $contact->phone }}</p>
-
-                    <hr />
-
                     <strong><i class="fa fa-comment mr-1"></i>Estado</strong>
 
 
@@ -108,12 +91,29 @@
                     @endif
 
                     <hr />
+                    <strong><i class="fa fa-map-marker mr-1"></i>País</strong>
+
+                    <p class="text-muted">{{ $contact->country }}</p>
+
+                    <hr />
+
+                    <strong><i class="fa fa-map mr-1"></i>Provincia</strong>
+
+                    <p class="text-muted">{{ $contact->state }}</p>
+
+                    <hr />                   
+
+                    
 
                     <strong><i class="fa fa-envelope mr-1"></i> Email</strong>
 
                     <p class="text-muted">{{ $contact->email }}</p>
                     <hr />
+                    <strong><i class="fa fa-phone mr-1"></i>Teléfonos</strong>
 
+                    <p class="text-muted">{{ $contact->phone }}</p>
+
+                    <hr />
                     <strong><i class="fa fa-envelope mr-1"></i> Se contactó mediante: </strong>
                     {{-- @dump($contact->comunication_medium) --}}
                     @if ($contact->comunication_medium == 1)
