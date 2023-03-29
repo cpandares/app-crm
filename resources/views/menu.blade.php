@@ -33,7 +33,7 @@
 
 
                 <div data-kt-menu-placement="right-start" class="menu-item py-3">
-                    <a  href="{{ url('admin/productos-api') }}" class="menu-link" title="Productos Api" class="menu-link"{{--  href="#" --}}>
+                    <a  href="{{ url('admin/pedidos-api') }}" class="menu-link" title="Productos Api" class="menu-link"{{--  href="#" --}}>
 
                         <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->

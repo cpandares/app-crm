@@ -23,12 +23,12 @@
                             <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base"
                                 bis_skin_checked="1">
 
-                                <a href="{{ route('admin.campaings.index') }}" class="btn btn-primary mr-2">
-                                    Limpiar Filtros
+                                <a href="{{ route('admin.campaings.index') }}" class="btn btn-primary mr-2" title="Limpiar Filtros">
+                                    <i class="fa fa-repeat"></i>
                                 </a>
 
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal">Nueva Campaña</button>
+                                    data-target="#exampleModal">Nueva Oportunidad</button>
                                 <!--end::Add customer-->
                             </div>
                             <!--end::Toolbar-->
@@ -87,20 +87,17 @@
                                         </tr>
 
                                         <tr class="text-gray-600">
-                                            {{-- @dump($campaing) --}}
+                                           
                                             {!! Form::open(['route' => 'admin.campaings.index', 'method' => 'get', 'id' => 'frmFiltros']) !!}
                                             <input type="hidden" id="accion" name="accion" value="2">
 
                                             <th>
-                                                {{-- <input type="text" placeholder="Nombre contacto" name="name" id="name"
-                                                onfocusout="buscar('documento')" onchange="buscar('documento')"
-                                                class="form-control"> --}}
+                                              
                                             </th>
                                             <th>
                                                 {!! Form::select('name', $campaings, $name, [
                                                     'id' => 'name',
-                                                    'class' => 'form-control text-gray-400
-                                                                                                                                            js-example-basic-single',
+                                                    'class' => 'form-control text-gray-400                                                                          js-example-basic-single',
                                                     'placeholder' => 'Seleccionar',
                                                     'onchange' => "buscar('name')",
                                                 ]) !!}
@@ -113,8 +110,7 @@
                                             <th>
                                                 {!! Form::select('country', $paises, $country, [
                                                     'id' => 'country',
-                                                    'class' => 'form-control text-gray-400
-                                                                                                                                            js-example-basic-single',
+                                                    'class' => 'form-control text-gray-400                                                         js-example-basic-single',
                                                     'placeholder' => 'Seleccionar',
                                                     'onchange' => "buscar('country')",
                                                 ]) !!}
@@ -258,7 +254,7 @@
                                                             ]) !!}
 
                                                             <div class="row">
-                                                                <div class="col-6">
+                                                                <div class="col-sm-12 col-md-6">
                                                                     {!! Form::label('campaing_name', 'Nombre') !!}
                                                                     {!! Form::text('campaing_name', $item->campaing_name, [
                                                                         'class' => 'form-control',
@@ -266,7 +262,7 @@
                                                                     ]) !!}
                                                                     <br>
                                                                 </div>
-                                                                <div class="col-6">
+                                                                <div class="col-sm-12 col-md-6">
 
                                                                     {!! Form::label('country', 'Pais') !!}
                                                                     {!! Form::select('country', $paises, $item->country, [
@@ -278,13 +274,13 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-6">
+                                                                <div class="col-sm-12 col-md-6">
                                                                     {!! Form::label('city', 'Ciudad') !!}
                                                                     {!! Form::text('city', $item->city, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
                                                                     <br>
 
                                                                 </div>
-                                                                <div class="col-6">
+                                                                <div class="col-sm-12 col-md-6">
 
                                                                     {!! Form::label('init_date', 'Fecha de inicio') !!}
                                                                     {!! Form::date('init_date', $item->init_date, ['class' => 'form-control']) !!}
@@ -292,13 +288,13 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-6">
+                                                                <div class="col-sm-12 col-md-6">
 
                                                                     {!! Form::label('end_date', 'Fecha finalización') !!}
                                                                     {!! Form::date('end_date', $item->end_date, ['class' => 'form-control']) !!}
                                                                     <br>
                                                                 </div>
-                                                                <div class="col-6">
+                                                                <div class="col-sm-12 col-md-6">
 
                                                                     {!! Form::label('status', 'Estado de la campaña') !!}
                                                                     {!! Form::select(
@@ -347,7 +343,7 @@
                                         class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
                                         <div class="dataTables_paginate paging_simple_numbers"
                                             id="kt_customers_table_paginate">
-                                            {{ $data->appends(['name' => $name, 'country' => $country, 'city' => $city]) }}
+                                            {{ $data->appends(['name' => $name, 'country' => $country, 'city' => $city,'status' =>$status]) }}
                                         </div>
                                     </div>
                                 </div>
@@ -363,10 +359,10 @@
             </div>
             <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
-                <div class=" modal-dialog  mw-650px">
+                <div class="modal-dialog modal-lg  mw-650px">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Nueva Campaña</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Nueva Oportunidad</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -375,30 +371,29 @@
                             {!! Form::open(['route' => 'admin.campaings.store', 'autocomplete' => 'off', 'files' => true]) !!}
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-sm-12 col-md-6">
                                     {!! Form::label('name', 'Nombre') !!}
                                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Feria España']) !!}
                                     <br>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-sm-12 col-md-6">
 
                                     {!! Form::label('country', 'Pais') !!}
                                     {!! Form::select('country', $paises, null, [
-                                        'class' => 'form-control
-                                                                                                        ',
-                                        'placeholder' => 'Seleccionar',
+                                        'class' => 'form-control',
+                                        'placeholder' => '--Seleccionar País--',
                                     ]) !!}
                                     <br>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-sm-12 col-md-6">
                                     {!! Form::label('ciudad', 'Ciudad') !!}
                                     {!! Form::text('ciudad', null, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
                                     <br>
 
                                 </div>
-                                <div class="col-6">
+                                <div class="col-sm-12 col-md-6">
 
                                     {!! Form::label('start_date', 'Fecha y hora de inicio') !!}
                                     {!! Form::date('start_date', null, ['class' => 'form-control']) !!}
@@ -406,23 +401,13 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-sm-12 col-md-6">
 
                                     {!! Form::label('end_date', 'Fecha finalización') !!}
                                     {!! Form::date('end_date', null, ['class' => 'form-control']) !!}
                                     <br>
                                 </div>
-                                <div class="col-6">
-
-                                    {!! Form::label('status', 'Estado de la campaña') !!}
-                                    {!! Form::select(
-                                        'status',
-                                        ['1' => 'Activa', '2' => 'Inactiva', '3' => 'Cancelada', '4' => 'Empieza proximamente', '5' => 'Por confimar'],
-                                        null,
-                                        ['class' => 'form-control', 'placeholder' => 'Seleccionar'],
-                                    ) !!}
-                                    <br>
-                                </div>
+                                
                             </div>
                             {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-5']) !!}
                             {!! Form::close() !!}

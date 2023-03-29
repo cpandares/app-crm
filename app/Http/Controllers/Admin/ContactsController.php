@@ -39,6 +39,9 @@ class ContactsController extends Controller
                     ->leftJoin('contacts','contacts.id', '=', 'contact_campaings.contact_id')
                     ->get();
         dd($contactsCapaings); */
+
+        $campaings = Campaing::where('created_user', $user_id)->pluck('campaing_name','id');
+
         $controlador = new ContactsController();
         return view('contacts.index', 
                     [
@@ -52,7 +55,9 @@ class ContactsController extends Controller
                     'comunicacion_medias' => $comunicacion_medias,
                     'status' => $status,
                     'data'=> $contacts,
-                    'title' => $title
+                    'title' => $title,
+                    'campaings' => $campaings,
+                    'noInteresteds' =>$noInteresteds
                 ]);
 
     }
@@ -78,12 +83,13 @@ class ContactsController extends Controller
         $user_id = auth()->user()->id;
         $controlador = new ContactsController();
         $contacts = DB::table('contacts')->where('user_id', $user_id)
-            ->select('contacts.id', 'contacts.name','contacts.contact_status', 'contacts.lastname', 'contacts.email', 'contacts.created_at', 'campaing.campaing_name', 'contacts.phone', 'contacts.postcode', 'contacts.country', 'contacts.city','contacts.comunication_medium')
+            ->select('contacts.id', 'contacts.name','contacts.contact_status', 'contacts.lastname', 'contacts.email', 'contacts.created_at', 'campaing.campaing_name', 'contacts.phone', 'contacts.postcode', 'contacts.country', 'contacts.city','contacts.comunication_medium', 'contacts.state', 'contacts.address')
             ->leftJoin('campaing', 'campaing.contact_id', '=', 'contacts.id')
             ->orderByDesc('contacts.id');
             /* ->select('contacts.*','campaing.*') */
            
         /* dd($contacts); */
+        $campaings_list = Campaing::where('created_user', $user_id)->pluck('campaing_name','id');
         $comunicacion_medias = ComunicationMedium::pluck('comunication_medio', 'id');
         $campaings = Campaing::where('created_user', $user_id)->get();
         $status = ContactStatus::pluck('status_name', 'id');
@@ -114,7 +120,8 @@ class ContactsController extends Controller
             'paises' => $this->getPaises(),
             'controlador' =>$controlador,
             'list_campaings' => $list_campaings,
-            'title' => $title
+            'title' => $title,
+            'campaings_list' => $campaings_list
         ]);
     }
 
@@ -397,10 +404,13 @@ class ContactsController extends Controller
         /*  dd("12"); */
         try {
             //code...
+
+           /*  dd($request->all()); */
             $contact->name = $request->name;
             $contact->lastname = $request->lastname;
             $contact->email = $request->email;
             $contact->phone = $request->phone;
+            $contact->address = $request->address;
             $contact->country = $request->country;
             $contact->city = isset($request->city) ?  $request->city : 'No Asignado';
             $contact->state = $request->state;
@@ -413,13 +423,27 @@ class ContactsController extends Controller
             $result = $contact->save();
 
 
-           /*  $contact = Contact::where('user_id', $user_id)->orderByDesc('id')->first();
-            $contact_campaing->contact_id = $contact->contact_id;
-            $contact_campaing->user_id = $user_id;
-            $contact_campaing->created_at = Carbon::now();
-            $contact_campaing->updated_at = Carbon::now(); */
+          
+            if(isset($request->campaing)){
+                $contact_last = Contact::orderByDesc('id')->first();
+                try {
+                    $campaing = new ContactCampaing();
+                    $campaing->camaping_id = $request->campaing;
+                    $campaing->contact_id = $contact_last->id;
+                    $campaing->user_id = $user_id;
+                    $campaing->created_at = Carbon::now();
+                    $campaing->updated_at = Carbon::now();
+                    $result = $campaing->save();
+                  
+                } catch (\PDOException $th) {
+                    DB::rollBack();
+                    Alert::success('No se pudo asociar contacto a la campaña');
+                    return redirect()->back();
+                }
+            }
 
-            /*  return redirect()->route('admin.contact.show', compact('contact'))->with(['message' => 'Contacto guardado']); */
+         
+            
             Alert::success('Contacto Guardado');
             return redirect()->back();
         } catch (\PDOException $th) {

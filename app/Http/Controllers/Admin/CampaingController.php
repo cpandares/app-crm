@@ -45,6 +45,10 @@ class CampaingController extends Controller
 
             $condicion['campaing.country'] = $input['country'];
         }
+        if (isset($input['statu'])) {
+
+            $condicion['campaing.status'] = $input['statu'];
+        }
 
         $data = $data->where($condicion)->orderByDesc('id')->paginate(20);
 
@@ -55,6 +59,7 @@ class CampaingController extends Controller
             'name' => isset($input['name']) ? $input['name'] : null,
             'city' =>isset($input['city']) ? $input['city'] : null,
             'country' =>isset($input['country']) ? $input['country'] : null,
+            'status' =>isset($input['status']) ? $input['status'] : null,
             'title' => $title
         ]);
     }
@@ -93,7 +98,7 @@ class CampaingController extends Controller
         try {
             $ca = new Campaing();
             $ca->campaing_name = $request->name;
-            $ca->status = isset($request->status) ? $request->status : '1';
+            $ca->status = 1;
             $ca->country = $request->country;
             $ca->city = isset($request->ciudad) ? $request->ciudad : null;
             $ca->init_date = Carbon::parse($request->start_date);
@@ -187,7 +192,7 @@ class CampaingController extends Controller
             return redirect()->route('admin.contacs.index');
         } */
         $comunicacion_medias = ComunicationMedium::pluck('comunication_medio', 'id');
-        
+        $campaings = Campaing::where('created_user', $user_id)->pluck('campaing_name','id');
         $status = ContactStatus::pluck('status_name', 'id');
 
         $contacts = DB::table('contacts')
@@ -244,7 +249,8 @@ class CampaingController extends Controller
             'presupuestados' => $presupuestados,
             'clientes_negoci' => $clientes_negoci,
             'new_clients' => $new_clients,
-            'title' => $title
+            'title' => $title,
+            'campaings' => $campaings
         ]);
     }
 
@@ -580,6 +586,28 @@ class CampaingController extends Controller
         
     }
 
+    public function deleteContact(Request $request, $id)
+    {
+       
+        $user_id = auth()->user()->id;
+          /*   dd($request->all()); */
+      
+            try {
+                $campaing = ContactCampaing::where('camaping_id', $id)->where('contact_id', $request->contact);
+               
+                $result = $campaing->delete();
+
+                if ($result) {
+                    return redirect()->back();
+                } else {
+                    return false;
+                }
+            } catch (\PDOException $th) {
+                return $th->getMessage();
+            }
+        
+    }
+
 
     public function createContact(Request $request, $id){
 
@@ -610,8 +638,9 @@ class CampaingController extends Controller
         $contact->lastname = $request->lastname;
         $contact->email = $request->email;
         $contact->phone = $request->phone;
+        $contact->address = $request->address;
         $contact->country = $request->country;
-        $contact->city = $request->city;
+        $contact->city = isset($request->city) ?  $request->city : 'No Asignado';
         $contact->state = $request->state;
         $contact->postcode = $request->postcode;
         $contact->contact_status = $request->statu;

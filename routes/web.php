@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ContactsController;
+use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,8 @@ Route::get("loginForm", [\App\Http\Controllers\Auth\AuthController::class, 'logi
 Route::post("login", [\App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login');
 Route::get("logout", [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
 
+Route::get('reset-password', [User::class, 'resetPassword'])->name('reset-password');
+Route::post('reset-password', [User::class, 'validateData'])->name('validate-data');
 /* Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

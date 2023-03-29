@@ -65,10 +65,10 @@
                         <a href="{{ route('admin.campaings.index') }}" class="btn btn-primary float-right btn-sm mr-1">
                             < Ir a Campañas </a>
 
-                                <a href="{{ route('admin.campaings.show', $campaing->id) }}"
-                                    class="btn btn-primary float-right btn-sm mr-1" title="Limpiar filtro">
-                                    <i class="fa fa-repeat"></i>
-                                </a>
+                        <a href="{{ route('admin.campaings.show', $campaing->id) }}"
+                            class="btn btn-primary float-right btn-sm mr-1" title="Limpiar filtro">
+                            <i class="fa fa-repeat"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -307,6 +307,35 @@
                                 </tbody>
                             </table>
                         </div>
+                        
+
+                        <div class="row">
+                            <div
+                                class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+                                <div class="dataTables_length" id="kt_customers_table_length">
+                                    <label>
+                                        <select name="kt_customers_table_length" aria-controls="kt_customers_table"
+                                            class="form-select form-select-sm form-select-solid">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div
+                                class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+                                <div class="dataTables_paginate paging_simple_numbers"
+                                    id="kt_customers_table_paginate">
+                                    {{ $contacts->links() }}
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+
+
                         <input type="hidden" name="" id="campaing_id" value="{{ $campaing->id }}">
 
                     </div>

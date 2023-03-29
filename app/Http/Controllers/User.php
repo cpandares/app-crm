@@ -7,8 +7,11 @@ use App\Models\User as ModelsUser;
 use Illuminate\Http\Request;
 use Alert;
 use App\Models\Campaing as ModelsCampaing;
+use App\Models\ComunicationMedium;
 use App\Models\Contact;
+use App\Models\ContactStatus;
 use Campaing;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -67,7 +70,7 @@ class User extends Controller
             $user->phone = $request->phone;
             $user->password = Hash::make($request->password);
             $user->save();
-            Alert::success('Usuaruo registrado');
+            Alert::success('Usuario registrado');
             return redirect()->back();
         } catch (\PDOException $th) {
             //throw $th;
@@ -123,7 +126,7 @@ class User extends Controller
      */
     public function update(Request $request, ModelsUser $user)
     {
-        
+        /* dd($request->all()); */
         $user = ModelsUser::where('id', auth()->user()->id)->first();
 
         if(!$user){
@@ -131,7 +134,7 @@ class User extends Controller
             return redirect()->back();
         }
 
-        if($request->email !== $user->email){
+        if($request->email != $user->email){
             /* dd($request->email, $user->name); */
             if(ModelsUser::whereEmail($request->email)->exists()){
                 Alert::error('Email ya esta asosciado a otro usuario');
@@ -167,6 +170,61 @@ class User extends Controller
        }
 
     }
+
+
+    public function updateUser(Request $request, ModelsUser $user)
+    {
+        /* dd($request->all()); */
+        $user = ModelsUser::where('id',$request->user)->first();
+
+        if(!$user){
+            Alert::error('El usuario que intenta actualizar no existe');
+            return redirect()->back();
+        }
+
+        if($request->email != $user->email){
+            /* dd($request->email, $user->name); */
+            if(ModelsUser::whereEmail($request->email)->exists()){
+                Alert::error('Email ya esta asosciado a otro usuario');
+                return  redirect()->back();
+            }
+        }
+
+       try {
+            /* dd($request->password); */
+
+            if($request->file('imagen')){
+                $imagen = $request->file('imagen');
+
+      
+                if ($imagen){
+                    $ruta = "blog-laravel";
+                
+                    $response = cloudinary()->upload($request->file('imagen')->getRealPath(), array("folder" => $ruta))->getSecurepath();
+                
+                }  
+               
+            }
+           /*  dd($request->password); */
+            $user->name = $request->name;
+            $user->lastname = $request->lastname;
+            $user->email= $request->email;
+            $user->country = $request->country;
+            $user->rol = $request->rol;
+            $user->phone = $request->phone;
+            $user->password =  isset($request->password) ? Hash::make($request->password) : $user->password;
+            $user->image = isset($imagen) ? $response : $user->image;
+            $user->update();
+            Alert::success('Perfil actualizado con éxito');
+            return  redirect()->back();
+       } catch (\PDOException $th) {
+            Alert::error('Usuario no actualizado, contacte a soporte');
+            return  redirect()->back();
+       }
+
+    }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -387,22 +445,150 @@ class User extends Controller
 
     }
 
-    public function configSystem(){
+    public function configSystem(Request $request){
+
+        $input = $request->all();
+        $condicion = [];
 
         $title = 'Configuracion del sistema';
 
-        $users = DB::table('users')->orderByDesc('id')->paginate(20);
+        $users = DB::table('users')->orderByDesc('id');
         $contacts = Contact::all();
         $campaings = ModelsCampaing::all();
+        $list_campaings =  ModelsCampaing::pluck('campaing_name', 'id');
+        $comunicacion_medias = ComunicationMedium::pluck('comunication_medio', 'id');
+        $status = ContactStatus::pluck('status_name', 'id');
+        if(isset($input['name'])){
+            $condicion[] = ['users.name', 'like', '%' . $input['name'] . '%'];
+        }
+        if(isset($input['email'])){
+            $condicion[] = ['users.email', 'like', '%' . $input['email'] . '%'];
+        }
+        if(isset($input['lastname'])){
+            $condicion[] = ['users.lastname', 'like', '%' . $input['lastname'] . '%'];
+        }
+        if (isset($input['country'])) {
+            $condicion['users.country'] = $input['country'];
+        }
+        if (isset($input['statu'])) {
+            $condicion['users.rol'] = $input['statu'];
+        }
+        $users = $users->where($condicion)->paginate(20);
+
         return view('crm.admin',[
             'title' => $title,
             'users' => $users,
             'paises' => $this->getPaises(),
             'contacts' => $contacts,
-            'campaings' => $campaings
+            'campaings' => $campaings,
+            'list_campaings' =>$list_campaings,
+            'comunicacion_medias' =>$comunicacion_medias,
+            
         ]);
     }
 
+    public function detailUser(Request $request,$id){
+
+        $input = $request->all();
+        $condicion = [];
+
+        $user = ModelsUser::findOrFail($id);
+        $contacts = Contact::where('user_id', $id);
+        $clients = Contact::where('user_id', $id)->where('contact_status', 5)->paginate(20);
+        $campaings = ModelsCampaing::where('created_user', $id);
+        $usuarios = ModelsUser::pluck('name', 'id');
+        $comunicacion_medias = ComunicationMedium::pluck('comunication_medio', 'id');
+        $status = ContactStatus::pluck('status_name', 'id');
+        $list_campaings =  ModelsCampaing::where('created_user', $id)->pluck('campaing_name', 'id');
+
+        if(isset($input['name'])){
+            $condicion[] = ['contacts.name', 'like', '%' . $input['name'] . '%'];
+        }
+        if(isset($input['email'])){
+            $condicion[] = ['contacts.email', 'like', '%' . $input['email'] . '%'];
+        }
+        if(isset($input['lastname'])){
+            $condicion[] = ['contacts.lastname', 'like', '%' . $input['lastname'] . '%'];
+        }
+        if (isset($input['country'])) {
+            $condicion['contacts.country'] = $input['country'];
+        }
+        if (isset($input['statu'])) {
+            $condicion['contacts.contact_status'] = $input['statu'];
+        }
+
+
+        if (isset($input['city'])) {
+            $condicion[] = ['campaing.city', 'like', '%' . $input['city'] . '%'];
+        }
+
+        if (isset($input['campaing_name'])) {
+           
+            $condicion['campaing.campaing_name'] = $input['campaing_name'];
+        }
+
+        if (isset($input['campaing_country'])) {
+
+            $condicion['campaing.country'] = $input['campaing_country'];
+        }
+        if (isset($input['campaing_statu'])) {
+
+            $condicion['campaing.status'] = $input['campaing_statu'];
+        }
+
+        $campaings = $campaings->where($condicion)->orderByDesc('id')->paginate(20);
+
+
+
+        $contacts = $contacts->where($condicion)->paginate(20);
+
+        $title = 'Detalle de usuario';
+       /*  dd($contacts); */
+        return view('user.detail', [
+            'user' =>$user,
+            'title' =>$title,
+            'contacts' => $contacts,
+            'campaings' =>$campaings,
+            'usuarios' => $usuarios,
+            'paises' => $this->getPaises(),
+            'comunicacion_medias' => $comunicacion_medias,
+            'status' =>$status,
+            'clients' => $clients,
+            'list_campaings' =>$list_campaings
+        ]);
+    }
+
+    public function resetPassword(){
+
+
+        return view('auth.passwords.reset');
+    }
+
+    public function validateData(Request $request){
+
+         $user = ModelsUser::where('name', $request->name)
+                            ->where('email', $request->email)
+                            ->where('country', $request->country)
+                            ->first();
+        /* dd($user); */
+         if(is_null($user)){
+            /* Alert::error('Usuario no encontrado'); */
+            return redirect()->back()->with(['message' =>'Error, usuario no encontrado']);
+         }
+
+        try {
+            //code...
+            $user->password = Hash::make($request->password);
+            $user->update();
+            Alert::success('Has cambiado tu contraseña con éxito');
+   
+            return redirect()->route('login')->with(['message' =>'Contraseña actualizada']);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        return view('auth.passwords.reset');
+    }
 
 
 }

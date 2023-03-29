@@ -123,11 +123,12 @@ class NoteController extends Controller
             //code...
 
             $note->update($request->all());
+            Alert::success('Nota actualizada con exito');
+            return redirect()->back();
 
-            return redirect()->route('admin.notes.show', compact('note'));
-
-        } catch (\Throwable $th) {
+        } catch (\PDOException $th) {
             //throw $th;
+            Alert::success('Nota no se actualizo');
             return redirect()->back();
         }
 

@@ -36,6 +36,17 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://sortablejs.github.io/Sortable/Sortable.js"></script>
 <script>
+
+    function mostrarPalabra() {
+        var datos = document.getElementById('caja_busqueda').value;
+        datos = convertir(caja_busqueda.toLowerCase());
+        
+    }
+
+     function convertir(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    } 
+
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
 
@@ -45,6 +56,24 @@
                 let form = event.target;
                 Swal.fire({
                     title: 'Seguro desea eliminar esta campaña?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Continuar'
+                }).then((result) => {
+                    if (result.value) {
+                        this.submit();
+                    }
+                });
+            })
+
+            $('.formDeleteBudget').submit(function(e) {
+                e.preventDefault();
+                let form = event.target;
+                Swal.fire({
+                    title: 'Seguro desea eliminar este presupuesto?',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -75,7 +104,44 @@
                     }
                 });
             })
+            $('.formDeleteNote').submit(function(e) {
+                e.preventDefault();
+                let form = event.target;
+                Swal.fire({
+                    title: 'Seguro desea eliminar esta nota?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Continuar'
+                }).then((result) => {
+                    if (result.value) {
+                        this.submit();
+                    }
+                });
+            })
+
+            $('.formDeleteContactCampaing').submit(function(e) {
+                e.preventDefault();
+                let form = event.target;
+                Swal.fire({
+                    title: 'Seguro desea quitar este contacto de la campaña?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Continuar'
+                }).then((result) => {
+                    if (result.value) {
+                        this.submit();
+                    }
+                });
+            })
         
+            $("#price").maskMoney();
+
     });
     /* const items = document.querySelectorAll('.card__item')
     const columns = document.querySelectorAll('.column') */

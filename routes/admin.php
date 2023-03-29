@@ -33,6 +33,8 @@ Route::get('contacto-presupuesto-ajax/{id}', [BudgetController::class, 'ajax'])-
 
 Route::post('add-contacts-campaings', [CampaingController::class, 'addContact'])->name('add-contacts-campaings');
 
+Route::delete('delete-contacts-campaings/{id}', [CampaingController::class, 'deleteContact'])->name('delete-contacts-campaings');
+
 Route::put('update-status-contact', [ContactsController::class, 'updateStatus'])->name('update-status-contact');
 
 Route::get('contactos-lista', [ContactsController::class, 'lista'])->name('admin.contactos.lista');
@@ -41,7 +43,7 @@ Route::post('update-photo-contact/{id}', [ContactsController::class, 'updatePhot
 
 Route::get('clientes-api', [ContactsController::class, 'listarClientesApi'])->name('admin.clientes.api');
 
-Route::get('productos-api', [ProductoController::class, 'listarClientesApi'])->name('admin.clientes.api');
+Route::get('pedidos-api', [ProductoController::class, 'listarClientesApi'])->name('admin.clientes.api');
 
 Route::get('calendario', [CampaingController::class, 'calendario'])->name('admin.calendario.index');
 
@@ -50,3 +52,6 @@ Route::get('campaing-ajax', [CampaingController::class, 'ajaxCampaing'])->name('
 Route::resource('usuarios', User::class)->names('admin.usuarios');
 
 Route::get('config', [User::class, 'configSystem'])->name('admin.config');
+
+Route::get('usuario-detail/{id}', [User::class, 'detailUser'])->name('usuario-detail');
+Route::put('usuario-detail/{id}', [User::class, 'updateUser'])->name('usuario-update');

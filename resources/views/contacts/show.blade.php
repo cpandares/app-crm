@@ -101,6 +101,12 @@
 
                     <p class="text-muted">{{ $contact->state }}</p>
 
+                    <hr />
+
+                    <strong><i class="fa fa-map mr-1"></i>Dirección</strong>
+
+                    <p class="text-muted">{{ $contact->address }}</p>
+
                     <hr />                   
 
                     
@@ -134,8 +140,10 @@
                 <!-- /.card-body -->
                 <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal<?= $contact->id ?>"><b>Actualizar</b></button>
 
-                <a href="{{ route('admin.contact.index') }}" class="btn btn-primary btn-block"><b>Volver a
-                        Lista</b></a>
+                <a href="{{ route('admin.contact.index') }}" class="btn btn-primary btn-block">
+                    <b>Volver a
+                        Lista</b>
+                </a>
             </div>
             <div class="modal fade" id="exampleModal<?= $contact->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -150,7 +158,7 @@
                         {!! Form::model($contact,['route'=>['admin.contact.update', $contact], 'autocomplete'=>'off', 'files'=>true, 'method'=>'put']) !!}
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                               
                                 {!! Form::label('name', 'Nombre') !!}
                                 {!! Form::text('name', $contact->name, ['class'=>'form-control','placeholder'=>'Pedro', ]) !!}
@@ -158,7 +166,7 @@
                                     <small class="text-danger">Este campo es requerido</small>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                
                                 {!! Form::label('lastname', 'Apellido') !!}
                                 {!! Form::text('lastname', $contact->lastname, ['class'=>'form-control','placeholder'=>'Perez', ]) !!}
@@ -169,11 +177,11 @@
                         </div>
         
                         <div class="row  mt-2">
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                 {!! Form::label('phone', 'Telefono') !!}
                                 {!! Form::text('phone', $contact->phone, ['class'=>'form-control','placeholder'=>'+34 455487895', ]) !!}
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                
                                 {!! Form::label('email', 'Email') !!}
                                 {!! Form::email('email', $contact->email, ['class'=>'form-control','placeholder'=>'test@prueba.com', ]) !!}
@@ -184,14 +192,14 @@
                         </div>
         
                         <div class="row  mt-2">
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                 {!! Form::label('postcode', 'Código Postal') !!}
                                 {!! Form::text('postcode', $contact->postcode, ['class'=>'form-control','placeholder'=>'65656', ]) !!}
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                               
                                 {!! Form::label('country', 'País') !!}
-                                {!! Form::select('country', $paises, $contact->country, ['class'=>'form-control','placeholder'=>'---', ]) !!}
+                                {!! Form::select('country', $paises, $contact->country, ['class'=>'form-control','placeholder'=>'--Seleccionar País--', 'required']) !!}
                                 @error('country')
                                     <small class="text-danger">Este campo es requerido</small>
                                 @enderror
@@ -199,18 +207,18 @@
                         </div>
         
                         <div class="row  mt-2">
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                 {!! Form::label('city', 'Ciudad') !!}
                                 {!! Form::text('city', $contact->city, ['class'=>'form-control','placeholder'=>'Barcelona', ]) !!}
                             </div>
-                          {{--   <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                 {!! Form::label('state', 'Provincia (opcional)') !!}
-                                {!! Form::text('state', null, ['class'=>'form-control','placeholder'=>'', ]) !!}
-                            </div> --}}
+                                {!! Form::text('state', $contact->state, ['class'=>'form-control','placeholder'=>'', ]) !!}
+                            </div>
                         </div>
         
                         <div class="row  mt-2">
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                              
                                 {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
                                 {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
@@ -220,7 +228,7 @@
                                     <small class="text-danger">Este campo es requerido</small>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                
                                 {!! Form::label('medio_comunicacion', 'Estado del Cliente') !!}
                                 {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
@@ -371,7 +379,7 @@
                                 </div>
                             </div>
 
-                            <table class="table table_hover table_striped">
+                            <table class="table table_hover table_striped table-responsive">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -392,18 +400,94 @@
                                                 <td>{{ $item->title }}</td>
                                                 <td>{{ $item->observacion }}</td>
                                                 <td>{{ $item->price }}</td>
-                                                <td>{{ $item->created_at }}</td>
-                                                <td>{{ $item->valid_until }}</td>
-                                                <td>{{ $item->updated_at }}</td>
-                                                <td>
-                                                    <a  class="btn">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <a  class="btn">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
+                                                <td>{{ date('Y-m-d', strtotime( $item->created_at)) }}</td>
+                                                <td>{{ date('Y-m-d', strtotime($item->valid_until)) }}</td>
+                                                <td>{{ date('Y-m-d', strtotime($item->updated_at)) }}</td>
+                                                <td class="text-end">
+                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Acciones
+                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                                        <span class="svg-icon svg-icon-5 m-0">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon--></a>
+                                                    <!--begin::Menu-->
+                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                        <!--begin::Menu item-->
+                                                        <div class="menu-item px-3">
+                                                            <a 
+                                                            data-toggle="modal"
+                                                            data-target="#modalExampleBudget<?= $item->id ?>" 
+                                                            class="menu-link px-3">Editar</a>
+                                                        </div>
+                                                        <!--end::Menu item-->
+                                                        <!--begin::Menu item-->
+                                                        <div class="menu-item px-3">
+                                                            <form method="post"
+                                                            action="{{ route('admin.budget.destroy' , $item->id) }}"
+                                                            class="formDeleteBudget">
+                                                        @csrf
+                                                        <input type="hidden" name="contact" value="{{ $contact->id }}">
+                                                        @method('delete')
+                                                        <button  type="submit" id="logout_button" class="menu-link px-3"> 
+                                                           Eliminar
+                                                            
+                                                        </button>
+                                                    </form>
+                                                        </div>
+                                                        <!--end::Menu item-->
+                                                    </div>
+                                                    <!--end::Menu-->
                                                 </td>
                                             </tr>
+                                            <div class="modal fade" id="modalExampleBudget<?= $item->id ?>" tabindex="-1"
+                                                aria-labelledby="agregarPresupuestoLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalExampleBudget">Actualizar Presupuesto</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            {!! Form::model($item, ['route' => ['admin.budget.update', $item->id], 'autocomplete' => 'off', 'files' => true, 'method' => 'put']) !!}
+                        
+                        
+                                                            <label for=""><strong>Titulo</strong></label>
+                                                            <input type="text" class="form-control" name="title"  required value="{{ $item->title }}">
+                                                            <input type="hidden" name="contact" value="{{ $contact->id }}">
+                                                            <label for=""><strong>Observación</strong></label>
+                                                            <textarea name="observacion" cols="30" rows="10" class="form-control my-2" style="resize: none">
+                                                                {{ $item->observacion }}
+                                                            </textarea>
+                        
+                                                            <label for=""><strong>Es Válido hasta</strong> </label>
+                                                            <input type="date" name="valid_until" class="form-control" required value="{{ $item->valid_until }}">
+                        
+                                                            <label for="">
+                                                                <strong>Precio del presupuesto</strong>
+                                                            </label>
+                                                            <input 
+                                                               value=" {{ $item->price }}"
+                                                                class="form-control" 
+                                                                type="text" 
+                                                                name="price" 
+                                                                id="price"
+                                                                data-thousands="." 
+                                                                data-decimal="," 
+                                                                data-prefix="€ " 
+                                                                required
+                                                                />
+                        
+                                                            {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
+                                                            {!! Form::close() !!}
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     @else
                                         <tr>
@@ -530,7 +614,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <table class="table table-striped mt-2">
+                            <table class="table table-striped mt-2 table-responsive">
 
                                 <thead>
 
@@ -551,14 +635,37 @@
                                                 <td>-</td>
                                                 <td>{{ $item->init_date }}</td>
                                                 <td>{{ $item->end_date }}</td>
-                                                <td>
-                                                    <a >
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-
-                                                    <a >
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
+                                                <td class="text-end">
+                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Acciones
+                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                                        <span class="svg-icon svg-icon-5 m-0">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon--></a>
+                                                    <!--begin::Menu-->
+                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                        <!--begin::Menu item-->
+                                                        
+                                                        <!--end::Menu item-->
+                                                        <!--begin::Menu item-->
+                                                        <div class="menu-item px-3">
+                                                            <form method="post"
+                                                            action="{{ route('delete-contacts-campaings' , $item->id) }}"
+                                                            class="formDeleteContactCampaing">
+                                                        @csrf
+                                                        <input type="hidden" name="contact" value="{{ $contact->id }}">
+                                                        @method('delete')
+                                                        <button  type="submit" id="logout_button" class="menu-link px-3"> 
+                                                           Eliminar Campaña
+                                                            
+                                                        </button>
+                                                    </form>
+                                                        </div>
+                                                        <!--end::Menu item-->
+                                                    </div>
+                                                    <!--end::Menu-->
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -581,7 +688,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <table class="table table-striped mt-2">
+                            <table class="table table-striped mt-2 table-responsive">
 
                                 <thead>
 
@@ -600,18 +707,77 @@
                                             <tr>
                                                 <td>{{ $item->title }}</td>
                                                 <td>{{ $item->observacion }}</td>
-                                                <td>{{ $item->created_at }}</td>
-                                                <td>{{ $item->updated_at }}</td>
-                                                <td>
-                                                    <a >
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-
-                                                    <a >
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
+                                                <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
+                                                <td>{{date('Y-m-d', strtotime($item->updated_at)) }}</td>
+                                                      
+                                                <td class="text-end">
+                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Acciones
+                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                                        <span class="svg-icon svg-icon-5 m-0">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon--></a>
+                                                    <!--begin::Menu-->
+                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                        <!--begin::Menu item-->
+                                                        <div class="menu-item px-3">
+                                                            <a 
+                                                            data-toggle="modal"
+                                                            data-target="#exampleModal<?= $item->id ?>" 
+                                                            class="menu-link px-3">Editar</a>
+                                                        </div>
+                                                        <!--end::Menu item-->
+                                                        <!--begin::Menu item-->
+                                                        <div class="menu-item px-3">
+                                                            <form method="post"
+                                                            action="{{ route('admin.notes.destroy', $item->id) }}"
+                                                        class="formDeleteNote">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button  type="submit" id="logout_button" class="menu-link px-3"> 
+                                                           Eliminar
+                                                            
+                                                        </button>
+                                                    </form>
+                                                        </div>
+                                                        <!--end::Menu item-->
+                                                    </div>
+                                                    <!--end::Menu-->
                                                 </td>
                                             </tr>
+
+                                           
+
+                                            <div 
+                                                class="modal fade" id="exampleModal<?= $item->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Actualizar Nota</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {!! Form::model($item,[ 'route' => ['admin.notes.update', $item->id ] , 'autocomplete' => 'off', 'files' => true, 'method' =>'put']) !!}
+                                                        
+                                                        <label for="">Titulo</label>
+                                                        <input type="text" class="form-control" name="title" value={{ $item->title }} placeholder="">
+                                                        {{-- <input type="hidden" name="contact" value="{{ $contact->id }}"> --}}
+                                                        <label for="">Observación</label>
+                                                        <textarea name="observacion" cols="30" rows="10" class="form-control" style="resize: none">{{ $item->observacion }}
+                                                        </textarea>
+            
+                                                        {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                   
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            
                                         @endforeach
                                     @else
                                         <td colspan="6">No hay notas guardadas</td>
@@ -644,11 +810,7 @@
                                             {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
                                             {!! Form::close() !!}
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Close</button>
-
-                                        </div>
+                                     
                                     </div>
                                 </div>
                             </div>
@@ -663,7 +825,7 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="agregarPresupuestoLabel">Nueva Presupuesto</h5>
+                                        <h5 class="modal-title" id="agregarPresupuestoLabel">Nuevo Presupuesto</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -673,30 +835,40 @@
 
 
                                         <label for=""><strong>Titulo</strong></label>
-                                        <input type="text" class="form-control" name="title" placeholder="">
+                                        <input type="text" class="form-control" name="title" placeholder="" required>
                                         <input type="hidden" name="contact" value="{{ $contact->id }}">
                                         <label for=""><strong>Observación</strong></label>
                                         <textarea name="observacion" cols="30" rows="10" class="form-control" style="resize: none">
                                     </textarea>
 
                                         <label for=""><strong>Es Válido hasta</strong> </label>
-                                        <input type="date" name="valid_until" class="form-control">
+                                        <input type="date" name="valid_until" class="form-control" required>
 
-                                        <label for=""><strong>Precio del presupuesto</strong></label>
-                                        <input class="form-control" type="text" name="price" id="price"
-                                            data-thousands="." data-decimal="," data-prefix="₡ " />
+                                        <label for="">
+                                            <strong>Precio del presupuesto</strong>
+                                        </label>
+                                        <input 
+                                            class="form-control" 
+                                            type="text" 
+                                            name="price" 
+                                            id="price"
+                                            data-thousands="." 
+                                            data-decimal="," 
+                                            data-prefix="€ " 
+                                            required
+                                            />
 
                                         {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
                                         {!! Form::close() !!}
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
+
+                        
+                        
+
 
                         <div class="modal fade" id="agregarCa" tabindex="-1" aria-labelledby="agregarPresupuestoLabel"
                             aria-hidden="true">
@@ -717,11 +889,7 @@
                                         {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
                                         {!! Form::close() !!}
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -754,11 +922,7 @@
                                         {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-5']) !!}
                                         {!! Form::close() !!}
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-
-                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>

@@ -4,7 +4,7 @@
         @if (auth()->user()->rol == 3)
             <h2 class="text-center text-danger">Acceso restringido</h2>
         @else
-            <div class="col-md-3">
+            <div class="col-sm-12 col-md-3">
                 <!-- Profile Image -->
                 <div class="card mb-5 mb-xl-8">
                     <!--begin::Card body-->
@@ -72,7 +72,7 @@
 
 
             </div>
-            <div class="col">
+            <div class="col-sm-12 col-md-9">
                 <div class="card mb-6 mb-xl-9">
                     <!--begin::Header-->
                     <div class="card-header border-0">
@@ -85,10 +85,15 @@
                             <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base"
                                 bis_skin_checked="1">
     
-                               
+                                <a href="{{ url('admin/config') }}"
+                                            class="btn btn-primary float-right btn-sm mr-1" title="Limpiar filtros">
+                                            <i class="fa fa-repeat"></i>
+                                </a>
     
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                     data-target="#exampleModal">+ Nuevo Usuario</button>
+
+                                    
                                 <!--end::Add customer-->
                             </div>
                            
@@ -109,7 +114,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         {!! Form::label('name', 'Nombre') !!}
-                                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Eduardo']) !!}
+                                        {!! Form::text('name', null, ['class' => 'form-control', 'id' =>'form-control', 'placeholder' => 'Eduardo', 'onkeyup' =>'convertir(this)']) !!}
                                         <br>
                                     </div>
                                     <div class="col-6">
@@ -175,7 +180,8 @@
                     <!--end::Header-->
                     <!--begin::Body-->
                     <div class="card-body py-0">
-                        <table class="table align-middle table-row-dashed fs-6 gy-5  no-footer table-hover table_responsive"
+                        <table 
+                            class="table align-middle table-row-dashed fs-6 gy-5  no-footer table-hover table_responsive"
                             id="kt_customers_table">
                             <!--begin::Table head-->
                             <thead class="">
@@ -190,7 +196,71 @@
                                     <th>Acciones</th>
                                 </tr>
 
+                                <tr class="text-gray-600">
+                                    {{-- @dump($campaing) --}}
+                                    {!! Form::open(['url' => 'admin/config', 'method' => 'get', 'id' => 'frmFiltros']) !!}
+                                    <input type="hidden" id="accion" name="accion" value="2">
 
+                                    <th>
+                                        <input 
+                                            type="text" 
+                                            placeholder="Nombre contacto" 
+                                            name="name"
+                                            id="name" 
+                                            onchange="buscar('namea')" 
+                                            class="form-control">
+                                    </th>
+                                    <th>
+                                        {!! Form::select('country', $paises, null, [
+                                            'id' => 'campaing',
+                                            'class' => 'form-control text-gray-400                                                                                            js-example-basic-single',
+                                            'placeholder' => 'Seleccionar',
+                                            'onchange' => "buscar('campaing')",
+                                        ]) !!}
+
+                                    </th>
+                                    <th>
+                                        <input 
+                                        type="email" 
+                                        placeholder="Email" 
+                                        name="email"
+                                        id="email" 
+                                        onchange="buscar('emaila')" 
+                                        class="form-control">
+                                    </th>
+                                    <th>
+                                       {{--  {!! Form::select('campaing', $list_campaings, null, [
+                                            'id' => 'campaing',
+                                            'class' => 'form-control text-gray-400                                                                                            js-example-basic-single',
+                                            'placeholder' => 'Seleccionar',
+                                            'onchange' => "buscar('campaing')",
+                                        ]) !!} --}}
+                                    </th>
+                                    <th>
+                                        {!! Form::select(
+                                            'statu',
+                                            ['1' => 'Soporte', '2' => 'Directivo', '3' => 'Empleado', '4' => 'Comercial'],
+                                            null,
+                                            [
+                                                'id' => 'statu',
+                                                'class' => 'form-control js-example-basic-single
+                                                                                    text-gray-400',
+                                                'placeholder' => '----',
+                                                'onchange' => "buscar('statu')",
+                                                'required'
+                                            ],
+                                        ) !!}
+                                    </th>
+
+                                    <th>
+                                        
+
+                                    </th>
+
+                                    <th></th>
+
+                                    {!! Form::close() !!}
+                                </tr>
 
                             </thead>
                             <!--end::Table head-->
@@ -199,7 +269,7 @@
 
                                 @foreach ($users as $item)
                                     <tr>
-                                        <td>{{ $item->name }} {{ $item->lastname }}</td>
+                                        <td><a href="{{ url('admin/usuario-detail/' . $item->id) }}">{{ $item->name }} {{ $item->lastname }}</a></td>
                                         <td>{{ $item->country }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
@@ -231,27 +301,113 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a {{-- data-toggle="modal"
-                                                    data-target="#exampleModal<?= $item->id ?>" --}} class="menu-link px-3">Editar</a>
+                                                    <a data-toggle="modal"
+                                                    data-target="#exampleModal<?= $item->id ?>" class="menu-link px-3">Editar</a>
                                                 </div>
                                                
-                                                <div class="menu-item px-3">
-                                                   {{--  <form method="post"
+                                               {{--  <div class="menu-item px-3">
+                                                    <form method="post"
                                                 action="{{ route('admin.campaings.destroy', $item) }}"
                                                 class="formDelete">
                                                 @csrf
-                                                @method('delete') --}}
+                                                @method('delete')
                                                 <button  type="submit" id="logout_button" class="menu-link px-3"> 
                                                    Eliminar
                                                     
                                                 </button>
-                                           {{--  </form> --}}
-                                                </div>
+                                            </form>
+                                                </div> --}}
                                                 <!--end::Menu item-->
                                             </div>
                                             <!--end::Menu-->
                                         </td>
                                     </tr>
+                                    <div class="modal fade" id="exampleModal<?= $item->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Actualizar Usuario</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {!! Form::model($item,['url'=>['admin/usuario-detail', $item->id], 'autocomplete'=>'off', 'files'=>true, 'method'=>'put']) !!}
+                                                <input type="hidden" name="user" value="{{ $item->id }}">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-6">
+                                                      
+                                                        {!! Form::label('name', 'Nombre') !!}
+                                                        {!! Form::text('name', $item->name, ['class'=>'form-control','placeholder'=>'Pedro', ]) !!}
+                                                        @error('name')
+                                                            <small class="text-danger">Este campo es requerido</small>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-6">
+                                                       
+                                                        {!! Form::label('lastname', 'Apellido') !!}
+                                                        {!! Form::text('lastname', $item->lastname, ['class'=>'form-control','placeholder'=>'Perez', ]) !!}
+                                                        @error('lastname')
+                                                            <small class="text-danger">Este campo es requerido</small>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                
+                                                <div class="row  mt-2">
+                                                    <div class="col-sm-12 col-md-6">
+                                                        {!! Form::label('phone', 'Telefono') !!}
+                                                        {!! Form::text('phone', isset($item->phone) ? $item->phone : null, ['class'=>'form-control','placeholder'=>'+34 455487895', ]) !!}
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-6">
+                                                       
+                                                        {!! Form::label('email', 'Email') !!}
+                                                        {!! Form::email('email', isset($item->email) ? $item->email :null, ['class'=>'form-control','placeholder'=>'test@prueba.com', ]) !!}
+                                                        @error('email')
+                                                            <small class="text-danger">Este campo es requerido</small>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                
+                                                <div class="row  mt-2">
+                                                    <div class="col-sm-12 col-md-6">
+                                                       
+                                                        {!! Form::label('contact_status', 'Rol de usuario') !!}
+                                                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                        {!! Form::select('rol',['1' =>'Soporte', '2' => 'Directivo', '3'=>'Empleado','4' =>'Comercial'], $item->rol,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+                                
+                                                        @error('statu')
+                                                            <small class="text-danger">Este campo es requerido</small>
+                                                        @enderror
+                                                        
+                                                    </div>
+                                                    
+                                                    <div class="col-sm-12 col-md-6">
+                                                      
+                                                        {!! Form::label('country', 'País') !!}
+                                                        {!! Form::select('country', $paises, isset($item->country) ? $item->country : null, ['class'=>'form-control','placeholder'=>'---', ]) !!}
+                                                        @error('country')
+                                                            <small class="text-danger">Este campo es requerido</small>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                
+                                                
+
+                                               
+                                
+                                             
+                                
+                                                <div class="mt-5">
+                                
+                                                    {!! Form::submit('Guardar', ['class'=>'btn btn-primary ']) !!}
+                                                    
+                                                </div>
+                                                {!! Form::close() !!}
+                                            </div>
+                                           
+                                          </div>
+                                        </div>
+                                    </div>
                                 @endforeach
 
 
@@ -262,6 +418,13 @@
                         </table>
 
                     </div>
+                    <div
+                    class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+                    <div class="dataTables_paginate paging_simple_numbers"
+                        id="kt_customers_table_paginate">
+                        {{ $users->links() }}
+                    </div>
+                </div>
                     <!--end::Body-->
                 </div>
             </div>
@@ -269,5 +432,55 @@
 
 
     </div>
+
+@endsection
+
+@section('script')
+
+    <script>
+        $(document).ready(function() {
+                    $('.js-example-basic-single').select2();
+                });
+
+                function buscar(tipo) {
+
+                    $('#accion').val(1);
+                    var textoSelect = $('#' + tipo).val();
+                    const ENTER_KEY_CODE = 13;
+
+                    switch (tipo) {
+
+
+                        case 'name':
+                            document.querySelector('#name').addEventListener('keyup', function(e) {
+                                if (e.keyCode === ENTER_KEY_CODE) {
+                                    document.getElementById("frmFiltros").submit();
+                                }
+                            });
+                            break;
+
+                        case 'lastname':
+                            document.querySelector('#lastname').addEventListener('keyup', function(e) {
+                                if (e.keyCode === ENTER_KEY_CODE) {
+                                    document.getElementById("frmFiltros").submit();
+                                }
+                            });
+                            break;
+                        case 'email':
+                            document.querySelector('#email').addEventListener('keyup', function(e) {
+                                if (e.keyCode === ENTER_KEY_CODE) {
+                                    document.getElementById("frmFiltros").submit();
+                                }
+                            });
+                            break;
+
+
+                        default:
+                            document.getElementById("frmFiltros").submit();
+                            break;
+                    }
+
+                }
+    </script>
 
 @endsection

@@ -69,8 +69,10 @@ class BudgetController extends Controller
 
             Alert::success('Presupuesto almacenado');
             return redirect()->back();
-       } catch (\Throwable $th) {
-        throw $th;
+       } catch (\PDOException $th) {
+           /*  throw $th; */
+           Alert::success('Error al guadar presupuesto');
+           return redirect()->back();
        }
 
     }
@@ -87,6 +89,7 @@ class BudgetController extends Controller
     public function update(Request $request, Budget $budget){
 
         if(!$budget){
+            Alert::error('Presupuesto no encontrado, contacte a soporte');
             return redirect()->back();
         }
 
@@ -94,11 +97,12 @@ class BudgetController extends Controller
             //code...
 
             $budget->update($request->all());
-
+            Alert::success('Presupuesto actualizado');
             return redirect()->route('admin.budget.show', $budget)->with(['message' =>'Presupuesto actualizado']);
 
         } catch (\Throwable $th) {
             //throw $th;
+            Alert::error('Error actualizando presupuesto, contacte a soporte');
             return redirect()->back();
         }
 
@@ -115,10 +119,12 @@ class BudgetController extends Controller
         try {
             //code...
             $budget->delete();
-            $budgets = Budget::where('user_created', $user_id)->paginate(20);
-            return redirect()->route('admin.budget.index', compact('budgets'))->with(['message' => 'Presupuesto eliminado']);
+            /* $budgets = Budget::where('user_created', $user_id)->paginate(20); */
+            Alert::success('Presupuesto eliminado');
+            return redirect()->back();
         } catch (\Throwable $th) {
             //throw $th;
+            Alert::error('Presupuesto no eliminado, contacte a soporte');
             return redirect()->back();
         }
 
