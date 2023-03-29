@@ -141,11 +141,11 @@
                            <div class="me-3">
                                <button class="btn btn-primary float-right btn-sm" data-toggle="modal"
                                    data-target="#exampleModal" type="button">
-                                   Agregar Contactos
+                                   Añadir Contactos
                                </button>
                                {{--  <button class="btn btn-primary float-right btn-sm mr-2" data-toggle="modal"
                                 data-target="#exampleModal" type="button">
-                                Agregar Contactos
+                                Añadir Contactos
                             </button> --}}
                            </div>
                            <div class="me-3">
@@ -352,7 +352,7 @@
 
                                    {{-- <button class="btn btn-primary float-right mb-3 btn-sm" data-toggle="modal"
                                         data-target="#exampleModal" type="button">
-                                        Agregar Contactos
+                                        Añadir Contactos
                                     </button> --}}
 
                                    <a href="{{ url('admin/contactos-lista') }}"

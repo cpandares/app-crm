@@ -391,7 +391,7 @@ class ContactsController extends Controller
             'phone' => 'required',
             'country' => 'required',
             'medio_comunicacion' => 'required',
-            'statu' => 'required',
+           
         ]);
 
         if (Contact::where('email', $request->email)->exists()) {
@@ -415,7 +415,7 @@ class ContactsController extends Controller
             $contact->city = isset($request->city) ?  $request->city : 'No Asignado';
             $contact->state = $request->state;
             $contact->postcode = $request->postcode;
-            $contact->contact_status = $request->statu;
+            $contact->contact_status = 1;
             $contact->user_id = $user_id;
             $contact->comunication_medium = $request->medio_comunicacion;
             $contact->created_at = Carbon::now();
@@ -447,8 +447,9 @@ class ContactsController extends Controller
             Alert::success('Contacto Guardado');
             return redirect()->back();
         } catch (\PDOException $th) {
-            return $th->getMessage();
-            /*  return redirect()->route('admin.contacts.index')->with(['message' => 'Contacto no guardado']); */
+            /* return $th->getMessage(); */
+            Alert::error('Contacto no guardado, contacte con soporte');
+             return redirect()->route('admin.contacts.index');
         }
     }
 

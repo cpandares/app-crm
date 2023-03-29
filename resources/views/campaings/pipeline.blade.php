@@ -128,11 +128,11 @@
                          <div class="me-3">
                              <button class="btn btn-primary float-right btn-sm" data-toggle="modal"
                                  data-target="#exampleModal" type="button">
-                                 Agregar Contactos
+                                 Añadir Contactos
                              </button>
                             {{--  <button class="btn btn-primary float-right btn-sm mr-2" data-toggle="modal"
                              data-target="#exampleModal" type="button">
-                             Agregar Contactos
+                             Añadir Contactos
                          </button> --}}
                          </div>
                          <div class="me-3">
@@ -325,7 +325,7 @@
 
                                  {{-- <button class="btn btn-primary float-right mb-3 btn-sm" data-toggle="modal"
                                      data-target="#exampleModal" type="button">
-                                     Agregar Contactos
+                                     Añadir Contactos
                                  </button> --}}
 
                                  <a href="{{ route('admin.campaings.show', $campaing->id) }}" class="btn btn-primary float-right btn-sm mr-1">
@@ -400,7 +400,7 @@
                                         <div class="row  mt-2">
                                             <div class="col-md-6">
                                                 {!! Form::label('postcode', 'Código Postal') !!}
-                                                {!! Form::text('postcode', null, ['class' => 'form-control', 'placeholder' => '285056']) !!}
+                                                {!! Form::text('postcode', null, ['class' => 'form-control', 'placeholder' => '03430']) !!}
                                             </div>
                                             <div class="col-md-6">
 
@@ -635,7 +635,7 @@
                                                             {!! Form::label('postcode', 'Código Postal') !!}
                                                             {!! Form::text('postcode', isset($item->postcode) ? $item->postcode : null, [
                                                                 'class' => 'form-control',
-                                                                'placeholder' => '65656',
+                                                                'placeholder' => '03430',
                                                             ]) !!}
                                                         </div>
                                                         <div class="col-md-6">
@@ -837,7 +837,7 @@
                                                          {!! Form::label('postcode', 'Código Postal') !!}
                                                          {!! Form::text('postcode', isset($item->postcode) ? $item->postcode : null, [
                                                              'class' => 'form-control',
-                                                             'placeholder' => '65656',
+                                                             'placeholder' => '03430',
                                                          ]) !!}
                                                      </div>
                                                      <div class="col-md-6">
@@ -1040,7 +1040,7 @@
                                                             {!! Form::label('postcode', 'Código Postal') !!}
                                                             {!! Form::text('postcode', isset($item->postcode) ? $item->postcode : null, [
                                                                 'class' => 'form-control',
-                                                                'placeholder' => '65656',
+                                                                'placeholder' => '03430',
                                                             ]) !!}
                                                         </div>
                                                         <div class="col-md-6">
@@ -1238,7 +1238,7 @@
                                                             {!! Form::label('postcode', 'Código Postal') !!}
                                                             {!! Form::text('postcode', isset($item->postcode) ? $item->postcode : null, [
                                                                 'class' => 'form-control',
-                                                                'placeholder' => '65656',
+                                                                'placeholder' => '03430',
                                                             ]) !!}
                                                         </div>
                                                         <div class="col-md-6">
@@ -1436,7 +1436,7 @@
                                                          {!! Form::label('postcode', 'Código Postal') !!}
                                                          {!! Form::text('postcode', isset($item->postcode) ? $item->postcode : null, [
                                                              'class' => 'form-control',
-                                                             'placeholder' => '65656',
+                                                             'placeholder' => '03430',
                                                          ]) !!}
                                                      </div>
                                                      <div class="col-md-6">

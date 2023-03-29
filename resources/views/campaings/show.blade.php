@@ -52,7 +52,7 @@
 
                         <button class="btn btn-primary float-right mb-3 btn-sm" data-toggle="modal"
                             data-target="#exampleModal" type="button">
-                            Agregar Contactos
+                            Añadir Contactos
                         </button>
                         <a href="{{ url('admin/campaings/contacts/' . $campaing->id) }}"
                             class="btn btn-primary float-right btn-sm mr-1">

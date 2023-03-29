@@ -35,7 +35,7 @@
 
                                         <button class="btn btn-primary float-right mb-3 btn-sm" data-toggle="modal"
                                             data-target="#exampleModal" type="button">
-                                            Agregar Contactos
+                                            Añadir Contactos
                                         </button>
                                         <a href="{{ route('admin.contact.index') }}"
                                             class="btn btn-primary float-right btn-sm mr-1">
@@ -72,7 +72,7 @@
                                                     <div class="col-sm-12 col-sm-12 col-md-6">
 
                                                         {!! Form::label('name', 'Nombre') !!}
-                                                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Pedro']) !!}
+                                                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Pedro' ,'required']) !!}
                                                         @error('name')
                                                             <small class="text-danger">Este campo es requerido</small>
                                                         @enderror
@@ -80,7 +80,7 @@
                                                     <div class="col-sm-12 col-sm-12 col-md-6">
 
                                                         {!! Form::label('lastname', 'Apellido') !!}
-                                                        {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez']) !!}
+                                                        {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez', 'required']) !!}
                                                         @error('lastname')
                                                             <small class="text-danger">Este campo es requerido</small>
                                                         @enderror
@@ -89,13 +89,13 @@
 
                                                 <div class="row  mt-2">
                                                     <div class="col-sm-12 col-sm-12 col-md-6">
-                                                        {!! Form::label('phone', 'Telefono') !!}
-                                                        {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => '+34 455487895']) !!}
+                                                        {!! Form::label('phone', 'Teléfono') !!}
+                                                        {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => '+34 455487895', 'required']) !!}
                                                     </div>
                                                     <div class="col-sm-12 col-md-6">
 
                                                         {!! Form::label('email', 'Email') !!}
-                                                        {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'test@prueba.com']) !!}
+                                                        {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'test@prueba.com', 'required']) !!}
                                                         @error('email')
                                                             <small class="text-danger">Este campo es requerido</small>
                                                         @enderror
@@ -105,12 +105,12 @@
                                                 <div class="row  mt-2">
                                                     <div class="col-sm-12 col-md-6">
                                                         {!! Form::label('postcode', 'Código Postal') !!}
-                                                        {!! Form::text('postcode', null, ['class' => 'form-control', 'placeholder' => '285056']) !!}
+                                                        {!! Form::text('postcode', null, ['class' => 'form-control', 'placeholder' => '03430']) !!}
                                                     </div>
                                                     <div class="col-sm-12 col-md-6">
 
                                                         {!! Form::label('country', 'País') !!}
-                                                        {!! Form::select('country', $paises, null, ['class' => 'form-control', 'placeholder' => 'España']) !!}
+                                                        {!! Form::select('country', $paises, null, ['class' => 'form-control', 'placeholder' => '--Seleccionar País--', 'required']) !!}
                                                         @error('country')
                                                             <small class="text-danger">Este campo es requerido</small>
                                                         @enderror
@@ -150,12 +150,10 @@
                                                             
                                                             'class' => 'form-control',
                                                             'placeholder' => 'Seleccionar',
-                                                            'required'
+                                                           
                                                         ]) !!}
         
-                                                        @error('statu')
-                                                            <small class="text-danger">Este campo es requerido</small>
-                                                        @enderror
+                                                        
         
                                                     </div>
                                                 </div>
@@ -171,25 +169,9 @@
                                                             'placeholder' => 'Seleccionar',
                                                         ]) !!}
 
-                                                        @error('medio_comunicacion')
-                                                            <small class="text-danger">Este campo es requerido</small>
-                                                        @enderror
+                                                     
                                                     </div>
-                                                    <div class="col-sm-12 col-md-6">
-
-                                                        {!! Form::label('medio_comunicacion', 'Estado del Cliente') !!}
-                                                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                        {!! Form::select('statu', $status, null, [
-                                                            'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
-                                                            'class' => 'form-control',
-                                                            'placeholder' => 'Seleccionar',
-                                                        ]) !!}
-
-                                                        @error('statu')
-                                                            <small class="text-danger">Este campo es requerido</small>
-                                                        @enderror
-
-                                                    </div>
+                                                  
                                                 </div>
 
 
@@ -239,7 +221,7 @@
                                             <th class="min-w-125px">Nombre Completo </th>
                                           {{--   <th class="min-w-125px ">Apellido</th> --}}
                                             <th class="min-w-125px ">Email</th>
-                                            <th class="min-w-125px ">Phone</th>
+                                            <th class="min-w-125px ">Teléfono</th>
                                             <th class="min-w-125px ">Campañas</th>
                                             <th class="min-w-125px ">Estado</th>
                                             <th class="text-end min-w-70px" rowspan="1" colspan="1"
@@ -417,7 +399,7 @@
                                         
                                                         <div class="row  mt-2">
                                                             <div class="col-sm-12 col-md-6">
-                                                                {!! Form::label('phone', 'Telefono') !!}
+                                                                {!! Form::label('phone', 'Teléfono') !!}
                                                                 {!! Form::text('phone', isset($item->phone) ? $item->phone : null, ['class'=>'form-control','placeholder'=>'+34 455487895', ]) !!}
                                                             </div>
                                                             <div class="col-sm-12 col-md-6">
