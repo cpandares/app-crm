@@ -56,7 +56,7 @@
 
                                 <div class="modal fade " id="exampleModal" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class=" modal-dialog modal-dialog-centered mw-650px">
+                                    <div class=" modal-dialog modal-lg modal-dialog-centered ">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Nuevo Contacto</h5>
@@ -71,6 +71,23 @@
                                                 <div class="row">
                                                     <div class="col-sm-12 col-sm-12 col-md-6">
 
+                                                        {!! Form::label('type_contact', 'Tipo de contacto') !!}
+                                                        {!! Form::select('type_contact', ['1' =>'Persona','2' =>'Empresa'], null, ['class' => 'form-control', 'placeholder' => '--Seleciona un tipo--' ,'required']) !!}
+                                                        
+                                                    </div>
+                                                   {{--  <div class="col-sm-12 col-sm-12 col-md-6">
+
+                                                        {!! Form::label('lastname', 'Apellidos') !!}
+                                                        {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez', 'required']) !!}
+                                                        @error('lastname')
+                                                            <small class="text-danger">Este campo es requerido</small>
+                                                        @enderror
+                                                    </div> --}}
+                                                </div>
+
+                                                <div class="row mt-2">
+                                                    <div class="col-sm-12 col-sm-12 col-md-6">
+
                                                         {!! Form::label('name', 'Nombre') !!}
                                                         {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Pedro' ,'required']) !!}
                                                         @error('name')
@@ -79,7 +96,7 @@
                                                     </div>
                                                     <div class="col-sm-12 col-sm-12 col-md-6">
 
-                                                        {!! Form::label('lastname', 'Apellido') !!}
+                                                        {!! Form::label('lastname', 'Apellidos') !!}
                                                         {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez', 'required']) !!}
                                                         @error('lastname')
                                                             <small class="text-danger">Este campo es requerido</small>
@@ -171,6 +188,18 @@
 
                                                      
                                                     </div>
+
+                                                    <div class="col-sm-12 col-md-6">
+
+                                                        {!! Form::label('website', 'Página Web') !!}
+                                                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                        {!! Form::url('website', null,['id' => 'cliente_tarjeta_franquicia_tarjeta_id',
+                                                            'class' => 'form-control',
+                                                            'placeholder' => 'www.example.com',
+                                                        ]) !!}
+
+                                                     
+                                                    </div>
                                                   
                                                 </div>
 
@@ -222,7 +251,9 @@
                                           {{--   <th class="min-w-125px ">Apellido</th> --}}
                                             <th class="min-w-125px ">Email</th>
                                             <th class="min-w-125px ">Teléfono</th>
+                                            <th class="min-w-125px ">Página  web</th>
                                             <th class="min-w-125px ">Campañas</th>
+                                            <th class="min-w-125px ">Tipo de contacto</th>
                                             <th class="min-w-125px ">Estado</th>
                                             <th class="text-end min-w-70px" rowspan="1" colspan="1"
                                                 aria-label="Acciones" style="width: 146.738px;">Acciones</th>
@@ -243,6 +274,7 @@
 
                                             </th>
                                             <th></th>
+                                            <th></th>
                                             <th>
                                                 {!! Form::select('campaing', $list_campaings, null, [
                                                     'id' => 'campaing',
@@ -250,6 +282,19 @@
                                                     'placeholder' => 'Seleccionar',
                                                     'onchange' => "buscar('campaing')",
                                                 ]) !!}
+                                            </th>
+                                            <th>
+                                                {!! Form::select('tipo_contacto',['1' => 'Persona', '2' => 'Empresa'],
+                                                    null,
+                                                    [
+                                                        'id' => 'tipo_contacto',
+                                                        'class' => 'form-control js-example-basic-single
+                                                                                            text-gray-400',
+                                                        'placeholder' => '----',
+                                                        'onchange' => "buscar('statu')",
+                                                        
+                                                    ],
+                                                ) !!}
                                             </th>
                                             <th>
                                                 {!! Form::select(
@@ -294,7 +339,15 @@
                                                     {{ $item->email }}
                                                 </td>
                                                 <td>{{ $item->phone }}</td>
-
+                                                <td>
+                                                    @if ($item->website)
+                                                        <a href="{{ $item->website }}" target="_blank" rel="noopener noreferrer">
+                                                            {{ $item->website }}
+                                                        </a>
+                                                    @else
+                                                        <p class="text-danger">No asignado</p>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @php
                                                         $campaigs = $controlador->getCampaingsContacts($item->id);
@@ -308,7 +361,15 @@
                                                     {{-- {{ $item->campaing_name }} --}}
                                                 </td>
 
-
+                                                <td>
+                                                    @if ($item->type_contact == 1)
+                                                        <p  class="badge badge-light-info">Persona</p>
+                                                    @elseif($item->type_contact == 2)
+                                                        <p  class="badge badge-light-success">Empresa</p>
+                                                    @else
+                                                        <p><p  class="badge badge-primary">No asignado</p></p>
+                                                    @endif
+                                                </td>
 
                                                 <td>
                                                     {{--  @dump($item) --}}
@@ -377,6 +438,24 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         {!! Form::model($item,['route'=>['admin.contact.update', $item->id], 'autocomplete'=>'off', 'files'=>true, 'method'=>'put']) !!}
+
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-sm-12 col-md-6">
+        
+                                                                {!! Form::label('type_contact', 'Tipo de contacto') !!}
+                                                                {!! Form::select('type_contact', ['1' =>'Persona','2' =>'Empresa'], isset($item->type_contact)? $item->type_contact : null, ['class' => 'form-control', 'placeholder' => '--Seleciona un tipo--' ,'required']) !!}
+                                                                
+                                                            </div>
+                                                           {{--  <div class="col-sm-12 col-sm-12 col-md-6">
+        
+                                                                {!! Form::label('lastname', 'Apellidos') !!}
+                                                                {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez', 'required']) !!}
+                                                                @error('lastname')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                            </div> --}}
+                                                        </div>
+
                                 
                                                         <div class="row">
                                                             <div class="col-sm-12 col-md-6">
@@ -456,11 +535,11 @@
                 
                                                                 {!! Form::label('campaing', 'Asignar Campaña (Opcional)') !!}
                                                                 {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                                {!! Form::select('campaing', $campaings, null, [
+                                                                {!! Form::select('campaing', $list_campaings, null, [
                                                                     
                                                                     'class' => 'form-control',
                                                                     'placeholder' => 'Seleccionar',
-                                                                    'required'
+                                                                    
                                                                 ]) !!}
                 
                                                                 @error('statu')
@@ -471,7 +550,7 @@
                                                         </div>
                                         
                                                         <div class="row  mt-2">
-                                                            <div class="col-sm-12 col-md-6">
+                                                            <div class="col-sm-12 col-md-4">
                                                              
                                                                 {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
                                                                 {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
@@ -481,11 +560,20 @@
                                                                     <small class="text-danger">Este campo es requerido</small>
                                                                 @enderror
                                                             </div>
-                                                            <div class="col-sm-12 col-md-6">
+                                                            <div class="col-sm-12 col-md-4">
                                                                
                                                                 {!! Form::label('contact_status', 'Estado del Cliente') !!}
                                                                 {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
                                                                 {!! Form::select('contact_status',$status, $item->contact_status,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+                                        
+                                                               
+                                                                
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-4">
+                                                               
+                                                                {!! Form::label('website', 'Página web') !!}
+                                                                {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                                {!! Form::url('website', isset($item->website) ? $item->website : null,['id'=>'website','class'=>'form-control','placeholder'=>'example.com', ]) !!}
                                         
                                                                 @error('statu')
                                                                     <small class="text-danger">Este campo es requerido</small>

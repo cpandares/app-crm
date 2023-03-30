@@ -621,7 +621,7 @@ class CampaingController extends Controller
             'phone' =>'required',
             'country' => 'required',
             'medio_comunicacion' => 'required',
-            'statu' => 'required',
+            
         ]);
 
         if(Contact::where('email', $request->email)->exists()){
@@ -638,12 +638,17 @@ class CampaingController extends Controller
         $contact->lastname = $request->lastname;
         $contact->email = $request->email;
         $contact->phone = $request->phone;
+
+        $contact->website = isset($request->website) ? $request->website : null;
+        $contact->type_contact = isset($request->type_contact) ?  $request->type_contact : 1; //Si no viene el tipo contacto por defecto sera persona
+        $contact->types_contacts = isset($request->types_contacts) ? $request->types_contacts : null;
         $contact->address = $request->address;
+
         $contact->country = $request->country;
         $contact->city = isset($request->city) ?  $request->city : 'No Asignado';
         $contact->state = $request->state;
         $contact->postcode = $request->postcode;
-        $contact->contact_status = $request->statu;
+        $contact->contact_status = 1;
         $contact->user_id = $user_id;
         $contact->comunication_medium = $request->medio_comunicacion;
         $contact->created_at = Carbon::now();

@@ -83,7 +83,7 @@ class ContactsController extends Controller
         $user_id = auth()->user()->id;
         $controlador = new ContactsController();
         $contacts = DB::table('contacts')->where('user_id', $user_id)
-            ->select('contacts.id', 'contacts.name','contacts.contact_status', 'contacts.lastname', 'contacts.email', 'contacts.created_at', 'campaing.campaing_name', 'contacts.phone', 'contacts.postcode', 'contacts.country', 'contacts.city','contacts.comunication_medium', 'contacts.state', 'contacts.address')
+            ->select('contacts.id', 'contacts.name','contacts.contact_status', 'contacts.lastname', 'contacts.email', 'contacts.created_at', 'campaing.campaing_name', 'contacts.phone', 'contacts.postcode', 'contacts.country', 'contacts.city','contacts.comunication_medium', 'contacts.state', 'contacts.address', 'contacts.website','contacts.type_contact')
             ->leftJoin('campaing', 'campaing.contact_id', '=', 'contacts.id')
             ->orderByDesc('contacts.id');
             /* ->select('contacts.*','campaing.*') */
@@ -109,6 +109,9 @@ class ContactsController extends Controller
         }
         if (isset($input['statu'])) {
             $condicion['contacts.contact_status'] = $input['statu'];
+        }
+        if (isset($input['tipo_contacto'])) {
+            $condicion['contacts.type_contact'] = $input['tipo_contacto'];
         }
         $contacts = $contacts->where($condicion)->paginate(20);
         
@@ -414,7 +417,12 @@ class ContactsController extends Controller
             $contact->country = $request->country;
             $contact->city = isset($request->city) ?  $request->city : 'No Asignado';
             $contact->state = $request->state;
-            $contact->postcode = $request->postcode;
+            $contact->postcode = isset($request->postcode) ? $request->postcode : null;
+
+            $contact->website = isset($request->website) ? $request->website : null;
+            $contact->type_contact = isset($request->type_contact) ?  $request->type_contact : 1; //Si no viene el tipo contacto por defecto sera persona
+            $contact->types_contacts = isset($request->types_contacts) ? $request->types_contacts : null;
+
             $contact->contact_status = 1;
             $contact->user_id = $user_id;
             $contact->comunication_medium = $request->medio_comunicacion;
@@ -449,7 +457,7 @@ class ContactsController extends Controller
         } catch (\PDOException $th) {
             /* return $th->getMessage(); */
             Alert::error('Contacto no guardado, contacte con soporte');
-             return redirect()->route('admin.contacts.index');
+             return redirect()->back();
         }
     }
 
@@ -508,7 +516,12 @@ class ContactsController extends Controller
             $contact->city = $request->city;
             $contact->phone = $request->phone;
             $contact->postcode = $request->postcode;
-            $status = ContactStatus::where('id', (int) $request->statu)->first();
+
+            $contact->website = isset($request->website) ? $request->website : null;
+            $contact->type_contact = isset($request->type_contact) ?  $request->type_contact : 1; //Si no viene el tipo contacto por defecto sera persona
+            $contact->types_contacts = isset($request->types_contacts) ? $request->types_contacts : null;
+            $contact->address = $request->address;
+            $status = ContactStatus::where('id', (int) $request->contact_status)->first();
            /*  dd($status); */
             $contact->contact_status = $status->id;
             $contact->update();

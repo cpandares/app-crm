@@ -90,7 +90,7 @@
                                 ]) !!}
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-sm-12 col-md-6">
 
                                         {!! Form::label('name', 'Nombre') !!}
                                         {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Pedro']) !!}
@@ -98,9 +98,9 @@
                                             <small class="text-danger">Este campo es requerido</small>
                                         @enderror
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-sm-12 col-md-6">
 
-                                        {!! Form::label('lastname', 'Apellido') !!}
+                                        {!! Form::label('lastname', 'Apellidos') !!}
                                         {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez']) !!}
                                         @error('lastname')
                                             <small class="text-danger">Este campo es requerido</small>
@@ -109,11 +109,11 @@
                                 </div>
 
                                 <div class="row  mt-2">
-                                    <div class="col-md-6">
+                                    <div class="col-sm-12 col-md-6">
                                         {!! Form::label('phone', 'Telefono') !!}
                                         {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => '+34 455487895']) !!}
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-sm-12 col-md-6">
 
                                         {!! Form::label('email', 'Email') !!}
                                         {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'test@prueba.com']) !!}
@@ -124,11 +124,11 @@
                                 </div>
 
                                 <div class="row  mt-2">
-                                    <div class="col-md-6">
+                                    <div class="col-sm-12 col-md-6">
                                         {!! Form::label('postcode', 'Código Postal') !!}
                                         {!! Form::text('postcode', null, ['class' => 'form-control', 'placeholder' => '285056']) !!}
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-sm-12 col-md-6">
 
                                         {!! Form::label('country', 'País') !!}
                                         {!! Form::select('country', $paises, null, ['class' => 'form-control', 'placeholder' => '--Seleccionar--']) !!}
@@ -139,18 +139,18 @@
                                 </div>
 
                                 <div class="row  mt-2">
-                                    <div class="col-md-6">
+                                    <div class="col-sm-12 col-md-6">
                                         {!! Form::label('city', 'Ciudad') !!}
                                         {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-sm-12 col-md-6">
                                         {{-- {!! Form::label('state', 'Provincia (opcional)') !!}
                                     {!! Form::text('state', null, ['class'=>'form-control','placeholder'=>'', ]) !!} --}}
                                     </div>
                                 </div>
 
                                 <div class="row  mt-2">
-                                    <div class="col-md-6">
+                                    <div class="col-sm-12 col-md-6">
 
                                         {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
                                         {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
@@ -164,20 +164,16 @@
                                             <small class="text-danger">Este campo es requerido</small>
                                         @enderror
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-sm-12 col-md-6">
 
-                                        {!! Form::label('medio_comunicacion', 'Estado del Cliente') !!}
+                                        {!! Form::label('website', 'Página Web') !!}
                                         {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                        {!! Form::select('statu', $status, null, [
-                                            'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
+                                        {!! Form::url('website', null,['id' => 'cliente_tarjeta_franquicia_tarjeta_id',
                                             'class' => 'form-control',
-                                            'placeholder' => 'Seleccionar',
+                                            'placeholder' => 'www.example.com',
                                         ]) !!}
 
-                                        @error('statu')
-                                            <small class="text-danger">Este campo es requerido</small>
-                                        @enderror
-
+                                     
                                     </div>
                                 </div>
 
