@@ -135,7 +135,7 @@ class CampaingController extends Controller
             return redirect()->route('admin.contacs.index');
         } */
         $comunicacion_medias = ComunicationMedium::pluck('comunication_medio', 'id');
-        
+        $list_campaings =  Campaing::where('created_user', $user_id)->pluck('campaing_name', 'id');
         $status = ContactStatus::pluck('status_name', 'id');
 
         $contacts = DB::table('contacts')
@@ -166,6 +166,10 @@ class CampaingController extends Controller
 
             $condicion['contacts.country'] = $input['country'];
         }
+        if (isset($input['tipo_contacto'])) {
+
+            $condicion['contacts.type_contact'] = $input['tipo_contacto'];
+        }
 
         $contacts = $contacts->where($condicion)->paginate(20);
 
@@ -176,7 +180,8 @@ class CampaingController extends Controller
             'paises' => $this->getPaises(),
             'comunicacion_medias' => $comunicacion_medias,
             'status' => $status,
-            'title' => $title
+            'title' => $title,
+            'list_campaings' =>$list_campaings
         ]);
     }
 

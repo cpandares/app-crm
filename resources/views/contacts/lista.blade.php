@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('menu')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content" bis_skin_checked="1">
 
 
@@ -239,7 +240,7 @@
                         <!--begin::Table-->
                         <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"
                             bis_skin_checked="1">
-                            <div class="table-responsive" bis_skin_checked="1">
+                            <div  bis_skin_checked="1">
                                 <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
                                     id="kt_customers_table">
                                     <!--begin::Table head-->
@@ -248,7 +249,7 @@
                                         <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
 
                                             <th class="min-w-125px">Nombre Completo </th>
-                                          {{--   <th class="min-w-125px ">Apellido</th> --}}
+                                          
                                             <th class="min-w-125px ">Email</th>
                                             <th class="min-w-125px ">Teléfono</th>
                                             <th class="min-w-125px ">Página  web</th>
@@ -438,7 +439,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         {!! Form::model($item,['route'=>['admin.contact.update', $item->id], 'autocomplete'=>'off', 'files'=>true, 'method'=>'put']) !!}
-
+                                                        <input type="hidden" name="contact" value={{ $item->id }}>
                                                         <div class="row">
                                                             <div class="col-sm-12 col-sm-12 col-md-6">
         

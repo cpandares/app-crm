@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@include('menu')
     <div class="row">
 
         <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
@@ -90,6 +91,23 @@
                                 ]) !!}
 
                                 <div class="row">
+                                    <div class="col-sm-12 col-sm-12 col-md-6">
+
+                                        {!! Form::label('type_contact', 'Tipo de contacto') !!}
+                                        {!! Form::select('type_contact', ['1' =>'Persona','2' =>'Empresa'], null, ['class' => 'form-control', 'placeholder' => '--Seleciona un tipo--' ,'required']) !!}
+                                        
+                                    </div>
+                                {{--  <div class="col-sm-12 col-sm-12 col-md-6">
+
+                                        {!! Form::label('lastname', 'Apellidos') !!}
+                                        {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez', 'required']) !!}
+                                        @error('lastname')
+                                            <small class="text-danger">Este campo es requerido</small>
+                                        @enderror
+                                    </div> --}}
+                                </div>
+
+                                <div class="row mt-2">
                                     <div class="col-sm-12 col-md-6">
 
                                         {!! Form::label('name', 'Nombre') !!}
@@ -144,8 +162,17 @@
                                         {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
                                     </div>
                                     <div class="col-sm-12 col-md-6">
-                                        {{-- {!! Form::label('state', 'Provincia (opcional)') !!}
-                                    {!! Form::text('state', null, ['class'=>'form-control','placeholder'=>'', ]) !!} --}}
+        
+                                        {!! Form::label('address', 'Dirección (opcional)') !!}
+                                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                        {!! Form::text('address',  null, [
+                                           
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Calle tercera casa 25',
+                                           
+                                        ]) !!}
+
+                                     
                                     </div>
                                 </div>
 
@@ -206,12 +233,16 @@
                             <table class="table table-hover table-striped ">
                                 <thead>
                                     <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0 text-center">
-                                        <th>Nombre de contacto</th>
-
-                                        <th>Email</th>
-                                        <th>Pais</th>
-                                        {{-- <th>Ciudad</th> --}}
-                                        <th>Estado</th>
+                                        <th class="min-w-125px">Nombre Completo </th>
+                                          
+                                        <th class="min-w-125px ">Email</th>
+                                        <th class="min-w-125px ">Teléfono</th>
+                                        <th class="min-w-125px ">Página  web</th>
+                                        <th class="min-w-125px ">Paìs</th>
+                                        <th class="min-w-125px ">Tipo de contacto</th>
+                                        <th class="min-w-125px ">Estado</th>
+                                        <th class="text-end min-w-70px" rowspan="1" colspan="1"
+                                            aria-label="Acciones" style="width: 146.738px;">Acciones</th>
 
                                     </tr>
 
@@ -221,8 +252,11 @@
                                         <input type="hidden" id="accion" name="accion" value="2">
 
                                         <th>
-                                            <input type="text" placeholder="Nombre contacto" name="name"
-                                                id="name" {{--  onfocusout="buscar('documento')"  --}} onchange="buscar('documento')"
+                                            <input type="text" 
+                                                placeholder="Nombre contacto" 
+                                                 name="name"
+                                                id="name" 
+                                                onchange="buscar('documento')"
                                                 class="form-control">
                                         </th>
 
@@ -230,6 +264,9 @@
                                             <input type="text" placeholder="Email" name="email" id="email"
                                                 {{--  onfocusout="buscar('documento')"  --}} onchange="buscar('emaila')" class="form-control">
                                         </th>
+                                        <th></th>
+                                        <th></th>
+                                        
                                         <th>
                                             {!! Form::select('country', $paises, null, [
                                                 'id' => 'country',
@@ -238,7 +275,19 @@
                                                 'onchange' => "buscar('country')",
                                             ]) !!}
                                         </th>
-
+                                        <th>
+                                            {!! Form::select('tipo_contacto',['1' => 'Persona', '2' => 'Empresa'],
+                                                    null,
+                                                    [
+                                                        'id' => 'tipo_contacto',
+                                                        'class' => 'form-control js-example-basic-single
+                                                                                            text-gray-400',
+                                                        'placeholder' => '----',
+                                                        'onchange' => "buscar('statu')",
+                                                        
+                                                    ],
+                                                ) !!}
+                                        </th>
                                         <th>
                                             {!! Form::select(
                                                 'statu',
@@ -265,15 +314,37 @@
                                             <tr class="odd">
                                                 <td>
 
-                                                    <a class="text-center text-gray-800 text-hover-primary mb-1"
-                                                        href="{{ route('admin.contact.show', $item->id) }}">
-                                                        {{ $item->name }} {{ $item->lastname }}
+                                                    <a href="{{ route('admin.contact.show', $item->id) }}"
+                                              
+                                                        class="text-gray-800 text-hover-primary mb-1">{{ $item->name }} {{ $item->lastname }}
+                                                    </a>
+                                                        
                                                 </td>
-                                                <td class="text-center text-gray-600 text-hover-primary mb-1">
-                                                    {{ $item->email }}</td>
-                                                <td class="text-center text-gray-600 text-hover-primary mb-1">
-                                                    {{ $item->country }}</td>
-                                                {{--   <td class="text-center text-gray-600 text-hover-primary mb-1">{{ $item->state }}</td> --}}
+                                                <td>
+                                                    {{ $item->email }}
+                                                </td>
+                                                <td>{{ $item->phone }}</td>
+                                                <td>
+                                                    @if ($item->website)
+                                                        <a href="{{ $item->website }}" target="_blank" rel="noopener noreferrer">
+                                                            {{ $item->website }}
+                                                        </a>
+                                                    @else
+                                                        <p class="text-danger">No asignado</p>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{ $item->country }}
+                                                </td>
+                                                <td>
+                                                    @if ($item->type_contact == 1)
+                                                        <p  class="badge badge-light-info">Persona</p>
+                                                    @elseif($item->type_contact == 2)
+                                                        <p  class="badge badge-light-success">Empresa</p>
+                                                    @else
+                                                        <p><p  class="badge badge-primary">No asignado</p></p>
+                                                    @endif
+                                                </td>
                                                 <td class="text-center text-gray-600 text-hover-primary mb-1">
                                                     @if ($item->contact_status == 1)
                                                         <span class="badge badge-primary pull-rigth">Nuevo</span>
@@ -293,10 +364,211 @@
                                                             interesado</span>
                                                     @endif
                                                 </td>
+                                                <td class="text-end">
+                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Acciones
+                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                                        <span class="svg-icon svg-icon-5 m-0">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon--></a>
+                                                    <!--begin::Menu-->
+                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                        <!--begin::Menu item-->
+                                                        <div class="menu-item px-3">
+                                                            <a 
+                                                            data-toggle="modal"
+                                                            data-target="#exampleModal<?= $item->id ?>" class="menu-link px-3">Editar</a>
+                                                        </div>
+                                                        <!--end::Menu item-->
+                                                        <!--begin::Menu item-->
+                                                        <div class="menu-item px-3">
+                                                            <form method="post"
+                                                            action="{{ route('admin.contact.destroy', $item->id) }}"
+                                                        class="formDeleteContact">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button  type="submit" id="logout_button" class="menu-link px-3"> 
+                                                           Eliminar
+                                                            
+                                                        </button>
+                                                    </form>
+                                                        </div>
+                                                        <!--end::Menu item-->
+                                                    </div>
+                                                    <!--end::Menu-->
+                                                </td>
                                                 {{-- <td>
                                             <input type="checkbox" name="contact_id[]"  id="contact_id" value="{{ $item->id }}"/>
                                         </td> --}}
                                             </tr>
+                                            <div class="modal fade" id="exampleModal<?= $item->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Actualizar Contacto</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {!! Form::model($item,['route'=>['admin.contact.update', $item->id], 'autocomplete'=>'off', 'files'=>true, 'method'=>'put']) !!}
+                                                        <input type="hidden" name="contact" value={{ $item->id }}>
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-sm-12 col-md-6">
+        
+                                                                {!! Form::label('type_contact', 'Tipo de contacto') !!}
+                                                                {!! Form::select('type_contact', ['1' =>'Persona','2' =>'Empresa'], isset($item->type_contact)? $item->type_contact : null, ['class' => 'form-control', 'placeholder' => '--Seleciona un tipo--' ,'required']) !!}
+                                                                
+                                                            </div>
+                                                           {{--  <div class="col-sm-12 col-sm-12 col-md-6">
+        
+                                                                {!! Form::label('lastname', 'Apellidos') !!}
+                                                                {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez', 'required']) !!}
+                                                                @error('lastname')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                            </div> --}}
+                                                        </div>
+
+                                
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-6">
+                                                              
+                                                                {!! Form::label('name', 'Nombre') !!}
+                                                                {!! Form::text('name', $item->name, ['class'=>'form-control','placeholder'=>'Pedro', ]) !!}
+                                                                @error('name')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                               
+                                                                {!! Form::label('lastname', 'Apellido') !!}
+                                                                {!! Form::text('lastname', $item->lastname, ['class'=>'form-control','placeholder'=>'Perez', ]) !!}
+                                                                @error('lastname')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                        
+                                                        <div class="row  mt-2">
+                                                            <div class="col-sm-12 col-md-6">
+                                                                {!! Form::label('phone', 'Teléfono') !!}
+                                                                {!! Form::text('phone', isset($item->phone) ? $item->phone : null, ['class'=>'form-control','placeholder'=>'+34 455487895', ]) !!}
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                               
+                                                                {!! Form::label('email', 'Email') !!}
+                                                                {!! Form::email('email', isset($item->email) ? $item->email :null, ['class'=>'form-control','placeholder'=>'test@prueba.com', ]) !!}
+                                                                @error('email')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                        
+                                                        <div class="row  mt-2">
+                                                            <div class="col-sm-12 col-md-6">
+                                                                {!! Form::label('postcode', 'Código Postal') !!}
+                                                                {!! Form::text('postcode', isset($item->postcode) ? $item->postcode : null, ['class'=>'form-control','placeholder'=>'65656', ]) !!}
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                              
+                                                                {!! Form::label('country', 'País') !!}
+                                                                {!! Form::select('country', $paises, isset($item->country) ? $item->country : null, ['class'=>'form-control','placeholder'=>'---', ]) !!}
+                                                                @error('country')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                        
+                                                        <div class="row  mt-2">
+                                                            <div class="col-sm-12 col-md-6">
+                                                                {!! Form::label('city', 'Ciudad') !!}
+                                                                {!! Form::text('city', isset($item->city) ? $item->city : null, ['class'=>'form-control','placeholder'=>'Barcelona', ]) !!}
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                {!! Form::label('state', 'Provincia (opcional)') !!}
+                                                                {!! Form::text('state', isset($item->state) ? $item->state :null, ['class'=>'form-control','placeholder'=>'', ]) !!}
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row  mt-2">
+                                                            <div class="col-sm-12 col-md-6">
+                
+                                                                {!! Form::label('address', 'Dirección (opcional)') !!}
+                                                                {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                                {!! Form::text('address',  isset($item->address) ? $item->address : null, [
+                                                                   
+                                                                    'class' => 'form-control',
+                                                                    'placeholder' => 'Calle tercera casa 25',
+                                                                   
+                                                                ]) !!}
+                
+                                                             
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                
+                                                                {!! Form::label('campaing', 'Asignar Campaña (Opcional)') !!}
+                                                                {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                                {!! Form::select('campaing', $list_campaings, null, [
+                                                                    
+                                                                    'class' => 'form-control',
+                                                                    'placeholder' => 'Seleccionar',
+                                                                    
+                                                                ]) !!}
+                
+                                                                @error('statu')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                
+                                                            </div>
+                                                        </div>
+                                        
+                                                        <div class="row  mt-2">
+                                                            <div class="col-sm-12 col-md-4">
+                                                             
+                                                                {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
+                                                                {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                                {!! Form::select('medio_comunicacion',$comunicacion_medias, isset($item->comunication_medium) ? $item->comunication_medium : null,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+                                        
+                                                                @error('medio_comunicacion')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-4">
+                                                               
+                                                                {!! Form::label('contact_status', 'Estado del Cliente') !!}
+                                                                {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                                {!! Form::select('contact_status',$status, $item->contact_status,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+                                        
+                                                               
+                                                                
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-4">
+                                                               
+                                                                {!! Form::label('website', 'Página web') !!}
+                                                                {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                                {!! Form::url('website', isset($item->website) ? $item->website : null,['id'=>'website','class'=>'form-control','placeholder'=>'example.com', ]) !!}
+                                        
+                                                                @error('statu')
+                                                                    <small class="text-danger">Este campo es requerido</small>
+                                                                @enderror
+                                                                
+                                                            </div>
+                                                        </div>
+                                        
+                                                        <div class="mt-5">
+                                        
+                                                            {!! Form::submit('Guardar', ['class'=>'btn btn-primary ']) !!}
+                                                            
+                                                        </div>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                   
+                                                  </div>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     @else
                                     @endif

@@ -69,6 +69,7 @@ class ContactsController extends Controller
         ->leftJoin('contact_campaings', 'contact_campaings.camaping_id','=','campaing.id')
         ->leftJoin('contacts','contacts.id', '=', 'contact_campaings.contact_id')
         ->where('contacts.id', $contact->id)
+        ->orderByDesc('campaing.id')
         ->first();
         
         return $contactsCapaings;
@@ -94,6 +95,7 @@ class ContactsController extends Controller
         $campaings = Campaing::where('created_user', $user_id)->get();
         $status = ContactStatus::pluck('status_name', 'id');
         $list_campaings =  Campaing::where('created_user', $user_id)->pluck('campaing_name', 'id');
+        
 
         if(isset($input['name'])){
             $condicion[] = ['contacs.name', 'like', '%' . $input['name'] . '%'];
@@ -508,7 +510,7 @@ class ContactsController extends Controller
 
         try {
             //code...
-           /*  dd($request->all()); */
+            /* dd($request->id); */
             /* $contact->update($request->all()); */
             $contact->name = $request->name;
             $contact->lastname = $request->lastname;
@@ -524,6 +526,19 @@ class ContactsController extends Controller
             $status = ContactStatus::where('id', (int) $request->contact_status)->first();
            /*  dd($status); */
             $contact->contact_status = $status->id;
+            if(isset($request->campaing)){
+                try {
+                    $campaing = new ContactCampaing();
+                    $campaing->camaping_id = $request->campaing;
+                    $campaing->contact_id = $request->contact;
+                    $campaing->user_id = auth()->user()->id;
+                    $campaing->created_at = Carbon::now();
+                    $campaing->updated_at = Carbon::now();
+                    $result = $campaing->save();
+                } catch (\PDOException $th) {
+                    return $th->getMessage();
+                }
+            }
             $contact->update();
             Alert::success('Contacto actualizado');
             return redirect()->back();

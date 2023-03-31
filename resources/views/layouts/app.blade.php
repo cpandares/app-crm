@@ -304,7 +304,8 @@
                  
                 </div>
 
-                @include('menu')
+                
+               
             
             
                 @yield('content')
