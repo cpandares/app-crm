@@ -20,7 +20,8 @@
         border: none
     }
     #logout_button :hover{
-        background: none;
+        background: #ace0b8 !important;
+        color: white !important;
         width: 100%;
         border: none
     }
@@ -305,7 +306,7 @@
                 </div>
 
                 
-               
+                @include('menu')
             
             
                 @yield('content')

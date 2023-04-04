@@ -16,4 +16,10 @@ class Comunicacion extends Model
         'user_created_for',
         'comunicacion_media_id',
     ];
+
+
+    public function user(){
+        return $this->belongsTo(User::class,'user_created', 'id');
+    }
+
 }

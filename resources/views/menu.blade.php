@@ -121,7 +121,7 @@
                               
                                     </span>
                                 </span>
-                                <span class="menu-title">Campañas</span>
+                                <span class="menu-title">Oportunidades</span>
                             </a>
                         </div>
                         <div class="menu-item">

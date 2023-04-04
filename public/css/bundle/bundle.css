@@ -44,7 +44,7 @@ input[type="text"] {text-transform:capitalize;}
 
 .board-lists {
 	display: grid;
-	grid-auto-columns: 272px;
+	grid-auto-columns: 240px;
 	grid-auto-flow: column;
 	grid-gap: 8px;
 	overflow: scroll;
@@ -56,6 +56,7 @@ input[type="text"] {text-transform:capitalize;}
 	background-color: rgb(235, 236, 240);
 	border-radius: 3px;
 	padding: 10px;
+	height: 100vh;
   }
 
   .list-title {

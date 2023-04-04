@@ -16,6 +16,7 @@ class Budget extends Model
         'valid_until',
         'user_created',
         'user_created_for',
+        'document'
     ];
 
 

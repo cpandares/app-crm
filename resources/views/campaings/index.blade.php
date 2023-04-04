@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('menu')
+
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content" bis_skin_checked="1">
 
 
@@ -15,7 +15,7 @@
                     <div class="card-header border-0 pt-6" bis_skin_checked="1">
                         <!--begin::Card title-->
                         <div class="card-title" bis_skin_checked="1">
-                            <p> Tienes un total de {{ count($campaings) }} campañas creadas</p>
+                            <p> Tienes un total de {{ count($campaings) }} oportunidades creadas</p>
                         </div>
                         <!--begin::Card title-->
                         <!--begin::Card toolbar-->
@@ -82,7 +82,7 @@
                                             <th class="min-w-125px sorting" tabindex="0"
                                             aria-controls="kt_customers_table" rowspan="1" colspan="1"
                                             aria-label="Fecha creación: activate to sort column ascending"
-                                            style="width: 203.962px;">Status</th>
+                                            style="width: 203.962px;">Estado</th>
                                             <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1"
                                                 aria-label="Acciones" style="width: 146.738px;">Acciones</th>
                                         </tr>
@@ -207,7 +207,7 @@
                                                         </span>
                                                         <!--end::Svg Icon--></a>
                                                     <!--begin::Menu-->
-                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
                                                             <a data-toggle="modal"

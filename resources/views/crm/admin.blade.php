@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    @include('menu')
+  
     <div class="row container">
 
         @if (auth()->user()->rol == 3)
@@ -143,7 +143,7 @@
                                         <div class="col-6">
 
                                             {!! Form::label('rol', 'Rol') !!}
-                                            {!! Form::select('rol', ['1' => 'Soporte', '2' => 'Directivo', '3' => 'Empleado'], null, [
+                                            {!! Form::select('rol', ['1' => 'Soporte', '2' => 'Directivo', '3' => 'Comercial', '4' =>'Empleado'], null, [
                                                 'class' => 'form-control',
                                                 'placeholder' => 'Seleccionar',
                                             ]) !!}
@@ -277,6 +277,10 @@
                                                 <span class="badge badge-light-info fw-bolder fs-8 px-2 py-1 ms-2">
                                                     Directivo
                                                 </span>
+                                            @elseif($item->rol == 3)
+                                                <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">
+                                                    Comercial
+                                                </span>
                                             @else
                                                 <span class="badge badge-primary fw-bolder fs-8 px-2 py-1 ms-2">
                                                     Empleado
@@ -298,7 +302,7 @@
                                                 <!--end::Svg Icon-->
                                             </a>
                                             <!--begin::Menu-->
-                                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+                                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-primary fw-bold fs-7 w-125px py-4"
                                                 data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">

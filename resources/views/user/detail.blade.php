@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('content')
-@include('menu')
+
     <div class="row">
         <div class="col-md-3">
             <!-- Profile Image -->
@@ -186,7 +186,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#comunicaciones" data-toggle="tab">Campañas creadas</a>
+                            <a class="nav-link" href="#comunicaciones" data-toggle="tab">Oportunidades creadas</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="#activity" data-toggle="tab">Resumen de actividad</a>
@@ -500,7 +500,7 @@
                                     <th class="min-w-125px sorting" tabindex="0"
                                         aria-controls="kt_customers_table" rowspan="1" colspan="1"
                                         aria-label="Nombre Cliente: activate to sort column ascending"
-                                        style="width: 172.038px;">Nombre Campaña</th>
+                                        style="width: 172.038px;">Nombre Oportunidad</th>
                                     <th class="min-w-125px sorting" tabindex="0"
                                         aria-controls="kt_customers_table" rowspan="1" colspan="1"
                                         aria-label="Email: activate to sort column ascending"

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddWebsiteToContactsTable extends Migration
+class AddRepresentToContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,13 +15,10 @@ class AddWebsiteToContactsTable extends Migration
     {
         Schema::table('contacts', function (Blueprint $table) {
             //
-            $table->string('website')->nullable();
-            $table->string('type_contact');
-            $table->unsignedBigInteger('types_contacts')->nullable();
-            
+            $table->boolean('represent')->nullable();
+            $table->unsignedBigInteger('type_enterprise')->nullable();
 
-            $table->foreign('types_contacts')->references('id')->on('contact_types')->onDelete('cascade'); 
-            
+            $table->foreign('type_enterprise')->references('id')->on('enterpreses_types')->onDelete('cascade'); 
         });
     }
 

@@ -8,6 +8,7 @@ use App\Models\Budget;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 Use Alert;
+use Illuminate\Support\Facades\Storage;
 
 class BudgetController extends Controller
 {
@@ -49,20 +50,40 @@ class BudgetController extends Controller
             'title'=>'required'          
         ]);
 
+       
+        $documento = $request->file('archivo');
+
+
 
         $budget = new Budget();
 
        try {
+
+
+        if ($documento != null) {
+            $mime = $documento->getMimeType();
+           
+            
+              $url =  Storage::put('adjunto', $request->file('archivo'));
+            //}
+        }
+
+
+
+            $valor = str_replace('₡', '', $request->price);
+            $valor =  str_replace(' ', '', $valor);
+            $valor =  str_replace('.', '', $valor);
+            $valor = floatval($valor);
         //code...
             $budget->title = $request->title;
             $budget->observacion = $request->observacion;
-            $budget->price = $request->price;
+            $budget->price = $valor;
             $budget->valid_until = $request->valid_until;
             $budget->user_created = $user_id;
             $budget->user_created_for = $request->contact;
             $budget->created_at = Carbon::now();
             $budget->updated_at = Carbon::now();
-
+            $budget->document = isset($url) ? $url : null;
             $budget->save();
 
             $presupuesto = Budget::orderByDesc('id')->first();

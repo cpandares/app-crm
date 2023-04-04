@@ -35,7 +35,12 @@
     integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://sortablejs.github.io/Sortable/Sortable.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <script>
+
+
+   
+
 
     function mostrarPalabra() {
         var datos = document.getElementById('caja_busqueda').value;
@@ -46,10 +51,14 @@
      function convertir(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     } 
+    $(document).ready(function(){
+        $('.js-example-basic-single').select2();
+       
+        
+    })
 
     $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-
+      
         
         $('.formDelete').submit(function(e) {
                 e.preventDefault();
@@ -141,7 +150,7 @@
             })
         
             $("#price").maskMoney();
-
+            $("#budget").maskMoney();
     });
     /* const items = document.querySelectorAll('.card__item')
     const columns = document.querySelectorAll('.column') */

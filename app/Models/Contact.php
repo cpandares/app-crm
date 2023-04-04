@@ -22,7 +22,10 @@ class Contact extends Model
         'contact_status',
         'user_id',
         'comunication_medium',
-        'image'
+        'image',
+        'represent',
+        'type_enterprise',
+        'name_enterprise'
     ];
 
 

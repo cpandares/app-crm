@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-@include('menu')
+
     <div class="row">
 
         <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
@@ -64,7 +64,7 @@
                         </a> --}}
 
                         <a href="{{ route('admin.campaings.index') }}" class="btn btn-primary float-right btn-sm mr-1">
-                            < Ir a Campañas </a>
+                            < Ir a Oportunidades </a>
 
                         <a href="{{ route('admin.campaings.show', $campaing->id) }}"
                             class="btn btn-primary float-right btn-sm mr-1" title="Limpiar filtro">
@@ -93,18 +93,32 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-sm-12 col-md-6">
 
-                                        {!! Form::label('type_contact', 'Tipo de contacto') !!}
-                                        {!! Form::select('type_contact', ['1' =>'Persona','2' =>'Empresa'], null, ['class' => 'form-control', 'placeholder' => '--Seleciona un tipo--' ,'required']) !!}
+                                        <label for="comisiones" class="form-label">¿Representa una empresa?</label><br>
+                                        <input 
+                                        type="checkbox" 
+                                        id="representa_empresa" 
+                                        name="representa_empresa"  
+                                        data-toggle="toggle" 
+                                        data-onstyle="primary" 
+                                        data-offstyle="danger"  
+                                        data-on="Si" 
+                                        data-off="No"
+                                        onchange="accion_respresenta(this)">
                                         
                                     </div>
-                                {{--  <div class="col-sm-12 col-sm-12 col-md-6">
+                                
+                                </div>
 
-                                        {!! Form::label('lastname', 'Apellidos') !!}
-                                        {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez', 'required']) !!}
-                                        @error('lastname')
-                                            <small class="text-danger">Este campo es requerido</small>
-                                        @enderror
-                                    </div> --}}
+                                <div class="row mt-2" id="empresa_repre">
+                                    <div class="" >
+                                        {!! Form::label('name_empresa', 'Nombre Empresa') !!}
+                                        {!! Form::text('name_empresa',null, ['class'=>'form-control','placeholder'=>'Inversiones llc', ]) !!}
+                                    </div>
+                                    <div class="" >
+                                        {!! Form::label('type_enterprise', 'Tipo de empresa') !!}
+                                        {!! Form::select('type_enterprise', $type_enterprise, null,['class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+                                    </div>
+                                    <hr class="mt-5">
                                 </div>
 
                                 <div class="row mt-2">
@@ -207,17 +221,14 @@
 
 
 
-                                <div class="mt-5">
+                                <div class="mt-5 modal-footer">
 
                                     {!! Form::submit('Guardar', ['class' => 'btn btn-outline-primary ']) !!}
 
                                 </div>
                                 {!! Form::close() !!}
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -239,7 +250,7 @@
                                         <th class="min-w-125px ">Teléfono</th>
                                         <th class="min-w-125px ">Página  web</th>
                                         <th class="min-w-125px ">Paìs</th>
-                                        <th class="min-w-125px ">Tipo de contacto</th>
+                                        <th class="min-w-125px ">¿Representa Empresa?</th>
                                         <th class="min-w-125px ">Estado</th>
                                         <th class="text-end min-w-70px" rowspan="1" colspan="1"
                                             aria-label="Acciones" style="width: 146.738px;">Acciones</th>
@@ -276,7 +287,7 @@
                                             ]) !!}
                                         </th>
                                         <th>
-                                            {!! Form::select('tipo_contacto',['1' => 'Persona', '2' => 'Empresa'],
+                                            {{-- {!! Form::select('tipo_contacto',['1' => 'Persona', '2' => 'Empresa'],
                                                     null,
                                                     [
                                                         'id' => 'tipo_contacto',
@@ -286,7 +297,7 @@
                                                         'onchange' => "buscar('statu')",
                                                         
                                                     ],
-                                                ) !!}
+                                                ) !!} --}}
                                         </th>
                                         <th>
                                             {!! Form::select(
@@ -336,13 +347,12 @@
                                                 <td>
                                                     {{ $item->country }}
                                                 </td>
-                                                <td>
-                                                    @if ($item->type_contact == 1)
-                                                        <p  class="badge badge-light-info">Persona</p>
-                                                    @elseif($item->type_contact == 2)
-                                                        <p  class="badge badge-light-success">Empresa</p>
+                                                <td class="text-center">
+                                                    @if ($item->represent == 1)
+                                                        <p  class="badge badge-light-info">Si</p>
+                                                  
                                                     @else
-                                                        <p><p  class="badge badge-primary">No asignado</p></p>
+                                                        <p><p  class="badge badge-primary">No</p></p>
                                                     @endif
                                                 </td>
                                                 <td class="text-center text-gray-600 text-hover-primary mb-1">
@@ -365,16 +375,20 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-end">
-                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Acciones
-                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                                    <a href="#" 
+                                                        class="btn btn-sm  btn-active-primary" 
+                                                        data-kt-menu-trigger="click" 
+                                                        data-kt-menu-placement="bottom-end"
+                                                        >Acciones
+                                                       
                                                         <span class="svg-icon svg-icon-5 m-0">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                                 <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
                                                             </svg>
                                                         </span>
-                                                        <!--end::Svg Icon--></a>
+                                                    </a>
                                                     <!--begin::Menu-->
-                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
                                                             <a 
@@ -385,15 +399,14 @@
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
                                                             <form method="post"
-                                                            action="{{ route('admin.contact.destroy', $item->id) }}"
-                                                        class="formDeleteContact">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button  type="submit" id="logout_button" class="menu-link px-3"> 
-                                                           Eliminar
-                                                            
-                                                        </button>
-                                                    </form>
+                                                                action="{{ route('admin.contact.destroy', $item->id) }}"
+                                                                class="formDeleteContact">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button  type="submit" id="logout_button" class="menu-link px-3" > 
+                                                                    Eliminar
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                         <!--end::Menu item-->
                                                     </div>
@@ -415,23 +428,30 @@
                                                     <div class="modal-body">
                                                         {!! Form::model($item,['route'=>['admin.contact.update', $item->id], 'autocomplete'=>'off', 'files'=>true, 'method'=>'put']) !!}
                                                         <input type="hidden" name="contact" value={{ $item->id }}>
+
+                                                      
+
                                                         <div class="row">
                                                             <div class="col-sm-12 col-sm-12 col-md-6">
-        
-                                                                {!! Form::label('type_contact', 'Tipo de contacto') !!}
-                                                                {!! Form::select('type_contact', ['1' =>'Persona','2' =>'Empresa'], isset($item->type_contact)? $item->type_contact : null, ['class' => 'form-control', 'placeholder' => '--Seleciona un tipo--' ,'required']) !!}
+                                
+                                                                <label for="comisiones" class="form-label">¿Representa una empresa?</label><br>
+                                                                <input type="checkbox" id="representa_empresa"  data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="primary" data-offstyle="danger"  onchange="accion_respresentart(this)">
                                                                 
                                                             </div>
-                                                           {{--  <div class="col-sm-12 col-sm-12 col-md-6">
-        
-                                                                {!! Form::label('lastname', 'Apellidos') !!}
-                                                                {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez', 'required']) !!}
-                                                                @error('lastname')
-                                                                    <small class="text-danger">Este campo es requerido</small>
-                                                                @enderror
-                                                            </div> --}}
+                                                           
                                                         </div>
-
+            
+                                                        <div class="row mt-2" id="empresa_reprentart">
+                                                            <div class="" >
+                                                                {!! Form::label('name_empresa', 'Nombre Empresa') !!}
+                                                                {!! Form::text('name_empresa',$item->name_enterprise, ['class'=>'form-control','placeholder'=>'Inversiones llc', ]) !!}
+                                                            </div>
+                                                            <div class="" >
+                                                                {!! Form::label('type_enterprise', 'Tipo de empresa') !!}
+                                                                {!! Form::select('type_enterprise', $type_enterprise, null,['class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
+                                                            </div>
+                                                            <hr class="mt-5">
+                                                        </div>
                                 
                                                         <div class="row">
                                                             <div class="col-sm-12 col-md-6">
@@ -626,6 +646,22 @@
 
 @section('script')
     <script type="text/javascript">
+    function accion_respresentart(checkboxElem){
+        let inputSubalterno = document.getElementById('empresa_reprentart');
+       
+        if (checkboxElem.checked) {
+           /*  $('#inputSubalterno').collapse('show'); */
+            inputSubalterno.style.display = 'block';
+        }else {
+            /* $('#inputSubalterno').collapse('hide'); */
+            inputSubalterno.style.display = 'none';
+        }
+    }
+    $(document).ready(function(){
+        
+        document.getElementById('empresa_reprentart').style.display = 'none';
+        
+    })
         function generar_todos() {
             var ids = document.querySelectorAll("input[name='contact_id[]']:checked");
             var a = [];

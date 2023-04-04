@@ -1,6 +1,6 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('content')
-@include('menu')
+ 
     <div class="row">
         <div class="col-md-3">
             <!-- Profile Image -->
@@ -17,10 +17,10 @@
                                         src="https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png"
                                         alt="User profile picture" />
                                 @else
-                                    <img width="50%" height="50%" class="image-input-wrapper w-150px h-150px" style="object-fit: cover"
-                                        src="{{ $contact->image }}" alt="User profile picture" />
+                                    <img width="50%" height="50%" class="image-input-wrapper w-150px h-150px"
+                                        style="object-fit: cover" src="{{ $contact->image }}" alt="User profile picture" />
                                 @endif
-                             
+
                             </div>
                             <!--end::Preview existing avatar-->
                             <!--begin::Label-->
@@ -41,9 +41,9 @@
 
                     <h4 class="profile-username text-center">
                         <strong>{{ $contact->name }} {{ $contact->lastname }}</strong>
-                        
+
                     </h4>
-                   
+
                     {{--  <p class="text-muted text-center">ID 115400723</p> --}}
 
                     {{-- <ul class="list-group list-group-unbordered mb-3">
@@ -109,9 +109,9 @@
 
                     <p class="text-muted">{{ $contact->address }}</p>
 
-                    <hr />                   
+                    <hr />
 
-                    
+
 
                     <strong><i class="fa fa-envelope mr-1"></i> Email</strong>
 
@@ -140,118 +140,190 @@
 
                 </div>
                 <!-- /.card-body -->
-                <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal<?= $contact->id ?>"><b>Actualizar</b></button>
+                <button class="btn btn-primary btn-block" data-toggle="modal"
+                    data-target="#exampleModal<?= $contact->id ?>"><b>Actualizar</b></button>
 
                 <a href="{{ route('admin.contact.index') }}" class="btn btn-primary btn-block">
                     <b>Volver a
                         Lista</b>
                 </a>
             </div>
-            <div class="modal fade" id="exampleModal<?= $contact->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal<?= $contact->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog modal-lg">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Actualizar {{ $contact->name }}</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                        {!! Form::model($contact,['route'=>['admin.contact.update', $contact], 'autocomplete'=>'off', 'files'=>true, 'method'=>'put']) !!}
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Actualizar {{ $contact->name }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {!! Form::model($contact, [
+                                'route' => ['admin.contact.update', $contact],
+                                'autocomplete' => 'off',
+                                'files' => true,
+                                'method' => 'put',
+                            ]) !!}
 
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                              
-                                {!! Form::label('name', 'Nombre') !!}
-                                {!! Form::text('name', $contact->name, ['class'=>'form-control','placeholder'=>'Pedro', ]) !!}
-                                @error('name')
-                                    <small class="text-danger">Este campo es requerido</small>
-                                @enderror
+                            <div class="row">
+                                <div class="col-sm-12 col-sm-12 col-md-6">
+
+                                    <label for="comisiones" class="form-label">¿Representa una empresa?</label><br>
+                                    <input type="checkbox" id="representa_empresa" data-toggle="toggle" data-on="Si"
+                                        data-off="No" data-onstyle="primary" data-offstyle="danger"
+                                        onchange="accion_respresenta(this)">
+
+                                </div>
+
                             </div>
-                            <div class="col-sm-12 col-md-6">
-                               
-                                {!! Form::label('lastname', 'Apellido') !!}
-                                {!! Form::text('lastname', $contact->lastname, ['class'=>'form-control','placeholder'=>'Perez', ]) !!}
-                                @error('lastname')
-                                    <small class="text-danger">Este campo es requerido</small>
-                                @enderror
+
+                            <div class="row mt-2" id="empresa_reprentar">
+                                <div class="">
+                                    {!! Form::label('name_empresa', 'Nombre Empresa') !!}
+                                    {!! Form::text('name_empresa', $contact->name, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
+                                </div>
+                                <div class="">
+                                    {!! Form::label('name_empresa', 'Tipo de empresa') !!}
+                                    {!! Form::select('name_empresa', [], null, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
+                                </div>
+                                <hr class="mt-5">
                             </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-12 col-md-6">
+
+                                    {!! Form::label('name', 'Nombre') !!}
+                                    {!! Form::text('name', $contact->name, ['class' => 'form-control', 'placeholder' => 'Pedro']) !!}
+                                    @error('name')
+                                        <small class="text-danger">Este campo es requerido</small>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+
+                                    {!! Form::label('lastname', 'Apellidos') !!}
+                                    {!! Form::text('lastname', $contact->lastname, ['class' => 'form-control', 'placeholder' => 'Perez']) !!}
+                                    @error('lastname')
+                                        <small class="text-danger">Este campo es requerido</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row  mt-2">
+                                <div class="col-sm-12 col-md-6">
+                                    {!! Form::label('phone', 'Telefono') !!}
+                                    {!! Form::text('phone', $contact->phone, ['class' => 'form-control', 'placeholder' => '+34 455487895']) !!}
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+
+                                    {!! Form::label('email', 'Email') !!}
+                                    {!! Form::email('email', $contact->email, ['class' => 'form-control', 'placeholder' => 'test@prueba.com']) !!}
+                                    @error('email')
+                                        <small class="text-danger">Este campo es requerido</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row  mt-2">
+                                <div class="col-sm-12 col-md-6">
+                                    {!! Form::label('postcode', 'Código Postal') !!}
+                                    {!! Form::text('postcode', $contact->postcode, ['class' => 'form-control', 'placeholder' => '65656']) !!}
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+
+                                    {!! Form::label('country', 'País') !!}
+                                    {!! Form::select('country', $paises, $contact->country, [
+                                        'class' => 'form-control',
+                                        'placeholder' => '--Seleccionar País--',
+                                        'required',
+                                    ]) !!}
+                                    @error('country')
+                                        <small class="text-danger">Este campo es requerido</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row  mt-2">
+                                <div class="col-sm-12 col-md-6">
+                                    {!! Form::label('city', 'Ciudad') !!}
+                                    {!! Form::text('city', $contact->city, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    {!! Form::label('state', 'Provincia (opcional)') !!}
+                                    {!! Form::text('state', $contact->state, ['class' => 'form-control', 'placeholder' => '']) !!}
+                                </div>
+                            </div>
+
+                            <div class="row  mt-2">
+                                <div class="col-sm-12 col-md-6">
+
+                                    {!! Form::label('address', 'Dirección (opcional)') !!}
+                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                    {!! Form::text('address', isset($contact->address) ? $contact->address : null, [
+                                        'class' => 'form-control',
+                                        'placeholder' => 'Calle tercera casa 25',
+                                    ]) !!}
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="row  mt-2">
+                                <div class="col-sm-12 col-md-4">
+
+                                    {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
+                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                    {!! Form::select(
+                                        'medio_comunicacion',
+                                        $comunicacion_medias,
+                                        isset($contact->comunication_medium) ? $contact->comunication_medium : null,
+                                        ['id' => 'cliente_tarjeta_franquicia_tarjeta_id', 'class' => 'form-control', 'placeholder' => 'Seleccionar'],
+                                    ) !!}
+
+                                    @error('medio_comunicacion')
+                                        <small class="text-danger">Este campo es requerido</small>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+
+                                    {!! Form::label('contact_status', 'Estado del Cliente') !!}
+                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                    {!! Form::select('contact_status', $status, $contact->contact_status, [
+                                        'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
+                                        'class' => 'form-control',
+                                        'placeholder' => 'Seleccionar',
+                                    ]) !!}
+
+
+
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+
+                                    {!! Form::label('website', 'Página web') !!}
+                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                    {!! Form::url('website', isset($contact->website) ? $contact->website : null, [
+                                        'id' => 'website',
+                                        'class' => 'form-control',
+                                        'placeholder' => 'example.com',
+                                    ]) !!}
+
+                                    @error('statu')
+                                        <small class="text-danger">Este campo es requerido</small>
+                                    @enderror
+
+                                </div>
+                            </div>
+
+                            <div class="mt-5">
+
+                                {!! Form::submit('Guardar', ['class' => 'btn btn-primary ']) !!}
+
+                            </div>
+                            {!! Form::close() !!}
                         </div>
-        
-                        <div class="row  mt-2">
-                            <div class="col-sm-12 col-md-6">
-                                {!! Form::label('phone', 'Telefono') !!}
-                                {!! Form::text('phone', $contact->phone, ['class'=>'form-control','placeholder'=>'+34 455487895', ]) !!}
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                               
-                                {!! Form::label('email', 'Email') !!}
-                                {!! Form::email('email', $contact->email, ['class'=>'form-control','placeholder'=>'test@prueba.com', ]) !!}
-                                @error('email')
-                                    <small class="text-danger">Este campo es requerido</small>
-                                @enderror
-                            </div>
-                        </div>
-        
-                        <div class="row  mt-2">
-                            <div class="col-sm-12 col-md-6">
-                                {!! Form::label('postcode', 'Código Postal') !!}
-                                {!! Form::text('postcode', $contact->postcode, ['class'=>'form-control','placeholder'=>'65656', ]) !!}
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              
-                                {!! Form::label('country', 'País') !!}
-                                {!! Form::select('country', $paises, $contact->country, ['class'=>'form-control','placeholder'=>'--Seleccionar País--', 'required']) !!}
-                                @error('country')
-                                    <small class="text-danger">Este campo es requerido</small>
-                                @enderror
-                            </div>
-                        </div>
-        
-                        <div class="row  mt-2">
-                            <div class="col-sm-12 col-md-6">
-                                {!! Form::label('city', 'Ciudad') !!}
-                                {!! Form::text('city', $contact->city, ['class'=>'form-control','placeholder'=>'Barcelona', ]) !!}
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                {!! Form::label('state', 'Provincia (opcional)') !!}
-                                {!! Form::text('state', $contact->state, ['class'=>'form-control','placeholder'=>'', ]) !!}
-                            </div>
-                        </div>
-        
-                        <div class="row  mt-2">
-                            <div class="col-sm-12 col-md-6">
-                             
-                                {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
-                                {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                {!! Form::select('medio_comunicacion',$comunicacion_medias, $contact->comunication_medium,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
-        
-                                @error('medio_comunicacion')
-                                    <small class="text-danger">Este campo es requerido</small>
-                                @enderror
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                               
-                                {!! Form::label('medio_comunicacion', 'Estado del Cliente') !!}
-                                {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                {!! Form::select('statu',$status, $contact->contact_status,['id'=>'cliente_tarjeta_franquicia_tarjeta_id','class'=>'form-control','placeholder'=>'Seleccionar', ]) !!}
-        
-                                @error('statu')
-                                    <small class="text-danger">Este campo es requerido</small>
-                                @enderror
-                                
-                            </div>
-                        </div>
-        
-                        <div class="mt-5">
-        
-                            {!! Form::submit('Guardar', ['class'=>'btn btn-primary ']) !!}
-                            
-                        </div>
-                        {!! Form::close() !!}
+
                     </div>
-                   
-                  </div>
                 </div>
             </div>
             <!-- /.card -->
@@ -264,8 +336,8 @@
                 <div class="wizard my-5">
                     <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
 
-                        <li class="nav-item flex-fill " role="presentation" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Nuevo">
+                        <li class="nav-item flex-fill " role="presentation" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Nuevo">
 
                             <button type="submit" onclick="updateStatusNew()"
                                 class="nav-link  rounded-circle mx-auto d-flex align-items-center justify-content-center {{ $contact->contact_status == 1 ? 'active' : '' }}"
@@ -277,8 +349,8 @@
                                    
                                 </a> --}}
                         </li>
-                        <li class="nav-item flex-fill" role="presentation" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Negociación">
+                        <li class="nav-item flex-fill" role="presentation" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Negociación">
 
                             <button type="submit" onclick="updateStatusNego()"
                                 class="nav-link  rounded-circle mx-auto d-flex align-items-center justify-content-center {{ $contact->contact_status == 2 ? 'active' : '' }}"
@@ -287,8 +359,8 @@
                             </button>
 
                         </li>
-                        <li class="nav-item flex-fill" role="presentation" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Presupuesto enviado">
+                        <li class="nav-item flex-fill" role="presentation" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Presupuesto enviado">
 
 
 
@@ -360,7 +432,7 @@
                             <a class="nav-link" href="#comunicaciones" data-toggle="tab">Comunicaciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="#campaings" data-toggle="tab">Campañas</a>
+                            <a class="nav-link " href="#campaings" data-toggle="tab">Oportunidades</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#notas" data-toggle="tab">Notas</a>
@@ -381,7 +453,7 @@
                                 </div>
                             </div>
 
-                            <table class="table table_hover table_striped table-responsive">
+                            <table class="table table_hover table_striped mt-2">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -391,6 +463,7 @@
                                         <th>Fecha de creacón</th>
                                         <th>Válido hasta</th>
                                         <th>Fecha Actualizado</th>
+                                        <th>Documento</th>
                                         <th colspan="2"></th>
                                     </tr>
                                 </thead>
@@ -401,92 +474,123 @@
                                                 <td>{{ $item->id }}</td>
                                                 <td>{{ $item->title }}</td>
                                                 <td>{{ $item->observacion }}</td>
-                                                <td>{{ $item->price }}</td>
-                                                <td>{{ date('Y-m-d', strtotime( $item->created_at)) }}</td>
-                                                <td>{{ date('Y-m-d', strtotime($item->valid_until)) }}</td>
-                                                <td>{{ date('Y-m-d', strtotime($item->updated_at)) }}</td>
+                                                <td>
+                                                   {{--  {{ number_format($item->price,2,',','.') }} --}}
+                                                   {{ number_format(($item->price ),2,'.',',')}} €
+                                                </td>
+                                                <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
+                                                <td>{{ date('d-m-Y', strtotime($item->valid_until)) }}</td>
+                                                <td>{{ date('d-m-Y', strtotime($item->updated_at)) }}</td>
+                                                <td>
+                                                    @if ($item->document)
+                                                       {{--  <a href="" target="_blank">Ver Adjunto</a> --}}
+                                                        <a href="{{ url('upload/adjunto/'.$item->document) }}" 
+                                                            download="{{ $item->document}}" 
+                                                            class="btn btn-tbl-update btn-xs text-white" 
+                                                            data-bs-toggle="tooltip" 
+                                                            data-bs-placement="top" 
+                                                            title="Descargar">
+                                                            <i class="fa fa-download">
+                                                                
+                                                            </i>
+                                                        </a>
+                                                        
+                                                    @endif
+                                                </td>
                                                 <td class="text-end">
-                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Acciones
+                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary"
+                                                        data-kt-menu-trigger="click"
+                                                        data-kt-menu-placement="bottom-end">Acciones
                                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                                         <span class="svg-icon svg-icon-5 m-0">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path
+                                                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+                                                                    fill="black"></path>
                                                             </svg>
                                                         </span>
-                                                        <!--end::Svg Icon--></a>
+                                                        <!--end::Svg Icon-->
+                                                    </a>
                                                     <!--begin::Menu-->
-                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+                                                        data-kt-menu="true">
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
-                                                            <a 
-                                                            data-toggle="modal"
-                                                            data-target="#modalExampleBudget<?= $item->id ?>" 
-                                                            class="menu-link px-3">Editar</a>
+                                                            <a data-toggle="modal"
+                                                                data-target="#modalExampleBudget<?= $item->id ?>"
+                                                                class="menu-link px-3">Editar</a>
                                                         </div>
                                                         <!--end::Menu item-->
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
                                                             <form method="post"
-                                                            action="{{ route('admin.budget.destroy' , $item->id) }}"
-                                                            class="formDeleteBudget">
-                                                        @csrf
-                                                        <input type="hidden" name="contact" value="{{ $contact->id }}">
-                                                        @method('delete')
-                                                        <button  type="submit" id="logout_button" class="menu-link px-3"> 
-                                                           Eliminar
-                                                            
-                                                        </button>
-                                                    </form>
+                                                                action="{{ route('admin.budget.destroy', $item->id) }}"
+                                                                class="formDeleteBudget">
+                                                                @csrf
+                                                                <input type="hidden" name="contact"
+                                                                    value="{{ $contact->id }}">
+                                                                @method('delete')
+                                                                <button type="submit" id="logout_button"
+                                                                    class="menu-link px-3">
+                                                                    Eliminar
+
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                         <!--end::Menu item-->
                                                     </div>
                                                     <!--end::Menu-->
                                                 </td>
                                             </tr>
-                                            <div class="modal fade" id="modalExampleBudget<?= $item->id ?>" tabindex="-1"
-                                                aria-labelledby="agregarPresupuestoLabel" aria-hidden="true">
+                                            <div class="modal fade" id="modalExampleBudget<?= $item->id ?>"
+                                                tabindex="-1" aria-labelledby="agregarPresupuestoLabel"
+                                                aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="modalExampleBudget">Actualizar Presupuesto</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <h5 class="modal-title" id="modalExampleBudget">Actualizar
+                                                                Presupuesto</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            {!! Form::model($item, ['route' => ['admin.budget.update', $item->id], 'autocomplete' => 'off', 'files' => true, 'method' => 'put']) !!}
-                        
-                        
+                                                            {!! Form::model($item, [
+                                                                'route' => ['admin.budget.update', $item->id],
+                                                                'autocomplete' => 'off',
+                                                                'files' => true,
+                                                                'method' => 'put',
+                                                            ]) !!}
+
+
                                                             <label for=""><strong>Titulo</strong></label>
-                                                            <input type="text" class="form-control" name="title"  required value="{{ $item->title }}">
-                                                            <input type="hidden" name="contact" value="{{ $contact->id }}">
+                                                            <input type="text" class="form-control" name="title"
+                                                                required value="{{ $item->title }}">
+                                                            <input type="hidden" name="contact"
+                                                                value="{{ $contact->id }}">
                                                             <label for=""><strong>Observación</strong></label>
-                                                            <textarea name="observacion" cols="30" rows="10" class="form-control my-2" style="resize: none">
+                                                            <textarea name="observacion" class="form-control my-2" style="resize: none">
                                                                 {{ $item->observacion }}
                                                             </textarea>
-                        
+
                                                             <label for=""><strong>Es Válido hasta</strong> </label>
-                                                            <input type="date" name="valid_until" class="form-control" required value="{{ $item->valid_until }}">
-                        
+                                                            <input type="date" name="valid_until" class="form-control"
+                                                                required value="{{ $item->valid_until }}">
+
                                                             <label for="">
                                                                 <strong>Precio del presupuesto</strong>
                                                             </label>
-                                                            <input 
-                                                               value=" {{ $item->price }}"
-                                                                class="form-control" 
-                                                                type="text" 
-                                                                name="price" 
-                                                                id="price"
-                                                                data-thousands="." 
-                                                                data-decimal="," 
-                                                                data-prefix="€ " 
-                                                                required
-                                                                />
-                        
+                                                            <input value=" {{ $item->price }}" class="form-control"
+                                                                type="text" name="price" id="price"
+                                                                data-thousands="." data-decimal="," data-prefix="€ "
+                                                                required />
+
                                                             {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
                                                             {!! Form::close() !!}
                                                         </div>
-                                                       
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -527,17 +631,21 @@
 
                                     @if (count($comunicaciones) > 0)
                                         @foreach ($comunicaciones as $comunicacion)
+                                           {{--  <h2>Fecha creada: {{ date('d-m-Y', strtotime($comunicacion->created_at)) }}</h2> --}}
+                                            <span class="time"><strong>Registrado Por:</strong> 
+                                                {{ $comunicacion->user->name }} {{ $comunicacion->user->lastname }} -
+                                                <strong>Fecha Registro:</strong> {{ date('d-m-Y', strtotime($comunicacion->created_at)) }}</span>
+                                            <hr>
                                             <div class="timeline-label">
 
-                                                <div class="timeline-item">
+                                                <div class="timeline-item w-100">
 
-                                                    <span
-                                                        class="timeline-label fw-bolder text-gray-800 fs-6">{{ $comunicacion->created_at->diffForHumans() }}</span>
 
                                                     <div class="timeline-badge">
-
+                                                       {{--  <p>Lorem ipsum dolor sit amet.</p> --}}
+                                                   
                                                         @if ($comunicacion->comunicacion_media_id == 1)
-                                                            <a  title="Telefonica">
+                                                            <a title="Telefonica">
                                                                 <i class="fa fa-genderless text-primary fs-1">
 
                                                                 </i>
@@ -549,20 +657,19 @@
                                                                 </i>
                                                             </a>
                                                         @elseif($comunicacion->comunicacion_media_id == 3)
-                                                            <a  title="skype">
+                                                            <a title="skype">
                                                                 <i class="fa fa-genderless text-success fs-1">
 
                                                                 </i>
                                                             </a>
                                                         @elseif($comunicacion->comunicacion_media_id == 4)
-                                                            <a  title="Whatsapp">
+                                                            <a title="Whatsapp">
                                                                 <i class="fa fa-genderless text-gray fs-1">
 
                                                                 </i>
                                                             </a>
                                                         @else
-                                                            <a 
-                                                             title="Whatsapp">
+                                                            <a title="Whatsapp">
                                                                 <i class="fa fa-genderless text-success fs-1">
 
                                                                 </i>
@@ -612,11 +719,11 @@
                             <div class="row">
                                 <div class="col-md-12 text-right mb-3">
                                     <a data-toggle="modal" data-target="#agregarCa" class="btn btn-primary">
-                                        <i class="fa fa-plus"></i> Asignar Campaña
+                                        <i class="fa fa-plus"></i> Asignar Oportunidad
                                     </a>
                                 </div>
                             </div>
-                            <table class="table table-striped mt-2 table-responsive">
+                            <table class="table table-striped mt-2 ">
 
                                 <thead>
 
@@ -638,32 +745,40 @@
                                                 <td>{{ $item->init_date }}</td>
                                                 <td>{{ $item->end_date }}</td>
                                                 <td class="text-end">
-                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Acciones
+                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary"
+                                                        data-kt-menu-trigger="click"
+                                                        data-kt-menu-placement="bottom-end">Acciones
                                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                                         <span class="svg-icon svg-icon-5 m-0">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path
+                                                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+                                                                    fill="black"></path>
                                                             </svg>
                                                         </span>
-                                                        <!--end::Svg Icon--></a>
+                                                        <!--end::Svg Icon-->
+                                                    </a>
                                                     <!--begin::Menu-->
-                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+                                                        data-kt-menu="true">
                                                         <!--begin::Menu item-->
-                                                        
+
                                                         <!--end::Menu item-->
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
                                                             <form method="post"
-                                                            action="{{ route('delete-contacts-campaings' , $item->id) }}"
-                                                            class="formDeleteContactCampaing">
-                                                        @csrf
-                                                        <input type="hidden" name="contact" value="{{ $contact->id }}">
-                                                        @method('delete')
-                                                        <button  type="submit" id="logout_button" class="menu-link px-3"> 
-                                                           Eliminar Campaña
-                                                            
-                                                        </button>
-                                                    </form>
+                                                                action="{{ route('delete-contacts-campaings', $item->id) }}"
+                                                                class="formDeleteContactCampaing">
+                                                                @csrf
+                                                                <input type="hidden" name="contact"
+                                                                    value="{{ $contact->id }}">
+                                                                @method('delete')
+                                                                <button type="submit" id="logout_button"
+                                                                    class="menu-link px-3">
+                                                                    Eliminar Campaña
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                         <!--end::Menu item-->
                                                     </div>
@@ -690,7 +805,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <table class="table table-striped mt-2 table-responsive">
+                            <table class="table table-striped mt-2 ">
 
                                 <thead>
 
@@ -710,39 +825,46 @@
                                                 <td>{{ $item->title }}</td>
                                                 <td>{{ $item->observacion }}</td>
                                                 <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
-                                                <td>{{date('Y-m-d', strtotime($item->updated_at)) }}</td>
-                                                      
+                                                <td>{{ date('Y-m-d', strtotime($item->updated_at)) }}</td>
+
                                                 <td class="text-end">
-                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Acciones
+                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary"
+                                                        data-kt-menu-trigger="click"
+                                                        data-kt-menu-placement="bottom-end">Acciones
                                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                                         <span class="svg-icon svg-icon-5 m-0">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path
+                                                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+                                                                    fill="black"></path>
                                                             </svg>
                                                         </span>
-                                                        <!--end::Svg Icon--></a>
+                                                        <!--end::Svg Icon-->
+                                                    </a>
                                                     <!--begin::Menu-->
-                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+                                                        data-kt-menu="true">
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
-                                                            <a 
-                                                            data-toggle="modal"
-                                                            data-target="#exampleModal<?= $item->id ?>" 
-                                                            class="menu-link px-3">Editar</a>
+                                                            <a data-toggle="modal"
+                                                                data-target="#exampleModal<?= $item->id ?>"
+                                                                class="menu-link px-3">Editar</a>
                                                         </div>
                                                         <!--end::Menu item-->
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
                                                             <form method="post"
-                                                            action="{{ route('admin.notes.destroy', $item->id) }}"
-                                                        class="formDeleteNote">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button  type="submit" id="logout_button" class="menu-link px-3"> 
-                                                           Eliminar
-                                                            
-                                                        </button>
-                                                    </form>
+                                                                action="{{ route('admin.notes.destroy', $item->id) }}"
+                                                                class="formDeleteNote">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit" id="logout_button"
+                                                                    class="menu-link px-3">
+                                                                    Eliminar
+
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                         <!--end::Menu item-->
                                                     </div>
@@ -750,36 +872,43 @@
                                                 </td>
                                             </tr>
 
-                                           
 
-                                            <div 
-                                                class="modal fade" id="exampleModal<?= $item->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                            <div class="modal fade" id="exampleModal<?= $item->id ?>" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg">
-                                                  <div class="modal-content">
-                                                    <div class="modal-header">
-                                                      <h5 class="modal-title" id="exampleModalLabel">Actualizar Nota</h5>
-                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                      </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        {!! Form::model($item,[ 'route' => ['admin.notes.update', $item->id ] , 'autocomplete' => 'off', 'files' => true, 'method' =>'put']) !!}
-                                                        
-                                                        <label for="">Titulo</label>
-                                                        <input type="text" class="form-control" name="title" value={{ $item->title }} placeholder="">
-                                                        {{-- <input type="hidden" name="contact" value="{{ $contact->id }}"> --}}
-                                                        <label for="">Observación</label>
-                                                        <textarea name="observacion" cols="30" rows="10" class="form-control" style="resize: none">{{ $item->observacion }}
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar Nota
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            {!! Form::model($item, [
+                                                                'route' => ['admin.notes.update', $item->id],
+                                                                'autocomplete' => 'off',
+                                                                'files' => true,
+                                                                'method' => 'put',
+                                                            ]) !!}
+
+                                                            <label for="">Titulo</label>
+                                                            <input type="text" class="form-control" name="title"
+                                                                value={{ $item->title }} placeholder="">
+                                                            {{-- <input type="hidden" name="contact" value="{{ $contact->id }}"> --}}
+                                                            <label for="">Observación</label>
+                                                            <textarea name="observacion" cols="30" rows="10" class="form-control" style="resize: none">{{ $item->observacion }}
                                                         </textarea>
-            
-                                                        {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
-                                                        {!! Form::close() !!}
+
+                                                            {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
+                                                            {!! Form::close() !!}
+                                                        </div>
+
                                                     </div>
-                                                   
-                                                  </div>
                                                 </div>
                                             </div>
-                                            
                                         @endforeach
                                     @else
                                         <td colspan="6">No hay notas guardadas</td>
@@ -812,7 +941,7 @@
                                             {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
                                             {!! Form::close() !!}
                                         </div>
-                                     
+
                                     </div>
                                 </div>
                             </div>
@@ -837,39 +966,52 @@
 
 
                                         <label for=""><strong>Titulo</strong></label>
-                                        <input type="text" class="form-control" name="title" placeholder="" required>
-                                        <input type="hidden" name="contact" value="{{ $contact->id }}">
+                                        <input type="text" class="form-control" name="title" placeholder=""
+                                            required>
+                                        <input type="hidden" name="contact" value="{{ $contact->id }}"><br>
+
                                         <label for=""><strong>Observación</strong></label>
-                                        <textarea name="observacion" cols="30" rows="10" class="form-control" style="resize: none">
-                                    </textarea>
+
+                                       <input type="text" name="" id="" class="form-control" role="article"><br>
 
                                         <label for=""><strong>Es Válido hasta</strong> </label>
-                                        <input type="date" name="valid_until" class="form-control" required>
+                                        <input type="date" name="valid_until" class="form-control" required><br>
 
                                         <label for="">
-                                            <strong>Precio del presupuesto</strong>
+                                            <strong>Precio del presupuesto (€)</strong>
                                         </label>
-                                        <input 
+                                     
+                                      {{--   <div class="input-group "> --}}
+                                          
+                                            <input 
                                             class="form-control" 
                                             type="text" 
                                             name="price" 
-                                            id="price"
+                                            id="budget"
                                             data-thousands="." 
                                             data-decimal="," 
-                                            data-prefix="€ " 
-                                            required
-                                            />
+                                           
+                                            required 
+                                            ><br>
+                                           {{--  <div class="input-group-append">
+                                                <span class="input-group-text">€</span>
+                                            </div> --}}
+                                       {{--  </div> --}}
+
+                                         <label for="">Adjunto</label>   
+                                         <input type="file" name="archivo" class="form-control" accept="application/pdf">
+
 
                                         {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
                                         {!! Form::close() !!}
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
 
-                        
-                        
+
+
 
 
                         <div class="modal fade" id="agregarCa" tabindex="-1" aria-labelledby="agregarPresupuestoLabel"
@@ -891,7 +1033,7 @@
                                         {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
                                         {!! Form::close() !!}
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -924,7 +1066,7 @@
                                         {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-5']) !!}
                                         {!! Form::close() !!}
                                     </div>
-                                  
+
                                 </div>
                             </div>
                         </div>
@@ -984,10 +1126,10 @@
                     if (res) {
                         Swal.fire({
                             title: 'Se Actualizo foto',
-                           
+
                             icon: 'success',
                             showCancelButton: false,
-                            
+
                             confirmButtonText: 'OK'
                         }).then((result) => {
                             if (result.isConfirmed) {
@@ -999,7 +1141,7 @@
                 dataType: "json"
             });
 
-           
+
         }
 
 
@@ -1019,10 +1161,10 @@
                     if (res) {
                         Swal.fire({
                             title: 'Se Actualizo contacto',
-                           
+
                             icon: 'success',
                             showCancelButton: false,
-                            
+
                             confirmButtonText: 'OK'
                         }).then((result) => {
                             if (result.isConfirmed) {
@@ -1052,10 +1194,10 @@
                     if (res) {
                         Swal.fire({
                             title: 'Se Actualizo contacto',
-                           
+
                             icon: 'success',
                             showCancelButton: false,
-                            
+
                             confirmButtonText: 'OK'
                         }).then((result) => {
                             if (result.isConfirmed) {
@@ -1084,10 +1226,10 @@
                     if (res) {
                         Swal.fire({
                             title: 'Se Actualizo contacto',
-                           
+
                             icon: 'success',
                             showCancelButton: false,
-                            
+
                             confirmButtonText: 'OK'
                         }).then((result) => {
                             if (result.isConfirmed) {

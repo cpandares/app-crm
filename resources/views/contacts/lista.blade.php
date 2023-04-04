@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('menu')
+
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content" bis_skin_checked="1">
 
 
@@ -46,7 +46,7 @@
 
                                         <a href="{{ route('admin.campaings.index') }}"
                                             class="btn btn-primary float-right btn-sm mr-1">
-                                            Ver Campañas
+                                           Oportunidades
                                         </a>
                                         <a href="{{ url('admin/contactos-lista') }}"
                                             class="btn btn-primary float-right btn-sm mr-1" title="Limpiar filtros">
@@ -72,18 +72,36 @@
                                                 <div class="row">
                                                     <div class="col-sm-12 col-sm-12 col-md-6">
 
-                                                        {!! Form::label('type_contact', 'Tipo de contacto') !!}
-                                                        {!! Form::select('type_contact', ['1' =>'Persona','2' =>'Empresa'], null, ['class' => 'form-control', 'placeholder' => '--Seleciona un tipo--' ,'required']) !!}
-                                                        
-                                                    </div>
-                                                   {{--  <div class="col-sm-12 col-sm-12 col-md-6">
+                                                        <label 
+                                                        for="comisiones" 
+                                                        class="form-label">¿Representa una
+                                                            empresa?
+                                                        </label><br>
+                                                        <input 
+                                                        type="checkbox" 
+                                                        id="representa_empresa"  
+                                                        name="representa_empresa"  
+                                                        data-toggle="toggle"
+                                                        data-on="Si" 
+                                                        data-off="No" 
+                                                        data-onstyle="primary"
+                                                        data-offstyle="danger" 
+                                                        onchange="accion_respresenta(this)">
 
-                                                        {!! Form::label('lastname', 'Apellidos') !!}
-                                                        {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez', 'required']) !!}
-                                                        @error('lastname')
-                                                            <small class="text-danger">Este campo es requerido</small>
-                                                        @enderror
-                                                    </div> --}}
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row mt-2" id="empresa_repre">
+                                                    <div class="">
+                                                        {!! Form::label('name_empresa', 'Nombre Empresa') !!}
+                                                        {!! Form::text('name_empresa', null, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
+                                                    </div>
+                                                    <div class="">
+                                                        {!! Form::label('type_enterprise', 'Tipo de empresa') !!}
+                                                        {!! Form::select('type_enterprise', $type_enterprise, null, ['class' => 'form-control', 'placeholder' => 'Selecciona un tipo']) !!}
+                                                    </div>
+                                                    <hr class="mt-5">
                                                 </div>
 
                                                 <div class="row mt-2">
@@ -164,8 +182,7 @@
         
                                                         {!! Form::label('campaing', 'Asignar Campaña (Opcional)') !!}
                                                         {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                        {!! Form::select('campaing', $campaings_list, null, [
-                                                            
+                                                        {!! Form::select('campaing', $campaings_list, null, [                                                            
                                                             'class' => 'form-control',
                                                             'placeholder' => 'Seleccionar',
                                                            
@@ -241,7 +258,7 @@
                         <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"
                             bis_skin_checked="1">
                             <div  bis_skin_checked="1">
-                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer table-responsive"
                                     id="kt_customers_table">
                                     <!--begin::Table head-->
                                     <thead>
@@ -254,7 +271,7 @@
                                             <th class="min-w-125px ">Teléfono</th>
                                             <th class="min-w-125px ">Página  web</th>
                                             <th class="min-w-125px ">Campañas</th>
-                                            <th class="min-w-125px ">Tipo de contacto</th>
+                                            <th class="min-w-125px ">¿Representa Empresa?</th>
                                             <th class="min-w-125px ">Estado</th>
                                             <th class="text-end min-w-70px" rowspan="1" colspan="1"
                                                 aria-label="Acciones" style="width: 146.738px;">Acciones</th>
@@ -285,17 +302,16 @@
                                                 ]) !!}
                                             </th>
                                             <th>
-                                                {!! Form::select('tipo_contacto',['1' => 'Persona', '2' => 'Empresa'],
+                                                {{-- {!! Form::select('tipo_contacto',['0' => 'No', '1' => 'Si'],
                                                     null,
                                                     [
                                                         'id' => 'tipo_contacto',
-                                                        'class' => 'form-control js-example-basic-single
-                                                                                            text-gray-400',
+                                                        'class' => 'form-control js-example-basic-single text-gray-400',
                                                         'placeholder' => '----',
                                                         'onchange' => "buscar('statu')",
                                                         
                                                     ],
-                                                ) !!}
+                                                ) !!} --}}
                                             </th>
                                             <th>
                                                 {!! Form::select(
@@ -304,8 +320,7 @@
                                                     null,
                                                     [
                                                         'id' => 'statu',
-                                                        'class' => 'form-control js-example-basic-single
-                                                                                            text-gray-400',
+                                                        'class' => 'form-control js-example-basic-single text-gray-400',
                                                         'placeholder' => '----',
                                                         'onchange' => "buscar('statu')",
                                                         'required'
@@ -346,7 +361,7 @@
                                                             {{ $item->website }}
                                                         </a>
                                                     @else
-                                                        <p class="text-danger">No asignado</p>
+                                                        <p class="text-info">No asignado</p>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -363,12 +378,11 @@
                                                 </td>
 
                                                 <td>
-                                                    @if ($item->type_contact == 1)
-                                                        <p  class="badge badge-light-info">Persona</p>
-                                                    @elseif($item->type_contact == 2)
-                                                        <p  class="badge badge-light-success">Empresa</p>
+                                                    @if ($item->represent == 1)
+                                                        <p  class="badge badge-light-info">Si</p>
+                                                  
                                                     @else
-                                                        <p><p  class="badge badge-primary">No asignado</p></p>
+                                                        <p><p  class="badge badge-primary">No</p></p>
                                                     @endif
                                                 </td>
 
@@ -401,7 +415,7 @@
                                                         </span>
                                                         <!--end::Svg Icon--></a>
                                                     <!--begin::Menu-->
-                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
                                                             <a 
@@ -443,18 +457,37 @@
                                                         <div class="row">
                                                             <div class="col-sm-12 col-sm-12 col-md-6">
         
-                                                                {!! Form::label('type_contact', 'Tipo de contacto') !!}
-                                                                {!! Form::select('type_contact', ['1' =>'Persona','2' =>'Empresa'], isset($item->type_contact)? $item->type_contact : null, ['class' => 'form-control', 'placeholder' => '--Seleciona un tipo--' ,'required']) !!}
-                                                                
-                                                            </div>
-                                                           {{--  <div class="col-sm-12 col-sm-12 col-md-6">
+                                                                <label 
+                                                                for="comisiones" 
+                                                                class="form-label">¿Representa una
+                                                                    empresa?
+                                                                </label><br>
+                                                                <input 
+                                                                type="checkbox" 
+                                                                id="representa_empresa"  
+                                                                name="representa_empresa"  
+                                                                data-toggle="toggle"
+                                                                {{ $item->represent == 1 ? 'checked' : '' }}
+                                                                data-on="Si" 
+                                                                data-off="No" 
+                                                                data-onstyle="primary"
+                                                                data-offstyle="danger" 
+                                                                onchange="accion_respresentar(this)">
         
-                                                                {!! Form::label('lastname', 'Apellidos') !!}
-                                                                {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez', 'required']) !!}
-                                                                @error('lastname')
-                                                                    <small class="text-danger">Este campo es requerido</small>
-                                                                @enderror
-                                                            </div> --}}
+                                                            </div>
+        
+                                                        </div>
+        
+                                                        <div class="row mt-2" id="empresa_reprentar">
+                                                            <div class="">
+                                                                {!! Form::label('name_empresa', 'Nombre Empresa') !!}
+                                                                {!! Form::text('name_empresa', isset($item->name_enterprise) ? $item->name_enterprise : null, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
+                                                            </div>
+                                                            <div class="">
+                                                                {!! Form::label('type_enterprise', 'Tipo de empresa') !!}
+                                                                {!! Form::select('type_enterprise', $type_enterprise, null, ['class' => 'form-control', 'placeholder' => 'Selecciona un tipo']) !!}
+                                                            </div>
+                                                            <hr class="mt-5">
                                                         </div>
 
                                 
@@ -610,7 +643,9 @@
                                     class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
                                     <div class="dataTables_length" id="kt_customers_table_length">
                                         <label>
-                                            <select name="kt_customers_table_length" aria-controls="kt_customers_table"
+                                            <select 
+                                                name="kt_customers_table_length" 
+                                                aria-controls="kt_customers_table"
                                                 class="form-select form-select-sm form-select-solid">
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
@@ -642,8 +677,36 @@
 
         @section('script')
             <script type="text/javascript">
+
+            function accion_respresenta(checkboxElem){
+                    let inputSubalterno = document.getElementById('empresa_repre');
+                
+                    if (checkboxElem.checked) {
+                    /*  $('#inputSubalterno').collapse('show'); */
+                        inputSubalterno.style.display = 'block';
+                    }else {
+                        /* $('#inputSubalterno').collapse('hide'); */
+                        inputSubalterno.style.display = 'none';
+                    }
+                }
+
+                function accion_respresentar(checkboxElem){
+                    let inputSubalterno = document.getElementById('empresa_reprentar');
+                    console.log(inputSubalterno)
+                    if (checkboxElem.checked) {
+                    /*  $('#inputSubalterno').collapse('show'); */
+                        inputSubalterno.style.display = 'block';
+                    }else {
+                        /* $('#inputSubalterno').collapse('hide'); */
+                        inputSubalterno.style.display = 'none';
+                    }
+                }
+
+
                 $(document).ready(function() {
                     $('.js-example-basic-single').select2();
+                    document.getElementById('empresa_repre').style.display = 'none';
+                    document.getElementById('empresa_reprentar').style.display = 'none';
                 });
 
                 function buscar(tipo) {

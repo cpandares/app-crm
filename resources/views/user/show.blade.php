@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    @include('menu')
+  
     <div class="row container">
         <div class="col-md-3">
             <!-- Profile Image -->

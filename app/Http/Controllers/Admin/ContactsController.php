@@ -31,6 +31,7 @@ class ContactsController extends Controller
         $clientes = Contact::where('user_id', $user_id)->where('contact_status', 4)->orderByDesc('id')->get();
         $noInteresteds = Contact::where('user_id', $user_id)->where('contact_status', 5)->orderByDesc('id')->get();
         $comunicacion_medias = ComunicationMedium::pluck('comunication_medio', 'id');
+        $type_enterprise = DB::table('enterpreses_types')->pluck('name_enterprise', 'id');
         $status = ContactStatus::pluck('status_name', 'id');
         $title = 'Listado de contactos';
        /*  $contactsCapaings = DB::table('campaing')
@@ -57,7 +58,8 @@ class ContactsController extends Controller
                     'data'=> $contacts,
                     'title' => $title,
                     'campaings' => $campaings,
-                    'noInteresteds' =>$noInteresteds
+                    'noInteresteds' =>$noInteresteds,
+                    'type_enterprise' => $type_enterprise
                 ]);
 
     }
@@ -84,7 +86,7 @@ class ContactsController extends Controller
         $user_id = auth()->user()->id;
         $controlador = new ContactsController();
         $contacts = DB::table('contacts')->where('user_id', $user_id)
-            ->select('contacts.id', 'contacts.name','contacts.contact_status', 'contacts.lastname', 'contacts.email', 'contacts.created_at', 'campaing.campaing_name', 'contacts.phone', 'contacts.postcode', 'contacts.country', 'contacts.city','contacts.comunication_medium', 'contacts.state', 'contacts.address', 'contacts.website','contacts.type_contact')
+            ->select('contacts.id', 'contacts.name','contacts.contact_status', 'contacts.lastname', 'contacts.email', 'contacts.created_at', 'campaing.campaing_name', 'contacts.phone', 'contacts.postcode', 'contacts.country', 'contacts.city','contacts.comunication_medium', 'contacts.state', 'contacts.address', 'contacts.website','contacts.type_contact', 'contacts.represent')
             ->leftJoin('campaing', 'campaing.contact_id', '=', 'contacts.id')
             ->orderByDesc('contacts.id');
             /* ->select('contacts.*','campaing.*') */
@@ -95,7 +97,7 @@ class ContactsController extends Controller
         $campaings = Campaing::where('created_user', $user_id)->get();
         $status = ContactStatus::pluck('status_name', 'id');
         $list_campaings =  Campaing::where('created_user', $user_id)->pluck('campaing_name', 'id');
-        
+        $type_enterprise = DB::table('enterpreses_types')->pluck('name_enterprise', 'id');
 
         if(isset($input['name'])){
             $condicion[] = ['contacs.name', 'like', '%' . $input['name'] . '%'];
@@ -109,8 +111,10 @@ class ContactsController extends Controller
         if (isset($input['country'])) {
             $condicion['contacs.country'] = $input['country'];
         }
-        if (isset($input['statu'])) {
-            $condicion['contacts.contact_status'] = $input['statu'];
+        if (isset($input['tipo_contacto'])) {
+            
+            $condicion['contacts.represent'] = (int) $input['tipo_contacto'];
+           
         }
         if (isset($input['tipo_contacto'])) {
             $condicion['contacts.type_contact'] = $input['tipo_contacto'];
@@ -126,7 +130,8 @@ class ContactsController extends Controller
             'controlador' =>$controlador,
             'list_campaings' => $list_campaings,
             'title' => $title,
-            'campaings_list' => $campaings_list
+            'campaings_list' => $campaings_list,
+            'type_enterprise' => $type_enterprise
         ]);
     }
 
@@ -410,7 +415,12 @@ class ContactsController extends Controller
         try {
             //code...
 
-           /*  dd($request->all()); */
+           
+            if($request->representa_empresa == 'on'){
+                $representa = 1;
+            }else{
+                $representa = null;
+            }
             $contact->name = $request->name;
             $contact->lastname = $request->lastname;
             $contact->email = $request->email;
@@ -424,9 +434,11 @@ class ContactsController extends Controller
             $contact->website = isset($request->website) ? $request->website : null;
             $contact->type_contact = isset($request->type_contact) ?  $request->type_contact : 1; //Si no viene el tipo contacto por defecto sera persona
             $contact->types_contacts = isset($request->types_contacts) ? $request->types_contacts : null;
-
+            $contact->name_enterprise = isset($request->name_empresa) ? $request->name_empresa : null;
+            $contact->type_enterprise = isset($request->type_enterprise) ? $request->type_enterprise : null;
             $contact->contact_status = 1;
             $contact->user_id = $user_id;
+            $contact->represent = $representa;
             $contact->comunication_medium = $request->medio_comunicacion;
             $contact->created_at = Carbon::now();
             $contact->updated_at = Carbon::now();
@@ -457,9 +469,9 @@ class ContactsController extends Controller
             Alert::success('Contacto Guardado');
             return redirect()->back();
         } catch (\PDOException $th) {
-            /* return $th->getMessage(); */
-            Alert::error('Contacto no guardado, contacte con soporte');
-             return redirect()->back();
+            return $th->getMessage();
+            /* Alert::error('Contacto no guardado, contacte con soporte');
+             return redirect()->back(); */
         }
     }
 

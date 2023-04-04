@@ -29,7 +29,7 @@ class CampaingController extends Controller
         $id = auth()->user()->id;
         $campaings = Campaing::where('created_user', $id)->pluck('campaing_name','campaing_name');
         $data = Campaing::where('created_user', $id);
-        $title = 'Listado de Campañas';
+        $title = 'Oportunidades';
         
         
         if (isset($input['city'])) {
@@ -137,7 +137,7 @@ class CampaingController extends Controller
         $comunicacion_medias = ComunicationMedium::pluck('comunication_medio', 'id');
         $list_campaings =  Campaing::where('created_user', $user_id)->pluck('campaing_name', 'id');
         $status = ContactStatus::pluck('status_name', 'id');
-
+        $type_enterprise = DB::table('enterpreses_types')->pluck('name_enterprise', 'id');
         $contacts = DB::table('contacts')
                         ->where('contacts.user_id', $user_id)
                         ->where('contact_campaings.camaping_id', $id)
@@ -171,9 +171,9 @@ class CampaingController extends Controller
             $condicion['contacts.type_contact'] = $input['tipo_contacto'];
         }
 
-        $contacts = $contacts->where($condicion)->paginate(20);
+        $contacts = $contacts->where($condicion)->orderByDesc('id')->paginate(20);
 
-        $title = 'Detalle de Campaña: ' . $campaing->campaing_name;
+        $title = '' . $campaing->campaing_name;
         return view('campaings.show', [
             'campaing' => $campaing,
             'contacts' => $contacts,
@@ -181,7 +181,8 @@ class CampaingController extends Controller
             'comunicacion_medias' => $comunicacion_medias,
             'status' => $status,
             'title' => $title,
-            'list_campaings' =>$list_campaings
+            'list_campaings' =>$list_campaings,
+            'type_enterprise' => $type_enterprise
         ]);
     }
 
@@ -639,22 +640,29 @@ class CampaingController extends Controller
        /*  dd("12"); */
        try {
         //code...
+        if($request->representa_empresa == 'on'){
+            $representa = 1;
+        }else{
+            $representa = null;
+        }
         $contact->name = $request->name;
         $contact->lastname = $request->lastname;
         $contact->email = $request->email;
         $contact->phone = $request->phone;
+        $contact->address = $request->address;
+        $contact->country = $request->country;
+        $contact->city = isset($request->city) ?  $request->city : 'No Asignado';
+        $contact->state = $request->state;
+        $contact->postcode = isset($request->postcode) ? $request->postcode : null;
 
         $contact->website = isset($request->website) ? $request->website : null;
         $contact->type_contact = isset($request->type_contact) ?  $request->type_contact : 1; //Si no viene el tipo contacto por defecto sera persona
         $contact->types_contacts = isset($request->types_contacts) ? $request->types_contacts : null;
-        $contact->address = $request->address;
-
-        $contact->country = $request->country;
-        $contact->city = isset($request->city) ?  $request->city : 'No Asignado';
-        $contact->state = $request->state;
-        $contact->postcode = $request->postcode;
+        $contact->name_enterprise = isset($request->name_empresa) ? $request->name_empresa : null;
+        $contact->type_enterprise = isset($request->type_enterprise) ? $request->type_enterprise : null;
         $contact->contact_status = 1;
         $contact->user_id = $user_id;
+        $contact->represent = $representa;
         $contact->comunication_medium = $request->medio_comunicacion;
         $contact->created_at = Carbon::now();
         $contact->updated_at = Carbon::now();
