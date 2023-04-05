@@ -410,13 +410,13 @@
                                 </div>
                                 
                             </div>
-                            {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-5']) !!}
-                            {!! Form::close() !!}
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <div class="card-footer">
 
+                                {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-5']) !!}
+                                {!! Form::close() !!}
+                            </div>
                         </div>
+                       
                     </div>
                 </div>
             </div>
