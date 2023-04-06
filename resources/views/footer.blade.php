@@ -20,7 +20,7 @@
 <script src="{{ asset('js/custom/modals/users-search.js') }}"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      
+
 <script src="{{ asset('inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -37,120 +37,120 @@
 <script src="https://sortablejs.github.io/Sortable/Sortable.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <script>
+    
 
-
-   
 
 
     function mostrarPalabra() {
         var datos = document.getElementById('caja_busqueda').value;
         datos = convertir(caja_busqueda.toLowerCase());
-        
+        document.getElementById('empresa_repre').style.display = 'none';
+        document.getElementById('empresa_reprentar').style.display = 'none';
     }
 
-     function convertir(string) {
+    function convertir(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
-    } 
-    $(document).ready(function(){
+    }
+    $(document).ready(function() {
         $('.js-example-basic-single').select2();
-       
-        
+
+
     })
 
     $(document).ready(function() {
-      
-        
+
+
         $('.formDelete').submit(function(e) {
-                e.preventDefault();
-                let form = event.target;
-                Swal.fire({
-                    title: 'Seguro desea eliminar esta campaña?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonText: 'Continuar'
-                }).then((result) => {
-                    if (result.value) {
-                        this.submit();
-                    }
-                });
-            })
+            e.preventDefault();
+            let form = event.target;
+            Swal.fire({
+                title: 'Seguro desea eliminar esta campaña?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Continuar'
+            }).then((result) => {
+                if (result.value) {
+                    this.submit();
+                }
+            });
+        })
 
-            $('.formDeleteBudget').submit(function(e) {
-                e.preventDefault();
-                let form = event.target;
-                Swal.fire({
-                    title: 'Seguro desea eliminar este presupuesto?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonText: 'Continuar'
-                }).then((result) => {
-                    if (result.value) {
-                        this.submit();
-                    }
-                });
-            })
+        $('.formDeleteBudget').submit(function(e) {
+            e.preventDefault();
+            let form = event.target;
+            Swal.fire({
+                title: 'Seguro desea eliminar este presupuesto?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Continuar'
+            }).then((result) => {
+                if (result.value) {
+                    this.submit();
+                }
+            });
+        })
 
-            $('.formDeleteContact').submit(function(e) {
-                e.preventDefault();
-                let form = event.target;
-                Swal.fire({
-                    title: 'Seguro desea eliminar este contacto?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonText: 'Continuar'
-                }).then((result) => {
-                    if (result.value) {
-                        this.submit();
-                    }
-                });
-            })
-            $('.formDeleteNote').submit(function(e) {
-                e.preventDefault();
-                let form = event.target;
-                Swal.fire({
-                    title: 'Seguro desea eliminar esta nota?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonText: 'Continuar'
-                }).then((result) => {
-                    if (result.value) {
-                        this.submit();
-                    }
-                });
-            })
+        $('.formDeleteContact').submit(function(e) {
+            e.preventDefault();
+            let form = event.target;
+            Swal.fire({
+                title: 'Seguro desea eliminar este contacto?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Continuar'
+            }).then((result) => {
+                if (result.value) {
+                    this.submit();
+                }
+            });
+        })
+        $('.formDeleteNote').submit(function(e) {
+            e.preventDefault();
+            let form = event.target;
+            Swal.fire({
+                title: 'Seguro desea eliminar esta nota?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Continuar'
+            }).then((result) => {
+                if (result.value) {
+                    this.submit();
+                }
+            });
+        })
 
-            $('.formDeleteContactCampaing').submit(function(e) {
-                e.preventDefault();
-                let form = event.target;
-                Swal.fire({
-                    title: 'Seguro desea quitar este contacto de la campaña?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonText: 'Continuar'
-                }).then((result) => {
-                    if (result.value) {
-                        this.submit();
-                    }
-                });
-            })
-        
-            $("#price").maskMoney();
-            $("#budget").maskMoney();
+        $('.formDeleteContactCampaing').submit(function(e) {
+            e.preventDefault();
+            let form = event.target;
+            Swal.fire({
+                title: 'Seguro desea quitar este contacto de la campaña?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Continuar'
+            }).then((result) => {
+                if (result.value) {
+                    this.submit();
+                }
+            });
+        })
+
+        $("#price").maskMoney();
+        $("#budget").maskMoney();
     });
     /* const items = document.querySelectorAll('.card__item')
     const columns = document.querySelectorAll('.column') */
@@ -174,7 +174,7 @@
                 evt.related; // HTMLElement on which have guided
                 evt.relatedRect; // DOMRect
                 evt
-                .willInsertAfter; // Boolean that is true if Sortable will insert drag element after target by default
+                    .willInsertAfter; // Boolean that is true if Sortable will insert drag element after target by default
                 originalEvent.clientY; // mouse position
                 // return false; — for cancel
                 // return -1; — insert before target
@@ -190,12 +190,12 @@
                 let oldIndex = evt.oldIndex; // element's old index within old parent
                 let newIndex = evt.newIndex; // element's new index within new parent
                 let oldDraggableIndex = evt
-                .oldDraggableIndex; // element's old index within old parent, only counting draggable elements
+                    .oldDraggableIndex; // element's old index within old parent, only counting draggable elements
                 let newDraggableIndex = evt
-                .newDraggableIndex; // element's new index within new parent, only counting draggable elements
+                    .newDraggableIndex; // element's new index within new parent, only counting draggable elements
                 let clone = evt.clone // the clone element
                 let pullMode = evt
-                .pullMode; // when item is in another sortable: `"clone"` if cloning, `true` if moving
+                    .pullMode; // when item is in another sortable: `"clone"` if cloning, `true` if moving
 
                 let reference = to.dataset.reference;
 
@@ -241,12 +241,6 @@
         });
 
     });
-
-
-    
-
-
-
 </script>
 
 

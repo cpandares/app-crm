@@ -663,7 +663,7 @@ class CampaingController extends Controller
         $contact->contact_status = 1;
         $contact->user_id = $user_id;
         $contact->represent = $representa;
-        $contact->comunication_medium = $request->medio_comunicacion;
+        $contact->comunication_medium = null;
         $contact->created_at = Carbon::now();
         $contact->updated_at = Carbon::now();
         $result = $contact->save();

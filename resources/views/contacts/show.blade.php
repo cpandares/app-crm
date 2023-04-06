@@ -121,9 +121,9 @@
 
                     <p class="text-muted">{{ $contact->phone }}</p>
 
-                    <hr />
+                  {{--   <hr />
                     <strong><i class="fa fa-envelope mr-1"></i> Se contactó mediante: </strong>
-                    {{-- @dump($contact->comunication_medium) --}}
+                    
                     @if ($contact->comunication_medium == 1)
                         <span class="badge badge-primary pull-rigth">Email</span>
                     @elseif($contact->comunication_medium == 2)
@@ -134,7 +134,7 @@
                         <span class="badge badge-primary pull-rigth">Facebook</span>
                     @elseif($contact->comunication_medium == 5)
                         <span class="badge badge-primary pull-rigth">Whatsapp</span>
-                    @endif
+                    @endif --}}
                     <hr />
 
 
@@ -170,15 +170,21 @@
                                 <div class="col-sm-12 col-sm-12 col-md-6">
 
                                     <label for="comisiones" class="form-label">¿Representa una empresa?</label><br>
-                                    <input type="checkbox" id="representa_empresa" data-toggle="toggle" data-on="Si"
-                                        data-off="No" data-onstyle="primary" data-offstyle="danger"
+                                    <input 
+                                        type="checkbox" 
+                                        id="representa_empresa" 
+                                        data-toggle="toggle" 
+                                        data-on="Si"
+                                        data-off="No" 
+                                        data-onstyle="primary" 
+                                        data-offstyle="danger"
                                         onchange="accion_respresenta(this)">
 
                                 </div>
 
                             </div>
 
-                            <div class="row mt-2" id="empresa_reprentar">
+                            <div class="row mt-2" id="empresa_repre">
                                 <div class="">
                                     {!! Form::label('name_empresa', 'Nombre Empresa') !!}
                                     {!! Form::text('name_empresa', $contact->name, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
@@ -1100,6 +1106,17 @@
 
 
     <script>
+         function accion_respresenta(checkboxElem) {
+        let inputSubalterno = document.getElementById('empresa_repre');
+
+        if (checkboxElem.checked) {
+            /*  $('#inputSubalterno').collapse('show'); */
+            inputSubalterno.style.display = 'block';
+        } else {
+            /* $('#inputSubalterno').collapse('hide'); */
+            inputSubalterno.style.display = 'none';
+        }
+    }
         function changePhoto() {
 
             let avatarForm = $('#avatarForm');

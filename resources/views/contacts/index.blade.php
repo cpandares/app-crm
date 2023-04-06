@@ -204,10 +204,10 @@
                                                 </div>
 
                                                 <div class="row  mt-2">
-                                                    <div class="col-md-6">
+                                                   {{--  <div class="col-md-6">
 
                                                         {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
-                                                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                        
                                                         {!! Form::select('medio_comunicacion', $comunicacion_medias, null, [
                                                             'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
                                                             'class' => 'form-control',
@@ -218,7 +218,7 @@
                                                         @error('medio_comunicacion')
                                                             <small class="text-danger">Este campo es requerido</small>
                                                         @enderror
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-sm-12 col-md-6">
 
                                                         {!! Form::label('website', 'Página Web') !!}

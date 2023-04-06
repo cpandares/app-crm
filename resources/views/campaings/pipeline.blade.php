@@ -98,6 +98,35 @@
                                                 ]) !!}
 
                                                 <div class="row">
+                                                    <div class="col-sm-12 col-sm-12 col-md-6">
+
+                                                        <label for="comisiones" class="form-label">
+                                                            ¿Representa una empresa?</label><br>
+                                                        <input type="checkbox" id="representa_empresa"
+                                                            name="representa_empresa" data-toggle="toggle" data-on="Si"
+                                                            data-off="No" data-onstyle="primary" data-offstyle="danger"
+                                                            onchange="accion_respresenta(this)">
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row mt-2" id="empresa_repre">
+                                                    <div class="">
+                                                        {!! Form::label('name_empresa', 'Nombre Empresa') !!}
+                                                        {!! Form::text('name_empresa', null, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
+                                                    </div>
+                                                    <div class="">
+                                                        {!! Form::label('type_enterprise', 'Tipo de empresa') !!}
+                                                        {!! Form::select('type_enterprise', $type_enterprise, null, [
+                                                            'class' => 'form-control',
+                                                            'placeholder' => 'Inversiones llc',
+                                                        ]) !!}
+                                                    </div>
+                                                    <hr class="mt-5">
+                                                </div>
+
+                                                <div class="row">
                                                     <div class="col-md-6">
 
                                                         {!! Form::label('name', 'Nombre') !!}
@@ -194,10 +223,10 @@
                                                 </div>
 
                                                 <div class="row  mt-2">
-                                                    <div class="col-md-6">
+                                                    {{-- <div class="col-md-6">
 
                                                         {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
-                                                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                      
                                                         {!! Form::select('medio_comunicacion', $comunicacion_medias, null, [
                                                             'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
                                                             'class' => 'form-control',
@@ -208,7 +237,7 @@
                                                         @error('medio_comunicacion')
                                                             <small class="text-danger">Este campo es requerido</small>
                                                         @enderror
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-md-6">
 
                                                         {!! Form::label('medio_comunicacion', 'Estado del Cliente') !!}
@@ -406,10 +435,10 @@
                                                             </div>
 
                                                             <div class="row  mt-2">
-                                                                <div class="col-md-6">
+                                                                {{-- <div class="col-md-6">
 
                                                                     {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
-                                                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                                                                   
                                                                     {!! Form::select(
                                                                         'medio_comunicacion',
                                                                         $comunicacion_medias,
@@ -421,7 +450,7 @@
                                                                         <small class="text-danger">Este campo es
                                                                             requerido</small>
                                                                     @enderror
-                                                                </div>
+                                                                </div> --}}
                                                                 <div class="col-md-6">
 
                                                                     {!! Form::label('contact_status', 'Estado del Cliente') !!}
