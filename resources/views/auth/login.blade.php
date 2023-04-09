@@ -64,7 +64,7 @@ License: For each use you must have a valid license purchased only from above li
             <!--begin::Body-->
             <div class="d-flex flex-column flex-lg-row-fluid py-10">
                 <!--begin::Content-->
-                <div class="d-flex flex-center flex-column flex-column-fluid" >
+                <div class="d-flex flex-center flex-column flex-column-fluid">
                     <!--begin::Wrapper-->
                     <div class="w-lg-500px p-10 p-lg-15 mx-auto">
 
@@ -97,8 +97,13 @@ License: For each use you must have a valid license purchased only from above li
                                 <label class="form-label fs-6 fw-bolder text-dark">Usuario</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-lg form-control-solid" type="text"
-                                    name="email" autocomplete="off" />
+                                <input 
+                                    class="form-control form-control-lg form-control-solid" 
+                                    type="text"
+                                    name="email" 
+                                    autocomplete="off" 
+                                    id="campo"
+                                    />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -110,17 +115,30 @@ License: For each use you must have a valid license purchased only from above li
                                     <label class="form-label fw-bolder text-dark fs-6 mb-0">Contraseña</label>
                                     <!--end::Label-->
                                     <!--begin::Link-->
-                                    <a href="{{ url('reset-password') }}" class="link-primary fs-6 fw-bolder"
-                                        id="forgot_password" data-toggle="modal" data-target="#exampleModal">Olvidaste
-                                        tu Contraseña ?</a>
+
                                     <!--end::Link-->
                                 </div>
                                 <!--end::Wrapper-->
                                 <!--begin::Input-->
 
-                                <input class="form-control form-control-lg form-control-solid" type="password"
-                                    name="password" autocomplete="off" />
+                                <input 
+                                    class="form-control form-control-lg form-control-solid" 
+                                    type="password"
+                                    name="password" 
+                                    autocomplete="off" 
+                                    id="password"
+                                    />
                                 <!--end::Input-->
+                            </div>
+                            <div class="fv-row mb-10">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <p>
+                                        <input type="checkbox" name="" id="boton"> Recordarme
+                                    </p>
+                                    <a href="{{ url('reset-password') }}" class="link-primary fs-6 fw-bolder"
+                                        id="forgot_password" data-toggle="modal" data-target="#exampleModal">Olvidaste
+                                        tu Contraseña ?</a>
+                                </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Actions-->
@@ -158,7 +176,7 @@ License: For each use you must have a valid license purchased only from above li
 
 
     <!--begin::Global Javascript Bundle(used by all pages)-->
-    
+
     {{-- <script src="assets/js/scripts.bundle.js"></script>
     <link href="{{ asset('js/plugins/bundle.js') }}" rel="stylesheet" type="text/css" /> --}}
     <!--end::Global Javascript Bundle-->
@@ -166,6 +184,25 @@ License: For each use you must have a valid license purchased only from above li
     {{-- <script src="assets/js/custom/authentication/sign-in/general.js"></script> --}}
     <!--end::Page Custom Javascript-->
     <!--end::Javascript-->
+    <script>
+        // Obtener el botón y el campo de entrada
+        var boton = document.getElementById("boton");
+        var campo = document.getElementById("campo");
+        var password = document.getElementById('password');
+        // Agregar un evento de clic al botón
+        boton.addEventListener("click", function() {
+            // Obtener el valor del campo de entrada
+            var valor = campo.value;
+            var pass = password.value;
+            // Almacenar el valor en localStorage
+            localStorage.setItem("valor", valor);
+            localStorage.setItem("pass", pass)
+        });
+
+        // Recuperar el valor del almacenamiento local y establecerlo en el campo de entrada
+        campo.value = localStorage.getItem("valor");
+        password.value = localStorage.getItem("pass")
+    </script>
 </body>
 <!--end::Body-->
 
