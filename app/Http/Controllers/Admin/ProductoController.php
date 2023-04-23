@@ -79,7 +79,7 @@ class ProductoController extends Controller
         ]);
 
 
-
+       /*  dd($request->all()); */
         $imagen = $request->file('file');       
       
      
@@ -100,9 +100,10 @@ class ProductoController extends Controller
             $product->product_created_by = $user_id;
             $product->image = isset($filename) ? $filename : null;
             $product->price_esp = $request->price_esp;
-            $product->price_ger = $request->price_ger;
-            $product->price_italy = $request->price_italy;
-            $product->price_usa = $request->price_usa;
+            $product->price_ger = $request->price_ale;
+            $product->price_italy = $request->price_ita;
+            $product->price_fra = $request->price_fra;
+            $product->price_usa = $request->price_portugal;/* precio portugal */
             $product->stock = $request->stock;
             $product->sku = $request->sku;
 
@@ -184,13 +185,14 @@ class ProductoController extends Controller
 
         try {
             //code...
+           
             $product->product_name = $request->product_name;
             $product->product_description = $request->product_description;           
             $product->image = isset($filename) ? $filename : null;
-            $product->price_esp = $request->price_esp;
-            $product->price_ger = $request->price_ger;
-            $product->price_italy = $request->price_italy;
-            $product->price_usa = $request->price_usa;
+            $product->price_ger = $request->price_ale;
+            $product->price_italy = $request->price_ita;
+            $product->price_fra = $request->price_fra;
+            $product->price_usa = $request->price_portugal;/* precio portugal */
             $product->stock = $request->stock;
             $product->sku = $request->sku;
 
