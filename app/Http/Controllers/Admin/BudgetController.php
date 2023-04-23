@@ -61,8 +61,7 @@ class BudgetController extends Controller
 
 
         if ($documento != null) {
-            $mime = $documento->getMimeType();
-           
+            $mime = $documento->getMimeType();          
             
               $url =  Storage::put('adjunto', $request->file('archivo'));
             //}

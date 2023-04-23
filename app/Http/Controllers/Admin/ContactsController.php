@@ -82,6 +82,7 @@ class ContactsController extends Controller
     {
         $input = $request->all();
         $condicion = [];
+        $per_page = isset($request->per_page) ? $request->per_page : 20;
         $title = 'Listado de contactos';
         $user_id = auth()->user()->id;
         $controlador = new ContactsController();
@@ -119,7 +120,7 @@ class ContactsController extends Controller
         if (isset($input['tipo_contacto'])) {
             $condicion['contacts.type_contact'] = $input['tipo_contacto'];
         }
-        $contacts = $contacts->where($condicion)->paginate(20);
+        $contacts = $contacts->where($condicion)->paginate($per_page);
         
         return view('contacts.lista', [
             'contacts' => $contacts,
@@ -131,7 +132,8 @@ class ContactsController extends Controller
             'list_campaings' => $list_campaings,
             'title' => $title,
             'campaings_list' => $campaings_list,
-            'type_enterprise' => $type_enterprise
+            'type_enterprise' => $type_enterprise,
+            'per_page' => $per_page
         ]);
     }
 
@@ -611,22 +613,24 @@ class ContactsController extends Controller
         }
 
         $request->validate([
-            'imagen' => 'required|image'
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imagen = $request->file('imagen');
-
+        $imagen = $request->file('imagen');       
       
-        if ($imagen){
-            $ruta = "blog-laravel";
-        
-            $response = cloudinary()->upload($request->file('imagen')->getRealPath(), array("folder" => $ruta))->getSecurepath();
-          
-        }  
+     
+        if ($imagen != null) {
+            
+             $filename = time() . '.' . $request->imagen->extension();
+            
+            /*  dd($filename); */
+          $request->imagen->move(public_path('images/contactos/'), $filename);
+          /* $url =  Storage::put('images', $filename); */
+        }
       
         /*  dd($status); */
         try {
-            $contact->image = $response;
+            $contact->image = isset($filename) ? $filename : null;
             $contact->updated_at = Carbon::now();
             $result = $contact->save();
             //code...

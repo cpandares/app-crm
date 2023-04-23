@@ -12,7 +12,7 @@
                         <!--begin::Avatar-->
                         <div class="symbol symbol-100px symbol-circle mb-7">
                             @if ($user->image)
-                                <img src="{{ $user->image }}" alt="{{ $user->name }}">
+                                <img src="{{ URL('/images/contactos/') .'/'. $user->image }}" alt="{{ $user->name }}">
                             @else
                                 <img src="https://res.cloudinary.com/cpandares/image/upload/v1678989754/blog-laravel/ds6saobpntikegnurzzo.jpg"
                                     alt="default_image">
@@ -34,10 +34,15 @@
                                 <span class="badge badge-light-info fw-bolder fs-8 px-2 py-1 ms-2">
                                     Directivo
                                 </span>
+                            @elseif(auth()->user()->rol == 3)
+
+                            <span class="badge badge-primary fw-bolder fs-8 px-2 py-1 ms-2">
+                                Comercial
+                            </span>
                             @else
-                                <span class="badge badge-light-primary fw-bolder fs-8 px-2 py-1 ms-2">
-                                    Empleado
-                                </span>
+                            <span class="badge badge-light-primary fw-bolder fs-8 px-2 py-1 ms-2">
+                                Empleado
+                            </span>
                             @endif
                         </div>
                         <!--end::Position-->

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Alert;
+use Illuminate\Support\Facades\Storage;
+use DB;
 
 class ProductoController extends Controller
 {
@@ -13,14 +16,33 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $productos = Product::all();
+        $per_page = isset($request->per_page) ? $request->per_page : 20;
         $title = 'Productos registrados';
+        $condicion = [];
+        $input = $request->all();
+        $productos = DB::table('products');
+
+        if(isset($input['product_name'])){
+            
+            $condicion[] = ['products.product_name', 'like', '%' . $input['product_name'] . '%'];
+            
+        }
+       
+        if(isset($input['codigo'])){
+            $condicion[] = ['products.sku', 'like', '%' . $input['codigo'] . '%'];
+        }
+        
+       
+        $productos = $productos->where($condicion)->paginate($per_page);
+       
+
         return view('products.index', [
+            'title' => $title,
             'productos' =>$productos,
-            'title' => $title
+            'per_page' => $per_page
         ]);
 
     }
@@ -51,10 +73,24 @@ class ProductoController extends Controller
         //
 
         $user_id = auth()->user()->id;
-        $request->validate([
-            'product_name'=>'required',
-            'product_description' => 'required'  
+       $request->validate([
+            'product_name'=>'required|string',
+            'sku' => 'required|string|unique:products'  
         ]);
+
+
+
+        $imagen = $request->file('file');       
+      
+     
+        if ($imagen != null) {
+            
+             $filename = time() . '.' . $request->file->extension();
+            
+            /*  dd($filename); */
+          $request->file->move(public_path('images/productos/'), $filename);
+          /* $url =  Storage::put('images', $filename); */
+        }
 
         try {
             //code...
@@ -62,17 +98,20 @@ class ProductoController extends Controller
             $product->product_name = $request->product_name;
             $product->product_description = $request->product_description;
             $product->product_created_by = $user_id;
-        
+            $product->image = isset($filename) ? $filename : null;
             $product->price_esp = $request->price_esp;
             $product->price_ger = $request->price_ger;
             $product->price_italy = $request->price_italy;
             $product->price_usa = $request->price_usa;
+            $product->stock = $request->stock;
+            $product->sku = $request->sku;
 
              $product->save();
-
-             return redirect()->route('admin.products', compact('product'));
-        } catch (\Throwable $th) {
-            //throw $th;
+            Alert::success('Producto registrado existosamente');
+            return redirect()->route('admin.products.index');
+        } catch (\PDOException $th) {
+           /*  return $th->getMessage(); */
+           Alert::error('Producto no se registro, contacte con soporte');
             return redirect()->back();
         }
 
@@ -104,8 +143,8 @@ class ProductoController extends Controller
             return redirect()->back();
         }
 
-
-        return view('products.show', compact('product'));
+        $title = 'Editar Producto';
+        return view('products.edit', compact('product', 'title'));
       
     }
 
@@ -119,16 +158,49 @@ class ProductoController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        $request->validate([
+            'product_name'=>'required|string',
+            'sku'=>"required|string|unique:products,sku,$product->id",
+        ]);
         if(!$product){
             return redirect()->back();
+        }
+
+        $imagen = $request->file('file'); 
+        if ($imagen != null) {
+            
+             $filename = time() . '.' . $request->file->extension();
+            
+            /*  dd($filename); */
+          $request->file->move(public_path('images/productos/'), $filename);
+          /* $url =  Storage::put('images', $filename); */
+          if($product->image){
+            Storage::delete($product->image);
+          }
+        }else{
+            $filename = $product->image;
         }
 
 
         try {
             //code...
-            $product->update($request->all());
-        } catch (\Throwable $th) {
-            //throw $th;
+            $product->product_name = $request->product_name;
+            $product->product_description = $request->product_description;           
+            $product->image = isset($filename) ? $filename : null;
+            $product->price_esp = $request->price_esp;
+            $product->price_ger = $request->price_ger;
+            $product->price_italy = $request->price_italy;
+            $product->price_usa = $request->price_usa;
+            $product->stock = $request->stock;
+            $product->sku = $request->sku;
+
+             $product->update();
+             Alert::success('Producto actualizado correctamente');
+             return redirect()->route('admin.products.index');
+        } catch (\PDOException $th) {
+            /* return $th->getMessage(); */
+            Alert::error('Producto no actualizado, contacte con soporte');
+            return redirect()->route('admin.products.index');
         }
 
     }

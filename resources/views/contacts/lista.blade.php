@@ -706,15 +706,24 @@
                                 <div
                                     class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
                                     <div class="dataTables_length" id="kt_customers_table_length">
+                                        {!! Form::open(['url' => 'admin/contactos-lista', 'method' => 'get', 'id' => 'frmFiltrosChange']) !!}
                                         <label>
-                                            <select name="kt_customers_table_length" aria-controls="kt_customers_table"
-                                                class="form-select form-select-sm form-select-solid">
+                                            <select 
+                                                name="per_page"
+                                                id="per_page"
+                                                onchange="buscarChange('per_page')"
+                                                aria-controls="kt_customers_table"
+                                                class="form-select form-select-sm form-select-solid"
+                                                
+                                                >
+                                                <option value="{{ $per_page }}">{{ $per_page }}</option>
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
                                             </select>
                                         </label>
+                                        {!! Form::close() !!}
                                     </div>
                                 </div>
                                 <div
@@ -799,6 +808,26 @@
 
                         default:
                             document.getElementById("frmFiltros").submit();
+                            break;
+                    }
+
+                }
+
+
+                function buscarChange(tipo) {
+
+                    $('#accion').val(1);
+                    var textoSelect = $('#' + tipo).val();
+                    const ENTER_KEY_CODE = 13;
+
+                    switch (tipo) {
+
+
+                       
+
+
+                        default:
+                            document.getElementById("frmFiltrosChange").submit();
                             break;
                     }
 

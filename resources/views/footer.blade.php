@@ -39,23 +39,7 @@
 <script>
     
 
-
-
-    function mostrarPalabra() {
-        var datos = document.getElementById('caja_busqueda').value;
-        datos = convertir(caja_busqueda.toLowerCase());
-        document.getElementById('empresa_repre').style.display = 'none';
-        document.getElementById('empresa_reprentar').style.display = 'none';
-    }
-
-    function convertir(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-
-
-    })
+  
 
     $(document).ready(function() {
 
@@ -136,6 +120,23 @@
             let form = event.target;
             Swal.fire({
                 title: 'Seguro desea quitar este contacto de la campaña?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Continuar'
+            }).then((result) => {
+                if (result.value) {
+                    this.submit();
+                }
+            });
+        });
+        $('.formDeleteProduct').submit(function(e) {
+            e.preventDefault();
+            let form = event.target;
+            Swal.fire({
+                title: 'Seguro desea quitar este producto?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -241,6 +242,32 @@
         });
 
     });
+    document.getElementById("file").addEventListener('change', cambiarImagen);
+           function cambiarImagen(event){
+            
+            let file = event.target.files[0];
+            let reader = new FileReader();
+            reader.onload = (event) => {
+                document.getElementById("picture").setAttribute('src', event.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+    function mostrarPalabra() {
+        var datos = document.getElementById('caja_busqueda').value;
+        datos = convertir(caja_busqueda.toLowerCase());
+        document.getElementById('empresa_repre').style.display = 'none';
+        document.getElementById('empresa_reprentar').style.display = 'none';
+    }
+
+    function convertir(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+
+
+    })
 </script>
 
 

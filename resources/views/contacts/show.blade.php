@@ -11,14 +11,21 @@
                             <!--begin::Preview existing avatar-->
                             {{--  <div class="image-input-wrapper w-150px h-150px" style="background-image: url('https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png')">
                             </div> --}}
+                            
                             <div class="text-center image-input image-input-empty image-input-outline mb-3">
                                 @if (!$contact->image)
                                     <img width="50%" height="50%" class="rounded-circle"
                                         src="https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png"
                                         alt="User profile picture" />
                                 @else
-                                    <img width="50%" height="50%" class="image-input-wrapper w-150px h-150px"
-                                        style="object-fit: cover" src="{{ $contact->image }}" alt="User profile picture" />
+                                    <img 
+                                        width="50%" 
+                                        height="50%" 
+                                        class="image-input-wrapper w-150px h-150px"
+                                        style="object-fit: cover" 
+                                        src="{{ URL('/images/contactos/') .'/'. $contact->image }}"
+                                        {{-- src="{{ $contact->image }}"  --}}
+                                        alt="User profile picture" />
                                 @endif
 
                             </div>
@@ -29,10 +36,10 @@
                                 data-kt-image-input-action="change" data-bs-toggle="tooltip"
                                 title="Cambiar foto de contacto" onchange="changePhoto()">
                                 <i class="fas fa-pencil"></i>
-                                <!--begin::Inputs-->
+                               
                                 <input type="file" name="avatar" id="avatarInput" accept=".png, .jpg, .jpeg" />
                                 <input type="hidden" name="avatar_remove" />
-                                <!--end::Inputs-->
+                                
                             </label>
 
 

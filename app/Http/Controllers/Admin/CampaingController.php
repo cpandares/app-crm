@@ -27,11 +27,12 @@ class CampaingController extends Controller
         $condicion = [];
         $input = $request->all();
         $id = auth()->user()->id;
+        $per_page = isset($request->per_page) ? $request->per_page : 20;
         $campaings = Campaing::where('created_user', $id)->pluck('campaing_name','campaing_name');
         $data = Campaing::where('created_user', $id);
         $title = 'Oportunidades';
         
-        
+      
         if (isset($input['city'])) {
             $condicion[] = ['campaing.city', 'like', '%' . $input['city'] . '%'];
         }
@@ -60,7 +61,8 @@ class CampaingController extends Controller
             'city' =>isset($input['city']) ? $input['city'] : null,
             'country' =>isset($input['country']) ? $input['country'] : null,
             'status' =>isset($input['status']) ? $input['status'] : null,
-            'title' => $title
+            'title' => $title,
+            'per_page' => $per_page
         ]);
     }
 
@@ -126,11 +128,12 @@ class CampaingController extends Controller
     public function show($id, Request $request)
     {
         //
-
+        /* dd($request->per_page); */
         $input = $request->all();
 
         $user_id = auth()->user()->id;
-       
+        $per_page = isset($request->per_page) ? $request->per_page : 20;
+        
         /* if(!$campaing){
             return redirect()->route('admin.contacs.index');
         } */
@@ -182,7 +185,8 @@ class CampaingController extends Controller
             'status' => $status,
             'title' => $title,
             'list_campaings' =>$list_campaings,
-            'type_enterprise' => $type_enterprise
+            'type_enterprise' => $type_enterprise,
+            'per_page' => $per_page
         ]);
     }
 

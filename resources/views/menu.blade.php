@@ -2,7 +2,7 @@
     <!--begin::Logo-->
     <div class="aside-logo flex-column-auto py-13" id="kt_aside_logo">
         <a href="{{ url('/home') }}">
-            <img alt="Logo" src="https://le-cdn.website-editor.net/s/768ed8b3ca614ebb8803ceb590b6005d/dms3rep/multi/opt/nines-artesanals-donil-logo-dolls-web-120w.png?Expires=1681304802&Signature=iBB5TW2VNgThgrD1-UtdEgsE4yTJDJrwvtBc6ZH2eEfCnhpbjvieYxmbO9RxI9LTR4Dj0W8ZgLvFYfSlgMYaPiUWxW4NX~ToaUXOKqEjGpDn5ejxSinrhCFENgimuaua0wHp-1AtEyDEeZwD20ZjluYl4VBreXeFN3wnGvqW6EyaEAutRjREytxe-W8Z3WnQvz92y90IzH6~V5bwlh0E3rqNiOsWJxGnJfTflbPkrLCQ0JmSPOBNPg3xGxlGXRt8nxP~XhOAUi67noDwnZYOqveyKkIF4WVByvkiS6l7uijvQv4mOwNAUuYLWWP-Hg4wFHU7OYLrZUiCQczkLIHYFA__&Key-Pair-Id=K2NXBXLF010TJW" class="h-60px" />
+            <img alt="Logo" src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" class="h-60px" />
         </a>
     </div>
     <!--end::Logo-->

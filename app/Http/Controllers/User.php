@@ -149,19 +149,17 @@ class User extends Controller
                 $imagen = $request->file('imagen');
 
       
-                if ($imagen){
-                    $ruta = "blog-laravel";
-                
-                    $response = cloudinary()->upload($request->file('imagen')->getRealPath(), array("folder" => $ruta))->getSecurepath();
-                
-                }  
+                $filename = time() . '.' . $request->imagen->extension();
+            
+                /*  dd($filename); */
+                $request->imagen->move(public_path('images/contactos/'), $filename);
                
             }
            /*  dd($request->password); */
             $user->name = $request->name;
             $user->email= $request->email;
             $user->password =  isset($request->password) ? Hash::make($request->password) : $user->password;
-            $user->image = isset($imagen) ? $response : $user->image;
+            $user->image = isset($filename) ?$filename : $user->image;
             $user->update();
             Alert::success('Perfil actualizado con éxito');
             return  redirect()->back();
@@ -194,15 +192,13 @@ class User extends Controller
             /* dd($request->password); */
 
             if($request->file('imagen')){
-                $imagen = $request->file('imagen');
-
-      
-                if ($imagen){
-                    $ruta = "blog-laravel";
                 
-                    $response = cloudinary()->upload($request->file('imagen')->getRealPath(), array("folder" => $ruta))->getSecurepath();
                 
-                }  
+                $filename = time() . '.' . $request->imagen->extension();
+            
+                /*  dd($filename); */
+                $request->imagen->move(public_path('images/contactos/'), $filename);
+              
                
             }
            /*  dd($request->password); */
@@ -213,7 +209,7 @@ class User extends Controller
             $user->rol = $request->rol;
             $user->phone = $request->phone;
             $user->password =  isset($request->password) ? Hash::make($request->password) : $user->password;
-            $user->image = isset($imagen) ? $response : $user->image;
+            $user->image = isset($filename) ? $filename : $user->image;
             $user->update();
             Alert::success('Perfil actualizado con éxito');
             return  redirect()->back();
@@ -449,7 +445,7 @@ class User extends Controller
 
         $input = $request->all();
         $condicion = [];
-
+        $per_page = isset($request->per_page) ? $request->per_page : 20;
         $title = 'Configuracion del sistema';
 
         $users = DB::table('users')->orderByDesc('id');
@@ -473,7 +469,7 @@ class User extends Controller
         if (isset($input['statu'])) {
             $condicion['users.rol'] = $input['statu'];
         }
-        $users = $users->where($condicion)->paginate(20);
+        $users = $users->where($condicion)->paginate($per_page);
 
         return view('crm.admin',[
             'title' => $title,
@@ -483,7 +479,7 @@ class User extends Controller
             'campaings' => $campaings,
             'list_campaings' =>$list_campaings,
             'comunicacion_medias' =>$comunicacion_medias,
-            
+            'per_page' => $per_page
         ]);
     }
 
