@@ -9,6 +9,8 @@ use Alert;
 use Illuminate\Support\Facades\Storage;
 use DB;
 
+use Automattic\WooCommerce\Client;
+use Automattic\WooCommerce\HttpClient\HttpClientException;
 class ProductoController extends Controller
 {
     /**
@@ -237,9 +239,22 @@ class ProductoController extends Controller
     public function listarClientesApi(){
 
         $title = "Pedidos Api";
+      
+            $client_key = 'ck_cb1ee44de694e41172eb534b9205dcc16a8db7ff';
+            $secre_key = 'cs_fade398f40a8911b47627e39f947cc8295828e94';
 
+            $woocommerce = new Client('https://shop.ninesdeonil.com',
+           $client_key,
+            $secre_key,
+            [
+            'wp_api' => true, 'version' => 'wc/v3',
+        ]);
+
+        $results = $woocommerce->get('orders');
+       /*  dd($results); */
         return view('api.pedidos.index',[
-            'title' => $title
+            'title' => $title,
+            'orders' => $results
         ]);
     }
 

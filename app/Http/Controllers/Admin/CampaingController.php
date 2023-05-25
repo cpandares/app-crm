@@ -94,9 +94,9 @@ class CampaingController extends Controller
         $request->validate([
             'name' => 'required'
         ]);
-        $start_date = Carbon::parse($request->start_date);
-        $end_date = Carbon::parse($request->end_date);
-       
+        $start_time = Carbon::parse($request->time_start);
+        $end_time = Carbon::parse($request->time_end);
+       /*  dd($start_time); */
         try {
             $ca = new Campaing();
             $ca->campaing_name = $request->name;
@@ -105,6 +105,8 @@ class CampaingController extends Controller
             $ca->city = isset($request->ciudad) ? $request->ciudad : null;
             $ca->init_date = Carbon::parse($request->start_date);
             $ca->end_date = Carbon::parse($request->end_date);
+            $ca->time_start = $start_time;
+            $ca->end_date = $end_time;
             $ca->created_user = $user_id;
             $ca->save();
 
@@ -547,7 +549,7 @@ class CampaingController extends Controller
         $data = Campaing::where('created_user', $id)->get();
 
 
-       return view('campaings.calendario',[
+       return view('campaings.calendar',[
         'title' =>$title,
         'paises' => $this->getPaises()
        ]);

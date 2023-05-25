@@ -9,17 +9,18 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
-        "fideloper/proxy": "^4.2",
-        "fruitcake/laravel-cors": "^2.0",
+        "automattic/woocommerce": "^3.1",
         "cloudinary-labs/cloudinary-laravel": "^1.0",
         "cloudinary/cloudinary_php": "^2.7",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "fideloper/proxy": "^4.2",
+        "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^8.0",
-        "laravel/tinker": "^2.0",
         "laravel/sanctum": "^2.11",
+        "laravel/tinker": "^2.0",
+        "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.3",
         "realrashid/sweet-alert": "^4.1",
-        "laravel/ui": "^3.4",
         "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {

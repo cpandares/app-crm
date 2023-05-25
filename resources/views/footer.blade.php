@@ -13,7 +13,7 @@
 <!--begin::Page Custom Javascript(used by this page)-->
 {{-- <script src="assets/js/widgets.bundle.js"></script> --}}
 <script src="{{ asset('js/custom/widgets.js') }}"></script>
-
+<script src="{{ asset('js/widgets/widgets.bundle.js') }}"></script>
 
 <script src="{{ asset('js/custom/chat.js') }}"></script>
 <script src="{{ asset('js/custom/modals/upgrade-plan.js') }}"></script>
@@ -37,13 +37,9 @@
 <script src="https://sortablejs.github.io/Sortable/Sortable.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <script>
-    
-
-  
-
     $(document).ready(function() {
 
-
+        getPedidos()
         $('.formDelete').submit(function(e) {
             e.preventDefault();
             let form = event.target;
@@ -243,15 +239,16 @@
 
     });
     document.getElementById("file").addEventListener('change', cambiarImagen);
-           function cambiarImagen(event){
-            
-            let file = event.target.files[0];
-            let reader = new FileReader();
-            reader.onload = (event) => {
-                document.getElementById("picture").setAttribute('src', event.target.result);
-            };
-            reader.readAsDataURL(file);
-        }
+
+    function cambiarImagen(event) {
+
+        let file = event.target.files[0];
+        let reader = new FileReader();
+        reader.onload = (event) => {
+            document.getElementById("picture").setAttribute('src', event.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
 
     function mostrarPalabra() {
         var datos = document.getElementById('caja_busqueda').value;
@@ -268,6 +265,20 @@
 
 
     })
+
+    function getPedidos() {
+        fetch("https://shop.ninesdeonil.com/wp-json/wc/v3/orders?consumer_key=ck_cb1ee44de694e41172eb534b9205dcc16a8db7ff&consumer_secret=cs_fade398f40a8911b47627e39f947cc8295828e94")
+            .then(response => response.json())
+            .then(data => {
+                let tableHtml = "<tr><th>Pedido</th><th>Fecha</th></tr> <tr><th>Estado</th> </tr>";
+                data.forEach(user => {
+                    tableHtml += `<tr><td>hola</td><td>munod</td></tr>`;
+                });
+                document.getElementById("pedidos_api").innerHTML = tableHtml;
+            })
+            .catch(error => console.error(error));
+
+    }
 </script>
 
 

@@ -90,9 +90,7 @@
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Date Modified: activate to sort column ascending"
                                                 style="width: 138.538px;">Fecha modificado</th>
-                                            <th class="text-end min-w-100px sorting_disabled" rowspan="1"
-                                                colspan="1" aria-label="Actions" style="width: 138.587px;">Acciones
-                                            </th>
+                                           
                                         </tr>
                                         <!--end::Table row-->
                                     </thead>
@@ -100,6 +98,8 @@
                                     <!--begin::Table body-->
                                     <tbody class="fw-bold text-gray-600">
 
+                                        @foreach ($orders as $item)
+                                            
                                         <tr class="odd">
                                             <!--begin::Checkbox-->
                                             <td>
@@ -111,96 +111,40 @@
                                             <!--begin::Order ID=-->
                                             <td data-kt-ecommerce-order-filter="order_id">
                                                 <a 
-                                                    class="text-gray-800 text-hover-primary fw-bolder">14559</a>
+                                                    class="text-gray-800 text-hover-primary fw-bolder">{{ $item->id }}</a>
                                             </td>
                                             <!--end::Order ID=-->
                                             <!--begin::Customer=-->
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <!--begin:: Avatar -->
-                                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                                        <a >
-                                                            <div class="symbol-label">
-                                                                <img src="https://res.cloudinary.com/cpandares/image/upload/v1678472618/default_avatar_edkklf.png" alt="Brian Cox"
-                                                                    class="w-100">
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <!--end::Avatar-->
-                                                    <div class="ms-5">
-                                                        <!--begin::Title-->
-                                                        <a
-                                                            class="text-gray-800 text-hover-primary fs-5 fw-bolder">Brian
-                                                            Cox</a>
-                                                        <!--end::Title-->
-                                                    </div>
+                                                    {{ $item->line_items[0]->name }}
                                                 </div>
                                             </td>
                                             <!--end::Customer=-->
                                             <!--begin::Status=-->
                                             <td class="text-end pe-0" data-order="Completed">
                                                 <!--begin::Badges-->
-                                                <div class="badge badge-light-success">Despachado</div>
+                                                <div class="badge badge-light-success">{{ $item->status }}</div>
                                                 <!--end::Badges-->
                                             </td>
                                             <!--end::Status=-->
                                             <!--begin::Total=-->
                                             <td class="text-end pe-0">
-                                                <span class="fw-bolder">$65.00</span>
+                                                <span class="fw-bolder">$ {{ $item->total }}</span>
                                             </td>
                                             <!--end::Total=-->
                                             <!--begin::Date Added=-->
                                             <td class="text-end" data-order="2021-12-28">
-                                                <span class="fw-bolder">28/12/2021</span>
+                                                <span class="fw-bolder">{{ date('Y-m-d', strtotime($item->date_created)) }}</span>
                                             </td>
                                             <!--end::Date Added=-->
                                             <!--begin::Date Modified=-->
                                             <td class="text-end" data-order="2021-12-30">
-                                                <span class="fw-bolder">30/12/2021</span>
+                                                <span class="fw-bolder">{{ date('Y-m-d', strtotime($item->date_modified)) }}</span>
                                             </td>
-                                            <!--end::Date Modified=-->
-                                            <!--begin::Action=-->
-                                            <td class="text-end">
-                                                <a href="#" class="btn btn-sm btn-light btn-active-light-primary"
-                                                    data-kt-menu-trigger="click"
-                                                    data-kt-menu-placement="bottom-end">Acciones
-                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                                    <span class="svg-icon svg-icon-5 m-0">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path
-                                                                d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                                fill="black"></path>
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </a>
-                                                <!--begin::Menu-->
-                                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                                    data-kt-menu="true">
-                                                    <!--begin::Menu item-->
-                                                    <div class="menu-item px-3">
-                                                        <a 
-                                                            class="menu-link px-3">Ver</a>
-                                                    </div>
-                                                    <!--end::Menu item-->
-                                                    <!--begin::Menu item-->
-                                                    <div class="menu-item px-3">
-                                                        <a
-                                                            class="menu-link px-3">Detalle</a>
-                                                    </div>
-                                                    <!--end::Menu item-->
-                                                    <!--begin::Menu item-->
-                                                    <div class="menu-item px-3">
-                                                        <a href="#" class="menu-link px-3"
-                                                            data-kt-ecommerce-order-filter="delete_row">Eliminar</a>
-                                                    </div>
-                                                    <!--end::Menu item-->
-                                                </div>
-                                                <!--end::Menu-->
-                                            </td>
-                                            <!--end::Action=-->
+                                         
                                         </tr>
+                                        @endforeach
 
                                     </tbody>
                                     <!--end::Table body-->
