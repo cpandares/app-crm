@@ -238,7 +238,7 @@ class ProductoController extends Controller
 
     public function listarClientesApi(){
 
-        $title = "Pedidos Api";
+        $title = "Pedidos desde (WP españa) ";
       
             $client_key = 'ck_cb1ee44de694e41172eb534b9205dcc16a8db7ff';
             $secre_key = 'cs_fade398f40a8911b47627e39f947cc8295828e94';
