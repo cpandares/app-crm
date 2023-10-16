@@ -2,6 +2,10 @@
 
 @section('content')
 
+@section('css')
+  
+@endsection
+
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content" bis_skin_checked="1">
 
 
@@ -20,7 +24,7 @@
                         <!--begin::Card title-->
                         <div class="card-title">
                             <!--begin::Search-->
-                           
+                            <h2>Total: {{ $total }}</h2>
                             <!--end::Search-->
                         </div>
 
@@ -32,17 +36,13 @@
                         <div id="kt_ecommerce_sales_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="table-responsive">
                                 <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
-                                    id="kt_ecommerce_sales_table">
+                                    id="example">
                                     <!--begin::Table head-->
                                     <thead>
                                         <!--begin::Table row-->
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                            <th>{{ $contador }}</th>
                                             <th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1"
-                                                aria-label="
-                                        
-                                            
-                                        
-                                    "
                                                 style="width: 29.25px;">
                                                 <div
                                                     class="form-check form-check-sm form-check-custom form-check-solid me-3">
@@ -58,7 +58,7 @@
                                             <th class="min-w-175px sorting" tabindex="0"
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Customer: activate to sort column ascending"
-                                                style="width: 290.725px;">Cliente</th>
+                                                style="width: 290.725px;">Producto</th>
                                             <th class="text-end min-w-70px sorting" tabindex="0"
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Status: activate to sort column ascending"
@@ -71,10 +71,7 @@
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Date Added: activate to sort column ascending"
                                                 style="width: 138.538px;">Fecha de registro</th>
-                                            <th class="text-end min-w-100px sorting" tabindex="0"
-                                                aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
-                                                aria-label="Date Modified: activate to sort column ascending"
-                                                style="width: 138.538px;">Fecha modificado</th>
+                                           
                                            
                                         </tr>
                                         <!--end::Table row-->
@@ -83,10 +80,11 @@
                                     <!--begin::Table body-->
                                     <tbody class="fw-bold text-gray-600">
 
-                                        @foreach ($orders as $item)
+                                        @foreach ($orders as $key => $item)
                                             
                                         <tr class="odd">
                                             <!--begin::Checkbox-->
+                                            <td>{{ $key++ }}</td>
                                             <td>
                                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                     <input class="form-check-input" type="checkbox" value="1">
@@ -124,18 +122,17 @@
                                             </td>
                                             <!--end::Date Added=-->
                                             <!--begin::Date Modified=-->
-                                            <td class="text-end" data-order="2021-12-30">
-                                                <span class="fw-bolder">{{ date('d/m/Y', strtotime($item->date_modified)) }}</span>
-                                            </td>
+                                            
                                          
                                         </tr>
                                         @endforeach
 
                                     </tbody>
                                     <!--end::Table body-->
+                                    
                                 </table>
                             </div>
-
+                           
                            
                         </div>
                         <!--end::Table-->
@@ -152,4 +149,13 @@
         </div>
 
     </div>
+@endsection
+
+@section('js')
+    
+    <script>
+        $(document).ready(function() {
+          
+        });
+    </script>
 @endsection

@@ -36,10 +36,12 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://sortablejs.github.io/Sortable/Sortable.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function() {   
 
-        getPedidos()
+        $('#example').DataTable();
         $('.formDelete').submit(function(e) {
             e.preventDefault();
             let form = event.target;
@@ -148,6 +150,7 @@
 
         $("#price").maskMoney();
         $("#budget").maskMoney();
+       
     });
     /* const items = document.querySelectorAll('.card__item')
     const columns = document.querySelectorAll('.column') */
@@ -266,19 +269,7 @@
 
     })
 
-    function getPedidos() {
-        fetch("https://shop.ninesdeonil.com/wp-json/wc/v3/orders?consumer_key=ck_cb1ee44de694e41172eb534b9205dcc16a8db7ff&consumer_secret=cs_fade398f40a8911b47627e39f947cc8295828e94")
-            .then(response => response.json())
-            .then(data => {
-                let tableHtml = "<tr><th>Pedido</th><th>Fecha</th></tr> <tr><th>Estado</th> </tr>";
-                data.forEach(user => {
-                    tableHtml += `<tr><td>hola</td><td>munod</td></tr>`;
-                });
-                document.getElementById("pedidos_api").innerHTML = tableHtml;
-            })
-            .catch(error => console.error(error));
-
-    }
+   
 </script>
 
 

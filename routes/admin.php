@@ -31,6 +31,8 @@ Route::resource('campaings', CampaingController::class)->names('admin.campaings'
 
 Route::get('contacto-presupuesto-ajax/{id}', [BudgetController::class, 'ajax'])->name('contacto-presupuesto-ajax');
 
+Route::delete('delete-contacto-presupuesto-ajax/{id}', [BudgetController::class, 'destroy'])->name('admin.budget.destroy');
+
 Route::post('add-contacts-campaings', [CampaingController::class, 'addContact'])->name('add-contacts-campaings');
 
 Route::delete('delete-contacts-campaings/{id}', [CampaingController::class, 'deleteContact'])->name('delete-contacts-campaings');
@@ -43,7 +45,7 @@ Route::post('update-photo-contact/{id}', [ContactsController::class, 'updatePhot
 
 Route::get('clientes-api', [ContactsController::class, 'listarClientesApi'])->name('admin.clientes.api');
 
-Route::get('pedidos-api', [ProductoController::class, 'listarClientesApi'])->name('admin.clientes.api');
+Route::get('pedidos-api', [ProductoController::class, 'listarClientesApi'])->name('admin.pedidos.api');
 
 Route::get('calendario', [CampaingController::class, 'calendario'])->name('admin.calendario.index');
 

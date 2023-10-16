@@ -1103,7 +1103,7 @@
                                         Total de contactos en lista {{ count($noInteresteds) }}
                                     </div>
                                 </div>
-                                <div class="board-list border-top border-danger" data-reference="2">
+                                <div class="board-list border-top border-danger" data-reference="5">
 
                                     @if (count($noInteresteds) > 0)
                                         @foreach ($noInteresteds as $item)

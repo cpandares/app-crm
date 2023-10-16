@@ -428,9 +428,9 @@
                                                         data-kt-menu="true">
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
-                                                            <a data-toggle="modal"
-                                                                data-target="#exampleModal<?= $item->id ?>"
-                                                                class="menu-link px-3">Editar</a>
+                                                            <a 
+                                                                href="{{ route('admin.contact.show', $item->id) }}"
+                                                                class="menu-link px-3">Ver</a>
                                                         </div>
                                                         <!--end::Menu item-->
                                                         <!--begin::Menu item-->

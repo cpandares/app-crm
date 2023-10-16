@@ -538,7 +538,7 @@
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
                                                             <form method="post"
-                                                                action="{{ route('admin.budget.destroy', $item->id) }}"
+                                                                action="{{ url('admin/delete-contacto-presupuesto-ajax/' . $item->id ) }}"
                                                                 class="formDeleteBudget">
                                                                 @csrf
                                                                 <input type="hidden" name="contact"
