@@ -564,7 +564,6 @@ class User extends Controller
 
          $user = ModelsUser::where('name', $request->name)
                             ->where('email', $request->email)
-                            ->where('country', $request->country)
                             ->first();
         /* dd($user); */
          if(is_null($user)){

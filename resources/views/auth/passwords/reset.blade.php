@@ -108,14 +108,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <input class="form-control form-control-lg form-control-solid" type="text" name="email" autocomplete="off" />
                                 <!--end::Input-->
                             </div>
-                            <div class="fv-row mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fs-6 fw-bolder text-dark">País</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input class="form-control form-control-lg form-control-solid" type="text" name="country" autocomplete="off" />
-                                <!--end::Input-->
-                            </div>
+                            
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="fv-row mb-10">

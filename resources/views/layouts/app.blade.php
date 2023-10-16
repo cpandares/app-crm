@@ -168,13 +168,13 @@
                                                             </span>
                                                             @elseif(auth()->user()->rol == 2)
                                                             <span 
-                                                            class="badge badge-light-info fw-bolder fs-8 px-2 py-1 ms-2">
-                                                            Directivo
+                                                                class="badge badge-primary fw-bolder fs-8 px-2 py-1 ms-2">
+                                                               Empleado
                                                             </span>
-                                                            @else
+                                                            @else                                                            
                                                             <span 
-                                                            class="badge badge-primary fw-bolder fs-8 px-2 py-1 ms-2">
-                                                            Empleado
+                                                             class="badge badge-light-info fw-bolder fs-8 px-2 py-1 ms-2">
+                                                             Directivo
                                                             </span>
                                                             @endif
                                                            
