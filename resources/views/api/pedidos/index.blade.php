@@ -41,7 +41,7 @@
                                     <thead>
                                         <!--begin::Table row-->
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                            <th>{{ $contador }}</th>
+                                            <th>Contador</th>
                                             <th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1"
                                                 style="width: 29.25px;">
                                                 <div
@@ -84,7 +84,7 @@
                                             
                                         <tr class="odd">
                                             <!--begin::Checkbox-->
-                                            <td>{{ $key++ }}</td>
+                                            <td>{{ $contador++ }}</td>
                                             <td>
                                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                     <input class="form-check-input" type="checkbox" value="1">
