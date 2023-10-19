@@ -236,7 +236,7 @@ class ProductoController extends Controller
     }
 
 
-    public function listarClientesApi(Request $request){
+    public function listarPedidosApi(Request $request){
 
         $page = isset($request->page) ? $request->page : 1;
         $title = "Pedidos desde (WP españa) ";
@@ -248,15 +248,15 @@ class ProductoController extends Controller
            $client_key,
             $secre_key,
             [
-            'wp_api' => true, 'version' => 'wc/v3',
+            'wp_api' => true, 'version' => 'wc/v2',
         ]);
 
-       /*  $results = $woocommerce->get('orders');
+       /*  $results = $woocommerce->get('customers');
 
         $data = $results->paginate(100); */
 
         $data = $woocommerce->get('orders?page='.$page.'&per_page=100');
-
+        /* dd($data); */
         $total = count($data);
         $contador = 1;
 
@@ -268,6 +268,38 @@ class ProductoController extends Controller
         ]);
     }
 
+
+    public function listarClientesApi(Request $request){
+
+        $page = isset($request->page) ? $request->page : 1;
+        $title = "Clientes desde (WP españa) ";
+      
+            $client_key = 'ck_0fb04a44be393a5739abf3c22026eb0ac9abadf1';
+            $secre_key = 'cs_74d8724641d193a1cc4c2f94f1d6bd718c59542b';
+
+            $woocommerce = new Client('https://shop.ninesdeonil.com',
+           $client_key,
+            $secre_key,
+            [
+            'wp_api' => true, 'version' => 'wc/v2',
+        ]);
+
+       /*  $results = $woocommerce->get('customers');
+
+        $data = $results->paginate(100); */
+
+        $data = $woocommerce->get('customers?page='.$page.'&per_page=100');
+        /* dd($data); */
+        $total = count($data);
+        $contador = 1;
+
+        return view('api.clientes.index',[
+            'title' => $title,
+            'data' => $data,
+            'total' => $total,
+            'contador' => $contador,
+        ]);
+    }
 
 
 
