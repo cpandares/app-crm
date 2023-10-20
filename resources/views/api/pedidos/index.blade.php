@@ -59,6 +59,10 @@
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Customer: activate to sort column ascending"
                                                 style="width: 290.725px;">Producto</th>
+                                                <th class="min-w-175px sorting" tabindex="0"
+                                                aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
+                                                aria-label="Customer: activate to sort column ascending"
+                                                style="width: 290.725px;">Cliente</th>
                                             <th class="text-end min-w-70px sorting" tabindex="0"
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Status: activate to sort column ascending"
@@ -101,6 +105,11 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     {{ $item->line_items[0]->name }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-uppercase">{{ $item->shipping->first_name }} {{ $item->shipping->last_name }}</span>
                                                 </div>
                                             </td>
                                             <!--end::Customer=-->

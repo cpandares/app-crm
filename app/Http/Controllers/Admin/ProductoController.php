@@ -256,7 +256,7 @@ class ProductoController extends Controller
         $data = $results->paginate(100); */
 
         $data = $woocommerce->get('orders?page='.$page.'&per_page=100');
-        /* dd($data); */
+      /*   dd($data[0]); */
         $total = count($data);
         $contador = 1;
 
