@@ -240,7 +240,10 @@ class ProductoController extends Controller
 
         $page = isset($request->page) ? $request->page : 1;
         $title = "Pedidos desde (WP españa) ";
-      
+        
+        try {
+            //code...
+            
             $client_key = env('CLIENTE_SECRET_WOOCOMERCE_ESP');
             $secre_key = env('CLIENTE_KEY_WOOCOMERCE_ESP');
 
@@ -266,6 +269,21 @@ class ProductoController extends Controller
             'total' => $total,
             'contador' => $contador,
         ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return [
+                'error' => $th->getMessage(),
+                'status' => $th->getCode(),
+                'exception' => 'Throwable'
+            ];
+        }catch(HttpClientException $e){
+            return [
+                'error' => $e->getMessage(),
+                'status' => $e->getCode(),
+                'exception' => 'HttpClientException'
+            ];
+        }
+
     }
 
 
