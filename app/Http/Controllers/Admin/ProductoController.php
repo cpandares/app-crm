@@ -256,6 +256,7 @@ class ProductoController extends Controller
                 'wp_api' => true, 
                 'version' => 'wc/v3',
                 'timeout' => 400,
+                'verify_ssl'=> false,
             ]);
 
          
@@ -301,6 +302,7 @@ class ProductoController extends Controller
             'wp_api' => true, 
             'version' => 'wc/v3',
             'timeout' => 400,
+            'verify_ssl'=> false,
         ]);
 
        /*  $results = $woocommerce->get('customers');
