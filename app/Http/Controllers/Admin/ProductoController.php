@@ -243,21 +243,25 @@ class ProductoController extends Controller
         
         try {
             //code...
-            
+            /* no time limit */
+            set_time_limit(0);
+
             $client_key = env('CLIENTE_SECRET_WOOCOMERCE_ESP');
             $secre_key = env('CLIENTE_KEY_WOOCOMERCE_ESP');
-
+          
             $woocommerce = new Client('https://shop.ninesdeonil.com',
             $client_key,
             $secre_key,
             [
                 'wp_api' => true, 
-                'version' => 'wc/v3'
+                'version' => 'wc/v3',
+                'timeout' => 400,
             ]);
 
-            
+         
 
         $data = $woocommerce->get('orders?page='.$page.'&per_page=100');
+        
         /* dd($data[0]); */
         $total = count($data);
         $contador = 1;
@@ -294,7 +298,9 @@ class ProductoController extends Controller
            $client_key,
             $secre_key,
             [
-            'wp_api' => true, 'version' => 'wc/v2',
+            'wp_api' => true, 
+            'version' => 'wc/v3',
+            'timeout' => 400,
         ]);
 
        /*  $results = $woocommerce->get('customers');
