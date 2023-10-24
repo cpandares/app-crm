@@ -41,16 +41,9 @@
                                     <thead>
                                         <!--begin::Table row-->
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                            <th ></th>
                                             <th>Contador</th>
-                                            <th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1"
-                                                style="width: 29.25px;">
-                                                <div
-                                                    class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                                    <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                                        data-kt-check-target="#kt_ecommerce_sales_table .form-check-input"
-                                                        value="1">
-                                                </div>
-                                            </th>
+                                           
                                             <th class="min-w-100px sorting" tabindex="0"
                                                 aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
                                                 aria-label="Order ID: activate to sort column ascending"
@@ -88,12 +81,15 @@
                                             
                                         <tr class="odd">
                                             <!--begin::Checkbox-->
-                                            <td>{{ $contador++ }}</td>
                                             <td>
-                                                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                    <input class="form-check-input" type="checkbox" value="1">
-                                                </div>
+                                                <img alt="Logoaa" src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" class="h-35px" />
                                             </td>
+                                            <td>
+                                                {{-- add logo here --}}
+                                                
+                                                {{ $contador++ }}
+                                            </td>
+                                            
                                             <!--end::Checkbox-->
                                             <!--begin::Order ID=-->
                                             <td data-kt-ecommerce-order-filter="order_id">
@@ -116,7 +112,16 @@
                                             <!--begin::Status=-->
                                             <td class="text-end pe-0" data-order="Completed">
                                                 <!--begin::Badges-->
-                                                <div class="badge badge-light-success">{{ $item->status }}</div>
+                                                @if ($item->status == 'on-hold')
+                                                
+                                                    <span class="badge badge-primary"> En Espera</span>          
+                                                @elseif($item->status == 'processing')
+                                                    <span class="badge badge-info"> En Proceso</span>
+                                                @elseif($item->status == 'completed')
+                                                    <span class="badge badge-success"> Completado</span>    
+                                                @endif
+                                               
+                                             
                                                 <!--end::Badges-->
                                             </td>
                                             <!--end::Status=-->

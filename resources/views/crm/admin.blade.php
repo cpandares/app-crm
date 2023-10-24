@@ -190,7 +190,7 @@
                     <!--begin::Body-->
                     <div class="card-body py-0">
                         <table class="table align-middle table-row-dashed fs-6 gy-5  no-footer table-hover table_responsive"
-                            id="kt_customers_table">
+                           >
                             <!--begin::Table head-->
                             <thead class="">
                                 <!--begin::Table row-->
@@ -278,12 +278,12 @@
                                                     Directivo
                                                 </span>
                                             @elseif($item->rol == 3)
-                                                <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">
-                                                    Comercial
-                                                </span>
-                                            @else
                                                 <span class="badge badge-primary fw-bolder fs-8 px-2 py-1 ms-2">
                                                     Empleado
+                                                </span>
+                                            @else                                               
+                                                <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">
+                                                    Comercial
                                                 </span>
                                             @endif
                                         </td>
