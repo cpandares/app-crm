@@ -251,12 +251,11 @@ class ProductoController extends Controller
             $client_key,
             $secre_key,
             [
-                'wp_api' => true, 'version' => 'wc/v3',
+                'wp_api' => true, 
+                'version' => 'wc/v3'
             ]);
 
-       /*  $results = $woocommerce->get('customers');
-
-        $data = $results->paginate(100); */
+            
 
         $data = $woocommerce->get('orders?page='.$page.'&per_page=100');
         /* dd($data[0]); */
@@ -274,7 +273,9 @@ class ProductoController extends Controller
             return [
                 'error' => $e->getMessage(),
                 'status' => $e->getCode(),
-                'exception' => 'HttpClientException'
+                'exception' => 'HttpClientException',
+                'curl' => $e->getTrace()[0]['args'][0]['curl'],
+                'curl_error' => curl_error($e->getTrace()[0]['args'][0]['curl']),
             ];
         }
 
