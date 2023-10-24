@@ -269,14 +269,8 @@ class ProductoController extends Controller
             'total' => $total,
             'contador' => $contador,
         ]);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return [
-                'error' => $th->getMessage(),
-                'status' => $th->getCode(),
-                'exception' => 'Throwable'
-            ];
-        }catch(HttpClientException $e){
+        }
+        catch(HttpClientException $e){
             return [
                 'error' => $e->getMessage(),
                 'status' => $e->getCode(),
