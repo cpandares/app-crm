@@ -275,7 +275,7 @@ class ProductoController extends Controller
                 'status' => $e->getCode(),
                 'exception' => 'HttpClientException',
                 'curl' => $e->getTrace()[0],
-                'curl_error' => curl_error($e->getTrace()[0]['curl']),
+                'curl_error' => curl_error($e->getTrace()[0]),
             ];
         }
 
