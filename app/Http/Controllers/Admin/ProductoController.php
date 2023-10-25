@@ -278,7 +278,7 @@ class ProductoController extends Controller
             return [
                 'error' => $e->getMessage(),
                 'status' => $e->getCode(),
-                'exception' => 'HttpClientException',
+                'exception' => 'HttpClientException Pedidos',
                 'curl' => $e->getTrace()[0],
                 
             ];
