@@ -283,6 +283,7 @@ class ProductoController extends Controller
                 'status' => $e->getCode(),
                 'exception' => 'Exception Pedidos',
                 'curl' => $e->getTrace()[0],
+                'status_code' => $e->getTrace()[0]['args'][0]->getStatusCode(),
                 
             ];
         }
