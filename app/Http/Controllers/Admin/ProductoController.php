@@ -240,7 +240,7 @@ class ProductoController extends Controller
 
     public function listarPedidosApi(Request $request){
 
-        $page = 1;
+        $page = isset($request->page) ? $request->page : 1;
         $title = "Pedidos desde (WP españa) ";
         
         try {
@@ -257,7 +257,7 @@ class ProductoController extends Controller
             [
                 'wp_api' => true, 
                 'version' => 'wc/v3',
-                'timeout' => 1000,
+                'timeout' => 0,
                 'verify_ssl'=> false,
             ]);
 
@@ -281,7 +281,7 @@ class ProductoController extends Controller
                 'error' => $e->getMessage(),
                 'status' => $e->getCode(),
                 'exception' => 'Exception Pedidos',
-                'curl' => $e->getTrace(),
+                'curl' => $e->getTrace()[0],
                 
             ];
         }
