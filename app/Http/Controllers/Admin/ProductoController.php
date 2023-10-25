@@ -257,8 +257,9 @@ class ProductoController extends Controller
             [
                 'wp_api' => true, 
                 'version' => 'wc/v3',
-                'timeout' => 0,
+                'timeout' => 40000,
                 'verify_ssl'=> false,
+
             ]);
 
          
