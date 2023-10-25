@@ -35,7 +35,7 @@
                                     </th>
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table"  style="width: 232.688px;">Email</th>
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Company: activate to sort column ascending" style="width: 183.475px;">Username</th>
-                                    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table"  style="width: 173.712px;">Ordenes Registradas</th>
+                                    {{-- <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table"  style="width: 173.712px;">Ordenes Registradas</th> --}}
                                     <th class="min-w-125px sorting" tabindex="0"  style="width: 214.525px;">Fecha de registro</th>
                                     <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 129.137px;">Total Gastado</th>
                                 </tr>
@@ -69,9 +69,9 @@
                                             </td>
                                             <!--end::Company=-->
                                             <!--begin::Payment method=-->
-                                            <td >
+                                           {{--  <td >
                                                 <span class="text-gray-800 fw-bolder d-block">{{ $item->orders_count }}</span>
-                                            </td>
+                                            </td> --}}
                                             <!--end::Payment method=-->
                                             <!--begin::Date=-->
                                             <td >
