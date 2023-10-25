@@ -11,6 +11,8 @@ use DB;
 
 use Automattic\WooCommerce\Client;
 use Automattic\WooCommerce\HttpClient\HttpClientException;
+use Exception;
+
 class ProductoController extends Controller
 {
     /**
@@ -274,6 +276,15 @@ class ProductoController extends Controller
             'contador' => $contador,
         ]);
         }
+        catch(Exception $e){
+            return [
+                'error' => $e->getMessage(),
+                'status' => $e->getCode(),
+                'exception' => 'Exception Pedidos',
+                'curl' => $e->getTrace(),
+                
+            ];
+        }
         catch(HttpClientException $e){
             return [
                 'error' => $e->getMessage(),
@@ -283,6 +294,7 @@ class ProductoController extends Controller
                 
             ];
         }
+        
 
     }
 
