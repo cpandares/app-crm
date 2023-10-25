@@ -77,7 +77,7 @@
                                     <!--begin::Table body-->
                                     <tbody class="fw-bold text-gray-600">
 
-                                        @foreach ($orders as $key => $item)
+                                        @foreach ($orders as  $item)
                                             
                                         <tr class="odd">
                                             <!--begin::Checkbox-->
@@ -94,7 +94,8 @@
                                             <!--begin::Order ID=-->
                                             <td data-kt-ecommerce-order-filter="order_id">
                                                 <a 
-                                                    class="text-gray-800 text-hover-primary fw-bolder">{{ $item->id }}</a>
+                                                    class="text-gray-800 text-hover-primary fw-bolder">{{ $item->id }}
+                                                </a>
                                             </td>
                                             <!--end::Order ID=-->
                                             <!--begin::Customer=-->

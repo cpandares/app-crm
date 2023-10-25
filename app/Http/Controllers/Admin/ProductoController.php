@@ -245,7 +245,7 @@ class ProductoController extends Controller
         $client = new \GuzzleHttp\Client();
         $client_key = env('CLIENTE_SECRET_WOOCOMERCE_ESP');
         $secre_key = env('CLIENTE_KEY_WOOCOMERCE_ESP');
-        $url = 'https://shop.ninesdeonil.com/wp-json/wc/v3/orders?page='.$page.'&per_page=100';
+        $url = 'http://shop.ninesdeonil.com/wp-json/wc/v3/orders?page='.$page.'&per_page=100';
 
         $options = [
             'auth' => [$client_key, $secre_key],
@@ -254,7 +254,7 @@ class ProductoController extends Controller
             ],
             /* no ssl valid */
             'verify' => false,
-            
+
         ];
         try {
             //code...
@@ -275,24 +275,27 @@ class ProductoController extends Controller
             ]);
  */
          
- if ($response->getStatusCode() == 200) {
-    $orders = json_decode($response->getBody(), true);
-    dd($orders);
-    // Do something with the products...
-       /*  $data = $woocommerce->get('orders?page='.$page.'&per_page=100'); */
-        
-        /* dd($data[0]); */
-        /* $total = count($data); */
-        $contador = 1;
+    if ($response->getStatusCode() == 200) {
+        $orders = json_decode($response->getBody(), false);
+        /* dd($orders); */
+        $total = count($orders);
+            $contador = 1;
 
-        return view('api.pedidos.index',[
-            'title' => $title,
-            'orders' => $orders,
-            'total' =>100,
-            'contador' => $contador,
-            ]);
-        }       
-}
+            return view('api.pedidos.index',[
+                'title' => $title,
+                'orders' => $orders,
+                'total' =>$total,
+                'contador' => $contador,
+                ]);
+            } else{
+                return [
+                    'error' => 'Error al obtener los pedidos',
+                    'status' => $response->getStatusCode(),
+                    'exception' => 'Error al obtener los pedidos'
+                    
+                ];
+            }      
+    }
         catch(HttpClientException $e){
             return [
                 'error' => $e->getMessage(),
