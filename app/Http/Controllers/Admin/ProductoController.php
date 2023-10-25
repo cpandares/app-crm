@@ -257,8 +257,8 @@ class ProductoController extends Controller
             [
                 'wp_api' => true, 
                 'version' => 'wc/v3',
-                'timeout' => 40000,
-                'verify_ssl'=> false,
+                'timeout' => 80000,
+                'verify_ssl'=> true,
 
             ]);
 
@@ -276,17 +276,7 @@ class ProductoController extends Controller
             'total' =>100,
             'contador' => $contador,
         ]);
-        }
-        catch(Exception $e){
-            return [
-                'error' => $e->getMessage(),
-                'status' => $e->getCode(),
-                'exception' => 'Exception Pedidos',
-                'curl' => $e->getTrace()[0],
-                
-                
-            ];
-        }
+        }       
         catch(HttpClientException $e){
             return [
                 'error' => $e->getMessage(),
