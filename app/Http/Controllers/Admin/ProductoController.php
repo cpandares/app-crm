@@ -252,6 +252,9 @@ class ProductoController extends Controller
             'headers' => [
                 'Content-Type' => 'application/json',
             ],
+            /* no ssl valid */
+            'verify' => false,
+            
         ];
         try {
             //code...
