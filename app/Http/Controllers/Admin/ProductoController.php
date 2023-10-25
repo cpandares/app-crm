@@ -242,16 +242,25 @@ class ProductoController extends Controller
 
         $page = isset($request->page) ? $request->page : 1;
         $title = "Pedidos desde (WP españa) ";
-        
+        $client = new \GuzzleHttp\Client();
+        $client_key = env('CLIENTE_SECRET_WOOCOMERCE_ESP');
+        $secre_key = env('CLIENTE_KEY_WOOCOMERCE_ESP');
+        $url = 'https://shop.ninesdeonil.com/wp-json/wc/v3/orders?page='.$page.'&per_page=100';
+
+        $options = [
+            'auth' => [$client_key, $secre_key],
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+        ];
         try {
             //code...
             /* no time limit */
             set_time_limit(0);
 
-            $client_key = env('CLIENTE_SECRET_WOOCOMERCE_ESP');
-            $secre_key = env('CLIENTE_KEY_WOOCOMERCE_ESP');
+            $response = $client->get($url, $options);
           
-            $woocommerce = new Client('https://shop.ninesdeonil.com',
+          /*   $woocommerce = new Client('https://shop.ninesdeonil.com',
             $client_key,
             $secre_key,
             [
@@ -261,10 +270,13 @@ class ProductoController extends Controller
                 'verify_ssl'=> true,
 
             ]);
-
+ */
          
-
-        $data = $woocommerce->get('orders?page='.$page.'&per_page=100');
+ if ($response->getStatusCode() == 200) {
+    $orders = json_decode($response->getBody(), true);
+    dd($orders);
+    // Do something with the products...
+       /*  $data = $woocommerce->get('orders?page='.$page.'&per_page=100'); */
         
         /* dd($data[0]); */
         /* $total = count($data); */
@@ -272,11 +284,12 @@ class ProductoController extends Controller
 
         return view('api.pedidos.index',[
             'title' => $title,
-            'orders' => $data,
+            'orders' => $orders,
             'total' =>100,
             'contador' => $contador,
-        ]);
+            ]);
         }       
+}
         catch(HttpClientException $e){
             return [
                 'error' => $e->getMessage(),
