@@ -333,7 +333,7 @@ class ProductoController extends Controller
         $data = $results->paginate(100); */
 
         $data = $woocommerce->get('customers?page='.$page.'&per_page=100');
-        dd($data);
+      /*   dd($data); */
         $total = count($data);
         $contador = 1;
 
