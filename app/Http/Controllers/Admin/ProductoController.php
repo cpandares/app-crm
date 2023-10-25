@@ -245,7 +245,7 @@ class ProductoController extends Controller
         $client = new \GuzzleHttp\Client();
         $client_key = env('CLIENTE_SECRET_WOOCOMERCE_ESP');
         $secre_key = env('CLIENTE_KEY_WOOCOMERCE_ESP');
-        $url = 'http://shop.ninesdeonil.com/wp-json/wc/v3/orders?page='.$page.'&per_page=100';
+        $url = 'https://shop.ninesdeonil.com/wp-json/wc/v3/orders?page='.$page.'&per_page=100';
 
         $options = [
             'auth' => [$client_key, $secre_key],
