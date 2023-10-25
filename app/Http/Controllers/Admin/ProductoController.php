@@ -264,13 +264,13 @@ class ProductoController extends Controller
         $data = $woocommerce->get('orders?page='.$page.'&per_page=100');
         
         /* dd($data[0]); */
-        $total = count($data);
+        /* $total = count($data); */
         $contador = 1;
 
         return view('api.pedidos.index',[
             'title' => $title,
             'orders' => $data,
-            'total' => $total,
+            'total' =>100,
             'contador' => $contador,
         ]);
         }
