@@ -240,7 +240,7 @@ class ProductoController extends Controller
 
     public function listarPedidosApi(Request $request){
 
-        $page = isset($request->page) ? $request->page : 1;
+        $page = 1;
         $title = "Pedidos desde (WP españa) ";
         
         try {
