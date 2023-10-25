@@ -248,7 +248,6 @@ class ProductoController extends Controller
 
             $client_key = env('CLIENTE_SECRET_WOOCOMERCE_ESP');
             $secre_key = env('CLIENTE_KEY_WOOCOMERCE_ESP');
-            dd($client_key, $secre_key);
           
             $woocommerce = new Client('https://shop.ninesdeonil.com',
             $client_key,
@@ -256,7 +255,7 @@ class ProductoController extends Controller
             [
                 'wp_api' => true, 
                 'version' => 'wc/v3',
-                'timeout' => 400,
+                'timeout' => 1000,
                 'verify_ssl'=> false,
             ]);
 
