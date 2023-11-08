@@ -202,6 +202,10 @@ License: For each use you must have a valid license purchased only from above li
         // Recuperar el valor del almacenamiento local y establecerlo en el campo de entrada
         campo.value = localStorage.getItem("valor");
         password.value = localStorage.getItem("pass")
+
+        if(campo.value != ''){
+            boton.checked = true;
+        }
     </script>
 </body>
 <!--end::Body-->

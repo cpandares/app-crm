@@ -39,7 +39,36 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 <script>
-    $(document).ready(function() {   
+    $(document).ready(function() {  
+        
+        
+
+       /*  $.ajax({
+                url: "https://shop.ninesdeonil.com/wp-json/wc/v3/orders?consumer_key=ck_6d3fb768918b7067ee823204e2107033097ca64a&consumer_secret=cs_532eab538d5f11f08d30b70bd1a626a9808f8725&per_page=100",
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    var html = '';
+                    var i = 1;
+                    $.each(data, function(key, value) {
+                        html += '<tr>';
+                        html += '<td>' + i + '</td>';
+                        html += '<td>' + value.id + '</td>';
+                        html += '<td>' + value.line_items[0].name + '</td>';
+                        html += '<td>' + value.billing.first_name + ' ' + value.billing.last_name + '</td>';
+                        html += '<td>' + value.status + '</td>';
+                        html += '<td>' + value.total + '</td>';
+                        html += '<td>' + value.date_created + '</td>';
+                        html += '</tr>';
+                        i++;
+                    });
+                    $('#productos_api').html(html);
+                }
+            }); */
+
+
+
 
         $('#example').DataTable({
             "language": {

@@ -11,6 +11,7 @@ use DB;
 
 use Automattic\WooCommerce\Client;
 use Automattic\WooCommerce\HttpClient\HttpClientException;
+use Carbon\Carbon;
 use Exception;
 
 class ProductoController extends Controller
@@ -241,71 +242,43 @@ class ProductoController extends Controller
     public function listarPedidosApi(Request $request){
 
         $page = isset($request->page) ? $request->page : 1;
+        $per_page = isset($request->per_page) ? $request->per_page : 100;
         $title = "Pedidos desde (WP españa) ";
         $client = new \GuzzleHttp\Client();
         $client_key = env('CLIENTE_SECRET_WOOCOMERCE_ESP');
         $secre_key = env('CLIENTE_KEY_WOOCOMERCE_ESP');
-        $url = 'https://shop.ninesdeonil.com/wp-json/wc/v3/orders?page='.$page.'&per_page=100';
-
-        $options = [
-            'auth' => [$client_key, $secre_key],
-            'headers' => [
-                'Content-Type' => 'application/json',
-            ],
-            /* no ssl valid */
-            'verify' => false,
-
-        ];
-        try {
-            //code...
-            /* no time limit */
-            set_time_limit(0);
-
-            $response = $client->get($url, $options);
-          
-          /*   $woocommerce = new Client('https://shop.ninesdeonil.com',
-            $client_key,
-            $secre_key,
-            [
-                'wp_api' => true, 
-                'version' => 'wc/v3',
-                'timeout' => 80000,
-                'verify_ssl'=> true,
-
-            ]);
- */
-         
-    if ($response->getStatusCode() == 200) {
-        $orders = json_decode($response->getBody(), false);
-        /* dd($orders); */
-        $total = count($orders);
-            $contador = 1;
-
-            return view('api.pedidos.index',[
-                'title' => $title,
-                'orders' => $orders,
-                'total' =>$total,
-                'contador' => $contador,
-                ]);
-            } else{
-                return [
-                    'error' => 'Error al obtener los pedidos',
-                    'status' => $response->getStatusCode(),
-                    'exception' => 'Error al obtener los pedidos'
-                    
-                ];
-            }      
-    }
-        catch(HttpClientException $e){
-            return [
-                'error' => $e->getMessage(),
-                'status' => $e->getCode(),
-                'exception' => 'HttpClientException Pedidos',
-                'curl' => $e->getTrace()[0],
-                
-            ];
-        }
         
+
+       
+        $woocommerce = new Client('https://shop.ninesdeonil.com',
+        $client_key,
+         $secre_key,
+         [
+         'wp_api' => true, 
+         'version' => 'wc/v3',
+         'timeout' => 400,
+         'verify_ssl'=> false,
+         
+     ]);
+        
+        $page = 1;
+        $orders = [];
+        
+        do {
+            $results = $woocommerce->get('orders', ['per_page' => 100, 'page' => $page]);
+            $orders = array_merge($orders, $results);
+           /*  dd($orders); */
+            $page++;
+        } while(count($results) > 0);
+
+        $total = count($orders);
+
+        return view('api.pedidos.index',[
+            'title' => $title,
+            'orders' => $orders,
+            'total' => $total,
+            'contador' => 1
+        ]);
 
     }
 
@@ -326,6 +299,7 @@ class ProductoController extends Controller
             'version' => 'wc/v3',
             'timeout' => 400,
             'verify_ssl'=> false,
+            
         ]);
 
        /*  $results = $woocommerce->get('customers');
@@ -344,6 +318,9 @@ class ProductoController extends Controller
             'contador' => $contador,
         ]);
     }
+
+
+    
 
 
 

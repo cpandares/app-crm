@@ -80,7 +80,7 @@
                                         @foreach ($orders as  $item)
                                             
                                         <tr class="odd">
-                                            <!--begin::Checkbox-->
+                                          
                                             <td>
                                                 <img alt="Logoaa" src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" class="h-35px" />
                                             </td>
@@ -119,7 +119,12 @@
                                                 @elseif($item->status == 'processing')
                                                     <span class="badge badge-info"> En Proceso</span>
                                                 @elseif($item->status == 'completed')
-                                                    <span class="badge badge-success"> Completado</span>    
+                                                    <span class="badge badge-success"> Completado</span>   
+                                                @elseif($item->status == 'cancelled')
+                                                    <span class="badge badge-danger"> Cancelado</span>
+                                                @elseif($item->status == 'on-hold')
+                                                    <span class="badge badge-warning"> En Espera</span>
+                                                    
                                                 @endif
                                                
                                              
