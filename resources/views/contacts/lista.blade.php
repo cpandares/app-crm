@@ -256,7 +256,7 @@
                             <div bis_skin_checked="1">
                                 <table
                                     class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer table-responsive"
-                                    id="kt_customers_table">
+                                    >
                                     <!--begin::Table head-->
                                     <thead>
                                         <!--begin::Table row-->
