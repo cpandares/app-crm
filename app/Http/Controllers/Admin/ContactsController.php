@@ -519,12 +519,12 @@ class ContactsController extends Controller
         return view('contacts.edit', compact('contact'));
     }
 
-    public function update(Contact $contact, Request $request)
+    public function update( Request $request,Contact $contact)
     {
 
         try {
             //code...
-            /* dd($request->id); */
+           /*  dd($request->all()); */
             /* $contact->update($request->all()); */
             $contact->name = $request->name;
             $contact->lastname = $request->lastname;
@@ -532,6 +532,7 @@ class ContactsController extends Controller
             $contact->city = $request->city;
             $contact->phone = $request->phone;
             $contact->postcode = $request->postcode;
+            $contact->state = $request->state;
 
             $contact->website = isset($request->website) ? $request->website : null;
             $contact->type_contact = isset($request->type_contact) ?  $request->type_contact : 1; //Si no viene el tipo contacto por defecto sera persona

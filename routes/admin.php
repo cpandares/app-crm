@@ -46,6 +46,7 @@ Route::post('update-photo-contact/{id}', [ContactsController::class, 'updatePhot
 Route::get('clientes-api', [ProductoController::class, 'listarClientesApi'])->name('admin.clientes.api');
 
 Route::get('pedidos-api', [ProductoController::class, 'listarPedidosApi'])->name('admin.pedidos.api');
+Route::get('pedido-api/{pedido}', [ProductoController::class, 'showPedidoApi'])->name('admin.pedidos.show');
 
 Route::get('calendario', [CampaingController::class, 'calendario'])->name('admin.calendario.index');
 

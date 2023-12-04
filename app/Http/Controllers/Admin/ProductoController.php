@@ -132,8 +132,8 @@ class ProductoController extends Controller
     public function show(Product $product)
     {
         //
-
-        return view('product.show', compact('product'));
+        $title = 'Detalle del producto';
+        return view('products.show', compact('product', 'title'));
     }
 
     /**
@@ -254,12 +254,12 @@ class ProductoController extends Controller
         $client_key,
          $secre_key,
          [
-         'wp_api' => true, 
-         'version' => 'wc/v3',
-         'timeout' => 400,
-         'verify_ssl'=> false,
+            'wp_api' => true, 
+            'version' => 'wc/v3',
+            'timeout' => 400,
+            'verify_ssl'=> false,
          
-     ]);
+        ]);
         
         $page = 1;
         $orders = [];
@@ -319,6 +319,37 @@ class ProductoController extends Controller
         ]);
     }
 
+
+    public function showPedidoApi($pedido){
+
+        $title = "Detalle del pedido";
+        $client = new \GuzzleHttp\Client();
+        $client_key = env('CLIENTE_SECRET_WOOCOMERCE_ESP');
+        $secre_key = env('CLIENTE_KEY_WOOCOMERCE_ESP');
+        
+
+       
+        $woocommerce = new Client('https://shop.ninesdeonil.com',
+        $client_key,
+         $secre_key,
+         [
+            'wp_api' => true, 
+            'version' => 'wc/v3',
+            'timeout' => 400,
+            'verify_ssl'=> false,
+         
+        ]);
+
+        $order = $woocommerce->get('orders/'.$pedido);
+       
+       // dd($order);
+        return view('api.pedidos.show',[
+            'title' => $title,
+            'order' => $order
+        ]);
+
+
+    }
 
     
 

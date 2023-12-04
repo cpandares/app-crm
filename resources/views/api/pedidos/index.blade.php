@@ -93,7 +93,7 @@
                                             <!--end::Checkbox-->
                                             <!--begin::Order ID=-->
                                             <td data-kt-ecommerce-order-filter="order_id">
-                                                <a 
+                                                <a href="{{ route('admin.pedidos.show', $item->id) }}" {{-- onclick ="En construcción" --}}
                                                     class="text-gray-800 text-hover-primary fw-bolder">{{ $item->id }}
                                                 </a>
                                             </td>
