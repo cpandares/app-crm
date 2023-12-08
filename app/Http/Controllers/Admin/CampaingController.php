@@ -245,7 +245,7 @@ class CampaingController extends Controller
                             ->orderByDesc('contacts.id') 
                             ->get();
         
-
+                            $type_enterprise = DB::table('enterpreses_types')->pluck('name_enterprise', 'id');
         
         $campaing = Campaing::where('id', $id)->first();
       
@@ -262,7 +262,8 @@ class CampaingController extends Controller
             'clientes_negoci' => $clientes_negoci,
             'new_clients' => $new_clients,
             'title' => $title,
-            'campaings' => $campaings
+            'campaings' => $campaings,
+            'type_enterprise' => $type_enterprise
         ]);
     }
 

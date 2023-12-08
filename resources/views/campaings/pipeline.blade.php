@@ -13,14 +13,17 @@
             border: none
         }
     </style>
-    <div id="kt_header" class="header py-6 py-lg-0 mt-4" data-kt-sticky="true" data-kt-sticky-name="header"
-        data-kt-sticky-offset="{lg: '300px'}">
+    
+    <div  class="container mt-4" >
         <!--begin::Container-->
-        <div class="header-container container-fluid">
+
+        <div class="header-container">
+            <!--begin::Page title-->
+
             <!--begin::Container-->
 
             <!--begin::Card header-->
-            <div class="mt-5" bis_skin_checked="1">
+            <div class="mt-5 card-grid" bis_skin_checked="1">
                 <div class="card-header border-0 pt-6" bis_skin_checked="1">
                     <!--begin::Card title-->
                     <div class="card-title" bis_skin_checked="1">
