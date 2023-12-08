@@ -42,15 +42,15 @@
                                     <thead>
                                         <!--begin::Table row-->
 
-                                        <tr class="text-center text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                            <th class="w-10px pe-2 " style="width: 29.25px;">
+                                        <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                            <th class="text-center" style="width: 29.25px;">
 
                                             </th>
                                             <th class="min-w-200px " tabindex="0">Producto</th>
                                             <th class="text-end min-w-100px ">SKU</th>
 
-                                            <th class="text-end min-w-70px ">Stock
-                                            </th>
+                                            {{-- <th class="text-end min-w-70px ">Stock
+                                            </th> --}}
                                             <th class="text-end min-w-100px ">Precio España
                                             </th>
 
@@ -67,35 +67,7 @@
                                                 aria-label="Actions">Actions
                                             </th>
                                         </tr>
-                                        <!--end::Table row-->
-                                        {!! Form::open(['route' => 'admin.products.index', 'method' => 'get', 'id' => 'frmFiltros']) !!}
-                                        <tr>
-                                            <th></th>
-                                            <th>
-                                                <input 
-                                                    type="text" 
-                                                    placeholder="Nombre producto" 
-                                                    name="product_name"
-                                                    id="product_name" 
-                                                    onchange="buscar('product_name')"
-                                                    class="form-control"
-                                                    >
-                                            </th>
-                                            <th>
-                                                <input 
-                                                    type="text" 
-                                                    placeholder="codigo" 
-                                                    name="codigo" 
-                                                    id="codigo"
-                                                    onchange="buscar('codigo')" 
-                                                    class="form-control"
-                                                >
-                                            </th>
-                                            <th>
-
-                                            </th>
-                                        </tr>
-                                        {!! Form::close() !!}
+                                      
                                     </thead>
                                     <!--end::Table head-->
                                     <!--begin::Table body-->
@@ -128,7 +100,7 @@
                                                             <a href="{{ route('admin.products.show', $item->id) }}"
                                                                 class="text-gray-800 text-hover-primary fs-5 fw-bolder"
                                                                 data-kt-ecommerce-product-filter="product_name">
-                                                                {{ $item->product_name }}
+                                                                {{ $item->name }}
                                                             </a>
                                                             <!--end::Title-->
                                                         </div>
@@ -141,7 +113,7 @@
                                                 </td>
                                                 <!--end::SKU=-->
                                                 <!--begin::Qty=-->
-                                                <td class="text-end pe-0" data-order="5">
+                                               {{--  <td class="text-end pe-0" data-order="5">
                                                     @if ($item->stock > 100)
                                                         <span class="badge badge-light-success">Cantidad existente {{ $item->stock }}</span>
                                                       
@@ -152,13 +124,13 @@
                                                         <span class="badge badge-light-danger">Cantidad existente {{ $item->stock }}</span>
                                                        
                                                     @endif
-                                                </td>
+                                                </td> --}}
                                                 <!--end::Qty=-->
                                                 <!--begin::Price=-->
                                                 <td class="text-end pe-0">
                                                     <span class="fw-bolder text-dark">
                                                        
-                                                        {{ number_format($item->price_esp, 2, '.', ',') }} €
+                                                        {{ number_format($item->price, 2, '.', ',') }} €
                                                     </span>
                                                 </td>
                                                 <!--end::Price=-->
@@ -241,7 +213,7 @@
                                 </table>
                             </div>
                             <div class="row">
-                                <div
+                               {{--  <div
                                     class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
                                     <div class="dataTables_length" id="kt_ecommerce_products_table_length"><label>
                                     {!! Form::open(['route' => 'admin.products.index', 'method' => 'get', 'id' => 'frmFiltrosChange']) !!}
@@ -258,14 +230,14 @@
                                                 <option value="100">100</option>
                                             </select></label></div>
                                     {!! Form::close() !!}
-                                </div>
-                                <div
+                                </div> --}}
+                               {{--  <div
                                     class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
                                     <div class="dataTables_paginate paging_simple_numbers"
                                         id="kt_ecommerce_products_table_paginate">
                                         {{ $productos->links() }}
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <!--end::Table-->

@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\GetWooCommerceProducts::class,
     ];
 
     /**
@@ -25,6 +25,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        /* ever minute */
+        $schedule->command('woocommerce:products')->everyMinute();
+        $schedule->command('woocommerce:customers')->everyMinute();
+        $schedule->command('woocommerce:oders')->everyMinute();
     }
 
     /**
@@ -34,6 +38,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
+        
         $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Alert;
+use App\Models\OrderItalyApi;
+use App\Models\OrdersApi as ModelsOrdersApi;
+use App\Models\ProuctsApi;
 use Illuminate\Support\Facades\Storage;
 use DB;
 
@@ -13,6 +16,7 @@ use Automattic\WooCommerce\Client;
 use Automattic\WooCommerce\HttpClient\HttpClientException;
 use Carbon\Carbon;
 use Exception;
+use OrdersApi;
 
 class ProductoController extends Controller
 {
@@ -23,32 +27,22 @@ class ProductoController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $per_page = isset($request->per_page) ? $request->per_page : 20;
-        $title = 'Productos registrados';
-        $condicion = [];
-        $input = $request->all();
-        $productos = DB::table('products');
+     
+        $per_page = isset($request->per_page) ? $request->per_page : 10;
+        $title = 'Listado de productos';
+        $products = ProuctsApi::orderBy('id', 'desc')->get();
 
-        if(isset($input['product_name'])){
-            
-            $condicion[] = ['products.product_name', 'like', '%' . $input['product_name'] . '%'];
-            
-        }
-       
-        if(isset($input['codigo'])){
-            $condicion[] = ['products.sku', 'like', '%' . $input['codigo'] . '%'];
-        }
         
-       
-        $productos = $productos->where($condicion)->paginate($per_page);
-       
 
+       /*  dd($products); */
         return view('products.index', [
             'title' => $title,
-            'productos' =>$productos,
+            'productos' => $products,
+            'contador' => 1,
             'per_page' => $per_page
         ]);
+
+       
 
     }
 
@@ -129,10 +123,12 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
         //
         $title = 'Detalle del producto';
+        $product = ProuctsApi::find($id);
+        /* dd($product); */
         return view('products.show', compact('product', 'title'));
     }
 
@@ -142,9 +138,10 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
         //
+        $product = ProuctsApi::find($id);
         if(!$product){
             return redirect()->back();
         }
@@ -242,42 +239,34 @@ class ProductoController extends Controller
     public function listarPedidosApi(Request $request){
 
         $page = isset($request->page) ? $request->page : 1;
-        $per_page = isset($request->per_page) ? $request->per_page : 100;
-        $title = "Pedidos desde (WP españa) ";
-        $client = new \GuzzleHttp\Client();
-        $client_key = env('CLIENTE_SECRET_WOOCOMERCE_ESP');
-        $secre_key = env('CLIENTE_KEY_WOOCOMERCE_ESP');
-        
 
-       
-        $woocommerce = new Client('https://shop.ninesdeonil.com',
-        $client_key,
-         $secre_key,
-         [
-            'wp_api' => true, 
-            'version' => 'wc/v3',
-            'timeout' => 400,
-            'verify_ssl'=> false,
-         
-        ]);
-        
-        $page = 1;
-        $orders = [];
-        
-        do {
-            $results = $woocommerce->get('orders', ['per_page' => 100, 'page' => $page]);
-            $orders = array_merge($orders, $results);
-           /*  dd($orders); */
-            $page++;
-        } while(count($results) > 0);
+        $title ="Pedidos";
 
+        $orders = ModelsOrdersApi::orderBy('id', 'desc')->get();
         $total = count($orders);
+
+        $pedidos_italy = OrderItalyApi::orderBy('id', 'desc')->get();
+
+        $total_italy = count($pedidos_italy);
+
+        $orders = array_merge($orders->toArray(), $pedidos_italy->toArray());
+
+       /* order orders by date_created */
+         usort($orders, function($a, $b) {
+            return $a['date_created'] <=> $b['date_created'];
+        });
+
+        $orders = array_reverse($orders);
+        
 
         return view('api.pedidos.index',[
             'title' => $title,
             'orders' => $orders,
             'total' => $total,
-            'contador' => 1
+            'contador' => 1,
+            'page' => $page,
+            'total_italy' => $total_italy,
+
         ]);
 
     }
@@ -323,7 +312,7 @@ class ProductoController extends Controller
     public function showPedidoApi($pedido){
 
         $title = "Detalle del pedido";
-        $client = new \GuzzleHttp\Client();
+      /*   $client = new \GuzzleHttp\Client();
         $client_key = env('CLIENTE_SECRET_WOOCOMERCE_ESP');
         $secre_key = env('CLIENTE_KEY_WOOCOMERCE_ESP');
         
@@ -340,7 +329,10 @@ class ProductoController extends Controller
          
         ]);
 
-        $order = $woocommerce->get('orders/'.$pedido);
+        $order = $woocommerce->get('orders/'.$pedido); */
+
+        $order = ModelsOrdersApi::where('id', $pedido)->first();
+       /*  dd($order); */
        
        // dd($order);
         return view('api.pedidos.show',[

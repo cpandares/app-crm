@@ -17,7 +17,11 @@
                 <tr>
                     <th>Cliente</th>
                     <td>
-                      {{ $order->shipping->first_name }} {{ $order->shipping->last_name }}
+                        @php
+                            $shipping = json_decode($order->shipping);
+                            echo $shipping->first_name.' '.$shipping->last_name;                                                            
+                        @endphp
+                      {{-- {{ $order->shipping->first_name }} {{ $order->shipping->last_name }} --}}
                     </td>
                 </tr>
                 <tr>
@@ -47,7 +51,14 @@
                 <tr>
                     <th>Productos en la orden</th>
                     <td>
-                        @foreach ($order->line_items as $item)
+                       {{--  @php
+                             $product = json_decode($order->line_items);
+                            foreach ($product as $key => $value) {
+                                echo $value->name.'<br>';
+
+                            }
+                        @endphp --}}
+                        @foreach (json_decode($order->line_items) as $item)
                             <ul class="list-group">
                                 <li class="list-group-item">
                                    <strong>Producto: </strong> {{ $item->name }} <br>
@@ -56,7 +67,7 @@
                                    <strong>Total: </strong> {{ number_format($item->total,2,',','.') }}  €	<br>
                                 </li>
                             </ul>
-                         {{--    {{ $item->name }} <br> --}}
+                         
                             
                         @endforeach
                         
