@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CustomersApi extends Model
+class CustomerApiItaly extends Model
 {
     use HasFactory;
-    protected $table = 'customers_apis';
+    protected $table = 'customers_apis_italy';
     protected $fillable = [
         'id',
         'date_created',

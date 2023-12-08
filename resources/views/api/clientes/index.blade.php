@@ -20,16 +20,18 @@
                     <!--begin::Card body-->
                     <div class="card-body pt-0">
                         <!--begin::Table-->
-                        <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="table-responsive">
-                            <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_customers_table">
+                        <div 
+                           
+                            class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="table-responsive">
+                            <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" 
+                            id="kt_customers_table">
                             <!--begin::Table head-->
                             <thead>
                                 <!--begin::Table row-->
                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                     <th class="w-10px pe-2 sorting_disabled" tyle="width: 29.25px;">
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                            <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
-                                        </div>
+                                        Plataforma
                                     </th>
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table"  style="width: 173.712px;">Nombre Cliente
                                     </th>
@@ -48,24 +50,41 @@
                                     <tr class="odd">
                                             <!--begin::Checkbox-->
                                             <td>
-                                            
+                                                @if ($item["origin"] == 'es')
+                                                    <img 
+                                                    alt="Cliente de España" 
+                                                    src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                    class="h-35px rounded" 
+                                                    style="cursor: pointer"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Cliente de España"
+                                                        >
+                                                @elseif($item["origin"] == 'it')
+                                                    <img 
+                                                        alt="Cliente de Italia" 
+                                                        {{-- src="https://disnight.com/it/wp-content/uploads/2023/06/logonines.jpg"  --}}
+                                                        src="{{ URL('/images/logoit.png') }}" 
+                                                        class="h-35px" 
+                                                        style="cursor: pointer"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Cliente de Italia"
+                                                        >
+                                                @endif
                                             </td>
                                             <!--end::Checkbox-->
                                             <!--begin::Name=-->
                                             <td>
-                                                <a  class="text-gray-800 text-hover-primary mb-1">{{ $item->first_name }} {{ $item->last_name }}</a>
+                                                <a  class="text-gray-800 text-hover-primary mb-1">{{ $item["first_name"] }} {{ $item["last_name"] }}</a>
                                             </td>
                                             <!--end::Name=-->
                                             <!--begin::Email=-->
                                             <td>
                                                 <span class="text-gray-800 fw-bolder d-block">
-                                                    {{ $item->email }}
+                                                    {{ $item["email"] }}
                                                 </span>
                                             </td>
                                             <!--end::Email=-->
                                             <!--begin::Company=-->
                                             <td>
-                                                <span class="text-gray-800 fw-bolder d-block">{{ $item->username }}</span>
+                                                <span class="text-gray-800 fw-bolder d-block">{{ $item["username"] }}</span>
                                             </td>
                                             <!--end::Company=-->
                                             <!--begin::Payment method=-->
@@ -75,7 +94,9 @@
                                             <!--end::Payment method=-->
                                             <!--begin::Date=-->
                                             <td >
-                                                <span class="text-gray-800 fw-bolder d-block">{{ $item->date_created }}</span>
+                                                <span class="text-gray-800 fw-bolder d-block">
+                                                    {{ date('d-m-Y', strtotime($item["created_at"])) }}
+                                                </span>
                                             </td>
                                             <!--end::Date=-->
                                             <!--begin::Action=-->

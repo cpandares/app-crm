@@ -7,7 +7,9 @@ use App\Http\Controllers\Admin\NoteController;
 use App\Http\Controllers\Admin\ProductoController;
 use App\Http\Controllers\Admin\BudgetController;
 use App\Http\Controllers\Admin\ComunicacionController;
+use App\Http\Controllers\CustomersApiController;
 use App\Http\Controllers\User;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -43,7 +45,7 @@ Route::get('contactos-lista', [ContactsController::class, 'lista'])->name('admin
 
 Route::post('update-photo-contact/{id}', [ContactsController::class, 'updatePhoto'])->name('update-photo-contact');
 
-Route::get('clientes-api', [ProductoController::class, 'listarClientesApi'])->name('admin.clientes.api');
+Route::get('clientes-api', [CustomersApiController::class, 'index'])->name('admin.clientes.api');
 
 Route::get('pedidos-api', [ProductoController::class, 'listarPedidosApi'])->name('admin.pedidos.api');
 Route::get('pedido-api/{pedido}', [ProductoController::class, 'showPedidoApi'])->name('admin.pedidos.show');

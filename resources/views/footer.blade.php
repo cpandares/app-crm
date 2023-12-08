@@ -137,6 +137,7 @@
 
        
         $('#kt_customers_table').DataTable({
+            "lengthMenu": [15, 25, 50, 75, 100],
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
             }
