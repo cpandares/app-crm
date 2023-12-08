@@ -138,9 +138,9 @@ License: For each use you must have a valid license purchased only from above li
                                         <p>
                                             <input type="checkbox" name="" id="boton"> Recordarme
                                         </p>
-                                        <a href="{{ url('reset-password') }}" class="link-primary fs-6 fw-bolder"
+                                       {{--  <a href="{{ url('reset-password') }}" class="link-primary fs-6 fw-bolder"
                                             id="forgot_password" data-toggle="modal" data-target="#exampleModal">Olvidaste
-                                            tu Contraseña ?</a>
+                                            tu Contraseña ?</a> --}}
                                     </div>
                                 </div>
                                 <!--end::Input group-->
