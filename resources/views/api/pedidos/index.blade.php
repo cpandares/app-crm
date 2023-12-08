@@ -45,10 +45,11 @@
                                                 <form action="">
                                                     <select name="plataforma" id="" class="form-control">
                                                         <option value="">Plataforma</option>
-                                                        <option value="all">Ankstore</option>
-                                                        <option value="shopify">Italia</option>
-                                                        <option value="woocommerce">Woocommerce</option>
-                                                        <option value="prestashop">Prestashop</option>
+                                                        <option value="es">Wp España</option>
+                                                        <option value="it">Wp Italia</option>
+                                                        <option value="ankorstore">Ankorstore</option>
+                                                        <option value="faire">Faire</option>
+                                                        <option value="comercial">Comerciales</option>
                                                     </select>
                                                 </form>
                                                 
@@ -79,10 +80,11 @@
                                                             style="cursor: pointer"
                                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Pedido de España"
                                                             />
-                                                    @else
+                                                    @else 
                                                         <img 
                                                             alt="Pedido de Italia" 
-                                                            src="https://disnight.com/it/wp-content/uploads/2023/06/logonines.jpg" 
+                                                            {{-- src="https://disnight.com/it/wp-content/uploads/2023/06/logonines.jpg"  --}}
+                                                            src="{{ URL('/images/logoit.png') }}" 
                                                             class="h-35px" 
                                                             style="cursor: pointer"
                                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Pedido de Italia"
