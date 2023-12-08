@@ -202,7 +202,7 @@
                     <br>
                     <div class="mt-5 text-center">
 
-                        {!! Form::submit('Guardar', ['class' => 'btn btn-outline-primary ']) !!}
+                      {{--   {!! Form::submit('Guardar', ['class' => 'btn btn-outline-primary ']) !!} --}}
 
                     </div>
                     {!! Form::close() !!}

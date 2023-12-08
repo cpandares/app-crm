@@ -25,7 +25,7 @@
                                             class="btn btn-primary float-right btn-sm mr-1" title="Limpiar filtros">
                                             <i class="fa fa-repeat"></i>
                             </a>
-                            <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Crea un producto</a>
+                            {{-- <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Crea un producto</a> --}}
                             <!--end::Add product-->
                         </div>
                         <!--end::Card toolbar-->
@@ -64,8 +64,8 @@
                                                 Precio Portugal
                                             </th>
                                             <th class="text-end min-w-70px _disabled" rowspan="1" colspan="1"
-                                                aria-label="Actions">Actions
-                                            </th>
+                                                aria-label="Actions">
+                                                                                        </th>
                                         </tr>
                                       
                                     </thead>
@@ -163,10 +163,10 @@
                                                 <!--end::Status=-->
                                                 <!--begin::Action=-->
                                                 <td class="text-end">
-                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary"
+                                                  {{--   <a href="#" class="btn btn-sm btn-light btn-active-primary"
                                                         data-kt-menu-trigger="click"
                                                         data-kt-menu-placement="bottom-end">Acciones
-                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                                      
                                                         <span class="svg-icon svg-icon-5 m-0">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                 height="24" viewBox="0 0 24 24" fill="none">
@@ -175,18 +175,17 @@
                                                                     fill="black"></path>
                                                             </svg>
                                                         </span>
-                                                        <!--end::Svg Icon-->
+                                                      
                                                     </a>
-                                                    <!--begin::Menu-->
+                                                    
                                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-primary fw-bold fs-7 w-125px py-4"
                                                         data-kt-menu="true">
-                                                        <!--begin::Menu item-->
+                                                       
                                                         <div class="menu-item px-3">
                                                             <a  class="menu-link px-3"
                                                             href="{{ url('admin/products/'.$item->id.'/edit') }}">Editar</a>
                                                         </div>
-                                                        <!--end::Menu item-->
-                                                        <!--begin::Menu item-->
+                                                       
                                                         <div class="menu-item px-3">
                                                             <form method="post"
                                                                 action="{{ route('admin.products.destroy', $item->id) }}"
@@ -200,9 +199,9 @@
                                                                 </button>
                                                             </form>
                                                         </div>
-                                                        <!--end::Menu item-->
-                                                    </div>
-                                                    <!--end::Menu-->
+                                                        
+                                                    </div> --}}
+                                                    
                                                 </td>
                                                 <!--end::Action=-->
                                             </tr>

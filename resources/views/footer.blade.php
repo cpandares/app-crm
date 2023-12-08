@@ -1,3 +1,4 @@
+
 <link href="{{ asset('css/bundle/bundle.css') }}" rel="stylesheet" type="text/css" />
 
 <script src="{{ asset('js/plugins/plugins.bundle.js') }}"></script>

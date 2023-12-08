@@ -57,7 +57,7 @@ class ContactsController extends Controller
                     'status' => $status,
                     'data'=> $contacts,
                     'title' => $title,
-                    'campaings' => $campaings,
+                    'campaings_list' => $campaings,
                     'noInteresteds' =>$noInteresteds,
                     'type_enterprise' => $type_enterprise
                 ]);

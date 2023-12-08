@@ -14,10 +14,10 @@
         }
     </style>
 
-    <div id="kt_header" class="header py-6 py-lg-0 mt-4" data-kt-sticky="true" data-kt-sticky-name="header">
+    <div  class="container mt-4" >
         <!--begin::Container-->
 
-        <div class="header-container container-fluid">
+        <div class="header-container">
             <!--begin::Page title-->
 
             <!--begin::Container-->
@@ -63,198 +63,7 @@
                         </div>
                         <!--end::Card header-->
                         <!--begin::Card body-->
-                        <div class="card-body pt-0" bis_skin_checked="1">
-                            <!--begin::Table-->
-                            <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"
-                                bis_skin_checked="1">
-
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Nuevo Contacto</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                {!! Form::open(['route' => 'admin.contact.store', 'autocomplete' => 'off', 'files' => true]) !!}
-
-                                                <div class="row">
-                                                    <div class="col-sm-12 col-sm-12 col-md-6">
-
-                                                        <label for="comisiones" class="form-label">
-                                                            ¿Representa una empresa?</label><br>
-                                                        <input type="checkbox" id="representa_empresa" name="representa_empresa" data-toggle="toggle"
-                                                            data-on="Si" data-off="No" data-onstyle="primary"
-                                                            data-offstyle="danger" onchange="accion_respresenta(this)">
-
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="row mt-2" id="empresa_repre">
-                                                    <div class="">
-                                                        {!! Form::label('name_empresa', 'Nombre Empresa') !!}
-                                                        {!! Form::text('name_empresa', null, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
-                                                    </div>
-                                                    <div class="">
-                                                        {!! Form::label('type_enterprise', 'Tipo de empresa') !!}
-                                                        {!! Form::select('type_enterprise', $type_enterprise, null, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
-                                                    </div>
-                                                    <hr class="mt-5">
-                                                </div>
-
-                                                <div class="row mt-2">
-                                                    <div class="col-md-6">
-
-                                                        {!! Form::label('name', 'Nombre') !!}
-                                                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Pedro', 'required']) !!}
-                                                        @error('name')
-                                                            <small class="text-danger">Este campo es requerido</small>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="col-md-6">
-
-                                                        {!! Form::label('lastname', 'Apellidos') !!}
-                                                        {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez', 'required']) !!}
-                                                        @error('lastname')
-                                                            <small class="text-danger">Este campo es requerido</small>
-                                                        @enderror
-
-
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="row  mt-2">
-                                                    <div class="col-md-6">
-                                                        {!! Form::label('phone', 'Telefono') !!}
-                                                        {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => '+34 455487895', 'required']) !!}
-                                                    </div>
-                                                    <div class="col-md-6">
-
-                                                        {!! Form::label('email', 'Email') !!}
-                                                        {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'test@prueba.com', 'required']) !!}
-                                                        @error('email')
-                                                            <small class="text-danger">Este campo es requerido</small>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
-                                                <div class="row  mt-2">
-                                                    <div class="col-md-6">
-                                                        {!! Form::label('postcode', 'Código Postal') !!}
-                                                        {!! Form::text('postcode', null, ['class' => 'form-control', 'placeholder' => '285056']) !!}
-                                                    </div>
-                                                    <div class="col-md-6">
-
-                                                        {!! Form::label('country', 'País') !!}
-                                                        {!! Form::select('country', $paises, null, [
-                                                            'class' => 'form-control',
-                                                            'placeholder' => '--Seleccionar pais--',
-                                                            'required',
-                                                        ]) !!}
-                                                        @error('country')
-                                                            <small class="text-danger">Este campo es requerido</small>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
-                                                <div class="row  mt-2">
-                                                    <div class="col-md-6">
-                                                        {!! Form::label('city', 'Ciudad') !!}
-                                                        {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        {!! Form::label('state', 'Provincia (opcional)') !!}
-                                                        {!! Form::text('state', null, ['class' => 'form-control', 'placeholder' => '']) !!}
-                                                    </div>
-                                                </div>
-
-                                                <div class="row  mt-2">
-                                                    <div class="col-md-6">
-
-                                                        {!! Form::label('address', 'Dirección (opcional)') !!}
-                                                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                        {!! Form::text('address', null, [
-                                                            'class' => 'form-control',
-                                                            'placeholder' => 'Calle tercera casa 25',
-                                                        ]) !!}
-
-
-                                                    </div>
-                                                    <div class="col-md-6">
-
-                                                        {!! Form::label('campaing', 'Asignar Campaña (Opcional)') !!}
-                                                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                        {!! Form::select('campaing', $campaings, null, [
-                                                            'class' => 'form-control',
-                                                            'placeholder' => 'Seleccionar',
-                                                            'required',
-                                                        ]) !!}
-
-                                                        @error('statu')
-                                                            <small class="text-danger">Este campo es requerido</small>
-                                                        @enderror
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="row  mt-2">
-                                                   {{--  <div class="col-md-6">
-
-                                                        {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
-                                                        
-                                                        {!! Form::select('medio_comunicacion', $comunicacion_medias, null, [
-                                                            'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
-                                                            'class' => 'form-control',
-                                                            'placeholder' => 'Seleccionar',
-                                                            'required',
-                                                        ]) !!}
-
-                                                        @error('medio_comunicacion')
-                                                            <small class="text-danger">Este campo es requerido</small>
-                                                        @enderror
-                                                    </div> --}}
-                                                    <div class="col-sm-12 col-md-6">
-
-                                                        {!! Form::label('website', 'Página Web') !!}
-                                                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                        {!! Form::url('website', null, [
-                                                            'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
-                                                            'class' => 'form-control',
-                                                            'placeholder' => 'www.example.com',
-                                                        ]) !!}
-
-
-                                                    </div>
-                                                </div>
-
-
-
-
-                                                <div class="mt-5 modal-footer">
-
-                                                    {!! Form::submit('Guardar', ['class' => 'btn btn-primary ']) !!}
-
-                                                </div>
-                                                {!! Form::close() !!}
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                            <!--end::Table-->
-
-                        </div>
+                        @include('includes.contact_form_create')
 
                         <div class="board-lists ">
 
@@ -268,7 +77,7 @@
                                     </div>
                                 </div>
 
-                                <div class="board-list border-top border-info" data-reference="1">
+                                <div class="board-list " data-reference="1">
 
                                     @if (count($new_clients) > 0)
                                         @foreach ($new_clients as $item)
@@ -305,8 +114,13 @@
                                                                 <img src="{{ $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
-                                                                <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=664&q=80"
-                                                                    alt="Man standing near balcony" class="avatar__image">
+                                                                <img 
+                                                            alt="{{ $item->name }} {{ $item->lastname }}" 
+                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                            class="h-35px" 
+                                                            style="cursor: pointer"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
+                                                            />
                                                             @endif
 
                                                         </li>
@@ -513,8 +327,13 @@
                                                                 <img src="{{ $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
-                                                                <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=664&q=80"
-                                                                    alt="Man standing near balcony" class="avatar__image">
+                                                                <img 
+                                                            alt="{{ $item->name }} {{ $item->lastname }}" 
+                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                            class="h-35px" 
+                                                            style="cursor: pointer"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
+                                                            />
                                                             @endif
                                                         </li>
                                                     </ol>
@@ -719,8 +538,13 @@
                                                                 <img src="{{ $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
-                                                                <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=664&q=80"
-                                                                    alt="Man standing near balcony" class="avatar__image">
+                                                                <img 
+                                                            alt="{{ $item->name }} {{ $item->lastname }}" 
+                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                            class="h-35px" 
+                                                            style="cursor: pointer"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
+                                                            />
                                                             @endif
 
                                                         </li>
@@ -930,8 +754,13 @@
                                                                 <img src="{{ $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
-                                                                <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=664&q=80"
-                                                                    alt="Man standing near balcony" class="avatar__image">
+                                                                <img 
+                                                            alt="{{ $item->name }} {{ $item->lastname }}" 
+                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                            class="h-35px" 
+                                                            style="cursor: pointer"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
+                                                            />
                                                             @endif
                                                         </li>
                                                     </ol>
@@ -1139,8 +968,13 @@
                                                                 <img src="{{ $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
-                                                                <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=664&q=80"
-                                                                    alt="Man standing near balcony" class="avatar__image">
+                                                                <img 
+                                                            alt="{{ $item->name }} {{ $item->lastname }}" 
+                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                            class="h-35px" 
+                                                            style="cursor: pointer"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
+                                                            />
                                                             @endif
                                                         </li>
                                                     </ol>

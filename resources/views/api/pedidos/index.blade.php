@@ -72,9 +72,21 @@
                                             
                                                 <td>
                                                     @if ($item["origin"] == 'es')
-                                                        <img alt="Logoaa" src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" class="h-35px" />
+                                                        <img 
+                                                            alt="Pedido de España" 
+                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                            class="h-35px" 
+                                                            style="cursor: pointer"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Pedido de España"
+                                                            />
                                                     @else
-                                                        <img alt="Logoaa" src="https://disnight.com/it/wp-content/uploads/2023/06/logonines.jpg" class="h-35px" />
+                                                        <img 
+                                                            alt="Pedido de Italia" 
+                                                            src="https://disnight.com/it/wp-content/uploads/2023/06/logonines.jpg" 
+                                                            class="h-35px" 
+                                                            style="cursor: pointer"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Pedido de Italia"
+                                                            />
                                                     @endif
                                                    
                                                 </td>
