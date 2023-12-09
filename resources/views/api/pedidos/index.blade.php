@@ -42,16 +42,7 @@
                                         <!--begin::Table row-->
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                             <th>
-                                                <form action="">
-                                                    <select name="plataforma" id="" class="form-control">
-                                                        <option value="">Plataforma</option>
-                                                        <option value="es">Wp España</option>
-                                                        <option value="it">Wp Italia</option>
-                                                        <option value="ankorstore">Ankorstore</option>
-                                                        <option value="faire">Faire</option>
-                                                        <option value="comercial">Comerciales</option>
-                                                    </select>
-                                                </form>
+                                               Plataforma
                                                 
                                             </th>
                                             <th>N°</th>
@@ -62,7 +53,20 @@
                                             <th >Total</th>
                                             <th>Fecha de Pedido</th>
                                         </tr>
-                                        <!--end::Table row-->
+                                        
+                                        <tr>
+                                            <th> 
+                                                {!! Form::open(['url' => 'admin/pedidos-api','method'=>'get','id'=>'frmFiltrosOrders']) !!}
+                                                {!! Form::select('plataforma', [''=>"Todas", "es" =>"España", "it" => "Italia"],$plataforma,['id'=>'plataforma','class'=>'form-control select2','style'=>'width: 100%;','onchange'=>"buscarOrders('plataforma')",'placeholder'=>'']) !!}
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
                                     </thead>
                                     <!--end::Table head-->
                                     <!--begin::Table body-->

@@ -1,4 +1,3 @@
-
 <link href="{{ asset('css/bundle/bundle.css') }}" rel="stylesheet" type="text/css" />
 
 <script src="{{ asset('js/plugins/plugins.bundle.js') }}"></script>
@@ -45,104 +44,116 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
 
-    
+
 
 
 
 
 
 <script>
-    $(document).ready(function() {  
-        
-        
-
-       /*  $.ajax({
-                url: "https://shop.ninesdeonil.com/wp-json/wc/v3/orders?consumer_key=ck_6d3fb768918b7067ee823204e2107033097ca64a&consumer_secret=cs_532eab538d5f11f08d30b70bd1a626a9808f8725&per_page=100",
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    console.log(data);
-                    var html = '';
-                    var i = 1;
-                    $.each(data, function(key, value) {
-                        html += '<tr>';
-                        html += '<td>' + i + '</td>';
-                        html += '<td>' + value.id + '</td>';
-                        html += '<td>' + value.line_items[0].name + '</td>';
-                        html += '<td>' + value.billing.first_name + ' ' + value.billing.last_name + '</td>';
-                        html += '<td>' + value.status + '</td>';
-                        html += '<td>' + value.total + '</td>';
-                        html += '<td>' + value.date_created + '</td>';
-                        html += '</tr>';
-                        i++;
-                    });
-                    $('#productos_api').html(html);
-                }
-            }); */
+    $(document).ready(function() {
 
 
-            $('#example').DataTable( {
-                    dom: 'Bfrtip',
-                    buttons: [
-                        {
-                            extend: 'excelHtml5',
-                            text: 'Excel',
-                            className: 'btn btn-success'   
-                        },
-                        {
-                            extend: 'pdfHtml5',
-                            text: 'PDF',
-                            className: 'btn btn-danger'
-                        }
-                        
-                    ],
-                    "lengthMenu": [15, 25, 50, 75, 100],
-                    
-                
-                    "language": {
-                        "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json",
-                        "processing": "Cargando...",
-                        "infoEmpty": "No hay registros disponibles",
-                        "loadingRecords": "Cargando...",
-                        "infoEmpty": "No hay registros disponibles",
-                    },
-                    "paginate": {
-                    "first": "Primero",
-                    "last": "Último",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
+
+        /*  $.ajax({
+                 url: "https://shop.ninesdeonil.com/wp-json/wc/v3/orders?consumer_key=ck_6d3fb768918b7067ee823204e2107033097ca64a&consumer_secret=cs_532eab538d5f11f08d30b70bd1a626a9808f8725&per_page=100",
+                 type: 'GET',
+                 dataType: 'json',
+                 success: function(data) {
+                     console.log(data);
+                     var html = '';
+                     var i = 1;
+                     $.each(data, function(key, value) {
+                         html += '<tr>';
+                         html += '<td>' + i + '</td>';
+                         html += '<td>' + value.id + '</td>';
+                         html += '<td>' + value.line_items[0].name + '</td>';
+                         html += '<td>' + value.billing.first_name + ' ' + value.billing.last_name + '</td>';
+                         html += '<td>' + value.status + '</td>';
+                         html += '<td>' + value.total + '</td>';
+                         html += '<td>' + value.date_created + '</td>';
+                         html += '</tr>';
+                         i++;
+                     });
+                     $('#productos_api').html(html);
+                 }
+             }); */
+
+
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'excelHtml5',
+                    text: 'Excel',
+                    className: 'btn btn-success'
                 },
-                "processing": true,
-            } );
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF',
+                    className: 'btn btn-danger'
+                }
 
-            $('#kt_ecommerce_products_table').DataTable( {
-                    dom: 'Bfrtip',
-                    buttons: [
-                        {
-                            extend: 'excelHtml5',
-                            text: 'Excel',
-                            className: 'btn btn-success'   
-                        },
-                        {
-                            extend: 'pdfHtml5',
-                            text: 'PDF',
-                            className: 'btn btn-danger'
-                        }
-                        
-                    ],
-                    "language": {
-                        "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-                    },
-            } );
-
-       
-        $('#kt_customers_table').DataTable({
+            ],
             "lengthMenu": [15, 25, 50, 75, 100],
+
+
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json",
+                "processing": "Cargando...",
+                "infoEmpty": "No hay registros disponibles",
+                "loadingRecords": "Cargando...",
+                "infoEmpty": "No hay registros disponibles",
+            },
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+            "processing": true,
+        });
+
+        $('#kt_ecommerce_products_table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'excelHtml5',
+                    text: 'Excel',
+                    className: 'btn btn-success'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF',
+                    className: 'btn btn-danger'
+                }
+
+            ],
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-            }
-        
+            },
         });
+
+
+        $('#kt_customers_table_table').DataTable({
+            "lengthMenu": [15, 25, 50, 75, 100],
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'excelHtml5',
+                    text: 'Excel',
+                    className: 'btn btn-success'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF',
+                    className: 'btn btn-danger'
+                }
+
+            ],
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+            },
+
+        });
+
         $('.formDelete').submit(function(e) {
             e.preventDefault();
             let form = event.target;
@@ -251,7 +262,7 @@
 
         $("#price").maskMoney();
         $("#budget").maskMoney();
-       
+
     });
     /* const items = document.querySelectorAll('.card__item')
     const columns = document.querySelectorAll('.column') */
@@ -370,7 +381,67 @@
 
     })
 
-   
+
+
+    function buscar(tipo) {
+
+        $('#accion').val(1);
+        var textoSelect = $('#' + tipo).val();
+        const ENTER_KEY_CODE = 13;
+
+        switch (tipo) {
+
+            case 'documento':
+                document.querySelector('#documento').addEventListener('keyup', function(e) {
+                    if (e.keyCode === ENTER_KEY_CODE) {
+                        document.getElementById("frmFiltros").submit();
+                    }
+                });
+                break;
+            case 'concepto':
+                document.querySelector('#concepto').addEventListener('keyup', function(e) {
+                    if (e.keyCode === ENTER_KEY_CODE) {
+                        document.getElementById("frmFiltros").submit();
+                    }
+                });
+                break;
+
+            case 'asociacion':
+                document.querySelector('#asociacion').addEventListener('keyup', function(e) {
+                    if (e.keyCode === ENTER_KEY_CODE) {
+                        document.getElementById("frmFiltros").submit();
+                    }
+                });
+                break;
+
+
+            default:
+                document.getElementById("frmFiltros").submit();
+                break;
+        }
+
+    }
+
+
+    function buscarOrders(tipo) {
+
+            $('#accion').val(1);
+            var textoSelect = $('#' + tipo).val();
+            const ENTER_KEY_CODE = 13;
+
+            switch (tipo) {
+
+              
+
+
+                default:
+                    document.getElementById("frmFiltrosOrders").submit();
+                    break;
+            }
+
+}
+
+
 </script>
 
 

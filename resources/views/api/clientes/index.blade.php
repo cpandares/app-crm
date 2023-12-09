@@ -25,8 +25,9 @@
                             class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="table-responsive">
                             <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" 
-                            id="kt_customers_table">
+                            id="kt_customers_table_table">
                             <!--begin::Table head-->
+                          
                             <thead>
                                 <!--begin::Table row-->
                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
@@ -42,9 +43,28 @@
                                    {{--  <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 129.137px;">Total Gastado</th> --}}
                                 </tr>
                                 <!--end::Table row-->
+                                <tr>
+                                    <th width="100px"> 
+                                        {!! Form::open(['url' => 'admin/clientes-api','method'=>'get','id'=>'frmFiltros']) !!}
+                                        {!! Form::select('plataforma', [''=>"Todas", "es" =>"España", "it" => "Italia"],$plataforma,['id'=>'plataforma','class'=>'form-control select2','style'=>'width: 100%;','onchange'=>"buscar('plataforma')",'placeholder'=>'']) !!}
+                                            
+                                            {{-- <select name="plataforma" id="plataforma" class="form-control" onchange="buscar('plataforma')">
+                                                <option value="">Todas</option>
+                                                <option value="es">España</option>
+                                                <option value="it">Italia</option>
+                                            </select> --}}
+                                        {!! Form::close() !!}
+                                        <th>
+
+                                        </th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </th>
+                                </tr>
                             </thead>
-                            <!--end::Table head-->
-                            <!--begin::Table body-->
+
+                            
                             <tbody class="fw-bold text-gray-600">
                                 @foreach ($data as $item)                                    
                                     <tr class="odd">

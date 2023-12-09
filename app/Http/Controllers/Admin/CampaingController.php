@@ -186,7 +186,7 @@ class CampaingController extends Controller
             'comunicacion_medias' => $comunicacion_medias,
             'status' => $status,
             'title' => $title,
-            'list_campaings' =>$list_campaings,
+            'campaings_list' =>$list_campaings,
             'type_enterprise' => $type_enterprise,
             'per_page' => $per_page
         ]);

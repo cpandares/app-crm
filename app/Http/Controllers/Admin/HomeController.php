@@ -23,7 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $controlador = new ProductoController();
         $title = 'Resumen de Ventas';
-        return view('home', compact('title'));
+        return view('home', compact('title', 'controlador'));
     }
 }

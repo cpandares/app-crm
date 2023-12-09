@@ -16,6 +16,7 @@ use Automattic\WooCommerce\Client;
 use Automattic\WooCommerce\HttpClient\HttpClientException;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use OrdersApi;
 
 class ProductoController extends Controller
@@ -239,7 +240,7 @@ class ProductoController extends Controller
     public function listarPedidosApi(Request $request){
 
         $page = isset($request->page) ? $request->page : 1;
-
+        $input = $request->all();
         $title ="Pedidos";
 
         $orders = ModelsOrdersApi::orderBy('id', 'desc')->get();
@@ -249,14 +250,21 @@ class ProductoController extends Controller
 
         $total_italy = count($pedidos_italy);
 
-        $orders = array_merge($orders->toArray(), $pedidos_italy->toArray());
+        if( !isset($input['plataforma']) || !$input['plataforma'] || $input['plataforma'] == ''){
 
-       /* order orders by date_created */
-         usort($orders, function($a, $b) {
-            return $a['date_created'] <=> $b['date_created'];
-        });
+            $orders = array_merge($orders->toArray(), $pedidos_italy->toArray());
 
-        $orders = array_reverse($orders);
+      
+            usort($orders, function($a, $b) {
+               return $a['date_created'] <=> $b['date_created'];
+           });
+           $orders = array_reverse($orders);
+
+        }else if($input['plataforma'] == 'it'){
+            $orders = $pedidos_italy->toArray();
+        }else{
+            $orders = $orders->toArray();
+        }        
         
 
         return view('api.pedidos.index',[
@@ -266,7 +274,7 @@ class ProductoController extends Controller
             'contador' => 1,
             'page' => $page,
             'total_italy' => $total_italy,
-
+            'plataforma' => isset($input['plataforma']) ? $input['plataforma'] : '',
         ]);
 
     }
@@ -312,24 +320,7 @@ class ProductoController extends Controller
     public function showPedidoApi($pedido){
 
         $title = "Detalle del pedido";
-      /*   $client = new \GuzzleHttp\Client();
-        $client_key = env('CLIENTE_SECRET_WOOCOMERCE_ESP');
-        $secre_key = env('CLIENTE_KEY_WOOCOMERCE_ESP');
-        
-
-       
-        $woocommerce = new Client('https://shop.ninesdeonil.com',
-        $client_key,
-         $secre_key,
-         [
-            'wp_api' => true, 
-            'version' => 'wc/v3',
-            'timeout' => 400,
-            'verify_ssl'=> false,
-         
-        ]);
-
-        $order = $woocommerce->get('orders/'.$pedido); */
+      
 
         $order = ModelsOrdersApi::where('id', $pedido)->first();
        /*  dd($order); */
@@ -343,8 +334,38 @@ class ProductoController extends Controller
 
     }
 
-    
 
+    public function sumTotalSoldFromSpain(){
+
+        $total = FacadesDB::table('orders_apis')->where('status', 'completed')->sum('total');
+        return $total;
+
+    }
+
+    public function sumTotalSoldFromItaly(){
+
+        $total = FacadesDB::table('order_italy_apis')->where('status', 'completed')->sum('total');
+        return $total;
+    }
+    
+    public function ordersFromSpain(){
+
+        $orders = ModelsOrdersApi::orderBy('id', 'desc')->where('status', 'completed')->count();
+        return $orders;
+    }
+
+    public function ordersFromItaly(){
+
+        $orders = OrderItalyApi::orderBy('id', 'desc')->where('status', 'completed')->count();
+        return $orders;
+    }
+
+    public function sumTotalSoldFromFrance(){
+
+        $total = FacadesDB::table('orders_apis')->where('status', 'procesing')->sum('total');
+        return $total;
+
+    }
 
 
 }

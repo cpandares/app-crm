@@ -34,12 +34,19 @@
                             <div class="px-9 mb-5">
                                 <!--begin::Statistics-->
                                 <div class="d-flex mb-2">
-                                    
-                                    <span class="fs-2hx fw-bolder text-gray-800 me-2 lh-1">1,098,050</span><span class="fs-4 fw-bold text-gray-400 me-1">€</span>
+                                    @php
+                                        $total_spain = $controlador->sumTotalSoldFromSpain();
+                                        $total_italy = $controlador->sumTotalSoldFromItaly();
+                                        $orders_spain = $controlador->ordersFromSpain();
+                                        $orders_italy = $controlador->ordersFromItaly();
+                                    @endphp
+                                    <span class="fs-2hx fw-bolder text-gray-800 me-2 lh-1"> {{ ($total_spain + $total_italy) }} </span><span class="fs-4 fw-bold text-gray-400 me-1">€</span>
                                 </div>
                                 <!--end::Statistics-->
                                 <!--begin::Description-->
-                                <span class="fs-6 fw-bold text-gray-400">Se han hecho un total de 3.500 pedidos.</span>
+                                <span class="fs-6 fw-bold text-gray-400">
+                                    Se han hecho un total de {{ ( $orders_spain + $orders_italy ) }} pedidos.
+                                </span>
                                 <!--end::Description-->
                             </div>
                             <!--end::Statistics-->
@@ -96,7 +103,7 @@
                                     <!--begin::Info-->
                                     <div class="d-flex align-items-center" bis_skin_checked="1">
                                         <!--begin::Amount-->
-                                        <span class="fs-2hx fw-bolder text-dark me-2 lh-1">38,835€</span>
+                                        <span class="fs-2hx fw-bolder text-dark me-2 lh-1"> {{ number_format($total_spain, 2,',','.') }} €</span>
                                         <!--end::Amount-->
                                         <!--begin::Badge-->
                                         <span class="badge badge-success fs-6 lh-1 py-1 px-2 d-flex flex-center"
@@ -118,7 +125,7 @@
                                     </div>
                                     <!--end::Info-->
                                     <!--begin::Subtitle-->
-                                    <span class="text-gray-400 pt-1 fw-bold fs-6">Total de 350 pedidos</span>
+                                    <span class="text-gray-400 pt-1 fw-bold fs-6">Total de {{ $orders_spain }} pedidos</span>
                                     <!--end::Subtitle-->
                                 </div>
                                 <!--end::Title-->
@@ -152,7 +159,7 @@
                                     <!--begin::Info-->
                                     <div class="d-flex align-items-center" bis_skin_checked="1">
                                         <!--begin::Amount-->
-                                        <span class="fs-2hx fw-bolder text-dark me-2 lh-1">16,854€</span>
+                                        <span class="fs-2hx fw-bolder text-dark me-2 lh-1"> {{ number_format($total_italy,2,',','.') }} €</span>
                                         <!--end::Amount-->
                                         <!--begin::Badge-->
                                         <span class="badge badge-danger fs-6 lh-1 py-1 px-2 d-flex flex-center"
@@ -174,7 +181,7 @@
                                     </div>
                                     <!--end::Info-->
                                     <!--begin::Subtitle-->
-                                    <span class="text-gray-400 pt-1 fw-bold fs-6">Total de 150 pedidos</span>
+                                    <span class="text-gray-400 pt-1 fw-bold fs-6">Total de {{ $orders_italy }} pedidos</span>
                                     <!--end::Subtitle-->
                                 </div>
                                 <!--end::Title-->
@@ -291,13 +298,13 @@
                             <div class="px-9 mb-5" bis_skin_checked="1">
                                 <!--begin::Statistics-->
                                 <div class="d-flex mb-2" bis_skin_checked="1">
-                                    <span class="fs-2hx fw-bolder text-gray-800 me-2 lh-1">70,500</span><span
+                                    <span class="fs-2hx fw-bolder text-gray-800 me-2 lh-1">20,500</span><span
                                         class="fs-4 fw-bold text-gray-400 me-1">€</span>
 
                                 </div>
                                 <!--end::Statistics-->
                                 <!--begin::Description-->
-                                <span class="fs-6 fw-bold text-gray-400">Se han hecho un total de 190 pedidos.</span>
+                                <span class="fs-6 fw-bold text-gray-400">Se han hecho un total de 90 pedidos.</span>
                                 <!--end::Description-->
                             </div>
                             <!--end::Statistics-->
