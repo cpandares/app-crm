@@ -188,7 +188,8 @@ class CampaingController extends Controller
             'title' => $title,
             'campaings_list' =>$list_campaings,
             'type_enterprise' => $type_enterprise,
-            'per_page' => $per_page
+            'per_page' => $per_page,
+            'list_campaings' =>$list_campaings,
         ]);
     }
 

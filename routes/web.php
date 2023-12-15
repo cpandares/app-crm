@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ContactsController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,10 @@ Route::get("logout", [\App\Http\Controllers\Auth\AuthController::class, 'logout'
 
 Route::get('reset-password', [User::class, 'resetPassword'])->name('reset-password');
 Route::post('reset-password', [User::class, 'validateData'])->name('validate-data');
+Route::get('forget-password', [ForgotPasswordController::class, 'ForgetPassword'])->name('ForgetPasswordGet');
+  Route::post('forget-password', [ForgotPasswordController::class, 'ForgetPasswordStore'])->name('ForgetPasswordPost');
+  Route::get('reset-password/{token}', [ForgotPasswordController::class, 'ResetPassword'])->name('ResetPasswordGet');
+  Route::post('reset-password', [ForgotPasswordController::class, 'ResetPasswordStore'])->name('ResetPasswordPost');
 /* Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

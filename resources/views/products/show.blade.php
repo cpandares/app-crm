@@ -42,7 +42,7 @@
                         <div class="col-md-6">
 
                            <strong> {!! Form::label('product_name', 'Nombre') !!}</strong>
-                            {!! Form::text('product_name', $product->product_name, ['class' => 'form-control', 'placeholder' => 'Muñeca tipo 1']) !!}
+                            {!! Form::text('product_name', $product->name, ['class' => 'form-control', 'placeholder' => 'Muñeca tipo 1', 'disabled']) !!}
                             @error('product_name')
                                 <small class="text-danger">Este campo es requerido</small>
                             @enderror
@@ -50,7 +50,7 @@
                         <div class="col-md-6">
 
                            <strong> {!! Form::label('sku', 'Codigo') !!}</strong>
-                            {!! Form::text('sku', isset($product->sku) ? $product->sku : null, ['class' => 'form-control', 'placeholder' => 'MN-0001']) !!}
+                            {!! Form::text('sku', isset($product->sku) ? $product->sku : null, ['class' => 'form-control', 'placeholder' => 'MN-0001', 'disabled']) !!}
                             @error('sku')
                             
                             {{--  @dump(@error('sku')) --}}
@@ -68,7 +68,8 @@
                                     type="text" 
                                     name="price_esp" 
                                     class="form-control"
-                                    value="{{ isset($product->price_esp ) ? $product->price_esp : null }}"
+                                    value="{{ isset($product->price_esp ) ? $product->price : null }}"
+                                    disabled
                                   >
                                 <div class="input-group-append addons">
                                     <span class="input-group-text">€</span>
@@ -85,6 +86,7 @@
                                     name="price_ale" 
                                     class="form-control"
                                     value="{{ isset($product->price_ale ) ? $product->price_ale : null }}"
+                                    disabled
                                     >
                                 <div class="input-group-append addons">
                                     <span class="input-group-text">€</span>
@@ -103,6 +105,7 @@
                                 type="text" 
                                 name="price_ita" 
                                 class="form-control"
+                                disabled
                                 value="{{ isset($product->price_ita ) ? $product->price_ita : null }}">
                                 <div class="input-group-append addons">
                                     <span class="input-group-text">€</span>
@@ -119,6 +122,7 @@
                                     type="text" 
                                     name="price_fra" 
                                     class="form-control"
+                                    disabled
                                     value="{{ isset($product->price_fra ) ? $product->price_fra : null }}"
                                     >
                                 <div class="input-group-append addons">
@@ -137,6 +141,7 @@
                                     type="text" 
                                     name="price_portugal" 
                                     class="form-control"
+                                    disabled
                                     value="{{ isset($product->price_usa ) ? $product->price_usa : null }}"
                                     >
                                 <div class="input-group-append addons">
@@ -162,13 +167,25 @@
                     <div class="row  mt-2">
                         <div class="col-md-6">
                             {!! Form::label('product_description', 'Descripción') !!}
-                            <textarea name="product_description" class="form-control" style="resize: none">{{ $product->product_description }}</textarea>
+                            @php
+                                $product->description = str_replace('<br />', '', $product->description);
+                                $product->description = str_replace('<p>', '', $product->description);
+                                $product->description = str_replace('</p>', '', $product->description);
+                            @endphp
+                            <textarea name="product_description" 
+                                id="product_description" 
+                                class="form-control" 
+                                cols="30" rows="30" disabled
+                                >
+
+                                {{ $product->description }}
+                            </textarea>
                         </div>
 
                         <div class="col-md-6">
                             <strong> {!! Form::label('stock', 'Stock') !!}</strong>
                             
-                            <input type="number" class="form-control" min="1" name="stock" value="{{ $product->stock }}" >
+                            <input type="number" disabled class="form-control" min="1" name="stock" value="{{ $product->stock_quantity }}" >
                         </div>
 
                     </div>

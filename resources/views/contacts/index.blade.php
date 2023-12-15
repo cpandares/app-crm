@@ -69,8 +69,8 @@
 
 
                             <div>
-                                <div class="list-title">
-                                    <div class="alert alert-primary text-center" role="alert">
+                                <div class="list-title border-top border-info rounded">
+                                    <div class="alert alert-secondary text-center" role="alert">
                                         <h4>Nuevos</h4>
                                         <br>
                                         Total de contactos en lista: {{ count($new_clients) }}
@@ -85,28 +85,22 @@
                                                 draggable="true" data-id="{{ $item->id }}"
                                                 data-contact="{{ $item->contact_status }}">
 
-                                                @php
-                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
-                                                @endphp
-
-                                                @if ($campaigs)
-                                                    <span
-                                                        class="badge badge-light-info mb-2">{{ $campaigs->campaing_name }}</span>
-                                                @else
-                                                    <span class="badge badge-light-info">Sin campaña asociada</span>
-                                                @endif
+                                               
                                                 <h6 class="card__title">
                                                     <a class="text-gray-800 text-hover-primary mb-1"
                                                         href="{{ route('admin.contact.show', $item->id) }}">
-                                                        {{ $item->name }} {{ $item->lastname }}
+                                                        <span class="text-uppercase">{{ $item->name }} {{ $item->lastname }}</span>
                                                     </a>
                                                 </h6>
 
+                                                {{-- direccion --}}
+
+                                                <span class="badge badge-light-primary pull-rigth mb-2">
+                                                    {{ $item->country }} - {{ $item->city }}
+                                                </span>
+
                                                 <ol class="card__actions " style="list-style: none">
-                                                    {{--  <li class="card__actions--wrapper">
-                                            <i class="fas fa-eye"  data-toggle="modal"
-                                            data-target="#exampleModal<?= $item->id ?>"></i>
-                                        </li> --}}
+                                                  
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             <!-- Photo by Philip Martin on Unsplash -->
@@ -127,154 +121,14 @@
                                                     </ol>
                                                 </ol>
 
+                                                {{-- created_at --}}
+                                                <span class="badge badge-light-primary pull-rigth mb-2">
+                                                   Registrado:  {{ $item->created_at->diffForHumans() }}
+                                                </span>
+
 
                                             </div>
-                                            <div class="modal fade" id="exampleModal<?= $item->id ?>" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar
-                                                                Contacto
-                                                            </h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            {!! Form::model($item, [
-                                                                'route' => ['admin.contact.update', $item->id],
-                                                                'autocomplete' => 'off',
-                                                                'files' => true,
-                                                                'method' => 'put',
-                                                            ]) !!}
-
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('name', 'Nombre') !!}
-                                                                    {!! Form::text('name', $item->name, ['class' => 'form-control', 'placeholder' => 'Pedro']) !!}
-                                                                    @error('name')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('lastname', 'Apellido') !!}
-                                                                    {!! Form::text('lastname', $item->lastname, ['class' => 'form-control', 'placeholder' => 'Perez']) !!}
-                                                                    @error('lastname')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('phone', 'Telefono') !!}
-                                                                    {!! Form::text('phone', isset($item->phone) ? $item->phone : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '+34 455487895',
-                                                                    ]) !!}
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('email', 'Email') !!}
-                                                                    {!! Form::email('email', isset($item->email) ? $item->email : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'test@prueba.com',
-                                                                    ]) !!}
-                                                                    @error('email')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('postcode', 'Código Postal') !!}
-                                                                    {!! Form::text('postcode', isset($item->postcode) ? $item->postcode : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '65656',
-                                                                    ]) !!}
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('country', 'País') !!}
-                                                                    {!! Form::select('country', $paises, isset($item->country) ? $item->country : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '---',
-                                                                    ]) !!}
-                                                                    @error('country')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('city', 'Ciudad') !!}
-                                                                    {!! Form::text('city', isset($item->city) ? $item->city : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'Barcelona',
-                                                                    ]) !!}
-                                                                </div>
-                                                                {{--   <div class="col-md-6">
-                                                {!! Form::label('state', 'Provincia (opcional)') !!}
-                                                {!! Form::text('state', null, ['class'=>'form-control','placeholder'=>'', ]) !!}
-                                            </div> --}}
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
-                                                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                                    {!! Form::select(
-                                                                        'medio_comunicacion',
-                                                                        $comunicacion_medias,
-                                                                        isset($item->comunication_medium) ? $item->comunication_medium : null,
-                                                                        ['id' => 'cliente_tarjeta_franquicia_tarjeta_id', 'class' => 'form-control', 'placeholder' => 'Seleccionar'],
-                                                                    ) !!}
-
-                                                                    @error('medio_comunicacion')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('contact_status', 'Estado del Cliente') !!}
-                                                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                                    {!! Form::select('contact_status', $status, $item->contact_status, [
-                                                                        'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'Seleccionar',
-                                                                    ]) !!}
-
-                                                                    @error('statu')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="mt-5">
-
-                                                                {!! Form::submit('Guardar', ['class' => 'btn btn-primary ']) !!}
-
-                                                            </div>
-                                                            {!! Form::close() !!}
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
                                         @endforeach
                                     @endif
 
@@ -285,14 +139,14 @@
 
 
                             <div>
-                                <div class="list-title">
+                                <div class="list-title border-top border-success rounded">
                                     {{-- <h2 class="text-center text-gray-600 text-hover-primary">En Negociación</h2> --}}
-                                    <div class="alert alert-success text-center" role="alert">
+                                    <div class="alert alert-secondary text-center" role="alert">
                                         <h4> En Negociación</h4> <br>
                                         Total de contactos en lista {{ count($clientes_negoci) }}
                                     </div>
                                 </div>
-                                <div class="board-list border-top border-success" data-reference="2">
+                                <div class="board-list " data-reference="2">
 
                                     @if (count($clientes_negoci) > 0)
                                         @foreach ($clientes_negoci as $item)
@@ -301,26 +155,21 @@
                                                 data-contact="{{ $item->contact_status }}">
 
 
-                                                @php
-                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
-                                                @endphp
+                                                <h6 class="card__title">
+                                                    <a class="text-gray-800 text-hover-primary mb-1"
+                                                        href="{{ route('admin.contact.show', $item->id) }}">
+                                                        <span class="text-uppercase">{{ $item->name }} {{ $item->lastname }}</span>
+                                                    </a>
+                                                </h6>
 
-                                                @if ($campaigs)
-                                                    <span
-                                                        class="badge badge-light-success pull-rigth">{{ $campaigs->campaing_name }}</span>
-                                                @else
-                                                    <span class="badge badge-light-success pull-rigth">Sin campaña
-                                                        asociada</span>
-                                                @endif
-                                                <h6 class="card__title"> <a class="text-gray-800 text-hover-primary mb-1"
-                                                        href="{{ route('admin.contact.show', $item->id) }}">{{ $item->name }}
-                                                        {{ $item->lastname }}
-                                                    </a></h6>
+                                                {{-- direccion --}}
+
+                                                <span class="badge badge-light-primary pull-rigth mb-2">
+                                                    {{ $item->country }} - {{ $item->city }}
+                                                </span>
+
                                                 <ol class="card__actions" style="list-style: none">
-                                                    {{--  <li class="card__actions--wrapper">
-                                     <i class="fas fa-eye"  data-toggle="modal"
-                                     data-target="#exampleModal<?= $item->id ?>"></i>
-                                   </li> --}}
+                                                 
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             @if ($item->image)
@@ -339,153 +188,13 @@
                                                     </ol>
                                                 </ol>
 
+                                                {{-- created_at --}}
+                                                <span class="badge badge-light-primary pull-rigth mb-2">
+                                                   Registrado:  {{ $item->created_at->diffForHumans() }}
+                                                </span>
+
                                             </div>
-                                            <div class="modal fade" id="exampleModal<?= $item->id ?>" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar
-                                                                Contacto
-                                                            </h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            {!! Form::model($item, [
-                                                                'route' => ['admin.contact.update', $item->id],
-                                                                'autocomplete' => 'off',
-                                                                'files' => true,
-                                                                'method' => 'put',
-                                                            ]) !!}
-
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('name', 'Nombre') !!}
-                                                                    {!! Form::text('name', $item->name, ['class' => 'form-control', 'placeholder' => 'Pedro']) !!}
-                                                                    @error('name')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('lastname', 'Apellido') !!}
-                                                                    {!! Form::text('lastname', $item->lastname, ['class' => 'form-control', 'placeholder' => 'Perez']) !!}
-                                                                    @error('lastname')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('phone', 'Telefono') !!}
-                                                                    {!! Form::text('phone', isset($item->phone) ? $item->phone : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '+34 455487895',
-                                                                    ]) !!}
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('email', 'Email') !!}
-                                                                    {!! Form::email('email', isset($item->email) ? $item->email : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'test@prueba.com',
-                                                                    ]) !!}
-                                                                    @error('email')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('postcode', 'Código Postal') !!}
-                                                                    {!! Form::text('postcode', isset($item->postcode) ? $item->postcode : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '65656',
-                                                                    ]) !!}
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('country', 'País') !!}
-                                                                    {!! Form::select('country', $paises, isset($item->country) ? $item->country : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '---',
-                                                                    ]) !!}
-                                                                    @error('country')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('city', 'Ciudad') !!}
-                                                                    {!! Form::text('city', isset($item->city) ? $item->city : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'Barcelona',
-                                                                    ]) !!}
-                                                                </div>
-                                                                {{--   <div class="col-md-6">
-                                             {!! Form::label('state', 'Provincia (opcional)') !!}
-                                             {!! Form::text('state', null, ['class'=>'form-control','placeholder'=>'', ]) !!}
-                                         </div> --}}
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
-                                                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                                    {!! Form::select(
-                                                                        'medio_comunicacion',
-                                                                        $comunicacion_medias,
-                                                                        isset($item->comunication_medium) ? $item->comunication_medium : null,
-                                                                        ['id' => 'cliente_tarjeta_franquicia_tarjeta_id', 'class' => 'form-control', 'placeholder' => 'Seleccionar'],
-                                                                    ) !!}
-
-                                                                    @error('medio_comunicacion')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('contact_status', 'Estado del Cliente') !!}
-                                                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                                    {!! Form::select('contact_status', $status, $item->contact_status, [
-                                                                        'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'Seleccionar',
-                                                                    ]) !!}
-
-                                                                    @error('statu')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="mt-5">
-
-                                                                {!! Form::submit('Guardar', ['class' => 'btn btn-primary ']) !!}
-
-                                                            </div>
-                                                            {!! Form::close() !!}
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
+                                          
                                         @endforeach
                                     @endif
 
@@ -494,14 +203,14 @@
 
 
                             <div>
-                                <div class="list-title">
+                                <div class="list-title border-top border-primary rounded">
                                     {{--  <h2 class="text-center text-gray-600 text-hover-primary"></h2> --}}
-                                    <div class="alert alert-info text-center" role="alert">
+                                    <div class="alert alert-secondary text-center text-center" role="alert">
                                         <h4>Presupuesto Enviado</h4> <br>
                                         Total de contactos en lista {{ count($presupuestados) }}
                                     </div>
                                 </div>
-                                <div class="board-list border-top border-primary " data-reference="3">
+                                <div class="board-list  " data-reference="3">
 
                                     @if (count($presupuestados) > 0)
                                         @foreach ($presupuestados as $item)
@@ -509,28 +218,20 @@
                                                 data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}"
                                                 id="tarjeta">
                                                 {{-- <span class="badge badge-light-info">{{ $item->country }}</span> --}}
-                                                @php
-                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
-                                                @endphp
-
-                                                @if ($campaigs)
-                                                    <span
-                                                        class="badge badge-light-info pull-rigth mb-2">{{ $campaigs->campaing_name }}</span>
-                                                @else
-                                                    <span class="badge badge-light-info pull-rigth mb-2">Sin campaña
-                                                        asociada</span>
-                                                @endif
+                                               
                                                 <h6 class="card__title">
                                                     <a class="text-gray-800 text-hover-primary mb-1"
                                                         href="{{ route('admin.contact.show', $item->id) }}">
-                                                        {{ $item->name }} {{ $item->lastname }}
+                                                       <span class="text-uppercase"> {{ $item->name }} {{ $item->lastname }}</span>
                                                     </a>
                                                 </h6>
+                                                    
+                                                    {{-- direccion --}} 
+                                                    <span class="badge badge-light-primary pull-rigth mb-2">
+                                                        {{ $item->country }} - {{ $item->city }}
+                                                    </span>
                                                 <ol class="card__actions " style="list-style: none">
-                                                    {{--  <li class="card__actions--wrapper">
-                                                    <i class="fas fa-eye"  data-toggle="modal"
-                                                    data-target="#exampleModal<?= $item->id ?>"></i>
-                                                  </li> --}}
+                                                   
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             <!-- Photo by Philip Martin on Unsplash -->
@@ -549,176 +250,31 @@
 
                                                         </li>
                                                     </ol>
+
                                                 </ol>
-                                                @php
-                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
-                                                @endphp
-
-                                                @if ($campaigs)
-                                                    <span>Campañas: {{ $campaigs->campaing_name }}</span>
-                                                @endif
+                                                    
+                                                    {{-- created_at --}}
+                                                    <span class="badge badge-light-primary pull-rigth mb-2">
+                                                       Registrado:  {{ $item->created_at->diffForHumans() }}
+                                                    </span>
+                                               
 
                                             </div>
-                                            <div class="modal fade" id="exampleModal<?= $item->id ?>" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar
-                                                                Contacto
-                                                            </h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            {!! Form::model($item, [
-                                                                'route' => ['admin.contact.update', $item->id],
-                                                                'autocomplete' => 'off',
-                                                                'files' => true,
-                                                                'method' => 'put',
-                                                            ]) !!}
-
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('name', 'Nombre') !!}
-                                                                    {!! Form::text('name', $item->name, ['class' => 'form-control', 'placeholder' => 'Pedro']) !!}
-                                                                    @error('name')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('lastname', 'Apellido') !!}
-                                                                    {!! Form::text('lastname', $item->lastname, ['class' => 'form-control', 'placeholder' => 'Perez']) !!}
-                                                                    @error('lastname')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('phone', 'Telefono') !!}
-                                                                    {!! Form::text('phone', isset($item->phone) ? $item->phone : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '+34 455487895',
-                                                                    ]) !!}
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('email', 'Email') !!}
-                                                                    {!! Form::email('email', isset($item->email) ? $item->email : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'test@prueba.com',
-                                                                    ]) !!}
-                                                                    @error('email')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('postcode', 'Código Postal') !!}
-                                                                    {!! Form::text('postcode', isset($item->postcode) ? $item->postcode : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '65656',
-                                                                    ]) !!}
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('country', 'País') !!}
-                                                                    {!! Form::select('country', $paises, isset($item->country) ? $item->country : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '---',
-                                                                    ]) !!}
-                                                                    @error('country')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('city', 'Ciudad') !!}
-                                                                    {!! Form::text('city', isset($item->city) ? $item->city : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'Barcelona',
-                                                                    ]) !!}
-                                                                </div>
-                                                                {{--   <div class="col-md-6">
-                                                            {!! Form::label('state', 'Provincia (opcional)') !!}
-                                                            {!! Form::text('state', null, ['class'=>'form-control','placeholder'=>'', ]) !!}
-                                                        </div> --}}
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
-                                                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                                    {!! Form::select(
-                                                                        'medio_comunicacion',
-                                                                        $comunicacion_medias,
-                                                                        isset($item->comunication_medium) ? $item->comunication_medium : null,
-                                                                        ['id' => 'cliente_tarjeta_franquicia_tarjeta_id', 'class' => 'form-control', 'placeholder' => 'Seleccionar'],
-                                                                    ) !!}
-
-                                                                    @error('medio_comunicacion')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('contact_status', 'Estado del Cliente') !!}
-                                                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                                    {!! Form::select('contact_status', $status, $item->contact_status, [
-                                                                        'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'Seleccionar',
-                                                                    ]) !!}
-
-                                                                    @error('statu')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="mt-5">
-
-                                                                {!! Form::submit('Guardar', ['class' => 'btn btn-primary ']) !!}
-
-                                                            </div>
-                                                            {!! Form::close() !!}
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
+                                         
                                         @endforeach
                                     @endif
                                 </div>
                             </div>
 
                             <div>
-                                <div class="list-title">
+                                <div class="list-title border-top border-success rounded">
                                     {{--  <h2 class="text-center text-gray-600 text-hover-primary">Clientes</h2> --}}
-                                    <div class="alert alert-success text-center" role="alert">
+                                    <div class="alert alert-secondary text-center" role="alert">
                                         <h4>Clientes</h4> <br>
                                         Total de contactos en lista {{ count($clientes) }}
                                     </div>
                                 </div>
-                                <div class="board-list border-top border-success" data-reference="4">
+                                <div class="board-list " data-reference="4">
 
                                     @if (count($clientes) > 0)
                                         @foreach ($clientes as $item)
@@ -726,27 +282,18 @@
                                                 data-id="{{ $item->id }}" data-contact="{{ $item->contact_status }}"
                                                 id="tarjeta">
 
-                                                {{--   <span class="badge badge-primary">{{ $item->country }}</span> --}}
-                                                @php
-                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
-                                                @endphp
-
-                                                @if ($campaigs)
-                                                    <span
-                                                        class="badge badge-light-success pull-rigth mb-2">{{ $campaigs->campaing_name }}</span>
-                                                @else
-                                                    <span class="badge badge-light-success pull-rigth mb-2">Sin campaña
-                                                        asociada</span>
-                                                @endif
+                                               
                                                 <h6 class="card__title"> <a class="text-gray-800 text-hover-primary mb-1"
-                                                        href="{{ route('admin.contact.show', $item->id) }}">{{ $item->name }}
-                                                        {{ $item->lastname }}
+                                                        href="{{ route('admin.contact.show', $item->id) }}">
+                                                       <span class="text-uppercase"> {{ $item->name }} {{ $item->lastname }}</span>
                                                     </a></h6>
+
+                                                {{-- direccion --}}
+                                                <span class="badge badge-light-primary pull-rigth mb-2">
+                                                    {{ $item->country }} - {{ $item->city }}
+                                                </span>
                                                 <ol class="card__actions" style="list-style: none">
-                                                    {{--   <li class="card__actions--wrapper">
-                                      <i class="fas fa-eye"  data-toggle="modal"
-                                      data-target="#exampleModal<?= $item->id ?>"></i>
-                                    </li> --}}
+                                                
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             <!-- Photo by Philip Martin on Unsplash -->
@@ -765,160 +312,13 @@
                                                         </li>
                                                     </ol>
                                                 </ol>
-                                                @php
-                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
-                                                @endphp
-
-                                                @if ($campaigs)
-                                                    <span>Campañas: {{ $campaigs->campaing_name }}</span>
-                                                @endif
+                                                   
+                                                    {{-- created_at --}}
+                                                    <span class="badge badge-light-primary pull-rigth mb-2">
+                                                       Registrado:  {{ $item->created_at->diffForHumans() }}
+                                                    </span>
                                             </div>
-                                            <div class="modal fade" id="exampleModal<?= $item->id ?>" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar
-                                                                Contacto
-                                                            </h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            {!! Form::model($item, [
-                                                                'route' => ['admin.contact.update', $item->id],
-                                                                'autocomplete' => 'off',
-                                                                'files' => true,
-                                                                'method' => 'put',
-                                                            ]) !!}
-
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('name', 'Nombre') !!}
-                                                                    {!! Form::text('name', $item->name, ['class' => 'form-control', 'placeholder' => 'Pedro']) !!}
-                                                                    @error('name')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('lastname', 'Apellido') !!}
-                                                                    {!! Form::text('lastname', $item->lastname, ['class' => 'form-control', 'placeholder' => 'Perez']) !!}
-                                                                    @error('lastname')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('phone', 'Telefono') !!}
-                                                                    {!! Form::text('phone', isset($item->phone) ? $item->phone : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '+34 455487895',
-                                                                    ]) !!}
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('email', 'Email') !!}
-                                                                    {!! Form::email('email', isset($item->email) ? $item->email : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'test@prueba.com',
-                                                                    ]) !!}
-                                                                    @error('email')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('postcode', 'Código Postal') !!}
-                                                                    {!! Form::text('postcode', isset($item->postcode) ? $item->postcode : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '65656',
-                                                                    ]) !!}
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('country', 'País') !!}
-                                                                    {!! Form::select('country', $paises, isset($item->country) ? $item->country : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '---',
-                                                                    ]) !!}
-                                                                    @error('country')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('city', 'Ciudad') !!}
-                                                                    {!! Form::text('city', isset($item->city) ? $item->city : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'Barcelona',
-                                                                    ]) !!}
-                                                                </div>
-                                                                {{--   <div class="col-md-6">
-                                                {!! Form::label('state', 'Provincia (opcional)') !!}
-                                                {!! Form::text('state', null, ['class'=>'form-control','placeholder'=>'', ]) !!}
-                                            </div> --}}
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
-                                                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                                    {!! Form::select(
-                                                                        'medio_comunicacion',
-                                                                        $comunicacion_medias,
-                                                                        isset($item->comunication_medium) ? $item->comunication_medium : null,
-                                                                        ['id' => 'cliente_tarjeta_franquicia_tarjeta_id', 'class' => 'form-control', 'placeholder' => 'Seleccionar'],
-                                                                    ) !!}
-
-                                                                    @error('medio_comunicacion')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('contact_status', 'Estado del Cliente') !!}
-                                                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                                    {!! Form::select('contact_status', $status, $item->contact_status, [
-                                                                        'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'Seleccionar',
-                                                                    ]) !!}
-
-                                                                    @error('statu')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="mt-5">
-
-                                                                {!! Form::submit('Guardar', ['class' => 'btn btn-primary ']) !!}
-
-                                                            </div>
-                                                            {!! Form::close() !!}
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
+                                         
                                         @endforeach
                                     @endif
                                 </div>
@@ -926,13 +326,13 @@
                             </div>
 
                             <div>
-                                <div class="list-title">
-                                    <div class="alert alert-danger text-center" role="alert">
+                                <div class="list-title border-top border-danger rounded">
+                                    <div class="alert alert-secondary text-center" role="alert">
                                         <h4>No interesados</h4> <br>
                                         Total de contactos en lista {{ count($noInteresteds) }}
                                     </div>
                                 </div>
-                                <div class="board-list border-top border-danger" data-reference="5">
+                                <div class="board-list " data-reference="5">
 
                                     @if (count($noInteresteds) > 0)
                                         @foreach ($noInteresteds as $item)
@@ -940,28 +340,13 @@
                                                 data-id="{{ $item->id }}" id="tarjeta"
                                                 data-contact="{{ $item->contact_status }}">
 
-                                                {{--   <span
-                                            class="badge badge-light-success pull-rigth">{{ $item->country }}</span> --}}
-                                                @php
-                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
-                                                @endphp
-
-                                                @if ($campaigs)
-                                                    <span
-                                                        class="badge badge-light-danger pull-rigth mb-2">{{ $campaigs->campaing_name }}</span>
-                                                @else
-                                                    <span class="badge badge-light-danger pull-rigth mb-2">Sin campaña
-                                                        asociada</span>
-                                                @endif
+                                              
                                                 <h6 class="card__title"> <a class="text-gray-800 text-hover-primary mb-1"
-                                                        href="{{ route('admin.contact.show', $item->id) }}">{{ $item->name }}
-                                                        {{ $item->lastname }}
+                                                        href="{{ route('admin.contact.show', $item->id) }}">
+                                                         <span class="text-uppercase"> {{ $item->name }} {{ $item->lastname }}</span>
                                                     </a></h6>
                                                 <ol class="card__actions" style="list-style: none">
-                                                    {{--  <li class="card__actions--wrapper">
-                                     <i class="fas fa-eye"  data-toggle="modal"
-                                     data-target="#exampleModal<?= $item->id ?>"></i>
-                                   </li> --}}
+                                                  
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             @if ($item->image)
@@ -979,160 +364,14 @@
                                                         </li>
                                                     </ol>
                                                 </ol>
-                                                @php
-                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
-                                                @endphp
+                                                
+                                                    {{-- created_at --}}
+                                                    <span class="badge badge-light-primary pull-rigth mb-2">
+                                                       Registrado:  {{ $item->created_at->diffForHumans() }}
+                                                    </span>
 
-                                                @if ($campaigs)
-                                                    <span>Campañas: {{ $campaigs->campaing_name }}</span>
-                                                @endif
                                             </div>
-                                            <div class="modal fade" id="exampleModal<?= $item->id ?>" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar
-                                                                Contacto
-                                                            </h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            {!! Form::model($item, [
-                                                                'route' => ['admin.contact.update', $item->id],
-                                                                'autocomplete' => 'off',
-                                                                'files' => true,
-                                                                'method' => 'put',
-                                                            ]) !!}
-
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('name', 'Nombre') !!}
-                                                                    {!! Form::text('name', $item->name, ['class' => 'form-control', 'placeholder' => 'Pedro']) !!}
-                                                                    @error('name')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('lastname', 'Apellido') !!}
-                                                                    {!! Form::text('lastname', $item->lastname, ['class' => 'form-control', 'placeholder' => 'Perez']) !!}
-                                                                    @error('lastname')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('phone', 'Telefono') !!}
-                                                                    {!! Form::text('phone', isset($item->phone) ? $item->phone : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '+34 455487895',
-                                                                    ]) !!}
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('email', 'Email') !!}
-                                                                    {!! Form::email('email', isset($item->email) ? $item->email : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'test@prueba.com',
-                                                                    ]) !!}
-                                                                    @error('email')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('postcode', 'Código Postal') !!}
-                                                                    {!! Form::text('postcode', isset($item->postcode) ? $item->postcode : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '65656',
-                                                                    ]) !!}
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('country', 'País') !!}
-                                                                    {!! Form::select('country', $paises, isset($item->country) ? $item->country : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => '---',
-                                                                    ]) !!}
-                                                                    @error('country')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-                                                                    {!! Form::label('city', 'Ciudad') !!}
-                                                                    {!! Form::text('city', isset($item->city) ? $item->city : null, [
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'Barcelona',
-                                                                    ]) !!}
-                                                                </div>
-                                                                {{--   <div class="col-md-6">
-                                             {!! Form::label('state', 'Provincia (opcional)') !!}
-                                             {!! Form::text('state', null, ['class'=>'form-control','placeholder'=>'', ]) !!}
-                                         </div> --}}
-                                                            </div>
-
-                                                            <div class="row  mt-2">
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
-                                                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                                    {!! Form::select(
-                                                                        'medio_comunicacion',
-                                                                        $comunicacion_medias,
-                                                                        isset($item->comunication_medium) ? $item->comunication_medium : null,
-                                                                        ['id' => 'cliente_tarjeta_franquicia_tarjeta_id', 'class' => 'form-control', 'placeholder' => 'Seleccionar'],
-                                                                    ) !!}
-
-                                                                    @error('medio_comunicacion')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-                                                                </div>
-                                                                <div class="col-md-6">
-
-                                                                    {!! Form::label('contact_status', 'Estado del Cliente') !!}
-                                                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                                                    {!! Form::select('contact_status', $status, $item->contact_status, [
-                                                                        'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
-                                                                        'class' => 'form-control',
-                                                                        'placeholder' => 'Seleccionar',
-                                                                    ]) !!}
-
-                                                                    @error('statu')
-                                                                        <small class="text-danger">Este campo es
-                                                                            requerido</small>
-                                                                    @enderror
-
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="mt-5">
-
-                                                                {!! Form::submit('Guardar', ['class' => 'btn btn-primary ']) !!}
-
-                                                            </div>
-                                                            {!! Form::close() !!}
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
                                         @endforeach
                                     @endif
 
