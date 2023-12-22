@@ -245,8 +245,16 @@ class CampaingController extends Controller
                             ->where('contact_status',4)
                             ->orderByDesc('contacts.id') 
                             ->get();
-        
-                            $type_enterprise = DB::table('enterpreses_types')->pluck('name_enterprise', 'id');
+
+        $noInteresteds = DB::table('contacts')
+                        ->where('contacts.user_id', $user_id)
+                        ->where('contact_campaings.camaping_id', $id)
+                        ->join('contact_campaings','contact_campaings.contact_id','=','contacts.id')
+                        ->where('contact_status',5)
+                        ->orderByDesc('contacts.id') 
+                        ->get();
+
+        $type_enterprise = DB::table('enterpreses_types')->pluck('name_enterprise', 'id');
         
         $campaing = Campaing::where('id', $id)->first();
       
@@ -264,7 +272,8 @@ class CampaingController extends Controller
             'new_clients' => $new_clients,
             'title' => $title,
             'campaings' => $campaings,
-            'type_enterprise' => $type_enterprise
+            'type_enterprise' => $type_enterprise,
+            'noInteresteds' =>$noInteresteds
         ]);
     }
 
