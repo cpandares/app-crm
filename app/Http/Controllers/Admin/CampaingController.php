@@ -88,7 +88,7 @@ class CampaingController extends Controller
     {
         //
 
-       /*  dd($request->all()); */
+      /*   dd($request->all()); */
         $user_id = auth()->user()->id;
 
         $request->validate([
@@ -104,7 +104,7 @@ class CampaingController extends Controller
             $ca->country = $request->country;
             $ca->city = isset($request->ciudad) ? $request->ciudad : null;
             $ca->init_date = Carbon::parse($request->start_date);
-            $ca->end_date = Carbon::parse($request->end_date);
+            $ca->end_date = Carbon::parse($request->time_end);
             $ca->time_start = $start_time;
             $ca->end_date = $end_time;
             $ca->created_user = $user_id;
@@ -520,7 +520,7 @@ class CampaingController extends Controller
             $campaing->city = $request->city;
             $campaing->country = $request->country;
             $campaing->init_date = Carbon::parse($request->init_date);
-            $campaing->end_date = Carbon::parse($request->end_date);
+            $campaing->end_date = Carbon::parse($request->time_end);
             $campaing->status = $request->status;
             $campaing->update();
             Alert::success('Campaña actualizada');

@@ -33,10 +33,12 @@
                                 <div class="row" bis_skin_checked="1">
                                     <div class="col-12" bis_skin_checked="1">
 
-                                        <button class="btn btn-primary float-right mb-3 btn-sm" data-toggle="modal"
-                                            data-target="#exampleModal" type="button">
+                                        <a 
+                                            href="{{ route('admin.create-contact') }}"
+                                            class="btn btn-primary float-right mb-3 btn-sm" 
+                                            >
                                             Añadir Contactos
-                                        </button>
+                                        </a>
                                         <a href="{{ route('admin.contact.index') }}"
                                             class="btn btn-primary float-right btn-sm mr-1">
                                             Vista pipeline
@@ -55,16 +57,19 @@
                                 </div>
 
                             {{-- includes --}}
-                            @include('includes.contact_form_create')
+                           
                             {{-- includes --}}
 
                             </div>
                             <!--end::Toolbar-->
                             <!--begin::Group actions-->
-                            <div class="d-flex justify-content-end align-items-center d-none"
-                                data-kt-customer-table-toolbar="selected" bis_skin_checked="1">
+                            <div 
+                                class="d-flex justify-content-end align-items-center d-none"
+                                data-kt-customer-table-toolbar="selected" 
+                                bis_skin_checked="1">
                                 <div class="fw-bolder me-5" bis_skin_checked="1">
-                                    <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected
+                                    <span class="me-2" data-kt-customer-table-select="selected_count">
+                                        </span>Selected
                                 </div>
                                 <button type="button" class="btn btn-danger"
                                     data-kt-customer-table-select="delete_selected">Delete Selected</button>

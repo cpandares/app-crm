@@ -28,8 +28,12 @@
                                     <i class="fa fa-repeat"></i>
                                 </a>
 
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal">Nueva Oportunidad</button>
+                                <button 
+                                    type="button" 
+                                    class="btn btn-primary" 
+                                    data-toggle="modal"
+                                    data-target="#exampleModal">Nueva Oportunidad
+                                </button>
                                 <!--end::Add customer-->
                             </div>
                             <!--end::Toolbar-->
@@ -98,20 +102,24 @@
                                             <th>
                                                 {!! Form::select('name', $campaings, $name, [
                                                     'id' => 'name',
-                                                    'class' => 'form-control text-gray-400                                                                          js-example-basic-single',
+                                                    'class' => 'form-control text-gray-400 js-example-basic-single',
                                                     'placeholder' => 'Seleccionar',
                                                     'onchange' => "buscar('name')",
                                                 ]) !!}
                                             </th>
                                             <th>
-                                                <input type="text" placeholder="Ciudad" name="city" id="city"
-                                                    {{--
-                                                onfocusout="buscar('documento')" --}} onchange="buscar('city')" class="form-control">
+                                                <input 
+                                                    type="text" 
+                                                    placeholder="Ciudad" 
+                                                    name="city" 
+                                                    id="city"
+                                                    onchange="buscar('city')" 
+                                                    class="form-control">
                                             </th>
                                             <th>
                                                 {!! Form::select('country', $paises, $country, [
                                                     'id' => 'country',
-                                                    'class' => 'form-control text-gray-400                                                         js-example-basic-single',
+                                                    'class' => 'form-control text-gray-400 js-example-basic-single',
                                                     'placeholder' => 'Seleccionar',
                                                     'onchange' => "buscar('country')",
                                                 ]) !!}
@@ -178,25 +186,7 @@
                                                 </td>
                                        
 
-                                               {{--  <td class="text-end">
-
-                                                    
-
-                                                    <a style="cursor: pointer" data-toggle="modal"
-                                                        data-target="#exampleModal<?= $item->id ?>">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <form method="post"
-                                                        action="{{ route('admin.campaings.destroy', $item) }}"
-                                                        class="formDelete">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button  type="submit" id="logout_button">
-                                                            <i class="fas fa-trash"></i>
-                                                            
-                                                        </button>
-                                                    </form>
-                                                </td> --}}
+                                               
                                                 <td class="text-end">
                                                     <a href="#" class="btn btn-sm btn-light btn-active-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Acciones
                                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
@@ -205,7 +195,8 @@
                                                                 <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
                                                             </svg>
                                                         </span>
-                                                        <!--end::Svg Icon--></a>
+                                                        <!--end::Svg Icon-->
+                                                    </a>
                                                     <!--begin::Menu-->
                                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                         <!--begin::Menu item-->
@@ -223,7 +214,6 @@
                                                         @method('delete')
                                                         <button  type="submit" id="logout_button" class="menu-link px-3"> 
                                                            Eliminar
-                                                            
                                                         </button>
                                                     </form>
                                                         </div>
@@ -291,8 +281,8 @@
                                                             <div class="row">
                                                                 <div class="col-sm-12 col-md-6">
 
-                                                                    {!! Form::label('end_date', 'Fecha finalización') !!}
-                                                                    {!! Form::date('end_date', $item->end_date, ['class' => 'form-control']) !!}
+                                                                    {!! Form::label('time_end', 'Fecha finalización') !!}
+                                                                    {!! Form::date('time_end', $item->time_end, ['class' => 'form-control']) !!}
                                                                     <br>
                                                                 </div>
                                                                 <div class="col-sm-12 col-md-6">
@@ -412,7 +402,7 @@
                                 <div class="col-sm-12 col-md-6">
 
                                     {!! Form::label('end_date', 'Fecha finalización') !!}
-                                    {!! Form::date('end_date', null, ['class' => 'form-control']) !!}
+                                    {!! Form::date('time_end', null, ['class' => 'form-control']) !!}
                                     <br>
                                 </div>
                                 

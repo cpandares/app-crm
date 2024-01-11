@@ -139,8 +139,9 @@ class ContactsController extends Controller
 
     
 
-    public function create()
+    public function createContact($id = null)
     {
+        $title = 'Crear Contacto';
         $user_id = auth()->user()->id;
         $comunicacion_medias = ComunicationMedium::pluck('comunication_medio', 'id');
         $campaings = Campaing::where('created_user', $user_id)->get();
@@ -151,7 +152,11 @@ class ContactsController extends Controller
                 'comunicacion_medias' => $comunicacion_medias,
                 'campaings' => $campaings,
                 'status' => $status,
-                'paises' => $this->getPaises()
+                'paises' => $this->getPaises(),
+                'title' => $title,
+                'type_enterprise' => DB::table('enterpreses_types')->pluck('name_enterprise', 'id'),
+                'campaings_list' => Campaing::where('created_user', $user_id)->pluck('campaing_name', 'id'),
+                'id_campaing' => $id ? $id : null,
             ]
         );
     }
@@ -395,7 +400,7 @@ class ContactsController extends Controller
     {
 
         $user_id = auth()->user()->id;
-        /* dd($request); */
+        /* dd($request->all()); */
         $request->validate([
             'name' => 'required',
             'lastname' => 'required',
@@ -457,23 +462,81 @@ class ContactsController extends Controller
                     $campaing->user_id = $user_id;
                     $campaing->created_at = Carbon::now();
                     $campaing->updated_at = Carbon::now();
-                    $result = $campaing->save();
-                  
+                    $campaing->save();
+                    
+                    
+                    /* return view('campaings.show', [
+                        'campaing' => Campaing::findOrFail($request->campaing),
+                        'title' => 'Detalle de Campaña'
+                    ]); */
                 } catch (\PDOException $th) {
                     DB::rollBack();
-                    Alert::success('No se pudo asociar contacto a la campaña');
-                    return redirect()->back();
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Contacto no asignado a la campaña, contacte con soporte',
+                       
+                    ]);
                 }
             }
 
-         
-            
-            Alert::success('Contacto Guardado');
-            return redirect()->back();
+            if ($result) {
+                DB::commit();
+
+                if(isset($request->campaing_id)){
+                    Alert::success('Contacto guardado con exito');
+                    $contacts = DB::table('contacts')
+                    ->where('contacts.user_id', $user_id)
+                    ->where('contact_campaings.camaping_id', $request->campaing_id)
+                    ->join('contact_campaings','contact_campaings.contact_id','=','contacts.id')
+                    ->whereNotIn('contact_status', [5, 6]);
+                    return redirect()->route('admin.campaings.show',[
+                        'campaing' => Campaing::findOrFail($request->campaing_id),
+                        'title' => 'Detalle de Campaña',
+                        'contacts' => $contacts,
+                        'paises' => $this->getPaises(),
+                        'comunicacion_medias' => ComunicationMedium::pluck('comunication_medio', 'id'),
+                        'status' =>  ContactStatus::pluck('status_name', 'id'),
+                        
+                        'list_campaings' =>  Campaing::where('created_user', $user_id)->pluck('campaing_name', 'id'),
+                        'type_enterprise' =>  DB::table('enterpreses_types')->pluck('name_enterprise', 'id'),
+                        'per_page' => isset($request->per_page) ? $request->per_page : 20,
+                        'list_campaings' =>Campaing::where('created_user', $user_id)->pluck('campaing_name', 'id'),
+                    
+                    ]);
+                }else{
+                    Alert::success('Contacto guardado con exito');
+                    $data = DB::table('contacts')->where('user_id', $user_id)->get();
+                    return view('contacts.index',[
+                        'data' => $data,
+                        'title' => 'Listado de contactos',
+                        'paises' => $this->getPaises(),
+                        'comunicacion_medias' => ComunicationMedium::pluck('comunication_medio', 'id'),
+                        'status' => ContactStatus::pluck('status_name', 'id'),
+                        'campaings_list' => Campaing::where('created_user', $user_id)->pluck('campaing_name', 'id'),
+                        'type_enterprise' => DB::table('enterpreses_types')->pluck('name_enterprise', 'id'),
+                        'new_clients' => Contact::where('user_id', $user_id)->where('contact_status', 1)->orderByDesc('id')->get(),
+                        'clientes_negoci' => Contact::where('user_id', $user_id)->where('contact_status', 2)->orderByDesc('id')->get(),
+                        'presupuestados' => Contact::where('user_id', $user_id)->where('contact_status', 3)->orderByDesc('id')->get(),
+                        'clientes' => Contact::where('user_id', $user_id)->where('contact_status', 4)->orderByDesc('id')->get(),
+                        'noInteresteds' => Contact::where('user_id', $user_id)->where('contact_status', 5)->orderByDesc('id')->get(),
+                    ]);
+                }
+
+            } else {
+                DB::rollBack();
+                Alert::error('Contacto no guardado, contacte con soporte');
+                return redirect()->back();
+            }
+
+        
         } catch (\PDOException $th) {
-            return $th->getMessage();
-            /* Alert::error('Contacto no guardado, contacte con soporte');
-             return redirect()->back(); */
+            //throw $th;
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Contacto no guardado, contacte con soporte',
+               
+            ]);
         }
     }
 
@@ -657,6 +720,8 @@ class ContactsController extends Controller
             'title' => $title
         ]);
     }
+
+    
 
 
 }

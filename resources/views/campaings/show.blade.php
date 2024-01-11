@@ -51,10 +51,12 @@
 
 
 
-                        <button class="btn btn-primary float-right mb-3 btn-sm" data-toggle="modal"
-                            data-target="#exampleModal" type="button">
+                        <a  class="btn btn-primary float-right mb-3 btn-sm" 
+                            {{-- href="{{ url('contact/create/' .  $campaing->id) }}" --}}
+                            href="{{ route('admin.create-contact' , $campaing->id) }}"
+                            >
                             Añadir Contactos
-                        </button>
+                        </a>
                         <a href="{{ url('admin/campaings/contacts/' . $campaing->id) }}"
                             class="btn btn-primary float-right btn-sm mr-1">
                             Vista pipeline
@@ -103,6 +105,7 @@
                                         {{-- @dump($campaing) --}}
                                         {!! Form::open(['url' => 'admin/campaings/' . $campaing->id, 'method' => 'get', 'id' => 'frmFiltros']) !!}
                                         <input type="hidden" id="accion" name="accion" value="2">
+                                        <input type="hidden" name="campaing_id" value="{{$campaing->id}}">
 
                                         <th>
                                             <input type="text" placeholder="Nombre contacto" name="name"

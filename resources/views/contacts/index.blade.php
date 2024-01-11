@@ -44,10 +44,12 @@
                             <div class="row" bis_skin_checked="1">
                                 <div class="col-12" bis_skin_checked="1">
 
-                                    <button class="btn btn-primary float-right mb-3 btn-sm" data-toggle="modal"
-                                        data-target="#exampleModal" type="button">
-                                        Añadir Contactos
-                                    </button>
+                                    <a 
+                                    href="{{ route('admin.create-contact') }}"
+                                    class="btn btn-primary float-right mb-3 btn-sm" 
+                                    >
+                                    Añadir Contactos
+                                     </a>
 
                                     <a href="{{ url('admin/contactos-lista') }}"
                                         class="btn btn-primary float-right btn-sm mr-1">

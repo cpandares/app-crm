@@ -19,7 +19,9 @@ Route::post('campaings/create-contract/{id}', [CampaingController::class, 'creat
 
 Route::get('campaings/contacts/{id}', [CampaingController::class, 'showPipelineContacts'])->name('get-contact-campaing');
 
-Route::resource('contacts', ContactsController::class)->names('admin.contact');
+Route::resource('contacts', ContactsController::class)->names('admin.contact')->except(['create']);
+
+Route::get('contact/create/{id?}', [ContactsController::class, 'createContact'])->name('admin.create-contact');
 
 Route::resource('products', ProductoController::class)->names('admin.products');
 
