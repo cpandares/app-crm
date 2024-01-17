@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use Mail;
 use Hash;
+use Illuminate\Support\Facades\Mail as FacadesMail;
 use Illuminate\Support\Str;
 
 class ForgotPasswordController extends Controller
@@ -34,17 +35,23 @@ class ForgotPasswordController extends Controller
            
           $title = 'Reset Password';
 
-          Mail::send('auth.passwords.email', ['token' => $token, 'title' => $title], function($message) use($request){
-              $message->to($request->email);
-              $message->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'));
-              $message->subject('Reset Password');
-          });
+          $content = 'Click here to reset your password: ' . url('reset-password/' . $token);
 
-          return back()->with('message', 'We have emailed your password reset link!');
+          try {
+             $send = mail($request->email, $title, $content);
+            dd($send);
+              return back()->with('message', 'We have emailed your password reset link!');
+            //code...
+          } catch (\Throwable $th) {
+            //throw $th;
+            return $th->getMessage();
+          }
+          
+
       }
 
       public function ResetPassword($token) {
-          return view('auth.forget-password-link', ['token' => $token]);
+          return view('auth.reset', ['token' => $token]);
       }
       
       public function ResetPasswordStore(Request $request) {

@@ -12,7 +12,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-body">
             {!! Form::open(['route' => 'admin.contact.store', 'autocomplete' => 'off', 'files' => true]) !!}
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-sm-12 col-sm-12 col-md-6">
 
                         <label for="comisiones" class="form-label">¿Representa una
@@ -25,7 +25,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                     </div>
 
-                </div>
+                </div> --}}
 
             <div class="row mt-2" id="empresa_repre">
                 <div class="">

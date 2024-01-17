@@ -99,7 +99,7 @@
                                             <th class="min-w-125px ">Teléfono</th>
                                             <th class="min-w-125px ">Página web</th>
                                             <th class="min-w-125px ">Campañas</th>
-                                            <th class="min-w-125px ">¿Representa Empresa?</th>
+                                            <th class="min-w-125px ">Numero de N.I.F</th>
                                             <th class="min-w-125px ">Estado</th>
                                             <th class="text-end min-w-70px" rowspan="1" colspan="1"
                                                 aria-label="Acciones" style="width: 146.738px;">Acciones</th>
@@ -208,12 +208,12 @@
                                                 </td>
 
                                                 <td>
-                                                    @if ($item->represent == 1)
-                                                        <p class="badge badge-light-info">Si</p>
-                                                    @else
+                                                    @if ($item->name_enterprise)
                                                         <p>
-                                                        <p class="badge badge-primary">No</p>
+                                                            {{ $item->name_enterprise }}
                                                         </p>
+                                                    @else
+                                                        <p class="text-info">No asignado</p>
                                                     @endif
                                                 </td>
 

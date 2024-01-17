@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')
- 
+<style>
+    span.select2-container {
+        z-index: 10050;
+    }
+</style>
     <div class="row">
         <div class="col-md-3">
             <!-- Profile Image -->
@@ -161,9 +165,9 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Actualizar {{ $contact->name }}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
-                            </button>
+                            </button> --}}
                         </div>
                         <div class="modal-body">
                             {!! Form::model($contact, [
@@ -173,32 +177,29 @@
                                 'method' => 'put',
                             ]) !!}
 
-                            <div class="row">
-                                <div class="col-sm-12 col-sm-12 col-md-6">
+                            
 
-                                    <label for="comisiones" class="form-label">¿Representa una empresa?</label><br>
-                                    <input 
-                                        type="checkbox" 
-                                        id="representa_empresa" 
-                                        data-toggle="toggle" 
-                                        data-on="Si"
-                                        data-off="No" 
-                                        data-onstyle="primary" 
-                                        data-offstyle="danger"
-                                        onchange="accion_respresenta(this)">
-
-                                </div>
-
-                            </div>
-
-                            <div class="row mt-2" id="empresa_repre">
+                            <div class="row mt-2" >
                                 <div class="">
-                                    {!! Form::label('name_empresa', 'Nombre Empresa') !!}
+                                    {!! Form::label('name_empresa', 'Nombre Empresa Fiscal') !!}
                                     {!! Form::text('name_empresa', $contact->name, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
                                 </div>
                                 <div class="">
-                                    {!! Form::label('name_empresa', 'Tipo de empresa') !!}
-                                    {!! Form::select('name_empresa', [], null, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
+                                   
+                                    {!! Form::label('name_empresa', 'Nombre Comercial') !!}
+                                    {!! Form::text('name_empresa',  $contact->name_comercial, [
+                                        'class' => 'form-control',
+                                        'placeholder' => 'Nombre Comercial',
+                                        'id' => 'name_comercial'
+                                    ]) !!}
+                                </div>
+                                <div class="mt-2">
+                                    {!! Form::label('codigo_nif', 'Numero de N.I.F') !!}
+                                    {!! Form::text('codigo_nif',  $contact->codigo_nif, [
+                                        'class' => 'form-control',
+                                        'placeholder' => 'Numero de N.I.F',
+                                        'id' => 'codigo_nif'
+                                    ]) !!}
                                 </div>
                                 <hr class="mt-5">
                             </div>
@@ -206,53 +207,43 @@
                             <div class="row mt-2">
                                 <div class="col-sm-12 col-md-6">
 
-                                    {!! Form::label('name', 'Nombre') !!}
+                                    {!! Form::label('name', 'Persona de Contacto') !!}
                                     {!! Form::text('name', $contact->name, ['class' => 'form-control', 'placeholder' => 'Pedro']) !!}
                                     @error('name')
                                         <small class="text-danger">Este campo es requerido</small>
                                     @enderror
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-
-                                    {!! Form::label('lastname', 'Apellidos') !!}
-                                    {!! Form::text('lastname', $contact->lastname, ['class' => 'form-control', 'placeholder' => 'Perez']) !!}
-                                    @error('lastname')
-                                        <small class="text-danger">Este campo es requerido</small>
-                                    @enderror
+                                    {!! Form::label('phone', 'Telefono') !!}
+                                    {!! Form::text('phone', $contact->phone, ['class' => 'form-control', 'placeholder' => '+34 455487895']) !!}
                                 </div>
                             </div>
 
                             <div class="row  mt-2">
-                                <div class="col-sm-12 col-md-6">
-                                    {!! Form::label('phone', 'Telefono') !!}
-                                    {!! Form::text('phone', $contact->phone, ['class' => 'form-control', 'placeholder' => '+34 455487895']) !!}
-                                </div>
+                               
                                 <div class="col-sm-12 col-md-6">
 
                                     {!! Form::label('email', 'Email') !!}
                                     {!! Form::email('email', $contact->email, ['class' => 'form-control', 'placeholder' => 'test@prueba.com']) !!}
-                                    @error('email')
-                                        <small class="text-danger">Este campo es requerido</small>
-                                    @enderror
+                                   
                                 </div>
-                            </div>
 
-                            <div class="row  mt-2">
                                 <div class="col-sm-12 col-md-6">
                                     {!! Form::label('postcode', 'Código Postal') !!}
                                     {!! Form::text('postcode', $contact->postcode, ['class' => 'form-control', 'placeholder' => '65656']) !!}
                                 </div>
+                            </div>
+
+                            <div class="row  mt-2">
+                               
                                 <div class="col-sm-12 col-md-6">
 
-                                    {!! Form::label('country', 'País') !!}
+                                    {!! Form::label('country', 'País') !!} <br>
                                     {!! Form::select('country', $paises, $contact->country, [
                                         'class' => 'form-control',
                                         'placeholder' => '--Seleccionar País--',
-                                        'required',
                                     ]) !!}
-                                    @error('country')
-                                        <small class="text-danger">Este campo es requerido</small>
-                                    @enderror
+                                  
                                 </div>
                             </div>
 
@@ -279,38 +270,6 @@
 
 
                                 </div>
-
-                            </div>
-
-                            <div class="row  mt-2">
-                                <div class="col-sm-12 col-md-4">
-
-                                    {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
-                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                    {!! Form::select(
-                                        'medio_comunicacion',
-                                        $comunicacion_medias,
-                                        isset($contact->comunication_medium) ? $contact->comunication_medium : null,
-                                        ['id' => 'cliente_tarjeta_franquicia_tarjeta_id', 'class' => 'form-control', 'placeholder' => 'Seleccionar'],
-                                    ) !!}
-
-                                    @error('medio_comunicacion')
-                                        <small class="text-danger">Este campo es requerido</small>
-                                    @enderror
-                                </div>
-                                <div class="col-sm-12 col-md-4">
-
-                                    {!! Form::label('contact_status', 'Estado del Cliente') !!}
-                                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                    {!! Form::select('contact_status', $status, $contact->contact_status, [
-                                        'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
-                                        'class' => 'form-control',
-                                        'placeholder' => 'Seleccionar',
-                                    ]) !!}
-
-
-
-                                </div>
                                 <div class="col-sm-12 col-md-4">
 
                                     {!! Form::label('website', 'Página web') !!}
@@ -321,12 +280,11 @@
                                         'placeholder' => 'example.com',
                                     ]) !!}
 
-                                    @error('statu')
-                                        <small class="text-danger">Este campo es requerido</small>
-                                    @enderror
-
+                                   
                                 </div>
+
                             </div>
+
 
                             <div class="mt-5">
 
@@ -495,10 +453,11 @@
                                                 <td>{{ date('d-m-Y', strtotime($item->valid_until)) }}</td>
                                                 <td>{{ date('d-m-Y', strtotime($item->updated_at)) }}</td>
                                                 <td>
-                                                    @if ($item->document)
+                                                    @if (file_exists('adjunto/'.$item->document))
+                                                       {{--  @dump($item->document) --}}
                                                        {{--  <a href="" target="_blank">Ver Adjunto</a> --}}
-                                                        <a href="{{ url('upload/adjunto/'.$item->document) }}" 
-                                                            download="{{ $item->document}}" 
+                                                        <a href="{{ url('adjunto/'.$item->document) }}" 
+                                                            download="{{ $item->document }}"
                                                             class="btn btn-tbl-update btn-xs text-white" 
                                                             data-bs-toggle="tooltip" 
                                                             data-bs-placement="top" 

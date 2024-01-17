@@ -340,11 +340,11 @@
                                                 </ol>
 
                                                 {{-- created_at --}}
-                                                <span class="badge badge-primary pull-rigth mb-2">
-                                                   {{-- Registrado:  {{ $item->created_at }} --}}
+                                               {{--  <span class="badge badge-primary pull-rigth mb-2">
+                                                 
 
                                                     Registrado:  {{ date('d-m-Y', strtotime($item->created_at)) }}
-                                                </span>
+                                                </span> --}}
 
 
                                             </div>
@@ -409,11 +409,10 @@
                                                 </ol>
 
                                                 {{-- created_at --}}
-                                                <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{-- diffforhumans string --}}
+                                              {{--   <span class="badge badge-primary pull-rigth mb-2">                                                  
 
                                                    Registrado:  {{ date('d-m-Y', strtotime($item->created_at)) }}
-                                                </span>
+                                                </span> --}}
 
                                             </div>
                                           
@@ -476,9 +475,9 @@
                                                 </ol>
                                                     
                                                     {{-- created_at --}}
-                                                    <span class="badge badge-primary pull-rigth mb-2">
+                                                   {{--  <span class="badge badge-primary pull-rigth mb-2">
                                                        Registrado:  {{ $item->created_at }}
-                                                    </span>
+                                                    </span> --}}
                                                
 
                                             </div>
@@ -536,10 +535,10 @@
                                                 </ol>
                                                    
                                                     {{-- created_at --}}
-                                                    <span class="badge badge-primary pull-rigth mb-2">
+                                                    {{-- <span class="badge badge-primary pull-rigth mb-2">
                                                         
                                                        Registrado:  {{ date('d-m-Y', strtotime($item->created_at)) }}
-                                                    </span>
+                                                    </span> --}}
                                             </div>
                                          
                                         @endforeach
@@ -589,9 +588,9 @@
                                                 </ol>
                                                 
                                                 {{-- created_at --}}
-                                                <span class="badge badge-primary pull-rigth mb-2">
+                                               {{--  <span class="badge badge-primary pull-rigth mb-2">
                                                     Registrado:  {{ date('d-m-Y', strtotime($item->created_at)) }}
-                                                </span>
+                                                </span> --}}
 
                                             </div>
                                            

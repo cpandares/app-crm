@@ -53,7 +53,14 @@
 <script>
     $(document).ready(function() {
 
-
+            $("#country").select2({
+                placeholder: "Seleccionar País",
+                allowClear: true,
+            });
+            $("#campaing_contact").select2({
+                placeholder: "Seleccionar Campaña",
+                allowClear: true,
+            });
 
         /*  $.ajax({
                  url: "https://shop.ninesdeonil.com/wp-json/wc/v3/orders?consumer_key=ck_6d3fb768918b7067ee823204e2107033097ca64a&consumer_secret=cs_532eab538d5f11f08d30b70bd1a626a9808f8725&per_page=100",

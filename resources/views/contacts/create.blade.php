@@ -18,7 +18,7 @@
 
 
                 </div>
-                <a href="{{ route('admin.contact.index') }}" class="btn btn-outline-success">Cancelar</a>
+                <a  href="javascript:history.go(-1)" class="btn btn-outline-success">Cancelar</a>
             </div>
            
             <div class="card-body">
@@ -29,31 +29,27 @@
                 @else
                     {!! Form::hidden('campaing_id', null) !!}                    
                 @endif
-                <div class="row">
-                    <div class="col-sm-12 col-sm-12 col-md-6">
-
-                        <label for="comisiones" class="form-label">¿Representa una
-                            empresa?
-                        </label><br>
-                        <input type="checkbox" id="representa_empresa"
-                            name="representa_empresa" data-toggle="toggle" data-on="Si"
-                            data-off="No" data-onstyle="primary" data-offstyle="danger"
-                            onchange="accion_respresenta(this)">
-
-                    </div>
-
-                </div>
+                
 
             <div class="row mt-2" id="empresa_repre">
                 <div class="">
-                    {!! Form::label('name_empresa', 'Nombre Empresa') !!}
+                    {!! Form::label('name_empresa', 'Nombre Empresa Fiscal') !!}
                     {!! Form::text('name_empresa', null, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
                 </div>
-                <div class="">
-                    {!! Form::label('type_enterprise', 'Tipo de empresa') !!}
-                    {!! Form::select('type_enterprise', $type_enterprise, null, [
+                <div class="mt-2">
+                    {!! Form::label('name_comercial', 'Nombre Comercial') !!}
+                    {!! Form::text('name_comercial',  null, [
                         'class' => 'form-control',
-                        'placeholder' => 'Selecciona un tipo',
+                        'placeholder' => 'Nombre Comercial',
+                        'id' => 'name_comercial'
+                    ]) !!}
+                </div>
+                <div class="mt-2">
+                    {!! Form::label('codigo_nif', 'Numero de N.I.F') !!}
+                    {!! Form::text('codigo_nif',  null, [
+                        'class' => 'form-control',
+                        'placeholder' => 'Numero de N.I.F',
+                        'id' => 'codigo_nif'
                     ]) !!}
                 </div>
                 <hr class="mt-5">
@@ -62,42 +58,42 @@
             <div class="row mt-2">
                 <div class="col-sm-12 col-sm-12 col-md-6">
 
-                    {!! Form::label('name', 'Nombre') !!}
-                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Pedro', 'required']) !!}
+                    {!! Form::label('name', 'Persona de Contacto') !!}
+                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Pedro Perez', 'required']) !!}
                     @error('name')
                         <small class="text-danger">Este campo es requerido</small>
                     @enderror
                 </div>
-                <div class="col-sm-12 col-sm-12 col-md-6">
+                {{-- <div class="col-sm-12 col-sm-12 col-md-6">
 
                     {!! Form::label('lastname', 'Apellidos') !!}
                     {!! Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Perez', 'required']) !!}
                     @error('lastname')
                         <small class="text-danger">Este campo es requerido</small>
                     @enderror
-                </div>
-            </div>
-
-            <div class="row  mt-2">
+                </div> --}}
                 <div class="col-sm-12 col-sm-12 col-md-6">
                     {!! Form::label('phone', 'Teléfono') !!}
                     {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => '+34 455487895', 'required']) !!}
                 </div>
-                <div class="col-sm-12 col-md-6">
-
-                    {!! Form::label('email', 'Email') !!}
-                    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'test@prueba.com', 'required']) !!}
-                    @error('email')
-                        <small class="text-danger">Este campo es requerido o ya se encuentra registrado</small>
-                    @enderror
-                </div>
             </div>
 
             <div class="row  mt-2">
+                
+                <div class="col-sm-12 col-md-6">
+
+                    {!! Form::label('email', 'Email') !!}
+                    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'test@prueba.com']) !!}
+                    
+                </div>
                 <div class="col-sm-12 col-md-6">
                     {!! Form::label('postcode', 'Código Postal') !!}
                     {!! Form::text('postcode', null, ['class' => 'form-control', 'placeholder' => '03430']) !!}
                 </div>
+            </div>
+
+            <div class="row  mt-2">
+                
                 <div class="col-sm-12 col-md-6">
 
                     {!! Form::label('country', 'País') !!}
@@ -105,23 +101,25 @@
                         'class' => 'form-control',
                         'placeholder' => '--Seleccionar País--',
                         'required',
+                        'id' => 'country'
                     ]) !!}
                     @error('country')
                         <small class="text-danger">Este campo es requerido</small>
                     @enderror
                 </div>
-            </div>
-
-            <div class="row  mt-2">
                 <div class="col-sm-12 col-md-6">
                     {!! Form::label('city', 'Ciudad') !!}
                     {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
                 </div>
+            </div>
+
+           {{--  <div class="row  mt-2">
+                
                 <div class="col-sm-12 col-md-6">
                     {!! Form::label('state', 'Provincia (opcional)') !!}
                     {!! Form::text('state', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                 </div>
-            </div>
+            </div> --}}
 
             <div class="row  mt-2">
                 <div class="col-sm-12 col-md-6">
@@ -131,33 +129,6 @@
                     {!! Form::text('address', null, [
                         'class' => 'form-control',
                         'placeholder' => 'Calle tercera casa 25',
-                    ]) !!}
-
-
-                </div>
-                <div class="col-sm-12 col-md-6">
-
-                    {!! Form::label('campaing', 'Asignar Campaña (Opcional)') !!}
-                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                    {!! Form::select('campaing', $campaings_list, null, [
-                        'class' => 'form-control',
-                        'placeholder' => 'Seleccionar',
-                    ]) !!}
-
-
-
-                </div>
-            </div>
-
-            <div class="row  mt-2">
-                <div class="col-sm-12 col-md-6">
-
-                    {!! Form::label('medio_comunicacion', 'Se Contactó mediante') !!}
-                    {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                    {!! Form::select('medio_comunicacion', $comunicacion_medias, null, [
-                        'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
-                        'class' => 'form-control',
-                        'placeholder' => 'Seleccionar',
                     ]) !!}
 
 
@@ -175,6 +146,30 @@
 
 
                 </div>
+                
+            </div>
+
+            <div class="row  mt-2">
+                
+
+               
+
+                @if (!$id_campaing)
+                    <div class="col-sm-12 col-md-6">
+
+                        {!! Form::label('campaing', 'Asignar Campaña (Opcional)') !!}
+                        {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
+                        {!! Form::select('campaing', $campaings_list, null, [
+                            'class' => 'form-control',
+                            'placeholder' => 'Seleccionar',
+                            'id' => 'campaing_contact'
+                        ]) !!}
+
+
+
+                    </div>
+                    
+                @endif
 
             </div>
 
@@ -201,55 +196,8 @@
     <script>
 
         $(document).ready(function() {
-         /*    $('#representa_empresa').show(); */
-           $("#representa_empresa").prop("checked", false);
-            $('#empresa_repre').hide()
+           
         });
-
-        function accion_respresenta(e) {
-            if (e.checked) {
-                $('#empresa_repre').show();
-            } else {
-                $('#empresa_repre').hide();
-            }
-        }
-
-        /* submit form ajax  */
-     /*    $('#formContact').submit(function(e) {
-            e.preventDefault();
-            var form = $(this);
-            var url = form.attr('action');
-            var data = form.serialize();
-            $.post(url, data, function(result) {
-                if (result.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Contacto creado correctamente',
-                        showConfirmButton: true,
-                        confirmButtonText: 'Aceptar',
-                    }).then(isConfirm => {
-                        if (isConfirm) {
-                           
-                           window.location.go(-1);
-                        }
-                    })
-                    
-                   
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Algo salió mal!',
-                    })
-                }
-            }).fail(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Algo salió mal!',
-                })
-            });
-        }); */
 
         $('#formContact').validate({
             rules: {

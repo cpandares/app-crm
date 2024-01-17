@@ -282,7 +282,7 @@
                                                                 <div class="col-sm-12 col-md-6">
 
                                                                     {!! Form::label('time_end', 'Fecha finalización') !!}
-                                                                    {!! Form::date('time_end', $item->time_end, ['class' => 'form-control']) !!}
+                                                                    {!! Form::date('time_end', $item->end_date, ['class' => 'form-control']) !!}
                                                                     <br>
                                                                 </div>
                                                                 <div class="col-sm-12 col-md-6">

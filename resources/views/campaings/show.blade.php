@@ -94,7 +94,7 @@
                                         <th class="min-w-125px ">Teléfono</th>
                                         <th class="min-w-125px ">Página web</th>
                                         <th class="min-w-125px ">Paìs</th>
-                                        <th class="min-w-125px ">¿Representa Empresa?</th>
+                                        <th class="min-w-125px ">Codigo N.I.F</th>
                                         <th class="min-w-125px ">Estado</th>
                                         <th class="text-end min-w-70px" rowspan="1" colspan="1"
                                             aria-label="Acciones" style="width: 146.738px;">Acciones</th>
@@ -190,12 +190,10 @@
                                                     {{ $item->country }}
                                                 </td>
                                                 <td class="text-center">
-                                                    @if ($item->represent == 1)
-                                                        <p class="badge badge-light-info">Si</p>
+                                                    @if ($item->codigo_nif)
+                                                       {{ $item->codigo_nif }}
                                                     @else
-                                                        <p>
-                                                        <p class="badge badge-primary">No</p>
-                                                        </p>
+                                                        <p class="text-danger">No asignado</p>
                                                     @endif
                                                 </td>
                                                 <td class="text-center text-gray-600 text-hover-primary mb-1">
@@ -236,9 +234,9 @@
                                                         data-kt-menu="true">
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
-                                                            <a data-toggle="modal"
-                                                                data-target="#exampleModal<?= $item->id ?>"
-                                                                class="menu-link px-3">Editar</a>
+                                                            <a  href="{{ route('admin.contact.show', $item->id) }}"
+                                                                
+                                                                class="menu-link px-3">Ver mas</a>
                                                         </div>
                                                         <!--end::Menu item-->
                                                         <!--begin::Menu item-->

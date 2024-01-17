@@ -91,13 +91,13 @@
                                                 <h6 class="card__title">
                                                     <a class="text-gray-800 text-hover-primary mb-1"
                                                         href="{{ route('admin.contact.show', $item->id) }}">
-                                                        <span class="text-uppercase">{{ $item->name }} {{ $item->lastname }}</span>
+                                                        <span class="text-uppercase">{{ $item->name }}</span>
                                                     </a>
                                                 </h6>
 
                                                 {{-- direccion --}}
 
-                                                <span class="badge badge-light-primary pull-rigth mb-2">
+                                                <span class="badge badge-primary pull-rigth mb-2">
                                                     {{ $item->country }} - {{ $item->city }}
                                                 </span>
 
@@ -106,8 +106,8 @@
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             <!-- Photo by Philip Martin on Unsplash -->
-                                                            @if ($item->image)
-                                                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
+                                                            @if (file_exists('upload/contactos/' . $item->image) && $item->image != '')
+                                                                <img src="{{ 'upload/contactos/' . $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
                                                                 <img 
@@ -115,7 +115,7 @@
                                                             src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
                                                             class="h-35px" 
                                                             style="cursor: pointer"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }}"
                                                             />
                                                             @endif
 
@@ -123,10 +123,7 @@
                                                     </ol>
                                                 </ol>
 
-                                                {{-- created_at --}}
-                                                <span class="badge badge-light-primary pull-rigth mb-2">
-                                                   Registrado:  {{ $item->created_at->diffForHumans() }}
-                                                </span>
+                                              
 
 
                                             </div>
@@ -166,7 +163,7 @@
 
                                                 {{-- direccion --}}
 
-                                                <span class="badge badge-light-primary pull-rigth mb-2">
+                                                <span class="badge badge-primary pull-rigth mb-2">
                                                     {{ $item->country }} - {{ $item->city }}
                                                 </span>
 
@@ -174,8 +171,8 @@
                                                  
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
-                                                            @if ($item->image)
-                                                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
+                                                            @if (file_exists('upload/contactos/' . $item->image) && $item->image != '')
+                                                                <img src="{{ 'upload/contactos/' . $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
                                                                 <img 
@@ -183,7 +180,7 @@
                                                             src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
                                                             class="h-35px" 
                                                             style="cursor: pointer"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }}"
                                                             />
                                                             @endif
                                                         </li>
@@ -191,9 +188,9 @@
                                                 </ol>
 
                                                 {{-- created_at --}}
-                                                <span class="badge badge-light-primary pull-rigth mb-2">
+                                               {{--  <span class="badge badge-primary pull-rigth mb-2">
                                                    Registrado:  {{ $item->created_at->diffForHumans() }}
-                                                </span>
+                                                </span> --}}
 
                                             </div>
                                           
@@ -229,7 +226,7 @@
                                                 </h6>
                                                     
                                                     {{-- direccion --}} 
-                                                    <span class="badge badge-light-primary pull-rigth mb-2">
+                                                    <span class="badge badge-primary pull-rigth mb-2">
                                                         {{ $item->country }} - {{ $item->city }}
                                                     </span>
                                                 <ol class="card__actions " style="list-style: none">
@@ -237,8 +234,8 @@
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             <!-- Photo by Philip Martin on Unsplash -->
-                                                            @if ($item->image)
-                                                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
+                                                            @if (file_exists('upload/contactos/' . $item->image) && $item->image != '')
+                                                                <img src="{{ 'upload/contactos/' . $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
                                                                 <img 
@@ -246,7 +243,7 @@
                                                             src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
                                                             class="h-35px" 
                                                             style="cursor: pointer"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }}"
                                                             />
                                                             @endif
 
@@ -256,9 +253,9 @@
                                                 </ol>
                                                     
                                                     {{-- created_at --}}
-                                                    <span class="badge badge-light-primary pull-rigth mb-2">
+                                                    {{-- <span class="badge badge-primary pull-rigth mb-2">
                                                        Registrado:  {{ $item->created_at->diffForHumans() }}
-                                                    </span>
+                                                    </span> --}}
                                                
 
                                             </div>
@@ -291,7 +288,7 @@
                                                     </a></h6>
 
                                                 {{-- direccion --}}
-                                                <span class="badge badge-light-primary pull-rigth mb-2">
+                                                <span class="badge badge-primary pull-rigth mb-2">
                                                     {{ $item->country }} - {{ $item->city }}
                                                 </span>
                                                 <ol class="card__actions" style="list-style: none">
@@ -299,26 +296,26 @@
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             <!-- Photo by Philip Martin on Unsplash -->
-                                                            @if ($item->image)
-                                                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
-                                                                    class="avatar__image">
-                                                            @else
-                                                                <img 
-                                                            alt="{{ $item->name }} {{ $item->lastname }}" 
-                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
-                                                            class="h-35px" 
-                                                            style="cursor: pointer"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
-                                                            />
-                                                            @endif
+                                                            @if (file_exists('upload/contactos/' . $item->image) && $item->image != '')
+                                                            <img src="{{ 'upload/contactos/' . $item->image }}" alt="{{ $item->name }}"
+                                                                class="avatar__image">
+                                                        @else
+                                                            <img 
+                                                        alt="{{ $item->name }} {{ $item->lastname }}" 
+                                                        src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                        class="h-35px" 
+                                                        style="cursor: pointer"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }}"
+                                                        />
+                                                        @endif
                                                         </li>
                                                     </ol>
                                                 </ol>
                                                    
                                                     {{-- created_at --}}
-                                                    <span class="badge badge-light-primary pull-rigth mb-2">
+                                                    {{-- <span class="badge badge-primary pull-rigth mb-2">
                                                        Registrado:  {{ $item->created_at->diffForHumans() }}
-                                                    </span>
+                                                    </span> --}}
                                             </div>
                                          
                                         @endforeach
@@ -347,12 +344,15 @@
                                                         href="{{ route('admin.contact.show', $item->id) }}">
                                                          <span class="text-uppercase"> {{ $item->name }} {{ $item->lastname }}</span>
                                                     </a></h6>
+                                                    <span class="badge badge-primary pull-rigth mb-2">
+                                                        {{ $item->country }} - {{ $item->city }}
+                                                    </span>
                                                 <ol class="card__actions" style="list-style: none">
                                                   
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
-                                                            @if ($item->image)
-                                                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
+                                                            @if (file_exists('upload/contactos/' . $item->image) && $item->image != '')
+                                                                <img src="{{ 'upload/contactos/' . $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
                                                                 <img 
@@ -360,7 +360,7 @@
                                                             src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
                                                             class="h-35px" 
                                                             style="cursor: pointer"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }}"
                                                             />
                                                             @endif
                                                         </li>
@@ -368,9 +368,9 @@
                                                 </ol>
                                                 
                                                     {{-- created_at --}}
-                                                    <span class="badge badge-light-primary pull-rigth mb-2">
+                                                   {{--  <span class="badge badge-primary pull-rigth mb-2">
                                                        Registrado:  {{ $item->created_at->diffForHumans() }}
-                                                    </span>
+                                                    </span> --}}
 
                                             </div>
                                            

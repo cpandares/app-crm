@@ -138,9 +138,16 @@ License: For each use you must have a valid license purchased only from above li
                                         <p>
                                             <input type="checkbox" name="" id="boton"> Recordarme
                                         </p>
-                                       {{--  <a href="{{ url('reset-password') }}" class="link-primary fs-6 fw-bolder"
-                                            id="forgot_password" data-toggle="modal" data-target="#exampleModal">Olvidaste
-                                            tu Contraseña ?</a> --}}
+                                      {{--   <button  
+                                            class="link-primary fs-6 fw-bolder"
+                                            id="forgot_password" 
+                                            data-toggle="modal" data-target="#exampleModal">Olvidaste
+                                            tu Contraseña ?</button> --}}
+
+                                        {{--     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                Launch demo modal
+                                              </button> --}}
+
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -174,6 +181,35 @@ License: For each use you must have a valid license purchased only from above li
         </div>
 
     </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Recuperar Contraseña</h5>
+             
+            </div>
+            <div class="modal-body">
+                <p class="text-center">
+                    Te enviaremos un correo con un link para que puedas cambiar tu contraseña
+                </p>
+{{-- form recovery password --}}
+                <form method="POST" action="{{ route('password.email') }}" class="form w-100" id="kt_sign_in_form">
+                    @csrf
+                    <!--begin::Heading-->
+                    <div
+                        style="text-align: center;margin: 0 0 40px;" class="logo">
+                       
+
+                    <input type="email" class="form-control" name="email" placeholder="Tu email aqui">
+                    <button type="submit" class="btn btn-primary mt-2">Enviar</button>
+                </form>
+                
+            </div>
+           
+          </div>
+        </div>
+    </div>
     <!--end::Root-->
     <!--end::Main-->
     <!--begin::Javascript-->
@@ -188,7 +224,10 @@ License: For each use you must have a valid license purchased only from above li
     {{-- <script src="assets/js/custom/authentication/sign-in/general.js"></script> --}}
     <!--end::Page Custom Javascript-->
     <!--end::Javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script>
+        
         // Obtener el botón y el campo de entrada
         var boton = document.getElementById("boton");
         var campo = document.getElementById("campo");
