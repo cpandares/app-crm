@@ -12,120 +12,11 @@
         <div id="kt_aside_menu_wrapper" class="w-100 hover-scroll-overlay-y scroll-ps d-flex" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside, #kt_aside_menu"
             data-kt-scroll-offset="0">
             <div id="kt_aside_menu" class="menu menu-column menu-title-gray-600 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-icon-gray-400 menu-arrow-gray-400 fw-bold fs-6" data-kt-menu="true">
-                <div data-kt-menu-placement="right-start" class="menu-item py-3">
-                    <a class="menu-link" href="{{ url('/home') }}">
-
-                        <span class="menu-icon">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                                <span class="svg-icon svg-icon-2x">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                        <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                        <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                        <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                                    </svg>
-                                </span>
-                        <!--end::Svg Icon-->
-
-                        </span>
-                    </a>
-                </div>
-
-
-                <div data-kt-menu-trigger="click" data-kt-menu-placement="right-start" class="menu-item py-3">
-                    <span class="menu-link" title="Pedidos" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                        <span class="menu-icon">
-                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
-                            <span class="svg-icon svg-icon-2x">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"/>
-                                            <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,21 C20,22.1045695 19.1045695,23 18,23 L6,23 C4.8954305,23 4,22.1045695 4,21 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" fill="#000000" opacity="0.3"/>
-                                            <path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" fill="#000000"/>
-                                            <rect fill="#000000" opacity="0.3" x="10" y="9" width="7" height="2" rx="1"/>
-                                            <rect fill="#000000" opacity="0.3" x="7" y="9" width="2" height="2" rx="1"/>
-                                            <rect fill="#000000" opacity="0.3" x="7" y="13" width="2" height="2" rx="1"/>
-                                            <rect fill="#000000" opacity="0.3" x="10" y="13" width="7" height="2" rx="1"/>
-                                            <rect fill="#000000" opacity="0.3" x="7" y="17" width="2" height="2" rx="1"/>
-                                            <rect fill="#000000" opacity="0.3" x="10" y="17" width="7" height="2" rx="1"/>
-                                    </g>
-                            </svg>
-                            </span>
-                    <!--end::Svg Icon-->
-                    </span>
-                    </span>
-                    <div class="menu-sub menu-sub-dropdown w-225px w-lg-275px px-1 py-4">
-                       
-                        <div class="menu-item">
-                            <a class="menu-link" href="{{ url('admin/pedidos-api') }}"  data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                               
-                                <span class="menu-title">Pedidos</span>
-                            </a>
-                        </div>
-{{-- 
-                        <div class="menu-item">
-                            <a class="menu-link" href="{{ url('admin/pedidos-api') }}"  data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                               
-                                <span class="menu-title">Ankstore</span>
-                            </a>
-                        </div> --}}
-                        
-                    </div>
-                </div>
-
+                            
 
              
-                <div data-kt-menu-placement="right-start" class="menu-item here show py-3">
-                    <a href="{{ url('admin/clientes-api') }}" class="menu-link" title="Clientes Api">
-
-                        <span class="menu-icon">
-                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs037.svg-->
-                            <span class="svg-icon svg-icon-2x">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <polygon points="0 0 24 0 24 24 0 24"/>
-                                            <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-                                            <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
-                                    </g>
-                            </svg>
-                            </span>
-                        <!--end::Svg Icon-->
-                        </span>
-
-                    </a>
-                </div>
-                {{-- <div data-kt-menu-placement="right-start" class="menu-item here show py-3">
-                    <a class="menu-link" href="{{ route('admin.contact.index') }}" title="Contactos">
-
-                        
-                        <span class="menu-icon">
-                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs037.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
-                        <!--end::Svg Icon-->
-                        </span>
-
-                    </a>
-                </div> --}}
-                <div  data-kt-menu-placement="right-start" class="menu-item py-3">
-                   
-                    <span class="menu-link" title="Productos" data-bs-placement="right">
-                        <a href="{{ url('admin/products') }}">
-                        <span class="menu-icon">
-                            <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
-
-                                <span class="svg-icon svg-icon-2x">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M21 9V11C21 11.6 20.6 12 20 12H14V8H20C20.6 8 21 8.4 21 9ZM10 8H4C3.4 8 3 8.4 3 9V11C3 11.6 3.4 12 4 12H10V8Z" fill="black" />
-                                        <path d="M15 2C13.3 2 12 3.3 12 5V8H15C16.7 8 18 6.7 18 5C18 3.3 16.7 2 15 2Z" fill="black" />
-                                        <path opacity="0.3" d="M9 2C10.7 2 12 3.3 12 5V8H9C7.3 8 6 6.7 6 5C6 3.3 7.3 2 9 2ZM4 12V21C4 21.6 4.4 22 5 22H10V12H4ZM20 12V21C20 21.6 19.6 22 19 22H14V12H20Z" fill="black" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
-                            </span>
-                        </a>
-                    </span>
-                  
-                </div>
+            
+               
 
                 <div data-kt-menu-trigger="click" data-kt-menu-placement="right-start" class="menu-item py-3">
                     <span class="menu-link" title="CRM" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
@@ -181,20 +72,7 @@
                     </div>
                 </div>
 
-                <div data-kt-menu-placement="right-start" class="menu-item here show py-3">
-                    <a href="{{ url('admin/calendario') }}" class="menu-link" title="Calendario">
-
-                        <span class="menu-icon">
-                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs037.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" class="bi bi-calendar" viewBox="0 0 16 16">
-                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                              </svg>
-                            </span>
-                        <!--end::Svg Icon-->
-                        </span>
-
-                    </a>
-                </div>
+                
 
             </div>
         </div>

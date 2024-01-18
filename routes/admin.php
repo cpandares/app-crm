@@ -13,7 +13,7 @@ use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('dashboard', [ HomeController::class, 'index' ])->name('admin.home');
+Route::get('dashboard', [ ContactsController::class, 'lista' ])->name('contacts.lista');
 
 Route::post('campaings/create-contract/{id}', [CampaingController::class, 'createContact'])->name('add-contact-campaing');
 
@@ -46,13 +46,6 @@ Route::put('update-status-contact', [ContactsController::class, 'updateStatus'])
 Route::get('contactos-lista', [ContactsController::class, 'lista'])->name('admin.contactos.lista');
 
 Route::post('update-photo-contact/{id}', [ContactsController::class, 'updatePhoto'])->name('update-photo-contact');
-
-Route::get('clientes-api', [CustomersApiController::class, 'index'])->name('admin.clientes.api');
-
-Route::get('pedidos-api', [ProductoController::class, 'listarPedidosApi'])->name('admin.pedidos.api');
-Route::get('pedido-api/{pedido}', [ProductoController::class, 'showPedidoApi'])->name('admin.pedidos.show');
-
-Route::get('calendario', [CampaingController::class, 'calendario'])->name('admin.calendario.index');
 
 Route::get('campaing-ajax', [CampaingController::class, 'ajaxCampaing'])->name('ajax-campaing');
 

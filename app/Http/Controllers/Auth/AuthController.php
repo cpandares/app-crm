@@ -51,7 +51,7 @@ class AuthController extends Controller
             $data_entidad = DB::table('tbl_entidad')->where('entidad_id', $entidad->usu_ent_entidad_id)->first();
             $request->session()->put('data_entidad', $data_entidad);
  */
-            return redirect()->route('home');
+            return redirect()->route('contacts.lista');
         }else{
             return  redirect()->route('loginForm')->with(['message' =>'Usuario o contraseña invalidos']);
         }
