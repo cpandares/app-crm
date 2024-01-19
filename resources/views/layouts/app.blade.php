@@ -257,7 +257,7 @@
     
                                     <!--end::Theme mode-->
                                     <!--begin::Item-->
-                                    <a class="btn btn-primary">FACTUSOL</a>
+                                   {{--  <a class="btn btn-primary">FACTUSOL</a> --}}
                                     <!--end::Item-->
                                 </div>
                                 <!--end::Action-->
