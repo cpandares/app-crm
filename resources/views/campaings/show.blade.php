@@ -94,7 +94,7 @@
                                         <th class="min-w-125px ">Teléfono</th>
                                         <th class="min-w-125px ">Página web</th>
                                         <th class="min-w-125px ">Paìs</th>
-                                        <th class="min-w-125px ">Codigo N.I.F</th>
+                                        <th class="min-w-125px ">Nombre Comercial</th>
                                         <th class="min-w-125px ">Estado</th>
                                         <th class="text-end min-w-70px" rowspan="1" colspan="1"
                                             aria-label="Acciones" style="width: 146.738px;">Acciones</th>
@@ -109,7 +109,7 @@
 
                                         <th>
                                             <input type="text" placeholder="Nombre contacto" name="name"
-                                                id="name" onchange="buscar('documento')" class="form-control">
+                                                id="name" onchange="buscar('namea')" class="form-control">
                                         </th>
 
                                         <th>
@@ -190,10 +190,12 @@
                                                     {{ $item->country }}
                                                 </td>
                                                 <td class="text-center">
-                                                    @if ($item->codigo_nif)
-                                                       {{ $item->codigo_nif }}
+                                                    @if ($item->name_enterprise)
+                                                        <p>
+                                                            {{ $item->name_enterprise }}
+                                                        </p>
                                                     @else
-                                                        <p class="text-danger">No asignado</p>
+                                                        <p class="text-info">No asignado</p>
                                                     @endif
                                                 </td>
                                                 <td class="text-center text-gray-600 text-hover-primary mb-1">

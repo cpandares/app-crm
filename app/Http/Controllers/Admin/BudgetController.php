@@ -107,24 +107,43 @@ class BudgetController extends Controller
     }
 
 
-    public function update(Request $request, Budget $budget){
+    public function update(Request $request, $id){
 
+       /*  dd($id); */
+        $budget = Budget::find($id);
         if(!$budget){
             Alert::error('Presupuesto no encontrado, contacte a soporte');
             return redirect()->back();
         }
-
+        
         try {
-            //code...
+           
+            /* verify if request->price had symbol ₡ */
+            if(strpos($request->price, '€') !== false){
+                $valor = str_replace('€', '', $request->price);
+                $valor =  str_replace(' ', '', $valor);
+                $valor =  str_replace('.', '', $valor);
+                $valor = floatval($valor);
+            }else{
+                $valor = $request->price;
+            }
 
-            $budget->update($request->all());
+            $budget->title = $request->title;
+            $budget->observacion = $request->observacion;
+            $budget->price = $valor;
+            $budget->valid_until = $request->valid_until;
+            $budget->user_created = auth()->user()->id;
+            $budget->user_created_for = $request->contact;
+            $budget->updated_at = Carbon::now();
+            $budget->update();
             Alert::success('Presupuesto actualizado');
-            return redirect()->route('admin.budget.show', $budget)->with(['message' =>'Presupuesto actualizado']);
-
-        } catch (\Throwable $th) {
-            //throw $th;
-            Alert::error('Error actualizando presupuesto, contacte a soporte');
+            //return redirect()->route('admin.budget.show', $budget)->with(['message' =>'Presupuesto actualizado']);
             return redirect()->back();
+
+        } catch (\PDOException $th) {
+            return $th->getMessage();
+            /* Alert::error('Error actualizando presupuesto, contacte a soporte');
+            return redirect()->back(); */
         }
 
     }

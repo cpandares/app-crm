@@ -109,7 +109,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     {!! Form::label('city', 'Ciudad') !!}
-                    {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
+                    {!! Form::text('state', null, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
                 </div>
             </div>
 
@@ -138,7 +138,7 @@
 
                     {!! Form::label('website', 'Página Web') !!}
                     {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                    {!! Form::url('website', null, [
+                    {!! Form::text('website', null, [
                         'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
                         'class' => 'form-control',
                         'placeholder' => 'www.example.com',

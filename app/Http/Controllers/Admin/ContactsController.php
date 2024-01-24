@@ -102,23 +102,23 @@ class ContactsController extends Controller
         $type_enterprise = DB::table('enterpreses_types')->pluck('name_enterprise', 'id');
 
         if (isset($input['name'])) {
-            $condicion[] = ['contacs.name', 'like', '%' . $input['name'] . '%'];
+            $condicion[] = ['contacts.name', 'like', '%' . $input['name'] . '%'];
         }
         if (isset($input['email'])) {
-            $condicion[] = ['contacs.email', 'like', '%' . $input['email'] . '%'];
+            $condicion[] = ['contacts.email', 'like', '%' . $input['email'] . '%'];
         }
-        if (isset($input['lastname'])) {
-            $condicion[] = ['contacs.lastname', 'like', '%' . $input['lastname'] . '%'];
-        }
+        /* if (isset($input['campaing'])) {
+            $condicion['contacts.contact_status'] = $input['statu'];
+        } */
         if (isset($input['country'])) {
-            $condicion['contacs.country'] = $input['country'];
+            $condicion['contacts.country'] = $input['country'];
         }
         if (isset($input['tipo_contacto'])) {
 
             $condicion['contacts.represent'] = (int) $input['tipo_contacto'];
         }
-        if (isset($input['tipo_contacto'])) {
-            $condicion['contacts.type_contact'] = $input['tipo_contacto'];
+        if (isset($input['statu'])) {
+            $condicion['contacts.contact_status'] = $input['statu'];
         }
         $contacts = $contacts->where($condicion)->paginate($per_page);
       /*   dd($contacts); */
@@ -411,6 +411,11 @@ class ContactsController extends Controller
             return redirect()->back();
         }
 
+        if(Contact::where('codigo_nif', $request->codigo_nif)->exists()){
+            Alert::error('NIF ya esta asocaciado a otro contacto');
+            return redirect()->back();
+        }
+
         $contact = new Contact();
         /*  $contact_campaing = new ContactCampaing(); */
         /*  dd("12"); */
@@ -438,9 +443,9 @@ class ContactsController extends Controller
                 $contact->website = isset($request->website) ? $request->website : null;
                 $contact->type_contact = isset($request->type_contact) ?  $request->type_contact : 1; //Si no viene el tipo contacto por defecto sera persona
                 $contact->types_contacts = isset($request->types_contacts) ? $request->types_contacts : null;
-                $contact->name_enterprise = isset($request->name_empresa) ? $request->name_empresa : null;
+                
                 $contact->type_enterprise = isset($request->type_enterprise) ? $request->type_enterprise : null;
-                $contact->name_enterprise = $request->name_comercial ? $request->name_comercial : null;
+                $contact->name_enterprise = $request->name_empresa ? $request->name_empresa : null;
                 $contact->contact_status = 1;
                 $contact->user_id = $user_id;
                 $contact->represent = 1;
@@ -451,8 +456,10 @@ class ContactsController extends Controller
                 $contact->nombre_comercial = isset($request->name_comercial) ? $request->name_comercial : null;
                 $result = $contact->save();
             } catch (\PDOException $th) {
-                return $th->getMessage();
+                //return $th->getMessage();
                 DB::rollBack();
+                Alert::error('Contacto no guardado, contacte con soporte');
+                return redirect()->back();
             }
 
 
@@ -488,45 +495,21 @@ class ContactsController extends Controller
             if ($result) {
                 DB::commit();
 
-                if (isset($request->campaing_id)) {
-                    Alert::success('Contacto guardado con exito');
-                    $contacts = DB::table('contacts')
-                        ->where('contacts.user_id', $user_id)
-                        ->where('contact_campaings.camaping_id', $request->campaing_id)
-                        ->join('contact_campaings', 'contact_campaings.contact_id', '=', 'contacts.id')
-                        ->whereNotIn('contact_status', [5, 6]);
-                    return redirect()->route('admin.campaings.show', [
-                        'campaing' => Campaing::findOrFail($request->campaing_id),
-                        'title' => 'Detalle de Campaña',
-                        'contacts' => $contacts,
-                        'paises' => $this->getPaises(),
-                        'comunicacion_medias' => ComunicationMedium::pluck('comunication_medio', 'id'),
-                        'status' =>  ContactStatus::pluck('status_name', 'id'),
-
-                        'list_campaings' =>  Campaing::where('created_user', $user_id)->pluck('campaing_name', 'id'),
-                        'type_enterprise' =>  DB::table('enterpreses_types')->pluck('name_enterprise', 'id'),
-                        'per_page' => isset($request->per_page) ? $request->per_page : 20,
-                        'list_campaings' => Campaing::where('created_user', $user_id)->pluck('campaing_name', 'id'),
-
-                    ]);
-                } else {
-                    Alert::success('Contacto guardado con exito');
-                    $data = DB::table('contacts')->where('user_id', $user_id)->get();
-                    return view('contacts.index', [
-                        'data' => $data,
-                        'title' => 'Listado de contactos',
-                        'paises' => $this->getPaises(),
-                        'comunicacion_medias' => ComunicationMedium::pluck('comunication_medio', 'id'),
-                        'status' => ContactStatus::pluck('status_name', 'id'),
-                        'campaings_list' => Campaing::where('created_user', $user_id)->pluck('campaing_name', 'id'),
-                        'type_enterprise' => DB::table('enterpreses_types')->pluck('name_enterprise', 'id'),
-                        'new_clients' => Contact::where('user_id', $user_id)->where('contact_status', 1)->orderByDesc('id')->get(),
-                        'clientes_negoci' => Contact::where('user_id', $user_id)->where('contact_status', 2)->orderByDesc('id')->get(),
-                        'presupuestados' => Contact::where('user_id', $user_id)->where('contact_status', 3)->orderByDesc('id')->get(),
-                        'clientes' => Contact::where('user_id', $user_id)->where('contact_status', 4)->orderByDesc('id')->get(),
-                        'noInteresteds' => Contact::where('user_id', $user_id)->where('contact_status', 5)->orderByDesc('id')->get(),
-                    ]);
-                }
+                $data = DB::table('contacts')->where('user_id', $user_id)->get();
+                return view('contacts.index', [
+                    'data' => $data,
+                    'title' => 'Listado de contactos',
+                    'paises' => $this->getPaises(),
+                    'comunicacion_medias' => ComunicationMedium::pluck('comunication_medio', 'id'),
+                    'status' => ContactStatus::pluck('status_name', 'id'),
+                    'campaings_list' => Campaing::where('created_user', $user_id)->pluck('campaing_name', 'id'),
+                    'type_enterprise' => DB::table('enterpreses_types')->pluck('name_enterprise', 'id'),
+                    'new_clients' => Contact::where('user_id', $user_id)->where('contact_status', 1)->orderByDesc('id')->get(),
+                    'clientes_negoci' => Contact::where('user_id', $user_id)->where('contact_status', 2)->orderByDesc('id')->get(),
+                    'presupuestados' => Contact::where('user_id', $user_id)->where('contact_status', 3)->orderByDesc('id')->get(),
+                    'clientes' => Contact::where('user_id', $user_id)->where('contact_status', 4)->orderByDesc('id')->get(),
+                    'noInteresteds' => Contact::where('user_id', $user_id)->where('contact_status', 5)->orderByDesc('id')->get(),
+                ]);
             } else {
                 DB::rollBack();
                 Alert::error('Contacto no guardado, contacte con soporte');
@@ -588,11 +571,21 @@ class ContactsController extends Controller
     }
 
     public function update(Request $request, Contact $contact)
-    {
+    {   
+
+        if(Contact::where('email', $request->email)->where('id', '!=', $contact->id)->exists()){
+            Alert::error('Email ya esta asocaciado a otro contacto');
+            return redirect()->back();
+        }
+
+        if(Contact::where('codigo_nif', $request->codigo_nif)->where('id', '!=', $contact->id)->exists()){
+            Alert::error('NIF ya esta asocaciado a otro contacto');
+            return redirect()->back();
+        }
 
         try {
             //code...
-            /*  dd($request->all()); */
+           /*   dd($request->all()); */
             /* $contact->update($request->all()); */
             $contact->name = $request->name;
             $contact->lastname = null;
@@ -603,16 +596,16 @@ class ContactsController extends Controller
             $contact->state = $request->state;
             $contact->email = $request->email;
             $contact->nombre_comercial = isset($request->name_comercial) ? $request->name_comercial : null;
-            $contact->name_enterprise = isset($request->name_empresa) ? $request->name_empresa : null;
+           /*  $contact->name_enterprise = isset($request->name_empresa) ? $request->name_empresa : null; */
             $contact->codigo_nif = isset($request->codigo_nif) ? $request->codigo_nif : null;
-
+            $contact->name_enterprise = $request->name_empresa ? $request->name_empresa : null;
             $contact->website = isset($request->website) ? $request->website : null;
             $contact->type_contact = isset($request->type_contact) ?  $request->type_contact : 1; //Si no viene el tipo contacto por defecto sera persona
             $contact->types_contacts = isset($request->types_contacts) ? $request->types_contacts : null;
             $contact->address = $request->address;
             $status = ContactStatus::where('id', (int) $request->contact_status)->first();
             /*  dd($status); */
-            $contact->contact_status = $status->id;
+            
             if (isset($request->campaing)) {
                 try {
                     $campaing = new ContactCampaing();
@@ -630,7 +623,7 @@ class ContactsController extends Controller
             Alert::success('Contacto actualizado');
             return redirect()->back();
         } catch (\PDOException $th) {
-            /*  return $th->getMessage(); */
+            /*  return $th->getMessage(); die; */
             Alert::error('Contacto no actualizado, contacta a soporte');
             return redirect()->back();
         }

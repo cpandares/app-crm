@@ -314,30 +314,30 @@
                                                 {{-- direccion --}}
 
                                                 <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{ $item->country }} - {{ $item->city }}
+                                                    {{ $item->country }} 
                                                 </span>
 
-                                                <ol class="card__actions " style="list-style: none">
+                                               
                                                   
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             <!-- Photo by Philip Martin on Unsplash -->
-                                                            @if ($item->image)
-                                                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
-                                                                    class="avatar__image">
-                                                            @else
-                                                                <img 
-                                                            alt="{{ $item->name }} {{ $item->lastname }}" 
-                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
-                                                            class="h-35px" 
-                                                            style="cursor: pointer"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
-                                                            />
-                                                            @endif
+                                                            @if (file_exists('images/contactos/' . $item->image) && $item->image != '')
+                                                            <img src="{{'../../images/contactos/' . $item->image }}" alt="{{ $item->name }}"
+                                                                class="avatar__image">
+                                                        @else
+                                                            <img 
+                                                        alt="{{ $item->name }} {{ $item->lastname }}" 
+                                                        src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                        class="h-35px" 
+                                                        style="cursor: pointer"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }}"
+                                                        />
+                                                        @endif
 
                                                         </li>
                                                     </ol>
-                                                </ol>
+                                                
 
                                                 {{-- created_at --}}
                                                {{--  <span class="badge badge-primary pull-rigth mb-2">
@@ -385,27 +385,26 @@
                                                 {{-- direccion --}}
 
                                                 <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{ $item->country }} - {{ $item->city }}
+                                                    {{ $item->country }} 
                                                 </span>
 
-                                                <ol class="card__actions" style="list-style: none">
-                                                 
-                                                    <ol class="card__avatars" style="list-style: none">
-                                                        <li class="card__avatars--item">
-                                                            @if ($item->image)
-                                                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
-                                                                    class="avatar__image">
-                                                            @else
-                                                                <img 
-                                                            alt="{{ $item->name }} {{ $item->lastname }}" 
-                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
-                                                            class="h-35px" 
-                                                            style="cursor: pointer"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
-                                                            />
-                                                            @endif
-                                                        </li>
-                                                    </ol>
+                                                <ol class="card__avatars" style="list-style: none">
+                                                    <li class="card__avatars--item">
+                                                        <!-- Photo by Philip Martin on Unsplash -->
+                                                        @if (file_exists('images/contactos/' . $item->image) && $item->image != '')
+                                                        <img src="{{'../../images/contactos/' . $item->image }}" alt="{{ $item->name }}"
+                                                            class="avatar__image">
+                                                    @else
+                                                        <img 
+                                                    alt="{{ $item->name }} {{ $item->lastname }}" 
+                                                    src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                    class="h-35px" 
+                                                    style="cursor: pointer"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }}"
+                                                    />
+                                                    @endif
+
+                                                    </li>
                                                 </ol>
 
                                                 {{-- created_at --}}
@@ -449,30 +448,26 @@
                                                     
                                                     {{-- direccion --}} 
                                                     <span class="badge badge-primary pull-rigth mb-2">
-                                                        {{ $item->country }} - {{ $item->city }}
+                                                        {{ $item->country }} 
                                                     </span>
-                                                <ol class="card__actions " style="list-style: none">
-                                                   
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             <!-- Photo by Philip Martin on Unsplash -->
-                                                            @if ($item->image)
-                                                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
-                                                                    class="avatar__image">
-                                                            @else
-                                                                <img 
-                                                            alt="{{ $item->name }} {{ $item->lastname }}" 
-                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
-                                                            class="h-35px" 
-                                                            style="cursor: pointer"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
-                                                            />
-                                                            @endif
+                                                            @if (file_exists('images/contactos/' . $item->image) && $item->image != '')
+                                                            <img src="{{'../../images/contactos/' . $item->image }}" alt="{{ $item->name }}"
+                                                                class="avatar__image">
+                                                        @else
+                                                            <img 
+                                                        alt="{{ $item->name }} {{ $item->lastname }}" 
+                                                        src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                        class="h-35px" 
+                                                        style="cursor: pointer"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }}"
+                                                        />
+                                                        @endif
 
                                                         </li>
                                                     </ol>
-
-                                                </ol>
                                                     
                                                     {{-- created_at --}}
                                                    {{--  <span class="badge badge-primary pull-rigth mb-2">
@@ -511,27 +506,25 @@
 
                                                 {{-- direccion --}}
                                                 <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{ $item->country }} - {{ $item->city }}
+                                                    {{ $item->country }} 
                                                 </span>
-                                                <ol class="card__actions" style="list-style: none">
-                                                
-                                                    <ol class="card__avatars" style="list-style: none">
-                                                        <li class="card__avatars--item">
-                                                            <!-- Photo by Philip Martin on Unsplash -->
-                                                            @if ($item->image)
-                                                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
-                                                                    class="avatar__image">
-                                                            @else
-                                                                <img 
-                                                            alt="{{ $item->name }} {{ $item->lastname }}" 
-                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
-                                                            class="h-35px" 
-                                                            style="cursor: pointer"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
-                                                            />
-                                                            @endif
-                                                        </li>
-                                                    </ol>
+                                                <ol class="card__avatars" style="list-style: none">
+                                                    <li class="card__avatars--item">
+                                                        <!-- Photo by Philip Martin on Unsplash -->
+                                                        @if (file_exists('images/contactos/' . $item->image) && $item->image != '')
+                                                        <img src="{{'../../images/contactos/' . $item->image }}" alt="{{ $item->name }}"
+                                                            class="avatar__image">
+                                                    @else
+                                                        <img 
+                                                    alt="{{ $item->name }} {{ $item->lastname }}" 
+                                                    src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                    class="h-35px" 
+                                                    style="cursor: pointer"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }}"
+                                                    />
+                                                    @endif
+
+                                                    </li>
                                                 </ol>
                                                    
                                                     {{-- created_at --}}
@@ -567,26 +560,27 @@
                                                         href="{{ route('admin.contact.show', $item->id) }}">
                                                          <span class="text-uppercase"> {{ $item->name }} {{ $item->lastname }}</span>
                                                     </a></h6>
-                                                <ol class="card__actions" style="list-style: none">
+                                              
                                                   
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
-                                                            @if ($item->image)
-                                                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
-                                                                    class="avatar__image">
-                                                            @else
-                                                                <img 
-                                                            alt="{{ $item->name }} {{ $item->lastname }}" 
-                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
-                                                            class="h-35px" 
-                                                            style="cursor: pointer"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }} {{ $item->lastname }}"
-                                                            />
-                                                            @endif
+                                                            <!-- Photo by Philip Martin on Unsplash -->
+                                                            @if (file_exists('images/contactos/' . $item->image) && $item->image != '')
+                                                            <img src="{{'../../images/contactos/' . $item->image }}" alt="{{ $item->name }}"
+                                                                class="avatar__image">
+                                                        @else
+                                                            <img 
+                                                        alt="{{ $item->name }} {{ $item->lastname }}" 
+                                                        src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                        class="h-35px" 
+                                                        style="cursor: pointer"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }}"
+                                                        />
+                                                        @endif
+
                                                         </li>
                                                     </ol>
-                                                </ol>
-                                                
+                                            
                                                 {{-- created_at --}}
                                                {{--  <span class="badge badge-primary pull-rigth mb-2">
                                                     Registrado:  {{ date('d-m-Y', strtotime($item->created_at)) }}

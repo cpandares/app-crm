@@ -2,15 +2,19 @@
 
 @section('content')
 
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content" bis_skin_checked="1">
+<style>
+  span.select2-container {
+        z-index: 10050;
+    }
+</style>
 
 
-        <div class="content d-flex flex-column flex-column-fluid" id="kt_content" bis_skin_checked="1">
+        <div class="row" id="kt_content" bis_skin_checked="1">
             <!--begin::Container-->
             <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
                 {{--  <h2 >Listado de Campañas</h2> --}}
                 <!--begin::Card-->
-                <div class="card" bis_skin_checked="1">
+                <div class="card p-5" bis_skin_checked="1">
                     <!--begin::Card header-->
                     <div class="card-header border-0 pt-6" bis_skin_checked="1">
                         <!--begin::Card title-->
@@ -57,8 +61,7 @@
                         <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"
                             bis_skin_checked="1">
                             <div  bis_skin_checked="1">
-                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer table-hover table_responsive"
-                                    id="kt_customers_table">
+                                <table class="table table-hover table-striped " >
                                     <!--begin::Table head-->
                                     <thead class="">
                                         <!--begin::Table row-->
@@ -118,7 +121,7 @@
                                             </th>
                                             <th>
                                                 {!! Form::select('country', $paises, $country, [
-                                                    'id' => 'country',
+                                                    'id' => 'country_campaign',
                                                     'class' => 'form-control text-gray-400 js-example-basic-single',
                                                     'placeholder' => 'Seleccionar',
                                                     'onchange' => "buscar('country')",
@@ -257,9 +260,9 @@
 
                                                                     {!! Form::label('country', 'Pais') !!}
                                                                     {!! Form::select('country', $paises, $item->country, [
-                                                                        'class' => 'form-control
-                                                                                                                                                                    ',
+                                                                        'class' => 'form-control',
                                                                         'placeholder' => 'Seleccionar',
+                                                                        'id' => 'country'
                                                                     ]) !!}
                                                                     <br>
                                                                 </div>
@@ -419,18 +422,13 @@
             </div>
 
         </div>
-    </div>
+  
 @endsection
 
 
 @section('script')
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('.js-example-basic-single').select2();
-
-
-          
-        });
+        
 
         function buscar(tipo) {
 

@@ -98,7 +98,7 @@
                                                 {{-- direccion --}}
 
                                                 <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{ $item->country }} - {{ $item->city }}
+                                                    {{ $item->country }} 
                                                 </span>
 
                                                 <ol class="card__actions " style="list-style: none">
@@ -106,8 +106,8 @@
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             <!-- Photo by Philip Martin on Unsplash -->
-                                                            @if (file_exists('upload/contactos/' . $item->image) && $item->image != '')
-                                                                <img src="{{ 'upload/contactos/' . $item->image }}" alt="{{ $item->name }}"
+                                                            @if (file_exists('images/contactos/' . $item->image) && $item->image != '')
+                                                                <img src="{{ 'images/contactos/' . $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
                                                                 <img 
@@ -164,15 +164,15 @@
                                                 {{-- direccion --}}
 
                                                 <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{ $item->country }} - {{ $item->city }}
+                                                    {{ $item->country }} 
                                                 </span>
 
                                                 <ol class="card__actions" style="list-style: none">
                                                  
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
-                                                            @if (file_exists('upload/contactos/' . $item->image) && $item->image != '')
-                                                                <img src="{{ 'upload/contactos/' . $item->image }}" alt="{{ $item->name }}"
+                                                            @if (file_exists('images/contactos/' . $item->image) && $item->image != '')
+                                                                <img src="{{ 'images/contactos/' . $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
                                                                 <img 
@@ -227,15 +227,15 @@
                                                     
                                                     {{-- direccion --}} 
                                                     <span class="badge badge-primary pull-rigth mb-2">
-                                                        {{ $item->country }} - {{ $item->city }}
+                                                        {{ $item->country }} 
                                                     </span>
                                                 <ol class="card__actions " style="list-style: none">
                                                    
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             <!-- Photo by Philip Martin on Unsplash -->
-                                                            @if (file_exists('upload/contactos/' . $item->image) && $item->image != '')
-                                                                <img src="{{ 'upload/contactos/' . $item->image }}" alt="{{ $item->name }}"
+                                                            @if (file_exists('images/contactos/' . $item->image) && $item->image != '')
+                                                                <img src="{{ 'images/contactos/' . $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
                                                                 <img 
@@ -289,15 +289,15 @@
 
                                                 {{-- direccion --}}
                                                 <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{ $item->country }} - {{ $item->city }}
+                                                    {{ $item->country }} 
                                                 </span>
                                                 <ol class="card__actions" style="list-style: none">
                                                 
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             <!-- Photo by Philip Martin on Unsplash -->
-                                                            @if (file_exists('upload/contactos/' . $item->image) && $item->image != '')
-                                                            <img src="{{ 'upload/contactos/' . $item->image }}" alt="{{ $item->name }}"
+                                                            @if (file_exists('images/contactos/' . $item->image) && $item->image != '')
+                                                            <img src="{{ 'images/contactos/' . $item->image }}" alt="{{ $item->name }}"
                                                                 class="avatar__image">
                                                         @else
                                                             <img 
@@ -345,14 +345,14 @@
                                                          <span class="text-uppercase"> {{ $item->name }} {{ $item->lastname }}</span>
                                                     </a></h6>
                                                     <span class="badge badge-primary pull-rigth mb-2">
-                                                        {{ $item->country }} - {{ $item->city }}
+                                                        {{ $item->country }} 
                                                     </span>
                                                 <ol class="card__actions" style="list-style: none">
                                                   
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
-                                                            @if (file_exists('upload/contactos/' . $item->image) && $item->image != '')
-                                                                <img src="{{ 'upload/contactos/' . $item->image }}" alt="{{ $item->name }}"
+                                                            @if (file_exists('images/contactos/' . $item->image) && $item->image != '')
+                                                                <img src="{{ 'images/contactos/' . $item->image }}" alt="{{ $item->name }}"
                                                                     class="avatar__image">
                                                             @else
                                                                 <img 

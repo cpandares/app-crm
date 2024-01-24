@@ -345,6 +345,10 @@
                                     icon: 'success',
                                     showCancelButton: false,
                                     confirmButtonColor: '#3085d6'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.reload()
+                                    }
                                 });
                             }
                         },

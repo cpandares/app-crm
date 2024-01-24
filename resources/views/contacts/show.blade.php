@@ -50,33 +50,8 @@
                         </div>
                     </div>
 
-                    <h4 class="profile-username text-center">
-                        <strong>{{ $contact->name }} {{ $contact->lastname }}</strong>
+                   
 
-                    </h4>
-
-                    {{--  <p class="text-muted text-center">ID 115400723</p> --}}
-
-                    {{-- <ul class="list-group list-group-unbordered mb-3">
-                        <li class="list-group-item">
-                            <b>Celular</b> <a class="float-right">+58 86412220</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Sexo</b> <a class="float-right">Femenino</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Fecha de Nacimiento</b>
-                            <a class="float-right">26-06-1993</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Nacionalidad</b>
-                            <a class="float-right">Costarricense</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Estado Civil</b>
-                            <a class="float-right">Divorciado (a)</a>
-                        </li>
-                    </ul> --}}
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -84,8 +59,12 @@
 
             <!-- About Me Box -->
             <div class="card card-primary">
+              
                 <!-- /.card-header -->
                 <div class="card-body">
+                    <strong><i class="fa fa-book mr-1"></i>Nombre de Contacto</strong>
+                    <p class="text-muted"> {{ $contact->name }} {{ $contact->lastname }} </p>
+                    <hr>
                     <strong><i class="fa fa-comment mr-1"></i>Estado</strong>
 
 
@@ -110,7 +89,7 @@
 
                     <hr />
 
-                    <strong><i class="fa fa-map mr-1"></i>Provincia</strong>
+                    <strong><i class="fa fa-map mr-1"></i>Ciudad</strong>
 
                     <p class="text-muted">{{ $contact->state }}</p>
 
@@ -132,22 +111,22 @@
 
                     <p class="text-muted">{{ $contact->phone }}</p>
 
-                  {{--   <hr />
-                    <strong><i class="fa fa-envelope mr-1"></i> Se contactó mediante: </strong>
-                    
-                    @if ($contact->comunication_medium == 1)
-                        <span class="badge badge-primary pull-rigth">Email</span>
-                    @elseif($contact->comunication_medium == 2)
-                        <span class="badge badge-primary pull-rigth">Skype</span>
-                    @elseif($contact->comunication_medium == 3)
-                        <span class="badge badge-primary pull-rigth">Telefonica</span>
-                    @elseif($contact->comunication_medium == 4)
-                        <span class="badge badge-primary pull-rigth">Facebook</span>
-                    @elseif($contact->comunication_medium == 5)
-                        <span class="badge badge-primary pull-rigth">Whatsapp</span>
-                    @endif --}}
+                  
                     <hr />
 
+                    <strong>Nombre Comercial</strong>
+                    <p class="text-muted">{{ $contact->nombre_comercial }}</p>
+                    <hr>
+
+                    <strong>Nombre Fiscal</strong>
+                    <p class="text-muted">{{ $contact->name_enterprise }}</p>
+                    <hr>
+
+                    <strong>N.I.F</strong>
+                    <p class="text-muted">{{ $contact->codigo_nif }}</p>
+                    <hr>
+                    <strong>Web </strong>
+                    <p class="text-muted">{{ $contact->website }}</p>
 
                 </div>
                 <!-- /.card-body -->
@@ -182,12 +161,12 @@
                             <div class="row mt-2" >
                                 <div class="">
                                     {!! Form::label('name_empresa', 'Nombre Empresa Fiscal') !!}
-                                    {!! Form::text('name_empresa', $contact->name, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
+                                    {!! Form::text('name_empresa', $contact->name_enterprise, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
                                 </div>
                                 <div class="">
                                    
-                                    {!! Form::label('name_empresa', 'Nombre Comercial') !!}
-                                    {!! Form::text('name_empresa',  $contact->name_comercial, [
+                                    {!! Form::label('name_comercial', 'Nombre Comercial') !!}
+                                    {!! Form::text('name_comercial',  $contact->nombre_comercial, [
                                         'class' => 'form-control',
                                         'placeholder' => 'Nombre Comercial',
                                         'id' => 'name_comercial'
@@ -253,7 +232,7 @@
                                     {!! Form::text('city', $contact->city, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    {!! Form::label('state', 'Provincia (opcional)') !!}
+                                    {!! Form::label('state', 'Ciudad (opcional)') !!}
                                     {!! Form::text('state', $contact->state, ['class' => 'form-control', 'placeholder' => '']) !!}
                                 </div>
                             </div>
@@ -274,7 +253,7 @@
 
                                     {!! Form::label('website', 'Página web') !!}
                                     {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                                    {!! Form::url('website', isset($contact->website) ? $contact->website : null, [
+                                    {!! Form::text('website', isset($contact->website) ? $contact->website : null, [
                                         'id' => 'website',
                                         'class' => 'form-control',
                                         'placeholder' => 'example.com',

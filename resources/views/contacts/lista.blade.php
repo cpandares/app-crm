@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content" bis_skin_checked="1">
+   
 
-
-        <div class="content d-flex flex-column flex-column-fluid" id="kt_content" bis_skin_checked="1">
+        <div class="row" id="kt_content" bis_skin_checked="1">
             <!--begin::Container-->
             <div class="container-xxl" id="kt_content_container" bis_skin_checked="1">
                 <!--begin::Card-->
@@ -99,7 +98,7 @@
                                             <th class="min-w-125px ">Teléfono</th>
                                             <th class="min-w-125px ">Página web</th>
                                             <th class="min-w-125px ">Campañas</th>
-                                            <th class="min-w-125px ">Numero de N.I.F</th>
+                                            <th class="min-w-125px ">Nombre Comercial</th>
                                             <th class="min-w-125px ">Estado</th>
                                             <th class="text-end min-w-70px" rowspan="1" colspan="1"
                                                 aria-label="Acciones" style="width: 146.738px;">Acciones</th>
@@ -111,24 +110,32 @@
                                             <input type="hidden" id="accion" name="accion" value="2">
 
                                             <th>
-                                                <input type="text" placeholder="Nombre contacto" name="name"
-                                                    id="name" onchange="buscar('name')" class="form-control">
+                                                <input type="text" 
+                                                        placeholder="Nombre contacto" 
+                                                        name="name"
+                                                        id="name" onchange="buscar('name')"
+                                                        class="form-control">
                                             </th>
                                             <th>
-                                                <input type="text" placeholder="Nombre contacto" name="lastname"
-                                                    id="lastname" onchange="buscar('lastname')" class="form-control">
+                                                <input 
+                                                    type="text" 
+                                                    placeholder="Email contacto" 
+                                                    name="email"
+                                                    id="email" 
+                                                    onchange="buscar('email')" 
+                                                    class="form-control">
 
                                             </th>
                                             <th></th>
                                             <th></th>
                                             <th>
-                                                {!! Form::select('campaing', $list_campaings, null, [
+                                               {{--  {!! Form::select('campaing', $list_campaings, null, [
                                                     'id' => 'campaing',
                                                     'class' =>
                                                         'form-control text-gray-400                                                                                            js-example-basic-single',
                                                     'placeholder' => 'Seleccionar',
                                                     'onchange' => "buscar('campaing')",
-                                                ]) !!}
+                                                ]) !!} --}}
                                             </th>
                                             <th>
                                                 {{-- {!! Form::select('tipo_contacto',['0' => 'No', '1' => 'Si'],
@@ -573,6 +580,8 @@
                 </div>
 
             </div>
+
+        </div>
         @endsection
 
         @section('script')
