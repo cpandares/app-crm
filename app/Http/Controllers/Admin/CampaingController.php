@@ -31,7 +31,7 @@ class CampaingController extends Controller
         $campaings = Campaing::where('created_user', $id)->pluck('campaing_name','campaing_name');
         $data = Campaing::where('created_user', $id);
         $title = 'Oportunidades';
-        
+        $total_campaigns = Campaing::where('created_user', $id)->count();
       
         if (isset($input['city'])) {
             $condicion[] = ['campaing.city', 'like', '%' . $input['city'] . '%'];
@@ -62,7 +62,8 @@ class CampaingController extends Controller
             'country' =>isset($input['country']) ? $input['country'] : null,
             'status' =>isset($input['status']) ? $input['status'] : null,
             'title' => $title,
-            'per_page' => $per_page
+            'per_page' => $per_page,
+            'total_campaigns' => $total_campaigns
         ]);
     }
 

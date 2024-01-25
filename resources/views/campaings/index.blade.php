@@ -19,7 +19,7 @@
                     <div class="card-header border-0 pt-6" bis_skin_checked="1">
                         <!--begin::Card title-->
                         <div class="card-title" bis_skin_checked="1">
-                            <p> Tienes un total de {{ count($campaings) }} oportunidades creadas</p>
+                            <p> Tienes un total de {{ $total_campaigns }} oportunidades creadas</p>
                         </div>
                         <!--begin::Card title-->
                         <!--begin::Card toolbar-->
@@ -121,7 +121,7 @@
                                             </th>
                                             <th>
                                                 {!! Form::select('country', $paises, $country, [
-                                                    'id' => 'country_campaign',
+                                                    'id' => 'country',
                                                     'class' => 'form-control text-gray-400 js-example-basic-single',
                                                     'placeholder' => 'Seleccionar',
                                                     'onchange' => "buscar('country')",
@@ -160,8 +160,8 @@
 
                                                 <td>
                                                     <a href="{{ route('admin.campaings.show', $item) }}"
-                                                    class="text-gray-800 text-hover-primary mb-1">
-                                                        {{ $item->campaing_name }}
+                                                    class="text-gray-800 text-hover-primary mb-1 ">
+                                                        <span id="campaing_name_id">{{ $item->campaing_name }}</span>
                                                     </a>
                                                 </td>
 
@@ -383,6 +383,7 @@
                                     {!! Form::select('country', $paises, null, [
                                         'class' => 'form-control',
                                         'placeholder' => '--Seleccionar País--',
+                                        'id' => 'countryasds'
                                     ]) !!}
                                     <br>
                                 </div>

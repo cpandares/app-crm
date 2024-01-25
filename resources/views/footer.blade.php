@@ -61,6 +61,12 @@
                 placeholder: "Seleccionar Campaña",
                 allowClear: true,
             });
+            /* put in every first letter in uppercase in span with id #campaing_name_id */
+            var campaing_name_id = document.querySelectorAll('#campaing_name_id');
+            campaing_name_id.forEach(function(element) {
+                element.textContent = element.textContent.charAt(0).toUpperCase() + element.textContent.slice(1);
+            });
+            
 
         /*  $.ajax({
                  url: "https://shop.ninesdeonil.com/wp-json/wc/v3/orders?consumer_key=ck_6d3fb768918b7067ee823204e2107033097ca64a&consumer_secret=cs_532eab538d5f11f08d30b70bd1a626a9808f8725&per_page=100",
