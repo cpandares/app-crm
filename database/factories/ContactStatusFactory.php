@@ -14,7 +14,7 @@ class ContactStatusFactory extends Factory
     public function definition()
     {
         return [           
-            'status_name'=>$this->faker->unique()->randomElement(['Nuevo','En Negociacion','Presupuesto Enviado','Renegociando','Cliente','No Interesado'])
+            'status_name'=>$this->faker->unique()->randomElement(['Nuevo','En Negociacion','Presupuesto Enviado','Cliente','No Interesado'])
         ];
     }
 }

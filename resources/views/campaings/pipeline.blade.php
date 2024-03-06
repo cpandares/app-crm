@@ -314,8 +314,10 @@
                                                 {{-- direccion --}}
 
                                                 <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{ $item->country }} 
-                                                </span>
+                                                    {{ $item->country }} - {{ $item->state }} - {{ $item->city }}
+                                                  </span>
+                                                  <br>
+                                                  {{ $item->contact_type }}
 
                                                
                                                   
@@ -385,8 +387,10 @@
                                                 {{-- direccion --}}
 
                                                 <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{ $item->country }} 
-                                                </span>
+                                                    {{ $item->country }} - {{ $item->state }} - {{ $item->city }}
+                                                  </span>
+                                                  <br>
+                                                  {{ $item->contact_type }}
 
                                                 <ol class="card__avatars" style="list-style: none">
                                                     <li class="card__avatars--item">
@@ -448,8 +452,11 @@
                                                     
                                                     {{-- direccion --}} 
                                                     <span class="badge badge-primary pull-rigth mb-2">
-                                                        {{ $item->country }} 
-                                                    </span>
+                                                        {{ $item->country }} - {{ $item->state }} - {{ $item->city }}
+                                                      </span>
+                                                      <br>
+                                                      {{ $item->contact_type }}
+
                                                     <ol class="card__avatars" style="list-style: none">
                                                         <li class="card__avatars--item">
                                                             <!-- Photo by Philip Martin on Unsplash -->
@@ -506,8 +513,10 @@
 
                                                 {{-- direccion --}}
                                                 <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{ $item->country }} 
-                                                </span>
+                                                    {{ $item->country }} - {{ $item->state }} - {{ $item->city }}
+                                                  </span>
+                                                  <br>
+                                                  {{ $item->contact_type }}
                                                 <ol class="card__avatars" style="list-style: none">
                                                     <li class="card__avatars--item">
                                                         <!-- Photo by Philip Martin on Unsplash -->
@@ -557,9 +566,16 @@
 
                                               
                                                 <h6 class="card__title"> <a class="text-gray-800 text-hover-primary mb-1"
-                                                        href="{{ route('admin.contact.show', $item->id) }}">
-                                                         <span class="text-uppercase"> {{ $item->name }} {{ $item->lastname }}</span>
-                                                    </a></h6>
+                                                    href="{{ route('admin.contact.show', $item->id) }}">
+                                                   <span class="text-uppercase"> {{ $item->name }} {{ $item->lastname }}</span>
+                                                </a></h6>
+
+                                            {{-- direccion --}}
+                                            <span class="badge badge-primary pull-rigth mb-2">
+                                                {{ $item->country }} - {{ $item->state }} - {{ $item->city }}
+                                              </span>
+                                              <br>
+                                              {{ $item->contact_type }}
                                               
                                                   
                                                     <ol class="card__avatars" style="list-style: none">

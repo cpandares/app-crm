@@ -55,3 +55,7 @@ Route::get('config', [User::class, 'configSystem'])->name('admin.config');
 
 Route::get('usuario-detail/{id}', [User::class, 'detailUser'])->name('usuario-detail');
 Route::put('usuario-detail/{id}', [User::class, 'updateUser'])->name('usuario-update');
+
+Route::get('logs', [User::class, 'accessLogs'])->name('access-logs');
+
+Route::get('alertas', [User::class, 'alerts'])->name('alertas');

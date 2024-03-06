@@ -235,13 +235,10 @@
                                                         <span class="badge badge-light-success pull-rigth">Presupuesto
                                                             Enviado</span>
                                                     @elseif($item->contact_status == 4)
-                                                        <span class="badge badge-light-success pull-rigth">Cliente</span>
-                                                    @elseif($item->contact_status == 5)
-                                                        <span
-                                                            class="badge badge-light-warning pull-rigth">Renegociando</span>
+                                                        <span class="badge badge-light-success pull-rigth">Cliente</span>                                                    
                                                     @else
-                                                        <span class="badge badge-light-danger pull-rigth">No
-                                                            interesado</span>
+                                                        <span class="badge badge-light-danger pull-rigth">
+                                                            No Interesado</span>
                                                     @endif
                                                 </td>
 

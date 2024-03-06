@@ -2,11 +2,7 @@
 
 @section('content')
 
-<style>
-  span.select2-container {
-        z-index: 10050;
-    }
-</style>
+
 
 
         <div class="row" id="kt_content" bis_skin_checked="1">

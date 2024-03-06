@@ -60,10 +60,18 @@
             <!-- About Me Box -->
             <div class="card card-primary">
               
-                <!-- /.card-header -->
+                <!-- /.card-header contact_type-->
                 <div class="card-body">
                     <strong><i class="fa fa-book mr-1"></i>Nombre de Contacto</strong>
                     <p class="text-muted"> {{ $contact->name }} {{ $contact->lastname }} </p>
+                    <hr>
+                    <strong><i class="fa fa-book mr-1"></i>Tipo de Contacto</strong>
+                    @if ($contact->contact_type)
+                    <p class="text-muted"> {{ $contact->contact_type }} </p>
+                    @else
+                    <p class="text-muted"> No asignado </p>
+                    @endif
+                    
                     <hr>
                     <strong><i class="fa fa-comment mr-1"></i>Estado</strong>
 
@@ -76,8 +84,8 @@
                         <span class="badge badge-primary pull-rigth">Presupuesto Enviado</span>
                     @elseif($contact->contact_status == 4)
                         <span class="badge badge-primary pull-rigth">Cliente</span>
-                    @elseif($contact->contact_status == 5)
-                        <span class="badge badge-primary pull-rigth">Renegociando</span>
+                   {{--  @elseif($contact->contact_status == 5)
+                        <span class="badge badge-primary pull-rigth">Renegociando</span> --}}
                     @else
                         <span class="badge badge-primary pull-rigth">No Interesado</span>
                     @endif
@@ -89,9 +97,15 @@
 
                     <hr />
 
-                    <strong><i class="fa fa-map mr-1"></i>Ciudad</strong>
+                    <strong><i class="fa fa-map-marker mr-1"></i>Provincia</strong>
 
                     <p class="text-muted">{{ $contact->state }}</p>
+
+                    <hr />
+
+                    <strong><i class="fa fa-map mr-1"></i>Ciudad</strong>
+
+                    <p class="text-muted">{{ $contact->city }}</p>
 
                     <hr />
 
@@ -107,7 +121,7 @@
 
                     <p class="text-muted">{{ $contact->email }}</p>
                     <hr />
-                    <strong><i class="fa fa-phone mr-1"></i>Teléfonos</strong>
+                    <strong><i class="fa fa-phone mr-1"></i>Teléfono</strong>
 
                     <p class="text-muted">{{ $contact->phone }}</p>
 
@@ -180,6 +194,28 @@
                                         'id' => 'codigo_nif'
                                     ]) !!}
                                 </div>
+
+                                <div >
+                                    {!! Form::label('contact_type', 'Tipo de Contacto') !!}
+                                    {!! Form::select('contact_type',  [
+                                        'Cadena de tiendas' => 'Cadena de tiendas',
+                                        'Tienda Juguetes' => 'Tienda Juguetes',
+                                        'Tienda Online' => 'Tienda Online',
+                                        'Tienda Regalos' => 'Tienda Regalos',
+                                        'Tienda papelería' => 'Tienda papelería',
+                                        'Tienda educativa' => 'Tienda educativa',
+                                        'Tienda Puericultura' => 'Tienda Puericultura',
+                                        'Tienda Souvenirs' => 'Tienda Souvenirs',
+                                        'Concept Store' => 'Concept Store',
+                                        'Distribuidor' => 'Distribuidor',
+                                        'Mayorista' => 'Mayorista',
+                                        'Agente Comercial' => 'Agente Comercial',
+                                        'Importador' => 'Importador',
+                                    ], $contact->contact_type, [
+                                        'class' => 'form-control',
+                                        'placeholder' => 'Seleccionar'
+                                    ]) !!}
+                                </div>
                                 <hr class="mt-5">
                             </div>
 
@@ -224,6 +260,11 @@
                                     ]) !!}
                                   
                                 </div>
+
+                                <div class="col-sm-12 col-md-6">
+                                    {!! Form::label('providence', 'Provincia') !!}
+                                    {!! Form::text('state', $contact->state, ['class' => 'form-control', 'placeholder' => 'Alicante']) !!}
+                                </div>
                             </div>
 
                             <div class="row  mt-2">
@@ -231,13 +272,6 @@
                                     {!! Form::label('city', 'Ciudad') !!}
                                     {!! Form::text('city', $contact->city, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
                                 </div>
-                                <div class="col-sm-12 col-md-6">
-                                    {!! Form::label('state', 'Ciudad (opcional)') !!}
-                                    {!! Form::text('state', $contact->state, ['class' => 'form-control', 'placeholder' => '']) !!}
-                                </div>
-                            </div>
-
-                            <div class="row  mt-2">
                                 <div class="col-sm-12 col-md-6">
 
                                     {!! Form::label('address', 'Dirección (opcional)') !!}
@@ -249,6 +283,11 @@
 
 
                                 </div>
+                                
+                            </div>
+
+                            <div class="row  mt-2">
+                                
                                 <div class="col-sm-12 col-md-4">
 
                                     {!! Form::label('website', 'Página web') !!}
@@ -335,6 +374,17 @@
                             </button>
 
                         </li>
+                        <li class="nav-item flex-fill" role="presentation" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="No Interesado">
+                            <input type="hidden" name="id" value="{{ $contact->id }}" id="id_user">
+                            <button type="submit" onclick="return updateStatusNotInterest()"
+                                class="nav-link  rounded-circle mx-auto d-flex align-items-center justify-content-center {{ $contact->contact_status == 5 ? 'active' : '' }}"
+                                data-bs-toggle="tab" role="tab" aria-controls="step1" aria-selected="true">
+                                {{-- <i class="fas fa-flag-checkered"></i> --}}
+                                <i class="fas fa-times"></i>
+                            </button>
+
+                        </li>
                     </ul>
                     {{-- <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" role="tabpanel" id="step1" aria-labelledby="step1-tab">
@@ -374,16 +424,20 @@
                 {{--  --}}
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
+
+
                         <li class="nav-item">
-                            <a class="nav-link active show" href="#presupuestos" data-toggle="tab">Presupuestos</a>
+                            <a class="nav-link active show" href="#comunicaciones" data-toggle="tab">Comunicaciones</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#comunicaciones" data-toggle="tab">Comunicaciones</a>
+                            <a class="nav-link " href="#presupuestos" data-toggle="tab">Presupuestos</a>
                         </li>
-                        <li class="nav-item">
+
+                       
+                      {{--   <li class="nav-item">
                             <a class="nav-link " href="#campaings" data-toggle="tab">Oportunidades</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link" href="#notas" data-toggle="tab">Notas</a>
                         </li>
@@ -393,7 +447,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <!-- /.tab-pane -->
-                        <div class="tab-pane active" id="presupuestos">
+                        <div class="tab-pane" id="presupuestos">
 
                             <div class="row">
                                 <div class="col-md-12 text-right mb-3">
@@ -557,7 +611,7 @@
                         </div>
 
                         <!-- /.tab-pane -->
-                        <div class="tab-pane" id="comunicaciones">
+                        <div class="tab-pane active" id="comunicaciones">
                             <div class="card mb-5 mb-xxl-8">
 
                                 <div class="row">
@@ -1207,6 +1261,32 @@
         function updateStatusCli() {
 
             let reference = 4;
+            let id = document.getElementById('id_user').value;
+            $.ajax({
+                type: "PUT",
+                url: "{{ asset('') . 'admin/update-status-contact' }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    reference,
+                    id
+                },
+                success: function(res) {
+                    if (res) {
+                        Swal.fire({
+                            title: 'Se actualizo el contacto',
+                            text: "",
+                            icon: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6'
+                        });
+                    }
+                },
+                dataType: "json"
+            });
+        }
+
+        function updateStatusNotInterest(){
+            let reference = 5;
             let id = document.getElementById('id_user').value;
             $.ajax({
                 type: "PUT",

@@ -149,7 +149,7 @@ class CampaingController extends Controller
                         ->where('contact_campaings.camaping_id', $id)
                         ->join('contact_campaings','contact_campaings.contact_id','=','contacts.id')
                         ->whereNotIn('contact_status', [5, 6]);
-        /* dd($contacts); */
+       
         $campaing = Campaing::where('id', $id)->first();
         $condicion = [];
 
@@ -178,7 +178,7 @@ class CampaingController extends Controller
         }
 
         $contacts = $contacts->where($condicion)->orderByDesc('id')->paginate(20);
-
+        /* dd($user_id); */
         $title = '' . $campaing->campaing_name;
         return view('campaings.show', [
             'campaing' => $campaing,

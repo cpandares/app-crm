@@ -585,5 +585,31 @@ class User extends Controller
         return view('auth.passwords.reset');
     }
 
+    public function accessLogs(){
+            $user_rol = auth()->user()->rol;
+            if($user_rol != 1){
+                //Alert::error('No tienes permisos para acceder a esta sección');
+                return redirect()->back();
+            }
+            $logs = DB::table('login_logs')->orderByDesc('id')->paginate(20);
+            $title = 'Logs de acceso';
+            return view('user.logs',[
+                'logs' => $logs,
+                'title' => $title
+            ]);
+    }
+
+    public function alerts(){
+        $user_rol = auth()->user()->rol;
+        if($user_rol != 1){
+            Alert::error('No tienes permisos para acceder a esta sección');
+            return redirect()->back();
+        }
+        $title = 'Configuración de alertas de sistema';
+        return view('user.alerts',[
+            'title' => $title
+        ]);
+    }
+
 
 }

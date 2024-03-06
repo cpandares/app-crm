@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\LoginLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Providers\RouteServiceProvider;
 
 use AuthenticatesUsers;
-
+use Illuminate\Auth\Events\Login;
 
 class AuthController extends Controller
 {
@@ -46,11 +47,14 @@ class AuthController extends Controller
 
     public function login(Request $request){
         if( Auth::attempt(["name" => $request->input('email'), "password"=>$request->input('password')])){
+          
+           /*  LoginLog::create([
+                'username' => Auth::user()->name,
+                'email' => Auth::user()->email,
+                'ip_address' => $request->ip(),
+                'login_date' => now()
+            ]); */
 
-           /*  $entidad = DB::table('tbl_usuario_entidad')->where('usu_ent_usuario_id', auth()->user()->id)->first();
-            $data_entidad = DB::table('tbl_entidad')->where('entidad_id', $entidad->usu_ent_entidad_id)->first();
-            $request->session()->put('data_entidad', $data_entidad);
- */
             return redirect()->route('contacts.lista');
         }else{
             return  redirect()->route('loginForm')->with(['message' =>'Usuario o contraseña invalidos']);

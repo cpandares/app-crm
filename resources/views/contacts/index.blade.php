@@ -96,32 +96,47 @@
                                                 </h6>
 
                                                 {{-- direccion --}}
+                                                @php
+                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
+                                                @endphp
+
+                                                @if ($campaigs)
+                                                    <span
+                                                        class="badge badge-light-info mb-2">
+                                                       Oportunidad: {{ $campaigs->campaing_name }}
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-light-info">Sin campaña asociada</span>
+                                                @endif
+
 
                                                 <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{ $item->country }} 
+                                                  {{ $item->country }} - {{ $item->state }} - {{ $item->city }}
                                                 </span>
-
-                                                <ol class="card__actions " style="list-style: none">
+                                                <br>
+                                                {{ $item->contact_type }}
                                                   
-                                                    <ol class="card__avatars" style="list-style: none">
-                                                        <li class="card__avatars--item">
-                                                            <!-- Photo by Philip Martin on Unsplash -->
-                                                            @if (file_exists('images/contactos/' . $item->image) && $item->image != '')
-                                                                <img src="{{ 'images/contactos/' . $item->image }}" alt="{{ $item->name }}"
-                                                                    class="avatar__image">
-                                                            @else
-                                                                <img 
-                                                            alt="{{ $item->name }} {{ $item->lastname }}" 
-                                                            src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
-                                                            class="h-35px" 
-                                                            style="cursor: pointer"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }}"
-                                                            />
-                                                            @endif
+                                                <ol class="card__avatars" style="list-style: none">
+                                                    <li class="card__avatars--item">
+                                                        <!-- Photo by Philip Martin on Unsplash -->
+                                                        @if (file_exists('images/contactos/' . $item->image) && $item->image != '')
+                                                            <img src="{{ 'images/contactos/' . $item->image }}" alt="{{ $item->name }}"
+                                                                class="avatar__image">
+                                                        @else
+                                                            <img 
+                                                        alt="{{ $item->name }} {{ $item->lastname }}" 
+                                                        src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" 
+                                                        class="h-35px" 
+                                                        style="cursor: pointer"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name }}"
+                                                        />
+                                                        @endif
 
-                                                        </li>
-                                                    </ol>
+                                                    </li>
+                                                    {{-- campañas asociadas --}}
+                                                   
                                                 </ol>
+                                                
 
                                               
 
@@ -161,11 +176,29 @@
                                                     </a>
                                                 </h6>
 
-                                                {{-- direccion --}}
+                                                @php
+                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
+                                                @endphp
+
+                                                @if ($campaigs)
+                                                    <span
+                                                        class="badge badge-light-info mb-2">
+                                                       Oportunidad: {{ $campaigs->campaing_name }}
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-light-info">Sin campaña asociada</span>
+                                                @endif
+
 
                                                 <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{ $item->country }} 
-                                                </span>
+                                                    {{ $item->country }} - {{ $item->state }} - {{ $item->city }}
+                                                  </span>
+                                                  <br>
+                                                  {{ $item->contact_type }}
+
+                                                {{-- direccion --}}
+
+                                               
 
                                                 <ol class="card__actions" style="list-style: none">
                                                  
@@ -224,11 +257,29 @@
                                                        <span class="text-uppercase"> {{ $item->name }} {{ $item->lastname }}</span>
                                                     </a>
                                                 </h6>
+
+                                                @php
+                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
+                                                @endphp
+
+                                                @if ($campaigs)
+                                                    <span
+                                                        class="badge badge-light-info mb-2">
+                                                       Oportunidad: {{ $campaigs->campaing_name }}
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-light-info">Sin campaña asociada</span>
+                                                @endif
+
+
+                                                <span class="badge badge-primary pull-rigth mb-2">
+                                                    {{ $item->country }} - {{ $item->state }} - {{ $item->city }}
+                                                  </span>
+                                                  <br>
+                                                  {{ $item->contact_type }}
                                                     
                                                     {{-- direccion --}} 
-                                                    <span class="badge badge-primary pull-rigth mb-2">
-                                                        {{ $item->country }} 
-                                                    </span>
+                                                   
                                                 <ol class="card__actions " style="list-style: none">
                                                    
                                                     <ol class="card__avatars" style="list-style: none">
@@ -287,10 +338,28 @@
                                                        <span class="text-uppercase"> {{ $item->name }} {{ $item->lastname }}</span>
                                                     </a></h6>
 
-                                                {{-- direccion --}}
+                                                    @php
+                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
+                                                @endphp
+
+                                                @if ($campaigs)
+                                                    <span
+                                                        class="badge badge-light-info mb-2">
+                                                       Oportunidad: {{ $campaigs->campaing_name }}
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-light-info">Sin campaña asociada</span>
+                                                @endif
+
+
                                                 <span class="badge badge-primary pull-rigth mb-2">
-                                                    {{ $item->country }} 
-                                                </span>
+                                                    {{ $item->country }} - {{ $item->state }} - {{ $item->city }}
+                                                  </span>
+                                                  <br>
+                                                  {{ $item->contact_type }}
+
+                                                {{-- direccion --}}
+                                               
                                                 <ol class="card__actions" style="list-style: none">
                                                 
                                                     <ol class="card__avatars" style="list-style: none">
@@ -344,9 +413,26 @@
                                                         href="{{ route('admin.contact.show', $item->id) }}">
                                                          <span class="text-uppercase"> {{ $item->name }} {{ $item->lastname }}</span>
                                                     </a></h6>
-                                                    <span class="badge badge-primary pull-rigth mb-2">
-                                                        {{ $item->country }} 
+                                                    @php
+                                                    $campaigs = $controlador->getCampaingsContacts($item->id);
+                                                @endphp
+
+                                                @if ($campaigs)
+                                                    <span
+                                                        class="badge badge-light-info mb-2">
+                                                       Oportunidad: {{ $campaigs->campaing_name }}
                                                     </span>
+                                                @else
+                                                    <span class="badge badge-light-info">Sin campaña asociada</span>
+                                                @endif
+
+
+                                                <span class="badge badge-primary pull-rigth mb-2">
+                                                    {{ $item->country }} - {{ $item->state }} - {{ $item->city }}
+                                                  </span>
+                                                  <br>
+                                                  {{ $item->contact_type }}
+                                                   
                                                 <ol class="card__actions" style="list-style: none">
                                                   
                                                     <ol class="card__avatars" style="list-style: none">

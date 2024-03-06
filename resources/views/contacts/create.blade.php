@@ -32,19 +32,23 @@
                 
 
             <div class="row mt-2" id="empresa_repre">
-                <div class="">
-                    {!! Form::label('name_empresa', 'Nombre Empresa Fiscal') !!}
-                    {!! Form::text('name_empresa', null, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
+                <div class="col-sm-12 col-sm-12 col-md-6">
+                    
+                        {!! Form::label('name_empresa', 'Nombre Empresa Fiscal') !!}
+                        {!! Form::text('name_empresa', null, ['class' => 'form-control', 'placeholder' => 'Inversiones llc']) !!}
+                    
                 </div>
-                <div class="mt-2">
-                    {!! Form::label('name_comercial', 'Nombre Comercial') !!}
-                    {!! Form::text('name_comercial',  null, [
-                        'class' => 'form-control',
-                        'placeholder' => 'Nombre Comercial',
-                        'id' => 'name_comercial'
-                    ]) !!}
-                </div>
-                <div class="mt-2">
+                    <div class="col-sm-12 col-sm-12 col-md-6">
+                        {!! Form::label('name_comercial', 'Nombre Comercial') !!}
+                        {!! Form::text('name_comercial',  null, [
+                            'class' => 'form-control',
+                            'placeholder' => 'Nombre Comercial',
+                            'id' => 'name_comercial'
+                        ]) !!}
+                    </div>
+            </div>
+            <div class="row mt-2" id="empresa_repre">
+                <div class="col-sm-12 col-sm-12 col-md-6">
                     {!! Form::label('codigo_nif', 'Numero de N.I.F') !!}
                     {!! Form::text('codigo_nif',  null, [
                         'class' => 'form-control',
@@ -52,9 +56,29 @@
                         'id' => 'codigo_nif'
                     ]) !!}
                 </div>
-                <hr class="mt-5">
+                
+                <div class="col-sm-12 col-sm-12 col-md-6">
+                    {!! Form::label('nif', 'Tipo de Contacto') !!}
+                    {!! Form::select('contact_type',  [
+                        'Cadena de tiendas' => 'Cadena de tiendas',
+                        'Tienda Juguetes' => 'Tienda Juguetes',
+                        'Tienda Online' => 'Tienda Online',
+                        'Tienda Regalos' => 'Tienda Regalos',
+                        'Tienda papelería' => 'Tienda papelería',
+                        'Tienda educativa' => 'Tienda educativa',
+                        'Tienda Puericultura' => 'Tienda Puericultura',
+                        'Tienda Souvenirs' => 'Tienda Souvenirs',
+                        'Concept Store' => 'Concept Store',
+                        'Distribuidor' => 'Distribuidor',
+                        'Mayorista' => 'Mayorista',
+                        'Agente Comercial' => 'Agente Comercial',
+                        'Importador' => 'Importador',
+                    ], null, [
+                        'class' => 'form-control',
+                        'placeholder' => 'Seleccionar'
+                    ]) !!}
             </div>
-
+            <hr class="mt-2">
             <div class="row mt-2">
                 <div class="col-sm-12 col-sm-12 col-md-6">
 
@@ -108,8 +132,8 @@
                     @enderror
                 </div>
                 <div class="col-sm-12 col-md-6">
-                    {!! Form::label('city', 'Ciudad') !!}
-                    {!! Form::text('state', null, ['class' => 'form-control', 'placeholder' => 'Barcelona']) !!}
+                    {!! Form::label('providence', 'Provincia') !!}
+                    {!! Form::text('providence', null, ['class' => 'form-control', 'placeholder' => 'Alicante']) !!}
                 </div>
             </div>
 
@@ -122,13 +146,14 @@
             </div> --}}
 
             <div class="row  mt-2">
+
                 <div class="col-sm-12 col-md-6">
 
-                    {!! Form::label('address', 'Dirección (opcional)') !!}
+                    {!! Form::label('city', 'Ciudad') !!}
                     {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                    {!! Form::text('address', null, [
+                    {!! Form::text('city', null, [
                         'class' => 'form-control',
-                        'placeholder' => 'Calle tercera casa 25',
+                        'placeholder' => 'Ejemplo: Onil',
                     ]) !!}
 
 
@@ -136,12 +161,12 @@
 
                 <div class="col-sm-12 col-md-6">
 
-                    {!! Form::label('website', 'Página Web') !!}
+                    {!! Form::label('address', 'Dirección') !!}
                     {{-- {!! Form::select('medio_comunicacion', $comunicacion_medias,null ,['class'=>'form-control']) !!} --}}
-                    {!! Form::text('website', null, [
-                        'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
+                    
+                    {!! Form::text('address', null, [
                         'class' => 'form-control',
-                        'placeholder' => 'www.example.com',
+                        'placeholder' => 'Calle tercera casa 25',
                     ]) !!}
 
 
@@ -151,7 +176,14 @@
 
             <div class="row  mt-2">
                 
-
+             <div class="col-sm-12 col-md-6">
+                <label for="">Pagina Web</label>
+                {!! Form::text('website', null, [
+                    'id' => 'cliente_tarjeta_franquicia_tarjeta_id',
+                    'class' => 'form-control',
+                    'placeholder' => 'www.example.com',
+                ]) !!}
+             </div>
                
 
                 @if (!$id_campaing)

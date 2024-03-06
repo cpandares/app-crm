@@ -16,6 +16,6 @@ class ContactsStatusSeeder extends Seeder
     public function run()
     {
         
-        ContactStatus::factory(6)->create();
+        ContactStatus::factory(5)->create();
     }
 }
