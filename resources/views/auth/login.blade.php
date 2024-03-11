@@ -15,7 +15,7 @@ License: For each use you must have a valid license purchased only from above li
 
 <head>
     <base href="../../../">
-    <title>Login Nines d' Onil</title>
+    <title>COLOMA LEAL</title>
     <meta charset="utf-8" />
 
     <!--begin::Fonts-->
@@ -33,6 +33,16 @@ License: For each use you must have a valid license purchased only from above li
 <!--begin::Body-->
 
 <style>
+
+    .caja {
+        background-color: #f3f6f9;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     #forgot_password {
         cursor: pointer;
         color: inherit !important;
@@ -52,11 +62,16 @@ License: For each use you must have a valid license purchased only from above li
                 <div 
                     class="d-flex flex-column flex-lg-row-auto w-xl-50 positon-xl-relative ">
                     <!--begin::Wrapper-->
-                    <div class="d-flex flex-column ">
+                    <div class="caja">
                         <!--begin::Content-->
-                        <div class="d-flex flex-row-fluid flex-column">
-                            <!--begin::BACKGROUNG-->
-                            <img style="height: 90vh; object-fit: cover;" src="assets/media/back-signin.jpg" />
+                        <div class="d-flex flex-row-fluid flex-column text-center">
+
+
+                            
+                            <div class="d-flex flex-center flex-column flex-column-fluid justify-content-center">
+                                <img style="height: 100%; object-fit: cover;" src="assets/media/cropped-COLOMA-IDEAL-6.png" />
+                            </div>
+                            
                         </div>
                         <!--end::Content-->
                     </div>
@@ -76,7 +91,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Heading-->
                                 <div 
                                     style="text-align: center;margin: 0 0 40px;" class="logo">
-                                    <img src="assets/media/logonine.webp" /></div>
+                                    <img src="assets/media/cropped-COLOMA-IDEAL-6.png" /></div>
 
 
                                 <div class="text-center mb-10">

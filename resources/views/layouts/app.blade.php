@@ -139,7 +139,7 @@
                                                 <div class="menu-content d-flex align-items-center px-3">
                                                     <!--begin::Avatar-->
                                                     <div class="symbol symbol-50px me-5">
-                                                        @if (auth()->user()->rol == 1)
+                                                        {{-- @if (auth()->user()->rol == 1)
                                                             @if (!auth()->user()->image)
                                                                 <img alt="Logo" src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" />
                                                             @else
@@ -155,7 +155,7 @@
                                                         @endif
                                                        
                                                         
-                                                        @endif
+                                                        @endif --}}
                                                     </div>
                                                     <!--end::Avatar-->
                                                     <!--begin::Username-->

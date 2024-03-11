@@ -5,13 +5,17 @@
 
 
 
-/* .container {
-    font-family: "Trebuchet MS", sans-serif;
-    display: flex;
-	flex-wrap: wrap;
-    gap: 30px;
-	
-} */
+/* no hover to button .btn-custom */
+#button_new:hover {
+	/* no hover */
+	background-color: #a8ef4d;
+}
+
+#menu-icona .svg-icon:hover {
+	background-color:  #a8ef4d !important;
+	padding: 2px;
+	border-radius: 2px !important;
+}
 
 input[type="text"] {text-transform:capitalize;}
 

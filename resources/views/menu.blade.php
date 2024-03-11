@@ -1,8 +1,18 @@
-<div id="kt_aside" class="aside" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="auto" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggle">
+<style>
+    .img_logo{
+        /* remove background img */
+        filter: drop-shadow(
+0 0 10px rgba(0, 0, 0, 0.5)
+);
+    }
+</style>
+
+<div id="kt_aside" class="aside bg-dark text-white" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="auto" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggle">
     <!--begin::Logo-->
-    <div class="aside-logo flex-column-auto py-13" id="kt_aside_logo">
+    <div class="aside-logo flex-column-auto py-13 p-5" id="kt_aside_logo">
         <a href="{{ url('/home') }}">
-            <img alt="Logo" src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" class="h-60px" />
+           {{--  <img alt="Logo" src="{{ URL('/images/logo-demo17_o0xsf6.webp') }}" class="h-60px" /> --}}
+           <img src="assets/media/cropped-COLOMA-IDEAL-6.png"  class="img-fluid img_logo" />
         </a>
     </div>
     <!--end::Logo-->
@@ -11,16 +21,11 @@
         <!--begin::Aside menu-->
         <div id="kt_aside_menu_wrapper" class="w-100 hover-scroll-overlay-y scroll-ps d-flex" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside, #kt_aside_menu"
             data-kt-scroll-offset="0">
-            <div id="kt_aside_menu" class="menu menu-column menu-title-gray-600 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-icon-gray-400 menu-arrow-gray-400 fw-bold fs-6" data-kt-menu="true">
-                            
-
-             
-            
-               
+            <div id="kt_aside_menu" class="menu menu-column menu-title-gray-600 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-icon-gray-400 menu-arrow-gray-400 fw-bold fs-6" data-kt-menu="true">               
 
                 <div data-kt-menu-trigger="click" data-kt-menu-placement="right-start" class="menu-item py-3">
-                    <span class="menu-link" title="CRM" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                        <span class="menu-icon">
+                    <span class="menu-link" title="CRM" >
+                        <span class="menu-icona" id="menu-icona">
                             <!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
                             <span class="svg-icon svg-icon-2x">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -32,13 +37,13 @@
                         </span>
                     </span>
                     <div class="menu-sub menu-sub-dropdown w-225px w-lg-275px px-1 py-4">
-                        <div class="menu-item">
+                        <div class="menu-item ">
                             <div class="menu-content">
                                 <span class="menu-section fs-5 fw-bolder ps-1 py-1">CRM</span>
                             </div>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.campaings.index') }}"  data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                            <a class="menu-link" href="{{ route('admin.campaings.index') }}"  data-bs-toggle="tooltip" >
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/abstract/abs037.svg-->
                                     <span class="svg-icon svg-icon-2x">
@@ -52,13 +57,13 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ url('admin/contactos-lista') }}"  data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                            <a class="menu-link text-light" href="{{ url('admin/contactos-lista') }}"  data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/abstract/abs037.svg-->
                                     <span class="svg-icon svg-icon-2x">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 24 24" version="1.1">                                            
                                                     
-                                            <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                            <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.1"></path>
                                             <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
                                             
                                     </svg>
@@ -88,7 +93,7 @@
 
                {{-- <button type="submit" class="menu-link px-5" id="logout_button">Salir</button> --}}
               {{--  <input type="submit" value="Salir" class="menu-link px-5"> --}}
-              <button type="submit" class="btn btn-custom" data-kt-menu-trigger="click" data-kt-menu-overflow="true" data-kt-menu-placement="top-start">
+              <button type="submit" class="btn btn-custom" id="button_new" data-kt-menu-trigger="click" data-kt-menu-overflow="true" data-kt-menu-placement="top-start">
                       <!--begin::Svg Icon | path: icons/duotune/arrows/arr076.svg-->
                       <span class="svg-icon">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
